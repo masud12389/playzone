@@ -1,19 +1,34 @@
-# PlayZone Skill Gaming Platform
+PLAYZONE
+খেলুন • দক্ষতা দেখান • স্কোর করুন
+Skill-based gaming platform — কোনো casino বা betting নয়।
 
-Included:
-- index.html: mobile-first user frontend
-- admin.html: demo admin dashboard
-- schema.sql: starter MySQL schema
-- Skill-based game flow, virtual points, tournaments, sponsor rewards and ad-revenue tracking
+⚡ Tap Rush
+৩০ সেকেন্ডে যত বেশি target tap করতে পারবেন, তত বেশি score!
 
-Production next steps:
-1. Backend API (Node.js/Express, Laravel, Django, etc.)
-2. Secure authentication with password hashing and sessions/JWT
-3. MySQL/PostgreSQL database
-4. Real game engine and server-side score validation
-5. Tournament anti-cheat and audit logs
-6. Ad network integration
-7. Sponsor/reward management
-8. Privacy policy, terms, age gate and applicable local legal review
+সময়
+30
+স্কোর
+0
+Points
+1,000
+গেম শুরু করুন⚡
+Start চাপার পর target-এ দ্রুত tap করুন।
 
-This prototype deliberately excludes casino/betting mechanics and real-money wagering.
+🎮 আরও গেম
+7️⃣ Match Seven
+শিগগিরই আসছে
+
+Coming Soon
+🚀 Fly High
+শিগগিরই আসছে
+
+Coming Soon
+🧠 Brain Box
+শিগগিরই আসছে
+
+Coming Soon
+🏆 Tournament
+পরের ধাপে যোগ হবে
+
+Coming Soon
+⌂ Home   •   ⚡ Play   •   🏆 Ranking   •   👤 Profile
