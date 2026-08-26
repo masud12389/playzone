@@ -4,72 +4,1337 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PlayZone — Skill Gaming</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0b1a2a;color:#fff;font-family:Arial,"Noto Sans Bengali",sans-serif}
-header{background:#122a42;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:3}
-.logo{font-size:28px;font-weight:900;color:#ffd21a}.logo span{color:#fff}.menu{font-size:26px}
-.wrap{max-width:720px;margin:auto}.hero{margin:14px;border-radius:20px;padding:28px 18px;background:linear-gradient(135deg,#163e72,#5a1c72);text-align:center}
-.hero h1{font-size:31px;margin:0 0 8px}.hero p{color:#d7e5f3}.btn{border:0;border-radius:12px;padding:11px 16px;background:#ffd21a;color:#172638;font-weight:800;cursor:pointer}
-.wallet{margin:14px;padding:15px;border-radius:15px;background:#193650;display:flex;justify-content:space-between;gap:10px}.wallet small{color:#b7c9d9}.points{font-size:21px;font-weight:900}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 14px}.tab{background:#162d43;border-radius:12px;padding:11px 5px;text-align:center;font-size:13px}
-.section{padding:8px 14px 92px}.section h2{color:#ffd21a}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:#1b3550;border-radius:15px;overflow:hidden}.thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}.a{background:linear-gradient(135deg,#17468c,#12a9d8)}.b{background:linear-gradient(135deg,#781b70,#ec315e)}.c{background:linear-gradient(135deg,#81320e,#f1a41f)}.d{background:linear-gradient(135deg,#245523,#78ba48)}
-.card h3{margin:10px 12px 4px}.card p{margin:0 12px 10px;color:#b9c9d8;font-size:13px;min-height:34px}.play{margin:0 12px 12px;width:calc(100% - 24px)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#132a40;display:grid;grid-template-columns:repeat(4,1fr);padding:8px;border-top:1px solid #29435e;z-index:4}nav button{background:none;border:0;color:#cbd7e2;font-size:12px}nav b{display:block;font-size:20px;margin-bottom:3px}.active{color:#ffd21a!important}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:10;align-items:center;justify-content:center;padding:18px}.box{width:min(420px,100%);background:#152d44;border-radius:18px;padding:20px}.box h2{margin-top:0;color:#ffd21a}.box input{width:100%;padding:12px;margin:7px 0;border-radius:10px;border:1px solid #47627c;background:#0c1d2e;color:#fff}.close{float:right;background:none;border:0;color:#fff;font-size:22px}
-.profile{display:none;padding:20px 14px 100px}.profile .panel{background:#193650;border-radius:15px;padding:18px;margin-bottom:12px}
-@media(max-width:480px){.hero h1{font-size:26px}.grid{gap:9px}.thumb{height:105px;font-size:21px}}
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:#0b1a2a;
+ color:#fff;
+ font-family:Arial,"Noto Sans Bengali",sans-serif
+}
+
+header{
+ background:#122a42;
+ padding:14px 16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ position:sticky;
+ top:0;
+ z-index:3
+}
+
+.logo{
+ font-size:28px;
+ font-weight:900;
+ color:#ffd21a
+}
+
+.logo span{color:#fff}
+.menu{font-size:26px}
+
+.wrap{
+ max-width:720px;
+ margin:auto
+}
+
+.hero{
+ margin:14px;
+ border-radius:20px;
+ padding:28px 18px;
+ background:linear-gradient(135deg,#163e72,#5a1c72);
+ text-align:center
+}
+
+.hero h1{
+ font-size:31px;
+ margin:0 0 8px
+}
+
+.hero p{color:#d7e5f3}
+
+.btn{
+ border:0;
+ border-radius:12px;
+ padding:11px 16px;
+ background:#ffd21a;
+ color:#172638;
+ font-weight:800;
+ cursor:pointer
+}
+
+.btn:active{transform:scale(.97)}
+
+.wallet{
+ margin:14px;
+ padding:15px;
+ border-radius:15px;
+ background:#193650;
+ display:flex;
+ justify-content:space-between;
+ gap:10px
+}
+
+.wallet small{color:#b7c9d9}
+
+.points{
+ font-size:21px;
+ font-weight:900
+}
+
+.tabs{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+ padding:0 14px
+}
+
+.tab{
+ background:#162d43;
+ border-radius:12px;
+ padding:11px 5px;
+ text-align:center;
+ font-size:13px
+}
+
+.section{
+ padding:8px 14px 92px
+}
+
+.section h2{color:#ffd21a}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px
+}
+
+.card{
+ background:#1b3550;
+ border-radius:15px;
+ overflow:hidden
+}
+
+.thumb{
+ height:120px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:25px;
+ font-weight:900
+}
+
+.a{background:linear-gradient(135deg,#17468c,#12a9d8)}
+.b{background:linear-gradient(135deg,#781b70,#ec315e)}
+.c{background:linear-gradient(135deg,#81320e,#f1a41f)}
+.d{background:linear-gradient(135deg,#245523,#78ba48)}
+
+.card h3{
+ margin:10px 12px 4px
+}
+
+.card p{
+ margin:0 12px 10px;
+ color:#b9c9d8;
+ font-size:13px;
+ min-height:34px
+}
+
+.play{
+ margin:0 12px 12px;
+ width:calc(100% - 24px)
+}
+
+nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:#132a40;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ padding:8px;
+ border-top:1px solid #29435e;
+ z-index:4
+}
+
+nav button{
+ background:none;
+ border:0;
+ color:#cbd7e2;
+ font-size:12px
+}
+
+nav b{
+ display:block;
+ font-size:20px;
+ margin-bottom:3px
+}
+
+.active{color:#ffd21a!important}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:10;
+ align-items:center;
+ justify-content:center;
+ padding:18px
+}
+
+.box{
+ width:min(480px,100%);
+ max-height:90vh;
+ overflow:auto;
+ background:#152d44;
+ border-radius:18px;
+ padding:20px
+}
+
+.box h2{
+ margin-top:0;
+ color:#ffd21a
+}
+
+.close{
+ float:right;
+ background:none;
+ border:0;
+ color:#fff;
+ font-size:28px;
+ cursor:pointer
+}
+
+.gameInfo{
+ display:flex;
+ justify-content:space-between;
+ background:#0d2134;
+ border-radius:12px;
+ padding:12px;
+ margin-bottom:12px
+}
+
+.gameInfo strong{
+ color:#ffd21a;
+ font-size:20px
+}
+
+.gameArea{
+ position:relative;
+ height:390px;
+ background:#081521;
+ border:2px solid #31506c;
+ border-radius:15px;
+ overflow:hidden;
+ user-select:none;
+ touch-action:manipulation
+}
+
+.target{
+ position:absolute;
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ background:#ffd21a;
+ color:#172638;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:25px;
+ font-weight:900;
+ cursor:pointer;
+ box-shadow:0 0 20px #ffd21a88
+}
+
+.startGame{
+ width:100%;
+ margin-top:12px
+}
+
+.message{
+ text-align:center;
+ padding:20px 5px;
+ color:#cbd7e2
+}
+
+/* Match Seven */
+
+.matchGrid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px
+}
+
+.matchCard{
+ height:80px;
+ border:0;
+ border-radius:13px;
+ background:#213e59;
+ color:#fff;
+ font-size:25px;
+ font-weight:900;
+ cursor:pointer
+}
+
+.matchCard.selected{
+ background:#ffd21a;
+ color:#172638
+}
+
+.matchCard.matched{
+ visibility:hidden
+}
+
+/* Fly High */
+
+.flyCanvas{
+ width:100%;
+ height:390px;
+ display:block;
+ background:linear-gradient(#071d34,#102c1c);
+ border-radius:15px;
+ touch-action:none
+}
+
+/* Brain Box */
+
+.question{
+ background:#0d2134;
+ border-radius:15px;
+ padding:20px;
+ text-align:center;
+ margin-bottom:12px
+}
+
+.questionText{
+ font-size:29px;
+ font-weight:900;
+ color:#ffd21a;
+ margin-bottom:18px
+}
+
+.answerGrid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px
+}
+
+.answerGrid button{
+ padding:15px;
+ border:0;
+ border-radius:12px;
+ background:#24425e;
+ color:#fff;
+ font-size:20px;
+ font-weight:800;
+ cursor:pointer
+}
+
+.answerGrid button:hover{
+ background:#ffd21a;
+ color:#172638
+}
+
+.profile{
+ display:none;
+ padding:20px 14px 100px
+}
+
+.profile .panel{
+ background:#193650;
+ border-radius:15px;
+ padding:18px;
+ margin-bottom:12px
+}
+
+.hidden{display:none!important}
+
+@media(max-width:480px){
+ .hero h1{font-size:26px}
+ .grid{gap:9px}
+ .thumb{height:105px;font-size:21px}
+ .gameArea,.flyCanvas{height:340px}
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
-<header><div class="logo">PLAY<span>ZONE</span></div><div class="menu">☰</div></header>
+
+<header>
+ <div class="logo">PLAY<span>ZONE</span></div>
+ <div class="menu">☰</div>
+</header>
 
 <section class="hero">
-<h1>খেলুন • দক্ষতা দেখান • পুরস্কার জিতুন</h1>
-<p>Skill-based games, tournaments ও sponsor-funded rewards — কোনো casino বা betting নয়।</p>
-<button class="btn" onclick="openModal('login')">লগইন / রেজিস্টার</button>
+ <h1>খেলুন • দক্ষতা দেখান • পুরস্কার জিতুন</h1>
+ <p>Skill-based games, tournaments ও sponsor-funded rewards — কোনো casino বা betting নয়।</p>
+ <button class="btn" onclick="openModal('login')">লগইন / রেজিস্টার</button>
 </section>
 
-<div class="wallet"><div><small>Virtual Points</small><div class="points" id="points">1,000</div></div><button class="btn" onclick="openModal('rewards')">Rewards</button></div>
+<div class="wallet">
+ <div>
+  <small>Virtual Points</small>
+  <div class="points" id="points">1,000</div>
+ </div>
+ <button class="btn" onclick="openModal('rewards')">Rewards</button>
+</div>
 
-<div class="tabs"><div class="tab">🔥 জনপ্রিয়</div><div class="tab">🎯 Skill</div><div class="tab">🏆 Tournament</div><div class="tab">🎁 Rewards</div></div>
+<div class="tabs">
+ <div class="tab">🔥 জনপ্রিয়</div>
+ <div class="tab">🎯 Skill</div>
+ <div class="tab">🏆 Tournament</div>
+ <div class="tab">🎁 Rewards</div>
+</div>
 
 <main class="section" id="home">
+
 <h2>জনপ্রিয় Skill Games</h2>
+
 <div class="grid">
-<article class="card"><div class="thumb a">⚡ TAP RUSH</div><h3>Tap Rush</h3><p>দ্রুত প্রতিক্রিয়ার স্কোরিং গেম।</p><button class="btn play" onclick="play(100)">PLAY</button></article>
-<article class="card"><div class="thumb b">7️⃣ MATCH 7</div><h3>Match Seven</h3><p>একই রঙ মিলিয়ে কম্বো তৈরি করুন।</p><button class="btn play" onclick="play(120)">PLAY</button></article>
-<article class="card"><div class="thumb c">🚀 FLY HIGH</div><h3>Fly High</h3><p>বাধা এড়িয়ে সর্বোচ্চ স্কোর করুন।</p><button class="btn play" onclick="play(150)">PLAY</button></article>
-<article class="card"><div class="thumb d">🧠 BRAIN BOX</div><h3>Brain Box</h3><p>ধাঁধা সমাধান করে পয়েন্ট অর্জন করুন।</p><button class="btn play" onclick="play(130)">PLAY</button></article>
+
+<article class="card">
+ <div class="thumb a">⚡ TAP RUSH</div>
+ <h3>Tap Rush</h3>
+ <p>৩০ সেকেন্ডে যত বেশি target tap করুন।</p>
+ <button class="btn play" onclick="openGame('tap')">PLAY</button>
+</article>
+
+<article class="card">
+ <div class="thumb b">7️⃣ MATCH 7</div>
+ <h3>Match Seven</h3>
+ <p>একই সংখ্যা মিলিয়ে দ্রুত combo তৈরি করুন।</p>
+ <button class="btn play" onclick="openGame('match')">PLAY</button>
+</article>
+
+<article class="card">
+ <div class="thumb c">🚀 FLY HIGH</div>
+ <h3>Fly High</h3>
+ <p>বাধা এড়িয়ে যতদূর সম্ভব এগিয়ে যান।</p>
+ <button class="btn play" onclick="openGame('fly')">PLAY</button>
+</article>
+
+<article class="card">
+ <div class="thumb d">🧠 BRAIN BOX</div>
+ <h3>Brain Box</h3>
+ <p>দ্রুত প্রশ্নের সঠিক উত্তর দিয়ে score করুন।</p>
+ <button class="btn play" onclick="openGame('brain')">PLAY</button>
+</article>
+
 </div>
 </main>
 
 <section class="profile" id="profile">
-<div class="panel"><h2>👤 আমার প্রোফাইল</h2><p>Demo User</p><p>Points: <b id="profilePoints">1,000</b></p></div>
-<div class="panel"><h3>🏆 My Tournaments</h3><p>এখনো কোনো tournament join করা হয়নি।</p></div>
-<div class="panel"><h3>🎁 Rewards</h3><p>যোগ্যতা ও sponsor rules অনুযায়ী reward পাওয়া যাবে।</p></div>
-</section>
+
+<div class="panel">
+ <h2>👤 আমার প্রোফাইল</h2>
+ <p>Demo User</p>
+ <p>Points: <b id="profilePoints">1,000</b></p>
 </div>
 
-<nav><button class="active" onclick="show('home',this)">⌂<b>Home</b></button><button onclick="openModal('tournament')">🏆<b>Tournament</b></button><button onclick="openModal('rewards')">🎁<b>Rewards</b></button><button onclick="show('profile',this)">👤<b>Profile</b></button></nav>
+<div class="panel">
+ <h3>🏆 My Tournaments</h3>
+ <p>এখনো কোনো tournament join করা হয়নি।</p>
+</div>
 
-<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<div class="panel">
+ <h3>🎁 Rewards</h3>
+ <p>যোগ্যতা ও sponsor rules অনুযায়ী reward পাওয়া যাবে।</p>
+</div>
+
+</section>
+
+</div>
+
+<nav>
+ <button class="active" onclick="show('home',this)">
+  ⌂<b>Home</b>
+ </button>
+
+ <button onclick="openModal('tournament')">
+  🏆<b>Tournament</b>
+ </button>
+
+ <button onclick="openModal('rewards')">
+  🎁<b>Rewards</b>
+ </button>
+
+ <button onclick="show('profile',this)">
+  👤<b>Profile</b>
+ </button>
+</nav>
+
+<div class="modal" id="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div id="modalContent"></div>
+
+</div>
+</div>
 
 <script>
-let points=Number(localStorage.getItem('pz_points')||1000);
-const pointEl=()=>document.getElementById('points');
-function render(){pointEl().textContent=points.toLocaleString();document.getElementById('profilePoints').textContent=points.toLocaleString();localStorage.setItem('pz_points',points)}
-function play(add){points+=add;render();alert('ডেমো গেম সম্পন্ন! +' + add + ' virtual points');}
-function show(id,btn){document.getElementById('home').style.display=id==='home'?'block':'none';document.getElementById('profile').style.display=id==='profile'?'block':'none';document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
-function openModal(type){
-let c='';
-if(type==='login') c='<h2>লগইন / রেজিস্টার</h2><input placeholder="ইমেইল বা ফোন"><input type="password" placeholder="পাসওয়ার্ড"><button class="btn" onclick="alert(\\'Demo account created\\');closeModal()">Continue</button>';
-if(type==='rewards') c='<h2>🎁 Rewards</h2><p>Rewards sponsor-funded বা platform rules অনুযায়ী দেওয়া হবে। এখানে কোনো betting/casino payout নেই।</p><button class="btn" onclick="closeModal()">ঠিক আছে</button>';
-if(type==='tournament') c='<h2>🏆 Tournament</h2><p>Skill-based tournament system এখানে যোগ করা যাবে। Winner selection হবে নির্ধারিত score/skill rules অনুযায়ী।</p><button class="btn" onclick="closeModal()">Join Demo</button>';
-document.getElementById('modalContent').innerHTML=c;document.getElementById('modal').style.display='flex'
+
+/* =========================
+   POINT SYSTEM
+========================= */
+
+let points = Number(localStorage.getItem('pz_points') || 1000);
+
+function render(){
+
+ document.getElementById('points').textContent =
+ points.toLocaleString();
+
+ document.getElementById('profilePoints').textContent =
+ points.toLocaleString();
+
+ localStorage.setItem('pz_points',points);
 }
-function closeModal(){document.getElementById('modal').style.display='none'}
+
+function addPoints(amount){
+
+ points += amount;
+
+ render();
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function show(id,btn){
+
+ document.getElementById('home').style.display =
+ id==='home' ? 'block' : 'none';
+
+ document.getElementById('profile').style.display =
+ id==='profile' ? 'block' : 'none';
+
+ document.querySelectorAll('nav button')
+ .forEach(x=>x.classList.remove('active'));
+
+ btn.classList.add('active');
+}
+
+/* =========================
+   MODAL
+========================= */
+
+function closeModal(){
+
+ document.getElementById('modal').style.display='none';
+
+ stopAllGames();
+}
+
+function openModal(type){
+
+ let c='';
+
+ if(type==='login'){
+
+  c=`
+  <h2>👤 লগইন / রেজিস্টার</h2>
+
+  <p>এই version-এ account system demo mode-এ আছে।</p>
+
+  <input id="demoName"
+   placeholder="আপনার নাম"
+   style="width:100%;padding:12px;border-radius:10px;border:1px solid #47627c;background:#0c1d2e;color:#fff">
+
+  <br><br>
+
+  <button class="btn"
+   onclick="saveDemoUser()">
+   Continue
+  </button>
+  `;
+ }
+
+ if(type==='rewards'){
+
+  c=`
+  <h2>🎁 Rewards</h2>
+
+  <p>
+  আপনার Virtual Points বর্তমানে
+  <b>${points.toLocaleString()}</b>।
+  </p>
+
+  <p>
+  Reward system sponsor rules ও platform eligibility অনুযায়ী
+  পরিচালিত হবে।
+  </p>
+
+  <button class="btn" onclick="closeModal()">
+  ঠিক আছে
+  </button>
+  `;
+ }
+
+ if(type==='tournament'){
+
+  c=`
+  <h2>🏆 Tournament</h2>
+
+  <p>
+  Skill-based tournament system পরবর্তী ধাপে যুক্ত করা হবে।
+  </p>
+
+  <p>
+  Winner selection নির্ধারিত score ও skill rules অনুযায়ী হবে।
+  </p>
+
+  <button class="btn" onclick="closeModal()">
+  ঠিক আছে
+  </button>
+  `;
+ }
+
+ document.getElementById('modalContent').innerHTML=c;
+
+ document.getElementById('modal').style.display='flex';
+}
+
+function saveDemoUser(){
+
+ let name=document.getElementById('demoName').value.trim();
+
+ if(!name){
+  alert('নাম লিখুন');
+  return;
+ }
+
+ localStorage.setItem('pz_username',name);
+
+ alert('স্বাগতম, '+name+'!');
+
+ closeModal();
+}
+
+/* =========================
+   GAME SYSTEM
+========================= */
+
+let gameTimer=null;
+let gameRunning=false;
+
+function openGame(type){
+
+ document.getElementById('modal').style.display='flex';
+
+ if(type==='tap') startTapGame();
+ if(type==='match') startMatchGame();
+ if(type==='fly') startFlyGame();
+ if(type==='brain') startBrainGame();
+}
+
+/* =========================
+   TAP RUSH
+========================= */
+
+let tapScore=0;
+let tapTime=30;
+
+function startTapGame(){
+
+ stopAllGames();
+
+ document.getElementById('modalContent').innerHTML=`
+
+ <h2>⚡ Tap Rush</h2>
+
+ <div class="gameInfo">
+
+ <div>
+ সময়<br>
+ <strong id="tapTime">30</strong>
+ </div>
+
+ <div>
+ Score<br>
+ <strong id="tapScore">0</strong>
+ </div>
+
+ </div>
+
+ <div class="gameArea" id="tapArea">
+
+ <div class="message" id="tapMessage">
+ Start চাপুন তারপর target-এ দ্রুত tap করুন।
+ </div>
+
+ </div>
+
+ <button class="btn startGame"
+ onclick="runTapGame()">
+ START GAME
+ </button>
+
+ `;
+
+}
+
+function runTapGame(){
+
+ tapScore=0;
+ tapTime=30;
+ gameRunning=true;
+
+ document.getElementById('tapScore').textContent=0;
+ document.getElementById('tapTime').textContent=30;
+
+ const area=document.getElementById('tapArea');
+
+ area.innerHTML='';
+
+ createTarget();
+
+ gameTimer=setInterval(()=>{
+
+  tapTime--;
+
+  document.getElementById('tapTime').textContent=tapTime;
+
+  if(tapTime<=0){
+
+   endTapGame();
+
+  }
+
+ },1000);
+
+}
+
+function createTarget(){
+
+ if(!gameRunning)return;
+
+ const area=document.getElementById('tapArea');
+
+ const old=area.querySelector('.target');
+
+ if(old)old.remove();
+
+ const target=document.createElement('div');
+
+ target.className='target';
+
+ target.textContent='⚡';
+
+ const maxX=area.clientWidth-58;
+ const maxY=area.clientHeight-58;
+
+ target.style.left=Math.random()*maxX+'px';
+ target.style.top=Math.random()*maxY+'px';
+
+ target.onclick=()=>{
+
+  if(!gameRunning)return;
+
+  tapScore++;
+
+  document.getElementById('tapScore').textContent=tapScore;
+
+  createTarget();
+
+ };
+
+ area.appendChild(target);
+}
+
+function endTapGame(){
+
+ gameRunning=false;
+
+ clearInterval(gameTimer);
+
+ const earned=tapScore;
+
+ addPoints(earned);
+
+ const area=document.getElementById('tapArea');
+
+ area.innerHTML=`
+
+ <div class="message">
+
+ <h2>🎉 Game Over!</h2>
+
+ <p>আপনার Score: <strong>${tapScore}</strong></p>
+
+ <p>আপনি পেয়েছেন <strong>+${earned}</strong> Points</p>
+
+ <button class="btn" onclick="startTapGame()">
+ আবার খেলুন
+ </button>
+
+ </div>
+ `;
+
+}
+
+/* =========================
+   MATCH SEVEN
+========================= */
+
+let matchFirst=null;
+let matchLocked=false;
+let matchPairs=0;
+let matchScore=0;
+
+function startMatchGame(){
+
+ stopAllGames();
+
+ matchFirst=null;
+ matchLocked=false;
+ matchPairs=0;
+ matchScore=0;
+
+ let nums=[1,2,3,4,5,6,1,2,3,4,5,6];
+
+ nums.sort(()=>Math.random()-.5);
+
+ document.getElementById('modalContent').innerHTML=`
+
+ <h2>7️⃣ Match Seven</h2>
+
+ <div class="gameInfo">
+
+ <div>
+ Pair<br>
+ <strong id="matchPairs">0</strong>/6
+ </div>
+
+ <div>
+ Score<br>
+ <strong id="matchScore">0</strong>
+ </div>
+
+ </div>
+
+ <div class="matchGrid" id="matchGrid"></div>
+
+ <p class="message">
+ একই সংখ্যা দুইটি নির্বাচন করুন।
+ </p>
+ `;
+
+ const grid=document.getElementById('matchGrid');
+
+ nums.forEach((n,i)=>{
+
+  const btn=document.createElement('button');
+
+  btn.className='matchCard';
+  btn.textContent='?';
+  btn.dataset.value=n;
+  btn.dataset.index=i;
+
+  btn.onclick=()=>selectMatch(btn);
+
+  grid.appendChild(btn);
+
+ });
+
+}
+
+function selectMatch(btn){
+
+ if(matchLocked ||
+    btn.classList.contains('matched') ||
+    btn===matchFirst)return;
+
+ btn.textContent=btn.dataset.value;
+ btn.classList.add('selected');
+
+ if(!matchFirst){
+
+  matchFirst=btn;
+  return;
+ }
+
+ matchLocked=true;
+
+ if(matchFirst.dataset.value===btn.dataset.value){
+
+  setTimeout(()=>{
+
+   matchFirst.classList.add('matched');
+   btn.classList.add('matched');
+
+   matchPairs++;
+   matchScore+=10;
+
+   document.getElementById('matchPairs').textContent=matchPairs;
+   document.getElementById('matchScore').textContent=matchScore;
+
+   matchFirst=null;
+   matchLocked=false;
+
+   if(matchPairs===6){
+
+    addPoints(matchScore);
+
+    document.getElementById('modalContent').innerHTML=`
+
+    <h2>🎉 Match Complete!</h2>
+
+    <p>Score: <strong>${matchScore}</strong></p>
+
+    <p>Points earned:
+    <strong>+${matchScore}</strong>
+    </p>
+
+    <button class="btn" onclick="startMatchGame()">
+    আবার খেলুন
+    </button>
+
+    `;
+
+   }
+
+  },350);
+
+ }else{
+
+  setTimeout(()=>{
+
+   matchFirst.textContent='?';
+   btn.textContent='?';
+
+   matchFirst.classList.remove('selected');
+   btn.classList.remove('selected');
+
+   matchFirst=null;
+   matchLocked=false;
+
+  },600);
+
+ }
+
+}
+
+/* =========================
+   FLY HIGH
+========================= */
+
+let flyCanvas;
+let flyCtx;
+let flyFrame;
+let flyScore=0;
+let flyPlayer;
+let flyObstacles=[];
+let flyRunning=false;
+
+function startFlyGame(){
+
+ stopAllGames();
+
+ document.getElementById('modalContent').innerHTML=`
+
+ <h2>🚀 Fly High</h2>
+
+ <div class="gameInfo">
+
+ <div>
+ Score<br>
+ <strong id="flyScore">0</strong>
+ </div>
+
+ <div>
+ Control<br>
+ <strong>Tap</strong>
+ </div>
+
+ </div>
+
+ <canvas class="flyCanvas"
+ id="flyCanvas"
+ width="440"
+ height="390">
+ </canvas>
+
+ <button class="btn startGame"
+ onclick="runFlyGame()">
+ START GAME
+ </button>
+
+ `;
+
+ flyCanvas=document.getElementById('flyCanvas');
+ flyCtx=flyCanvas.getContext('2d');
+
+ drawFlyStart();
+
+}
+
+function drawFlyStart(){
+
+ flyCtx.clearRect(0,0,440,390);
+
+ flyCtx.fillStyle='#ffd21a';
+ flyCtx.font='22px Arial';
+ flyCtx.textAlign='center';
+
+ flyCtx.fillText(
+ 'START চাপুন',
+ 220,
+ 195
+ );
+
+}
+
+function runFlyGame(){
+
+ flyScore=0;
+ flyRunning=true;
+ flyObstacles=[];
+
+ flyPlayer={
+  x:70,
+  y:190,
+  size:20,
+  velocity:0
+ };
+
+ document.getElementById('flyScore').textContent=0;
+
+ flyCanvas.onclick=()=>{
+
+  if(flyRunning){
+
+   flyPlayer.velocity=-6;
+
+  }
+
+ };
+
+ flyCanvas.ontouchstart=(e)=>{
+
+  e.preventDefault();
+
+  if(flyRunning){
+
+   flyPlayer.velocity=-6;
+
+  }
+
+ };
+
+ flyFrame=requestAnimationFrame(flyLoop);
+
+}
+
+function flyLoop(){
+
+ if(!flyRunning)return;
+
+ flyCtx.clearRect(0,0,440,390);
+
+ /* gravity */
+
+ flyPlayer.velocity+=0.35;
+ flyPlayer.y+=flyPlayer.velocity;
+
+ /* obstacle */
+
+ if(Math.random()<0.025){
+
+  const gap=125;
+  const top=50+Math.random()*160;
+
+  flyObstacles.push({
+   x:440,
+   top:top,
+   bottom:top+gap,
+   passed:false
+  });
+
+ }
+
+ flyObstacles.forEach(o=>{
+
+  o.x-=3;
+
+  flyCtx.fillStyle='#53b85b';
+
+  flyCtx.fillRect(
+   o.x,
+   0,
+   42,
+   o.top
+  );
+
+  flyCtx.fillRect(
+   o.x,
+   o.bottom,
+   42,
+   390-o.bottom
+  );
+
+  if(!o.passed && o.x<70){
+
+   o.passed=true;
+
+   flyScore++;
+
+   document.getElementById('flyScore').textContent=flyScore;
+
+  }
+
+ });
+
+ flyObstacles=
+ flyObstacles.filter(o=>o.x>-50);
+
+ /* player */
+
+ flyCtx.fillStyle='#ffd21a';
+
+ flyCtx.beginPath();
+
+ flyCtx.arc(
+  flyPlayer.x,
+  flyPlayer.y,
+  flyPlayer.size,
+  0,
+  Math.PI*2
+ );
+
+ flyCtx.fill();
+
+ /* collision */
+
+ if(
+  flyPlayer.y<20 ||
+  flyPlayer.y>370 ||
+  flyObstacles.some(o=>
+   flyPlayer.x+18>o.x &&
+   flyPlayer.x-18<o.x+42 &&
+   (flyPlayer.y-18<o.top ||
+    flyPlayer.y+18>o.bottom)
+  )
+ ){
+
+  endFlyGame();
+  return;
+
+ }
+
+ flyFrame=requestAnimationFrame(flyLoop);
+
+}
+
+function endFlyGame(){
+
+ flyRunning=false;
+
+ cancelAnimationFrame(flyFrame);
+
+ addPoints(flyScore);
+
+ document.getElementById('modalContent').innerHTML=`
+
+ <h2>🚀 Game Over!</h2>
+
+ <p>Your Score:
+ <strong>${flyScore}</strong>
+ </p>
+
+ <p>Points earned:
+ <strong>+${flyScore}</strong>
+ </p>
+
+ <button class="btn"
+ onclick="startFlyGame()">
+ আবার খেলুন
+ </button>
+
+ `;
+
+}
+
+/* =========================
+   BRAIN BOX
+========================= */
+
+let brainQuestion=0;
+let brainScore=0;
+let brainAnswer=0;
+
+function startBrainGame(){
+
+ stopAllGames();
+
+ brainQuestion=0;
+ brainScore=0;
+
+ document.getElementById('modalContent').innerHTML=`
+
+ <h2>🧠 Brain Box</h2>
+
+ <div class="gameInfo">
+
+ <div>
+ Question<br>
+ <strong id="brainCount">0</strong>/10
+ </div>
+
+ <div>
+ Score<br>
+ <strong id="brainScore">0</strong>
+ </div>
+
+ </div>
+
+ <div id="brainContent"></div>
+ `;
+
+ nextBrainQuestion();
+
+}
+
+function nextBrainQuestion(){
+
+ brainQuestion++;
+
+ if(brainQuestion>10){
+
+  addPoints(brainScore);
+
+  document.getElementById('brainContent').innerHTML=`
+
+  <div class="message">
+
+  <h2>🧠 Challenge Complete!</h2>
+
+  <p>Score:
+  <strong>${brainScore}</strong>
+  </p>
+
+  <p>Points earned:
+  <strong>+${brainScore}</strong>
+  </p>
+
+  <button class="btn"
+  onclick="startBrainGame()">
+  আবার খেলুন
+  </button>
+
+  </div>
+
+  `;
+
+  return;
+ }
+
+ let a=Math.floor(Math.random()*10)+1;
+ let b=Math.floor(Math.random()*10)+1;
+
+ const operations=['+','-','×'];
+
+ const op=operations[
+  Math.floor(Math.random()*operations.length)
+ ];
+
+ if(op==='+') brainAnswer=a+b;
+ if(op==='-') brainAnswer=a-b;
+ if(op==='×') brainAnswer=a*b;
+
+ let answers=[
+  brainAnswer,
+  brainAnswer+1,
+  brainAnswer-1,
+  brainAnswer+Math.floor(Math.random()*5)+2
+ ];
+
+ answers.sort(()=>Math.random()-.5);
+
+ document.getElementById('brainCount').textContent=brainQuestion;
+
+ document.getElementById('brainContent').innerHTML=`
+
+ <div class="question">
+
+ <div class="questionText">
+ ${a} ${op} ${b} = ?
+ </div>
+
+ <div class="answerGrid">
+
+ ${answers.map(x=>
+ `<button onclick="answerBrain(${x})">${x}</button>`
+ ).join('')}
+
+ </div>
+
+ </div>
+
+ `;
+
+}
+
+function answerBrain(answer){
+
+ if(answer===brainAnswer){
+
+  brainScore+=10;
+
+  document.getElementById('brainScore').textContent=brainScore;
+
+  nextBrainQuestion();
+
+ }else{
+
+  nextBrainQuestion();
+
+ }
+
+}
+
+/* =========================
+   STOP GAMES
+========================= */
+
+function stopAllGames(){
+
+ gameRunning=false;
+
+ if(gameTimer){
+
+  clearInterval(gameTimer);
+  gameTimer=null;
+
+ }
+
+ flyRunning=false;
+
+ if(flyFrame){
+
+  cancelAnimationFrame(flyFrame);
+  flyFrame=null;
+
+ }
+
+}
+
+/* =========================
+   START
+========================= */
+
 render();
+
 </script>
-</body></html>
+
+</body>
+</html>
