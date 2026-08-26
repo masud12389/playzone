@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PlayZone — Tap Rush</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#091827;color:white;font-family:Arial,sans-serif}
+header{background:#122a42;padding:15px 18px;font-size:28px;font-weight:bold;color:#ffd21a}
+main{max-width:650px;margin:auto;padding:16px 14px 90px}.hero,.game,.card{background:#193650;border-radius:18px;padding:20px;margin-bottom:14px}
+h1{font-size:28px;margin:0 0 8px}.yellow{color:#ffd21a}.btn{background:#ffd21a;border:0;border-radius:12px;padding:12px 18px;font-weight:bold;font-size:16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.stat{background:#102a42;padding:12px;border-radius:10px;text-align:center}.stat b{display:block;font-size:22px;color:#ffd21a}
+.target{display:block;width:110px;height:110px;margin:30px auto;border-radius:50%;border:0;background:#ffd21a;font-size:38px;box-shadow:0 0 0 12px #ffd21a22;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card{margin:0;padding:16px;text-align:center}.play{width:100%}
+nav{position:fixed;bottom:0;left:0;right:0;background:#132a40;padding:10px;text-align:center}
+.small{color:#b9c9d8;font-size:14px}
+</style>
+</head>
+<body>
+<header>PLAYZONE</header>
+<main>
+<section class="hero">
+<h1>খেলুন • দক্ষতা দেখান • স্কোর করুন</h1>
+<p class="small">Skill-based gaming platform — কোনো casino বা betting নয়।</p>
+</section>
+
+<section class="game">
+<h2 class="yellow">⚡ Tap Rush</h2>
+<p>৩০ সেকেন্ডে যত বেশি target tap করতে পারবেন, তত বেশি score!</p>
+<div class="stats">
+<div class="stat">সময়<b id="time">30</b></div>
+<div class="stat">স্কোর<b id="score">0</b></div>
+<div class="stat">Points<b id="points">1,000</b></div>
+</div>
+<button class="btn" id="start">গেম শুরু করুন</button>
+<button class="target" id="target" disabled>⚡</button>
+<p id="result" class="small">Start চাপার পর target-এ দ্রুত tap করুন।</p>
+</section>
+
+<h2 class="yellow">🎮 আরও গেম</h2>
+<div class="grid">
+<div class="card"><h3>7️⃣ Match Seven</h3><p class="small">শিগগিরই আসছে</p><button class="btn play" disabled>Coming Soon</button></div>
+<div class="card"><h3>🚀 Fly High</h3><p class="small">শিগগিরই আসছে</p><button class="btn play" disabled>Coming Soon</button></div>
+<div class="card"><h3>🧠 Brain Box</h3><p class="small">শিগগিরই আসছে</p><button class="btn play" disabled>Coming Soon</button></div>
+<div class="card"><h3>🏆 Tournament</h3><p class="small">পরের ধাপে যোগ হবে</p><button class="btn play" disabled>Coming Soon</button></div>
+</div>
+</main>
+<nav>⌂ Home &nbsp; • &nbsp; ⚡ Play &nbsp; • &nbsp; 🏆 Ranking &nbsp; • &nbsp; 👤 Profile</nav>
+
+<script>
+let score=0,time=30,points=Number(localStorage.getItem("pz_points")||1000),timer;
+const $=id=>document.getElementById(id);
+$("points").textContent=points.toLocaleString();
+$("start").onclick=()=>{
+ score=0;time=30;$("score").textContent=0;$("time").textContent=30;
+ $("target").disabled=false;$("start").disabled=true;$("result").textContent="খেলা চলছে...";
+ clearInterval(timer);
+ timer=setInterval(()=>{
+  time--;$("time").textContent=time;
+  if(time<=0){
+   clearInterval(timer);$("target").disabled=true;$("start").disabled=false;
+   const earned=score*2;points+=earned;
+   localStorage.setItem("pz_points",points);
+   $("points").textContent=points.toLocaleString();
+   $("result").textContent="Game Over! Score: "+score+" | +"+earned+" virtual points";
+  }
+ },1000);
+};
+$("target").onclick=()=>{
+ if(!$("target").disabled){score++;$("score").textContent=score;}
+};
+</script>
+</body>
+</html>
