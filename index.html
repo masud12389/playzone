@@ -204,35 +204,785 @@ function escapeHTML(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;',
 let gameTimer=null,gameRunning=false;
 function openGame(type){document.getElementById('modal').style.display='flex';if(type==='tap')startTapGame();if(type==='match')startMatchGame();if(type==='fly')startFlyGame();if(type==='brain')startBrainGame();}
 
-/* Tap */
-let tapScore=0,tapTime=30;
-function startTapGame(){stopAllGames();document.getElementById('modalContent').innerHTML=`<h2>⚡ Tap Rush</h2><div class="gameInfo"><div>সময়<br><strong id="tapTime">30</strong></div><div>Score<br><strong id="tapScore">0</strong></div></div><div class="gameArea" id="tapArea"><div class="message">START চাপুন</div></div><button class="btn full" onclick="runTapGame()">START GAME</button>`}
-function runTapGame(){tapScore=0;tapTime=30;gameRunning=true;document.getElementById('tapScore').textContent=0;document.getElementById('tapTime').textContent=30;document.getElementById('tapArea').innerHTML='';createTarget();gameTimer=setInterval(()=>{tapTime--;document.getElementById('tapTime').textContent=tapTime;if(tapTime<=0)endTapGame()},1000)}
-function createTarget(){if(!gameRunning)return;const area=document.getElementById('tapArea');const old=area.querySelector('.target');if(old)old.remove();const t=document.createElement('div');t.className='target';t.textContent='⚡';t.style.left=Math.random()*(area.clientWidth-58)+'px';t.style.top=Math.random()*(area.clientHeight-58)+'px';t.onclick=()=>{if(!gameRunning)return;tapScore++;document.getElementById('tapScore').textContent=tapScore;createTarget()};area.appendChild(t)}
-function endTapGame(){gameRunning=false;clearInterval(gameTimer);gameTimer=null;addPoints(tapScore);document.getElementById('tapArea').innerHTML=`<div class="message"><h2>🎉 Game Over!</h2><p>Score: <b>${tapScore}</b></p><p>Points: <b>+${tapScore}</b></p><button class="btn" onclick="startTapGame()">আবার খেলুন</button></div>`}
+/* =========================
+   PLAYZONE GAME SYSTEM
+========================= */
 
-/* Match */
-let matchFirst=null,matchLocked=false,matchPairs=0,matchScore=0;
-function startMatchGame(){stopAllGames();matchFirst=null;matchLocked=false;matchPairs=0;matchScore=0;let nums=[1,2,3,4,5,6,1,2,3,4,5,6].sort(()=>Math.random()-.5);document.getElementById('modalContent').innerHTML=`<h2>7️⃣ Match Seven</h2><div class="gameInfo"><div>Pair<br><strong id="matchPairs">0</strong>/6</div><div>Score<br><strong id="matchScore">0</strong></div></div><div class="matchGrid" id="matchGrid"></div><p class="message">একই সংখ্যা দুইটি নির্বাচন করুন।</p>`;nums.forEach(n=>{const b=document.createElement('button');b.className='matchCard';b.textContent='?';b.dataset.value=n;b.onclick=()=>selectMatch(b);document.getElementById('matchGrid').appendChild(b)})}
-function selectMatch(btn){if(matchLocked||btn.classList.contains('matched')||btn===matchFirst)return;btn.textContent=btn.dataset.value;btn.classList.add('selected');if(!matchFirst){matchFirst=btn;return}matchLocked=true;if(matchFirst.dataset.value===btn.dataset.value){setTimeout(()=>{matchFirst.classList.add('matched');btn.classList.add('matched');matchPairs++;matchScore+=10;document.getElementById('matchPairs').textContent=matchPairs;document.getElementById('matchScore').textContent=matchScore;matchFirst=null;matchLocked=false;if(matchPairs===6){addPoints(matchScore);document.getElementById('modalContent').innerHTML=`<h2>🎉 Match Complete!</h2><p>Score: <b>${matchScore}</b></p><p>Points: <b>+${matchScore}</b></p><button class="btn" onclick="startMatchGame()">আবার খেলুন</button>`}},300)}else setTimeout(()=>{matchFirst.textContent='?';btn.textContent='?';matchFirst.classList.remove('selected');btn.classList.remove('selected');matchFirst=null;matchLocked=false},600)}
+let gameTimer = null;
+let gameRunning = false;
 
-/* Fly */
-let flyCanvas,flyCtx,flyFrame,flyScore=0,flyPlayer,flyObstacles=[],flyRunning=false;
-function startFlyGame(){stopAllGames();document.getElementById('modalContent').innerHTML=`<h2>🚀 Fly High</h2><div class="gameInfo"><div>Score<br><strong id="flyScore">0</strong></div><div>Control<br><strong>Tap</strong></div></div><canvas class="flyCanvas" id="flyCanvas" width="440" height="350"></canvas><button class="btn full" onclick="runFlyGame()">START GAME</button>`;flyCanvas=document.getElementById('flyCanvas');flyCtx=flyCanvas.getContext('2d');flyCtx.fillStyle='#ffd21a';flyCtx.font='22px Arial';flyCtx.textAlign='center';flyCtx.fillText('START চাপুন',220,175)}
-function runFlyGame(){flyScore=0;flyRunning=true;flyObstacles=[];flyPlayer={x:70,y:170,size:18,velocity:0};document.getElementById('flyScore').textContent=0;flyCanvas.onclick=()=>{if(flyRunning)flyPlayer.velocity=-6};flyCanvas.ontouchstart=e=>{e.preventDefault();if(flyRunning)flyPlayer.velocity=-6};flyFrame=requestAnimationFrame(flyLoop)}
-function flyLoop(){if(!flyRunning)return;flyCtx.clearRect(0,0,440,350);flyPlayer.velocity+=.35;flyPlayer.y+=flyPlayer.velocity;if(Math.random()<.025){let gap=120,top=40+Math.random()*140;flyObstacles.push({x:440,top,bottom:top+gap,passed:false})}flyObstacles.forEach(o=>{o.x-=3;flyCtx.fillStyle='#53b85b';flyCtx.fillRect(o.x,0,42,o.top);flyCtx.fillRect(o.x,o.bottom,42,350-o.bottom);if(!o.passed&&o.x<70){o.passed=true;flyScore++;document.getElementById('flyScore').textContent=flyScore}});flyObstacles=flyObstacles.filter(o=>o.x>-50);flyCtx.fillStyle='#ffd21a';flyCtx.beginPath();flyCtx.arc(flyPlayer.x,flyPlayer.y,flyPlayer.size,0,Math.PI*2);flyCtx.fill();if(flyPlayer.y<18||flyPlayer.y>332||flyObstacles.some(o=>flyPlayer.x+16>o.x&&flyPlayer.x-16<o.x+42&&(flyPlayer.y-16<o.top||flyPlayer.y+16>o.bottom))){endFlyGame();return}flyFrame=requestAnimationFrame(flyLoop)}
-function endFlyGame(){flyRunning=false;cancelAnimationFrame(flyFrame);addPoints(flyScore);document.getElementById('modalContent').innerHTML=`<h2>🚀 Game Over!</h2><p>Score: <b>${flyScore}</b></p><p>Points: <b>+${flyScore}</b></p><button class="btn" onclick="startFlyGame()">আবার খেলুন</button>`}
+/* =========================
+   TAP RUSH
+========================= */
 
-/* Brain */
-let brainQuestion=0,brainScore=0,brainAnswer=0;
-function startBrainGame(){stopAllGames();brainQuestion=0;brainScore=0;document.getElementById('modalContent').innerHTML=`<h2>🧠 Brain Box</h2><div class="gameInfo"><div>Question<br><strong id="brainCount">0</strong>/10</div><div>Score<br><strong id="brainScore">0</strong></div></div><div id="brainContent"></div>`;nextBrainQuestion()}
-function nextBrainQuestion(){brainQuestion++;if(brainQuestion>10){addPoints(brainScore);document.getElementById('brainContent').innerHTML=`<div class="message"><h2>🧠 Complete!</h2><p>Score: <b>${brainScore}</b></p><p>Points: <b>+${brainScore}</b></p><button class="btn" onclick="startBrainGame()">আবার খেলুন</button></div>`;return}let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1,ops=['+','-','×'],op=ops[Math.floor(Math.random()*3)];brainAnswer=op==='+'?a+b:op==='-'?a-b:a*b;let answers=[brainAnswer,brainAnswer+1,brainAnswer-1,brainAnswer+Math.floor(Math.random()*5)+2].sort(()=>Math.random()-.5);document.getElementById('brainCount').textContent=brainQuestion;document.getElementById('brainContent').innerHTML=`<div class="question"><div class="questionText">${a} ${op} ${b} = ?</div><div class="answerGrid">${answers.map(x=>`<button onclick="answerBrain(${x})">${x}</button>`).join('')}</div></div>`}
-function answerBrain(a){if(a===brainAnswer){brainScore+=10;document.getElementById('brainScore').textContent=brainScore}nextBrainQuestion()}
-function stopAllGames(){gameRunning=false;if(gameTimer){clearInterval(gameTimer);gameTimer=null}flyRunning=false;if(flyFrame){cancelAnimationFrame(flyFrame);flyFrame=null}}
+let tapScore = 0;
+let tapTime = 30;
 
-/* Startup */
-const savedName=localStorage.getItem('pz_username');if(savedName)document.getElementById('profileName').textContent=savedName;
-render();renderJobs();
+function startTapGame(){
+
+    stopAllGames();
+
+    tapScore = 0;
+    tapTime = 30;
+
+    document.getElementById('modalContent').innerHTML = `
+        <h2>⚡ Tap Rush</h2>
+
+        <div class="gameInfo">
+            <div>
+                সময়<br>
+                <strong id="tapTime">30</strong>
+            </div>
+
+            <div>
+                Score<br>
+                <strong id="tapScore">0</strong>
+            </div>
+        </div>
+
+        <div class="gameArea" id="tapArea">
+            <div class="message">
+                START চাপুন এবং target-এ যত দ্রুত সম্ভব tap করুন।
+            </div>
+        </div>
+
+        <button class="btn startGame" onclick="runTapGame()">
+            START GAME
+        </button>
+    `;
+}
+
+function runTapGame(){
+
+    stopAllGames();
+
+    tapScore = 0;
+    tapTime = 30;
+    gameRunning = true;
+
+    const scoreBox = document.getElementById('tapScore');
+    const timeBox = document.getElementById('tapTime');
+    const area = document.getElementById('tapArea');
+
+    scoreBox.textContent = '0';
+    timeBox.textContent = '30';
+    area.innerHTML = '';
+
+    createTarget();
+
+    gameTimer = setInterval(function(){
+
+        tapTime--;
+
+        if(timeBox){
+            timeBox.textContent = tapTime;
+        }
+
+        if(tapTime <= 0){
+            endTapGame();
+        }
+
+    },1000);
+}
+
+function createTarget(){
+
+    if(!gameRunning) return;
+
+    const area = document.getElementById('tapArea');
+
+    if(!area) return;
+
+    const oldTarget = area.querySelector('.target');
+
+    if(oldTarget){
+        oldTarget.remove();
+    }
+
+    const target = document.createElement('div');
+
+    target.className = 'target';
+    target.textContent = '⚡';
+
+    const maxX = Math.max(0, area.clientWidth - 58);
+    const maxY = Math.max(0, area.clientHeight - 58);
+
+    target.style.left = Math.random() * maxX + 'px';
+    target.style.top = Math.random() * maxY + 'px';
+
+    target.onclick = function(){
+
+        if(!gameRunning) return;
+
+        tapScore++;
+
+        const scoreBox = document.getElementById('tapScore');
+
+        if(scoreBox){
+            scoreBox.textContent = tapScore;
+        }
+
+        createTarget();
+    };
+
+    area.appendChild(target);
+}
+
+function endTapGame(){
+
+    if(!gameRunning) return;
+
+    gameRunning = false;
+
+    if(gameTimer){
+        clearInterval(gameTimer);
+        gameTimer = null;
+    }
+
+    const earned = tapScore;
+
+    addPoints(earned);
+
+    const area = document.getElementById('tapArea');
+
+    if(area){
+
+        area.innerHTML = `
+            <div class="message">
+
+                <h2>🎉 Game Over!</h2>
+
+                <p>
+                    আপনার Score:
+                    <strong>${tapScore}</strong>
+                </p>
+
+                <p>
+                    আপনি পেয়েছেন:
+                    <strong>+${earned} Points</strong>
+                </p>
+
+                <button class="btn" onclick="startTapGame()">
+                    আবার খেলুন
+                </button>
+
+            </div>
+        `;
+    }
+}
+
+
+/* =========================
+   MATCH SEVEN
+========================= */
+
+let matchFirst = null;
+let matchLocked = false;
+let matchPairs = 0;
+let matchScore = 0;
+
+function startMatchGame(){
+
+    stopAllGames();
+
+    matchFirst = null;
+    matchLocked = false;
+    matchPairs = 0;
+    matchScore = 0;
+
+    let numbers = [
+        1,2,3,4,5,6,
+        1,2,3,4,5,6
+    ];
+
+    numbers.sort(function(){
+        return Math.random() - 0.5;
+    });
+
+    document.getElementById('modalContent').innerHTML = `
+
+        <h2>7️⃣ Match Seven</h2>
+
+        <div class="gameInfo">
+
+            <div>
+                Pair<br>
+                <strong id="matchPairs">0</strong>/6
+            </div>
+
+            <div>
+                Score<br>
+                <strong id="matchScore">0</strong>
+            </div>
+
+        </div>
+
+        <div class="matchGrid" id="matchGrid"></div>
+
+        <p class="message">
+            একই সংখ্যা দুইটি নির্বাচন করুন।
+        </p>
+    `;
+
+    const grid = document.getElementById('matchGrid');
+
+    numbers.forEach(function(number,index){
+
+        const button = document.createElement('button');
+
+        button.className = 'matchCard';
+        button.textContent = '?';
+
+        button.dataset.value = number;
+        button.dataset.index = index;
+
+        button.onclick = function(){
+            selectMatch(button);
+        };
+
+        grid.appendChild(button);
+    });
+}
+
+function selectMatch(button){
+
+    if(
+        matchLocked ||
+        button.classList.contains('matched') ||
+        button === matchFirst
+    ){
+        return;
+    }
+
+    button.textContent = button.dataset.value;
+    button.classList.add('selected');
+
+    if(!matchFirst){
+
+        matchFirst = button;
+        return;
+    }
+
+    matchLocked = true;
+
+    if(matchFirst.dataset.value === button.dataset.value){
+
+        const first = matchFirst;
+        const second = button;
+
+        setTimeout(function(){
+
+            first.classList.add('matched');
+            second.classList.add('matched');
+
+            matchPairs++;
+            matchScore += 10;
+
+            document.getElementById('matchPairs').textContent =
+                matchPairs;
+
+            document.getElementById('matchScore').textContent =
+                matchScore;
+
+            matchFirst = null;
+            matchLocked = false;
+
+            if(matchPairs >= 6){
+
+                addPoints(matchScore);
+
+                document.getElementById('modalContent').innerHTML = `
+
+                    <h2>🎉 Match Complete!</h2>
+
+                    <p>
+                        Score:
+                        <strong>${matchScore}</strong>
+                    </p>
+
+                    <p>
+                        Points earned:
+                        <strong>+${matchScore}</strong>
+                    </p>
+
+                    <button class="btn"
+                        onclick="startMatchGame()">
+                        আবার খেলুন
+                    </button>
+                `;
+            }
+
+        },350);
+
+    }else{
+
+        const first = matchFirst;
+
+        setTimeout(function(){
+
+            first.textContent = '?';
+            button.textContent = '?';
+
+            first.classList.remove('selected');
+            button.classList.remove('selected');
+
+            matchFirst = null;
+            matchLocked = false;
+
+        },650);
+    }
+}
+
+
+/* =========================
+   FLY HIGH
+========================= */
+
+let flyCanvas = null;
+let flyCtx = null;
+let flyFrame = null;
+let flyScore = 0;
+let flyPlayer = null;
+let flyObstacles = [];
+let flyRunning = false;
+
+function startFlyGame(){
+
+    stopAllGames();
+
+    document.getElementById('modalContent').innerHTML = `
+
+        <h2>🚀 Fly High</h2>
+
+        <div class="gameInfo">
+
+            <div>
+                Score<br>
+                <strong id="flyScore">0</strong>
+            </div>
+
+            <div>
+                Control<br>
+                <strong>Tap</strong>
+            </div>
+
+        </div>
+
+        <canvas
+            class="flyCanvas"
+            id="flyCanvas"
+            width="440"
+            height="390">
+        </canvas>
+
+        <button class="btn startGame"
+            onclick="runFlyGame()">
+            START GAME
+        </button>
+    `;
+
+    flyCanvas = document.getElementById('flyCanvas');
+
+    flyCtx = flyCanvas.getContext('2d');
+
+    drawFlyStart();
+}
+
+function drawFlyStart(){
+
+    if(!flyCtx) return;
+
+    flyCtx.clearRect(0,0,440,390);
+
+    flyCtx.fillStyle = '#ffd21a';
+    flyCtx.font = '22px Arial';
+    flyCtx.textAlign = 'center';
+
+    flyCtx.fillText(
+        'START চাপুন',
+        220,
+        195
+    );
+}
+
+function runFlyGame(){
+
+    stopAllGames();
+
+    flyScore = 0;
+    flyRunning = true;
+    flyObstacles = [];
+
+    flyPlayer = {
+        x:70,
+        y:190,
+        size:20,
+        velocity:0
+    };
+
+    document.getElementById('flyScore').textContent = '0';
+
+    flyCanvas.onclick = function(){
+
+        if(flyRunning){
+            flyPlayer.velocity = -6;
+        }
+    };
+
+    flyCanvas.ontouchstart = function(event){
+
+        event.preventDefault();
+
+        if(flyRunning){
+            flyPlayer.velocity = -6;
+        }
+    };
+
+    flyFrame = requestAnimationFrame(flyLoop);
+}
+
+function flyLoop(){
+
+    if(!flyRunning) return;
+
+    flyCtx.clearRect(
+        0,
+        0,
+        flyCanvas.width,
+        flyCanvas.height
+    );
+
+    /* Gravity */
+
+    flyPlayer.velocity += 0.35;
+    flyPlayer.y += flyPlayer.velocity;
+
+    /* New obstacle */
+
+    if(Math.random() < 0.025){
+
+        const gap = 125;
+        const top = 45 + Math.random() * 165;
+
+        flyObstacles.push({
+            x:440,
+            top:top,
+            bottom:top + gap,
+            passed:false
+        });
+    }
+
+    /* Obstacles */
+
+    flyObstacles.forEach(function(obstacle){
+
+        obstacle.x -= 3;
+
+        flyCtx.fillStyle = '#53b85b';
+
+        flyCtx.fillRect(
+            obstacle.x,
+            0,
+            42,
+            obstacle.top
+        );
+
+        flyCtx.fillRect(
+            obstacle.x,
+            obstacle.bottom,
+            42,
+            390 - obstacle.bottom
+        );
+
+        if(
+            !obstacle.passed &&
+            obstacle.x < 70
+        ){
+
+            obstacle.passed = true;
+
+            flyScore++;
+
+            document.getElementById(
+                'flyScore'
+            ).textContent = flyScore;
+        }
+    });
+
+    flyObstacles =
+        flyObstacles.filter(function(obstacle){
+            return obstacle.x > -50;
+        });
+
+    /* Player */
+
+    flyCtx.fillStyle = '#ffd21a';
+
+    flyCtx.beginPath();
+
+    flyCtx.arc(
+        flyPlayer.x,
+        flyPlayer.y,
+        flyPlayer.size,
+        0,
+        Math.PI * 2
+    );
+
+    flyCtx.fill();
+
+    /* Collision */
+
+    const hitObstacle = flyObstacles.some(function(obstacle){
+
+        return (
+            flyPlayer.x + 18 > obstacle.x &&
+            flyPlayer.x - 18 < obstacle.x + 42 &&
+            (
+                flyPlayer.y - 18 < obstacle.top ||
+                flyPlayer.y + 18 > obstacle.bottom
+            )
+        );
+    });
+
+    if(
+        flyPlayer.y < 20 ||
+        flyPlayer.y > 370 ||
+        hitObstacle
+    ){
+
+        endFlyGame();
+        return;
+    }
+
+    flyFrame = requestAnimationFrame(flyLoop);
+}
+
+function endFlyGame(){
+
+    flyRunning = false;
+
+    if(flyFrame){
+        cancelAnimationFrame(flyFrame);
+        flyFrame = null;
+    }
+
+    const earned = flyScore;
+
+    addPoints(earned);
+
+    document.getElementById('modalContent').innerHTML = `
+
+        <h2>🚀 Game Over!</h2>
+
+        <p>
+            Your Score:
+            <strong>${flyScore}</strong>
+        </p>
+
+        <p>
+            Points earned:
+            <strong>+${earned}</strong>
+        </p>
+
+        <button class="btn"
+            onclick="startFlyGame()">
+            আবার খেলুন
+        </button>
+    `;
+}
+
+
+/* =========================
+   BRAIN BOX
+========================= */
+
+let brainQuestion = 0;
+let brainScore = 0;
+let brainAnswer = 0;
+
+function startBrainGame(){
+
+    stopAllGames();
+
+    brainQuestion = 0;
+    brainScore = 0;
+
+    document.getElementById('modalContent').innerHTML = `
+
+        <h2>🧠 Brain Box</h2>
+
+        <div class="gameInfo">
+
+            <div>
+                Question<br>
+                <strong id="brainCount">0</strong>/10
+            </div>
+
+            <div>
+                Score<br>
+                <strong id="brainScore">0</strong>
+            </div>
+
+        </div>
+
+        <div id="brainContent"></div>
+    `;
+
+    nextBrainQuestion();
+}
+
+function nextBrainQuestion(){
+
+    brainQuestion++;
+
+    if(brainQuestion > 10){
+
+        addPoints(brainScore);
+
+        document.getElementById('brainContent').innerHTML = `
+
+            <div class="message">
+
+                <h2>🧠 Challenge Complete!</h2>
+
+                <p>
+                    Score:
+                    <strong>${brainScore}</strong>
+                </p>
+
+                <p>
+                    Points earned:
+                    <strong>+${brainScore}</strong>
+                </p>
+
+                <button class="btn"
+                    onclick="startBrainGame()">
+                    আবার খেলুন
+                </button>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    const a =
+        Math.floor(Math.random() * 10) + 1;
+
+    const b =
+        Math.floor(Math.random() * 10) + 1;
+
+    const operations = ['+','-','×'];
+
+    const op =
+        operations[
+            Math.floor(
+                Math.random() * operations.length
+            )
+        ];
+
+    if(op === '+'){
+        brainAnswer = a + b;
+    }
+
+    if(op === '-'){
+        brainAnswer = a - b;
+    }
+
+    if(op === '×'){
+        brainAnswer = a * b;
+    }
+
+    let answers = [
+        brainAnswer,
+        brainAnswer + 1,
+        brainAnswer - 1,
+        brainAnswer + 3
+    ];
+
+    answers.sort(function(){
+        return Math.random() - 0.5;
+    });
+
+    document.getElementById('brainCount').textContent =
+        brainQuestion;
+
+    document.getElementById('brainContent').innerHTML = `
+
+        <div class="question">
+
+            <div class="questionText">
+                ${a} ${op} ${b} = ?
+            </div>
+
+            <div class="answerGrid">
+
+                ${answers.map(function(answer){
+
+                    return `
+                        <button
+                            onclick="answerBrain(${answer})">
+                            ${answer}
+                        </button>
+                    `;
+
+                }).join('')}
+
+            </div>
+
+        </div>
+    `;
+}
+
+function answerBrain(answer){
+
+    if(answer === brainAnswer){
+
+        brainScore += 10;
+
+        document.getElementById('brainScore').textContent =
+            brainScore;
+    }
+
+    nextBrainQuestion();
+}
+
+
+/* =========================
+   STOP ALL GAMES
+========================= */
+
+function stopAllGames(){
+
+    gameRunning = false;
+
+    if(gameTimer){
+
+        clearInterval(gameTimer);
+
+        gameTimer = null;
+    }
+
+    flyRunning = false;
+
+    if(flyFrame){
+
+        cancelAnimationFrame(flyFrame);
+
+        flyFrame = null;
+    }
+}
+
+
+/* =========================
+   STARTUP
+========================= */
+
+render();
+
+if(typeof renderJobs === 'function'){
+    renderJobs();
+}
 </script>
 </body>
 </html>
