@@ -1,446 +1,528 @@
 <!doctype html>
-
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#081522">
 <title>PLAYZONE — Skill & Opportunity Platform</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-margin:0;
-background:#081522;
-color:#fff;
-font-family:Arial,"Noto Sans Bengali",sans-serif
+  margin:0;
+  background:#081522;
+  color:#fff;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
 }
 
+button,input,textarea,select{font:inherit}
+
 .wrap{
-max-width:760px;
-margin:auto;
-padding-bottom:80px
+  max-width:760px;
+  margin:auto;
+  padding-bottom:90px;
 }
 
 header{
-position:sticky;
-top:0;
-z-index:20;
-background:#102a42;
-padding:14px 16px;
-display:flex;
-justify-content:space-between;
-align-items:center
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#102a42;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 10px #0005;
 }
 
 .logo{
-font-size:27px;
-font-weight:900;
-color:#ffd21a
+  font-size:27px;
+  font-weight:900;
+  color:#ffd21a;
 }
 
 .logo span{color:#fff}
 
-.menu{font-size:25px}
+.menu{
+  font-size:25px;
+}
 
 .hero{
-margin:14px;
-border-radius:20px;
-padding:26px 18px;
-text-align:center;
-background:linear-gradient(135deg,#16467b,#692078)
+  margin:14px;
+  border-radius:20px;
+  padding:26px 18px;
+  text-align:center;
+  background:linear-gradient(135deg,#16467b,#692078);
 }
 
 .hero h1{
-font-size:29px;
-margin:0 0 10px
+  font-size:29px;
+  margin:0 0 10px;
 }
 
 .hero p{
-color:#d8e6f2;
-line-height:1.6
+  color:#d8e6f2;
+  line-height:1.6;
 }
 
 .btn{
-border:0;
-border-radius:11px;
-padding:11px 16px;
-background:#ffd21a;
-color:#152536;
-font-weight:800;
-cursor:pointer
+  border:0;
+  border-radius:11px;
+  padding:11px 16px;
+  background:#ffd21a;
+  color:#152536;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.btn:active{transform:scale(.97)}
+.btn:active{
+  transform:scale(.97);
+}
 
 .btn.secondary{
-background:#24445f;
-color:#fff
+  background:#24445f;
+  color:#fff;
 }
 
-.btn.full{width:100%}
+.btn.full{
+  width:100%;
+}
 
 .wallet{
-margin:14px;
-padding:15px;
-border-radius:15px;
-background:#193650;
-display:flex;
-justify-content:space-between;
-align-items:center
+  margin:14px;
+  padding:15px;
+  border-radius:15px;
+  background:#193650;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.wallet small{color:#b8cad9}
+.wallet small{
+  color:#b8cad9;
+}
 
 .points{
-font-size:22px;
-font-weight:900
+  font-size:22px;
+  font-weight:900;
 }
 
 .tabs{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px;
-padding:0 14px
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  padding:0 14px;
 }
 
 .tab{
-background:#162d43;
-border-radius:11px;
-padding:11px 4px;
-text-align:center;
-font-size:12px
+  background:#162d43;
+  border-radius:11px;
+  padding:11px 4px;
+  text-align:center;
+  font-size:12px;
 }
 
-.section{padding:10px 14px}
+.section{
+  padding:10px 14px;
+}
 
-.section h2{color:#ffd21a}
+.section h2{
+  color:#ffd21a;
+}
 
 .grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .card{
-background:#19344d;
-border-radius:15px;
-overflow:hidden
+  background:#19344d;
+  border-radius:15px;
+  overflow:hidden;
 }
 
 .thumb{
-height:110px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-font-weight:900
+  height:110px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:900;
 }
 
-.a{background:linear-gradient(135deg,#17468c,#12a9d8)}
-.b{background:linear-gradient(135deg,#781b70,#ec315e)}
-.c{background:linear-gradient(135deg,#81320e,#f1a41f)}
-.d{background:linear-gradient(135deg,#245523,#78ba48)}
+.a{
+  background:linear-gradient(135deg,#17468c,#12a9d8);
+}
+
+.b{
+  background:linear-gradient(135deg,#781b70,#ec315e);
+}
+
+.c{
+  background:linear-gradient(135deg,#81320e,#f1a41f);
+}
+
+.d{
+  background:linear-gradient(135deg,#245523,#78ba48);
+}
 
 .card h3{
-margin:10px 12px 4px
+  margin:10px 12px 4px;
 }
 
 .card p{
-margin:0 12px 10px;
-color:#b9c9d8;
-font-size:13px;
-min-height:35px;
-line-height:1.5
+  margin:0 12px 10px;
+  color:#b9c9d8;
+  font-size:13px;
+  min-height:35px;
+  line-height:1.5;
 }
 
 .play{
-margin:0 12px 12px;
-width:calc(100% - 24px)
+  margin:0 12px 12px;
+  width:calc(100% - 24px);
 }
 
 .panel{
-background:#193650;
-border-radius:15px;
-padding:16px;
-margin:12px 14px
+  background:#193650;
+  border-radius:15px;
+  padding:16px;
+  margin:12px 14px;
 }
 
 .panel h2,
 .panel h3{
-color:#ffd21a
+  color:#ffd21a;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.row>*{
+  flex:1;
+  min-width:130px;
 }
 
 .feature{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
 .feature .mini{
-background:#132c43;
-border-radius:13px;
-padding:14px
+  background:#132c43;
+  border-radius:13px;
+  padding:14px;
 }
 
 .mini b{
-font-size:22px;
-color:#ffd21a
+  font-size:22px;
+  color:#ffd21a;
 }
 
 input,
 textarea,
 select{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #47627c;
-background:#0c1d2e;
-color:#fff;
-margin:6px 0 10px
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #47627c;
+  background:#0c1d2e;
+  color:#fff;
+  margin:6px 0 10px;
 }
 
 textarea{
-min-height:90px;
-resize:vertical
+  min-height:90px;
+  resize:vertical;
 }
 
 .badge{
-display:inline-block;
-background:#294a65;
-padding:5px 9px;
-border-radius:20px;
-font-size:12px;
-color:#dce8f2
+  display:inline-block;
+  background:#294a65;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+  color:#dce8f2;
 }
 
 .modal{
-display:none;
-position:fixed;
-inset:0;
-background:#000c;
-z-index:50;
-align-items:center;
-justify-content:center;
-padding:16px
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000c;
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
 }
 
 .box{
-width:min(500px,100%);
-max-height:90vh;
-overflow:auto;
-background:#152d44;
-border-radius:18px;
-padding:20px
+  width:min(500px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#152d44;
+  border-radius:18px;
+  padding:20px;
 }
 
 .box h2{
-margin-top:0;
-color:#ffd21a
+  margin-top:0;
+  color:#ffd21a;
 }
 
 .close{
-float:right;
-background:none;
-border:0;
-color:#fff;
-font-size:28px;
-cursor:pointer
+  float:right;
+  background:none;
+  border:0;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
 }
 
 .gameInfo{
-display:flex;
-justify-content:space-between;
-background:#0d2134;
-border-radius:12px;
-padding:12px;
-margin-bottom:12px
+  display:flex;
+  justify-content:space-between;
+  background:#0d2134;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:12px;
 }
 
 .gameInfo strong{
-color:#ffd21a;
-font-size:20px
+  color:#ffd21a;
+  font-size:20px;
 }
 
 .gameArea{
-position:relative;
-height:350px;
-background:#081521;
-border:2px solid #31506c;
-border-radius:15px;
-overflow:hidden;
-touch-action:manipulation
+  position:relative;
+  height:350px;
+  background:#081521;
+  border:2px solid #31506c;
+  border-radius:15px;
+  overflow:hidden;
+  touch-action:manipulation;
 }
 
 .target{
-position:absolute;
-width:58px;
-height:58px;
-border-radius:50%;
-background:#ffd21a;
-color:#172638;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:25px;
-font-weight:900;
-box-shadow:0 0 20px #ffd21a88;
-user-select:none
+  position:absolute;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#ffd21a;
+  color:#172638;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  font-weight:900;
+  box-shadow:0 0 20px #ffd21a88;
 }
 
 .message{
-text-align:center;
-padding:20px 5px;
-color:#cbd7e2
+  text-align:center;
+  padding:20px 5px;
+  color:#cbd7e2;
 }
 
 .matchGrid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
 .matchCard{
-height:75px;
-border:0;
-border-radius:13px;
-background:#213e59;
-color:#fff;
-font-size:25px;
-font-weight:900
+  height:75px;
+  border:0;
+  border-radius:13px;
+  background:#213e59;
+  color:#fff;
+  font-size:25px;
+  font-weight:900;
 }
 
 .matchCard.selected{
-background:#ffd21a;
-color:#172638
+  background:#ffd21a;
+  color:#172638;
 }
 
 .matchCard.matched{
-visibility:hidden
+  visibility:hidden;
 }
 
 .flyCanvas{
-width:100%;
-height:350px;
-display:block;
-background:linear-gradient(#071d34,#102c1c);
-border-radius:15px;
-touch-action:none
+  width:100%;
+  height:350px;
+  display:block;
+  background:linear-gradient(#071d34,#102c1c);
+  border-radius:15px;
+  touch-action:none;
 }
 
 .question{
-background:#0d2134;
-border-radius:15px;
-padding:18px;
-text-align:center
+  background:#0d2134;
+  border-radius:15px;
+  padding:18px;
+  text-align:center;
 }
 
 .questionText{
-font-size:27px;
-font-weight:900;
-color:#ffd21a;
-margin-bottom:16px
+  font-size:27px;
+  font-weight:900;
+  color:#ffd21a;
+  margin-bottom:16px;
 }
 
 .answerGrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
 .answerGrid button{
-padding:14px;
-border:0;
-border-radius:12px;
-background:#24425e;
-color:#fff;
-font-size:19px;
-font-weight:800
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#24425e;
+  color:#fff;
+  font-size:19px;
+  font-weight:800;
+}
+
+.answerGrid button:hover{
+  background:#315b7d;
 }
 
 nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#132a40;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-padding:7px;
-border-top:1px solid #29435e;
-z-index:40
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#132a40;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:7px;
+  border-top:1px solid #29435e;
+  z-index:40;
 }
 
 nav button{
-background:none;
-border:0;
-color:#cbd7e2;
-font-size:11px
+  background:none;
+  border:0;
+  color:#cbd7e2;
+  font-size:11px;
+  cursor:pointer;
 }
 
 nav b{
-display:block;
-font-size:19px;
-margin-bottom:2px
+  display:block;
+  font-size:19px;
+  margin-bottom:2px;
 }
 
 .active{
-color:#ffd21a!important
+  color:#ffd21a!important;
 }
 
 .hidden{
-display:none!important
+  display:none!important;
 }
 
 .notice{
-font-size:12px;
-color:#aebfce;
-line-height:1.6
+  font-size:12px;
+  color:#aebfce;
+  line-height:1.6;
 }
 
 .listItem{
-background:#10283d;
-border-radius:12px;
-padding:13px;
-margin:8px 0
+  background:#10283d;
+  border-radius:12px;
+  padding:13px;
+  margin:8px 0;
 }
 
 .listItem h3{
-margin:0 0 5px
+  margin:7px 0 5px;
 }
 
 .listItem p{
-margin:5px 0;
-color:#c3d0dc;
-font-size:13px
+  margin:5px 0;
+  color:#c3d0dc;
+  font-size:13px;
+}
+
+.success{
+  color:#70e08b;
+}
+
+.warning{
+  color:#ffd21a;
+}
+
+.danger{
+  color:#ff7b7b;
+}
+
+.statGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.stat{
+  background:#10283d;
+  border-radius:12px;
+  padding:13px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  color:#ffd21a;
+}
+
+.empty{
+  text-align:center;
+  padding:25px 10px;
+  color:#aebfce;
 }
 
 @media(max-width:480px){
 
-.hero h1{
-font-size:25px
-}
+  .hero h1{
+    font-size:25px;
+  }
 
-.grid{
-gap:9px
-}
+  .grid{
+    gap:9px;
+  }
 
-.thumb{
-height:100px;
-font-size:19px
-}
+  .thumb{
+    height:100px;
+    font-size:19px;
+  }
 
-.feature{
-grid-template-columns:1fr
-}
+  .feature{
+    grid-template-columns:1fr;
+  }
 
-.wallet{
-align-items:flex-start
-}
+  .wallet{
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .questionText{
+    font-size:23px;
+  }
 
 }
 </style>
-
 </head>
 
 <body>
@@ -448,17 +530,20 @@ align-items:flex-start
 <div class="wrap">
 
 <header>
-<div class="logo">PLAY<span>ZONE</span></div>
-<div class="menu">☰</div>
+  <div class="logo">PLAY<span>ZONE</span></div>
+  <div class="menu">☰</div>
 </header>
+
+
+<!-- HERO -->
 
 <section class="hero">
 
 <h1>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h1>
 
 <p>
-Skill games, tournaments, sponsor rewards এবং Skill/Job Hub —
-PLAYZONE এখন আরও বড় একটি opportunity platform.
+Skill games, tournaments, sponsor rewards এবং
+Skill/Job Hub — PLAYZONE এখন আরও বড় একটি opportunity platform.
 </p>
 
 <button class="btn" onclick="openModal('login')">
@@ -466,6 +551,9 @@ PLAYZONE এখন আরও বড় একটি opportunity platform.
 </button>
 
 </section>
+
+
+<!-- WALLET -->
 
 <div class="wallet">
 
@@ -480,6 +568,9 @@ PLAYZONE এখন আরও বড় একটি opportunity platform.
 
 </div>
 
+
+<!-- CATEGORY -->
+
 <div class="tabs">
 
 <div class="tab">🔥 জনপ্রিয়</div>
@@ -489,15 +580,23 @@ PLAYZONE এখন আরও বড় একটি opportunity platform.
 
 </div>
 
+
+<!-- HOME -->
+
 <main id="home" class="section">
 
 <h2>জনপ্রিয় Skill Games</h2>
 
 <div class="grid">
 
+
+<!-- TAP -->
+
 <article class="card">
 
-<div class="thumb a">⚡ TAP RUSH</div>
+<div class="thumb a">
+⚡ TAP RUSH
+</div>
 
 <h3>Tap Rush</h3>
 
@@ -511,9 +610,14 @@ PLAY
 
 </article>
 
+
+<!-- MATCH -->
+
 <article class="card">
 
-<div class="thumb b">7️⃣ MATCH 7</div>
+<div class="thumb b">
+7️⃣ MATCH 7
+</div>
 
 <h3>Match Seven</h3>
 
@@ -527,9 +631,14 @@ PLAY
 
 </article>
 
+
+<!-- FLY -->
+
 <article class="card">
 
-<div class="thumb c">🚀 FLY HIGH</div>
+<div class="thumb c">
+🚀 FLY HIGH
+</div>
 
 <h3>Fly High</h3>
 
@@ -543,9 +652,14 @@ PLAY
 
 </article>
 
+
+<!-- BRAIN -->
+
 <article class="card">
 
-<div class="thumb d">🧠 BRAIN BOX</div>
+<div class="thumb d">
+🧠 BRAIN BOX
+</div>
 
 <h3>Brain Box</h3>
 
@@ -560,6 +674,9 @@ PLAY
 </article>
 
 </div>
+
+
+<!-- SKILL HUB -->
 
 <div class="panel">
 
@@ -604,14 +721,18 @@ onclick="openModal('jobs')">
 
 </div>
 
+
+<!-- SPONSOR -->
+
 <div class="panel">
 
 <h2>📢 Sponsor & Business</h2>
 
 <p>
 আপনার ব্যবসা PLAYZONE-এ প্রচার করুন।
-Sponsor tournament, featured business এবং banner placement-এর মাধ্যমে
-আয় করার ব্যবস্থা রাখা হয়েছে।
+Sponsor tournament, featured business এবং
+banner placement-এর মাধ্যমে business promotion
+এর ব্যবস্থা করা যাবে।
 </p>
 
 <button class="btn" onclick="openModal('sponsor')">
@@ -620,7 +741,39 @@ Sponsor করুন
 
 </div>
 
+
+<!-- PLATFORM INFO -->
+
+<div class="panel">
+
+<h2>🌟 PLAYZONE Opportunity</h2>
+
+<p class="notice">
+PLAYZONE-এর লক্ষ্য হলো skill-based gaming,
+skill development, job opportunity এবং
+business sponsorship-কে একটি platform-এর মধ্যে আনা।
+</p>
+
+<div class="statGrid">
+
+<div class="stat">
+<strong id="gameCount">4</strong>
+Games
+</div>
+
+<div class="stat">
+<strong id="jobCount">4</strong>
+Demo Jobs
+</div>
+
+</div>
+
+</div>
+
 </main>
+
+
+<!-- JOBS -->
 
 <section id="jobs" class="section hidden">
 
@@ -635,10 +788,10 @@ Sponsor করুন
 <select id="skillFilter" onchange="renderJobs()">
 
 <option value="all">সব Skill</option>
-<option>Graphic Design</option>
-<option>Video Editing</option>
-<option>Data Entry</option>
-<option>Digital Marketing</option>
+<option value="Graphic Design">Graphic Design</option>
+<option value="Video Editing">Video Editing</option>
+<option value="Data Entry">Data Entry</option>
+<option value="Digital Marketing">Digital Marketing</option>
 
 </select>
 
@@ -652,13 +805,18 @@ Sponsor করুন
 
 </section>
 
+
+<!-- PROFILE -->
+
 <section id="profile" class="section hidden">
 
 <div class="panel" style="margin:0 0 12px">
 
 <h2>👤 আমার প্রোফাইল</h2>
 
-<p id="profileName">Demo User</p>
+<p id="profileName">
+Demo User
+</p>
 
 <p>
 Points:
@@ -671,6 +829,7 @@ Skill Player
 
 </div>
 
+
 <div class="panel" style="margin:0 0 12px">
 
 <h3>🏆 Tournament</h3>
@@ -679,13 +838,18 @@ Skill Player
 আপনার tournament history এখানে দেখা যাবে।
 </p>
 
+<button class="btn" onclick="openModal('tournament')">
+Tournament দেখুন
+</button>
+
 </div>
+
 
 <div class="panel" style="margin:0">
 
 <h3>💼 My Skills</h3>
 
-<p>
+<p id="mySkillText">
 আপনার skill profile তৈরি করুন এবং কাজের সুযোগ নিন।
 </p>
 
@@ -699,34 +863,45 @@ Skill Profile
 
 </div>
 
+
+<!-- BOTTOM NAV -->
+
 <nav>
 
-<button class="active" onclick="showPage('home',this)">
+<button class="active"
+onclick="showPage('home',this)">
 ⌂
 <b>Home</b>
 </button>
 
-<button onclick="openModal('tournament')">
+<button
+onclick="openModal('tournament')">
 🏆
 <b>Tournament</b>
 </button>
 
-<button onclick="showPage('jobs',this)">
+<button
+onclick="showPage('jobs',this)">
 💼
 <b>Jobs</b>
 </button>
 
-<button onclick="openModal('rewards')">
+<button
+onclick="openModal('rewards')">
 🎁
 <b>Rewards</b>
 </button>
 
-<button onclick="showPage('profile',this)">
+<button
+onclick="showPage('profile',this)">
 👤
 <b>Profile</b>
 </button>
 
 </nav>
+
+
+<!-- MODAL -->
 
 <div class="modal" id="modal">
 
@@ -742,13 +917,17 @@ Skill Profile
 
 </div>
 
+
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-/* =========================================
-   SUPABASE CONFIG
-========================================= */
+/* =====================================================
+   PLAYZONE CONFIG
+===================================================== */
 
 const SUPABASE_URL =
 'https://cavrhkprzbbtimlixbqp.supabase.co';
@@ -760,1817 +939,2402 @@ let supabaseClient = null;
 
 try{
 
-if(window.supabase){
+  if(window.supabase){
 
-supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+  }
+
+}catch(error){
+
+  console.log('Supabase initialization error:',error);
 
 }
 
-}catch(e){
 
-console.log('Supabase init error:',e);
-
-}
-
-
-/* =========================================
+/* =====================================================
    POINT SYSTEM
-========================================= */
+===================================================== */
 
 let points =
 Number(localStorage.getItem('pz_points') || 1000);
 
+
 function render(){
 
-const pointsBox =
-document.getElementById('points');
+  const pointText =
+    points.toLocaleString();
 
-const profilePoints =
-document.getElementById('profilePoints');
+  const pointsElement =
+    document.getElementById('points');
 
-if(pointsBox){
-pointsBox.textContent =
-points.toLocaleString();
-}
+  const profilePoints =
+    document.getElementById('profilePoints');
 
-if(profilePoints){
-profilePoints.textContent =
-points.toLocaleString();
-}
+  if(pointsElement){
+    pointsElement.textContent = pointText;
+  }
 
-localStorage.setItem(
-'pz_points',
-points
-);
+  if(profilePoints){
+    profilePoints.textContent = pointText;
+  }
 
-}
-
-
-function addPoints(n){
-
-const amount =
-Number(n || 0);
-
-if(amount <= 0)return;
-
-points += amount;
-
-render();
+  localStorage.setItem(
+    'pz_points',
+    String(points)
+  );
 
 }
 
 
-/* =========================================
+function addPoints(amount){
+
+  const n =
+    Number(amount || 0);
+
+  if(!Number.isFinite(n) || n <= 0){
+    return;
+  }
+
+  points += Math.floor(n);
+
+  render();
+
+}
+
+
+/* =====================================================
    NAVIGATION
-========================================= */
+===================================================== */
 
 function showPage(id,btn){
 
-['home','jobs','profile'].forEach(function(x){
+  ['home','jobs','profile'].forEach(function(page){
 
-const page =
-document.getElementById(x);
+    const element =
+      document.getElementById(page);
 
-if(page){
-page.classList.toggle(
-'hidden',
-x !== id
-);
+    if(element){
+
+      element.classList.toggle(
+        'hidden',
+        page !== id
+      );
+
+    }
+
+  });
+
+
+  document
+    .querySelectorAll('nav button')
+    .forEach(function(button){
+
+      button.classList.remove('active');
+
+    });
+
+
+  if(btn){
+    btn.classList.add('active');
+  }
+
+
+  if(id === 'jobs'){
+    renderJobs();
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
 }
 
-});
 
-document
-.querySelectorAll('nav button')
-.forEach(function(x){
-
-x.classList.remove('active');
-
-});
-
-if(btn){
-btn.classList.add('active');
-}
-
-if(id === 'jobs'){
-renderJobs();
-}
-
-}
-
-
-/* =========================================
+/* =====================================================
    MODAL
-========================================= */
+===================================================== */
 
 function closeModal(){
 
-document
-.getElementById('modal')
-.style.display='none';
+  const modal =
+    document.getElementById('modal');
 
-stopAllGames();
+  if(modal){
+    modal.style.display = 'none';
+  }
+
+  stopAllGames();
 
 }
 
 
 function openModal(type){
 
-stopAllGames();
+  stopAllGames();
 
-let c='';
+  let content = '';
 
 
-if(type === 'login'){
+  /* LOGIN */
 
-c=`
+  if(type === 'login'){
 
-<h2>👤 লগইন / রেজিস্টার</h2>
+    const savedName =
+      localStorage.getItem('pz_username') || '';
 
-<p>
-নাম দিয়ে Demo profile তৈরি করুন।
-</p>
+    content = `
 
-<input
-id="demoName"
-placeholder="আপনার নাম"
->
+      <h2>👤 লগইন / রেজিস্টার</h2>
 
-<input
-id="demoEmail"
-type="email"
-placeholder="ইমেইল"
->
+      <p>
+      আপনার নাম দিয়ে Demo profile তৈরি করুন।
+      </p>
 
-<button
-class="btn"
-onclick="saveDemoUser()">
+      <input
+        id="demoName"
+        placeholder="আপনার নাম"
+        value="${escapeHTML(savedName)}"
+      >
 
-Continue
+      <input
+        id="demoEmail"
+        type="email"
+        placeholder="ইমেইল"
+      >
 
-</button>
+      <button
+        class="btn"
+        onclick="saveDemoUser()">
 
-<p class="notice">
+        Continue
 
-নোট: Demo mode-এ এই তথ্য শুধু
-এই browser-এ সংরক্ষণ হবে।
+      </button>
 
-আসল password frontend-এ রাখবেন না।
+      <p class="notice">
+      নিরাপত্তার জন্য password এই HTML-এর
+      localStorage-এ রাখা হচ্ছে না।
+      বাস্তব account-এর জন্য Supabase Auth
+      ব্যবহার করা উচিত।
+      </p>
 
-</p>
+    `;
 
-`;
+  }
+
+
+  /* REWARDS */
+
+  if(type === 'rewards'){
+
+    content = `
+
+      <h2>🎁 Rewards</h2>
+
+      <div class="stat">
+        <strong>
+          ${points.toLocaleString()}
+        </strong>
+        Virtual Points
+      </div>
+
+      <p>
+      আপনার Points skill-game score থেকে
+      তৈরি হচ্ছে।
+      </p>
+
+      <p class="notice">
+      Points নিজে থেকে নগদ টাকা নয়।
+      ভবিষ্যতে sponsor/reward rules,
+      eligibility এবং legal payment system
+      যুক্ত করে reward ব্যবস্থা তৈরি করা যাবে।
+      </p>
+
+      <button
+        class="btn"
+        onclick="closeModal()">
+
+        ঠিক আছে
+
+      </button>
+
+    `;
+
+  }
+
+
+  /* TOURNAMENT */
+
+  if(type === 'tournament'){
+
+    content = `
+
+      <h2>🏆 Tournament</h2>
+
+      <p>
+      Skill-based tournament system-এর
+      foundation এখানে রাখা হয়েছে।
+      </p>
+
+      <div class="listItem">
+
+        <span class="badge">
+        Coming Soon
+        </span>
+
+        <h3>Weekly Skill Tournament</h3>
+
+        <p>
+        নির্দিষ্ট সময়ের মধ্যে game score অনুযায়ী
+        leaderboard তৈরি করা যাবে।
+        </p>
+
+      </div>
+
+      <div class="listItem">
+
+        <span class="badge">
+        Sponsor
+        </span>
+
+        <h3>Sponsor Prize Pool</h3>
+
+        <p>
+        Sponsor prize fund দিলে tournament
+        reward programme পরিচালনা করা যাবে।
+        </p>
+
+      </div>
+
+      <button
+        class="btn"
+        onclick="closeModal()">
+
+        ঠিক আছে
+
+      </button>
+
+    `;
+
+  }
+
+
+  /* SPONSOR */
+
+  if(type === 'sponsor'){
+
+    content = `
+
+      <h2>📢 Sponsor / Business</h2>
+
+      <p>
+      আপনার ব্যবসা বা প্রতিষ্ঠান PLAYZONE-এ
+      প্রচার করতে চাইলে তথ্য দিন।
+      </p>
+
+      <input
+        id="sName"
+        placeholder="ব্যবসা/প্রতিষ্ঠানের নাম"
+      >
+
+      <input
+        id="sPhone"
+        placeholder="মোবাইল নম্বর"
+      >
+
+      <textarea
+        id="sMsg"
+        placeholder="কী ধরনের বিজ্ঞাপন বা sponsorship চান?"
+      ></textarea>
+
+      <button
+        class="btn"
+        onclick="submitSponsor()">
+
+        আগ্রহ জানাই
+
+      </button>
+
+      <p
+        id="sStatus"
+        class="notice">
+      </p>
+
+    `;
+
+  }
+
+
+  /* JOBS */
+
+  if(type === 'jobs'){
+
+    content = `
+
+      <h2>💼 Skill & Job Hub</h2>
+
+      <p>
+      Jobs পেজে skill অনুযায়ী কাজ দেখুন।
+      </p>
+
+      <button
+        class="btn"
+        onclick="
+          closeModal();
+          showPage(
+            'jobs',
+            document.querySelectorAll('nav button')[2]
+          );
+        ">
+
+        Jobs দেখুন
+
+      </button>
+
+    `;
+
+  }
+
+
+  /* POST JOB */
+
+  if(type === 'postjob'){
+
+    content = `
+
+      <h2>➕ কাজ পোস্ট করুন</h2>
+
+      <input
+        id="jTitle"
+        placeholder="কাজের নাম"
+      >
+
+      <select id="jSkill">
+
+        <option>Graphic Design</option>
+        <option>Video Editing</option>
+        <option>Data Entry</option>
+        <option>Digital Marketing</option>
+
+      </select>
+
+      <input
+        id="jBudget"
+        placeholder="Budget (ঐচ্ছিক)"
+      >
+
+      <textarea
+        id="jDesc"
+        placeholder="কাজের বিস্তারিত"
+      ></textarea>
+
+      <button
+        class="btn"
+        onclick="addJob()">
+
+        Publish Job
+
+      </button>
+
+      <p class="notice">
+      Demo mode-এ job এই browser-এ
+      সংরক্ষণ হবে।
+      </p>
+
+    `;
+
+  }
+
+
+  /* SKILL PROFILE */
+
+  if(type === 'skill'){
+
+    const oldSkill =
+      getSavedSkill();
+
+    content = `
+
+      <h2>🎯 Skill Profile</h2>
+
+      <input
+        id="skillName"
+        placeholder="আপনার নাম"
+        value="${escapeHTML(oldSkill.name)}"
+      >
+
+      <select id="skillType">
+
+        <option ${
+          oldSkill.skill === 'Graphic Design'
+          ? 'selected' : ''
+        }>
+        Graphic Design
+        </option>
+
+        <option ${
+          oldSkill.skill === 'Video Editing'
+          ? 'selected' : ''
+        }>
+        Video Editing
+        </option>
+
+        <option ${
+          oldSkill.skill === 'Data Entry'
+          ? 'selected' : ''
+        }>
+        Data Entry
+        </option>
+
+        <option ${
+          oldSkill.skill === 'Digital Marketing'
+          ? 'selected' : ''
+        }>
+        Digital Marketing
+        </option>
+
+      </select>
+
+      <textarea
+        id="skillAbout"
+        placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ"
+      >${escapeHTML(oldSkill.about)}</textarea>
+
+      <button
+        class="btn"
+        onclick="saveSkill()">
+
+        Save Skill
+
+      </button>
+
+    `;
+
+  }
+
+
+  const modalContent =
+    document.getElementById('modalContent');
+
+  if(modalContent){
+
+    modalContent.innerHTML = content;
+
+  }
+
+
+  const modal =
+    document.getElementById('modal');
+
+  if(modal){
+
+    modal.style.display = 'flex';
+
+  }
 
 }
 
 
-if(type === 'rewards'){
-
-c=`
-
-<h2>🎁 Rewards</h2>
-
-<p>
-আপনার Virtual Points:
-<b>${points.toLocaleString()}</b>
-</p>
-
-<p>
-Reward sponsor rules ও platform eligibility
-অনুযায়ী পরিচালিত হবে।
-Points নিজে থেকে নগদ টাকা নয়।
-</p>
-
-<button
-class="btn"
-onclick="closeModal()">
-
-ঠিক আছে
-
-</button>
-
-`;
-
-}
-
-
-if(type === 'tournament'){
-
-c=`
-
-<h2>🏆 Tournament</h2>
-
-<p>
-Skill-based tournament এখানে যুক্ত করা যাবে।
-Sponsor prize pool দিতে পারে এবং leaderboard
-score অনুযায়ী winner নির্বাচন করা যাবে।
-</p>
-
-<p class="notice">
-বর্তমানে এটি Demo mode।
-</p>
-
-<button
-class="btn"
-onclick="closeModal()">
-
-ঠিক আছে
-
-</button>
-
-`;
-
-}
-
-
-if(type === 'sponsor'){
-
-c=`
-
-<h2>📢 Sponsor / Business</h2>
-
-<p>
-আপনার ব্যবসা বা প্রতিষ্ঠান PLAYZONE-এ
-প্রচার করতে চাইলে তথ্য দিন।
-</p>
-
-<input
-id="sName"
-placeholder="ব্যবসা/প্রতিষ্ঠানের নাম"
->
-
-<input
-id="sPhone"
-placeholder="মোবাইল নম্বর"
->
-
-<textarea
-id="sMsg"
-placeholder="কী ধরনের বিজ্ঞাপন বা sponsorship চান?"
-></textarea>
-
-<button
-class="btn"
-onclick="submitSponsor()">
-
-আগ্রহ জানাই
-
-</button>
-
-<p id="sStatus" class="notice"></p>
-
-`;
-
-}
-
-if(type === 'jobs'){
-
-c=`
-
-<h2>💼 Skill & Job Hub</h2>
-
-<p>
-Jobs পেজে গিয়ে skill অনুযায়ী কাজ দেখুন
-অথবা নতুন job post করুন।
-</p>
-
-<button
-class="btn"
-onclick="closeModal();showPage('jobs',document.querySelectorAll('nav button')[2])">
-
-Jobs দেখুন
-
-</button>
-
-`;
-
-}
-
-if(type === 'postjob'){
-
-c=`
-
-<h2>➕ কাজ পোস্ট করুন</h2>
-
-<input
-id="jTitle"
-placeholder="কাজের নাম"
-
->
-
-<select id="jSkill">
-
-<option>Graphic Design</option>
-<option>Video Editing</option>
-<option>Data Entry</option>
-<option>Digital Marketing</option>
-
-</select>
-
-<input
-id="jBudget"
-placeholder="Budget (ঐচ্ছিক)"
-
->
-
-<textarea
-id="jDesc"
-placeholder="কাজের বিস্তারিত"
-></textarea>
-
-<button
-class="btn"
-onclick="addJob()">
-
-Publish Job
-
-</button>
-
-<p class="notice">
-Demo mode-এ job এই browser-এ সংরক্ষণ হবে।
-</p>
-
-`;
-
-}
-
-if(type === 'skill'){
-
-const oldSkill =
-JSON.parse(
-localStorage.getItem('pz_skill') || 'null'
-);
-
-c=`
-
-<h2>🎯 Skill Profile</h2>
-
-<input
-id="skillName"
-placeholder="আপনার নাম"
-value="${escapeHTML(oldSkill?.name || '')}"
-
->
-
-<select id="skillType">
-
-<option>Graphic Design</option>
-<option>Video Editing</option>
-<option>Data Entry</option>
-<option>Digital Marketing</option>
-
-</select>
-
-<textarea
-id="skillAbout"
-placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ"
->${escapeHTML(oldSkill?.about || '')}</textarea>
-
-<button
-class="btn"
-onclick="saveSkill()">
-
-Save Skill
-
-</button>
-
-`;
-
-}
-
-document
-.getElementById('modalContent')
-.innerHTML=c;
-
-document
-.getElementById('modal')
-.style.display='flex';
-
-}
-
-/* =========================================
-DEMO USER
-========================================= */
+/* =====================================================
+   USER PROFILE
+===================================================== */
 
 function saveDemoUser(){
 
-const input =
-document.getElementById('demoName');
+  const input =
+    document.getElementById('demoName');
 
-const n =
-(input?.value || '').trim();
+  const name =
+    (input?.value || '').trim();
 
-if(!n){
 
-alert('নাম লিখুন');
+  if(!name){
 
-return;
+    alert('নাম লিখুন');
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    'pz_username',
+    name
+  );
+
+
+  const profileName =
+    document.getElementById('profileName');
+
+  if(profileName){
+
+    profileName.textContent = name;
+
+  }
+
+
+  alert(
+    'স্বাগতম, ' + name + '!'
+  );
+
+
+  closeModal();
 
 }
 
-localStorage.setItem(
-'pz_username',
-n
-);
 
-const profileName =
-document.getElementById('profileName');
+function loadUser(){
 
-if(profileName){
-profileName.textContent=n;
-}
+  const name =
+    localStorage.getItem('pz_username');
 
-alert(
-'স্বাগতম, ' + n + '!'
-);
+  const profileName =
+    document.getElementById('profileName');
 
-closeModal();
+  if(name && profileName){
+
+    profileName.textContent = name;
+
+  }
 
 }
 
-/* =========================================
-SPONSOR
-========================================= */
+
+/* =====================================================
+   SPONSOR
+===================================================== */
 
 function submitSponsor(){
 
-const nameBox =
-document.getElementById('sName');
+  const name =
+    document
+      .getElementById('sName')
+      ?.value
+      .trim();
 
-const phoneBox =
-document.getElementById('sPhone');
+  const phone =
+    document
+      .getElementById('sPhone')
+      ?.value
+      .trim();
 
-const messageBox =
-document.getElementById('sMsg');
+  const message =
+    document
+      .getElementById('sMsg')
+      ?.value
+      .trim() || '';
 
-const n =
-(nameBox?.value || '').trim();
 
-const p =
-(phoneBox?.value || '').trim();
+  if(!name || !phone){
 
-const m =
-(messageBox?.value || '').trim();
+    alert(
+      'ব্যবসার নাম ও মোবাইল নম্বর দিন'
+    );
 
-if(!n || !p){
+    return;
 
-alert(
-'ব্যবসার নাম ও মোবাইল নম্বর দিন'
-);
+  }
 
-return;
+
+  const data = {
+
+    name:name,
+
+    phone:phone,
+
+    message:message,
+
+    date:new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    'pz_sponsor_request',
+    JSON.stringify(data)
+  );
+
+
+  const status =
+    document.getElementById('sStatus');
+
+  if(status){
+
+    status.innerHTML =
+      '<span class="success">ধন্যবাদ! আপনার sponsor interest এই browser-এ সংরক্ষণ হয়েছে।</span>';
+
+  }
 
 }
 
-const data={
 
-name:n,
-phone:p,
-message:m,
-date:new Date().toISOString()
+/* =====================================================
+   SKILL PROFILE
+===================================================== */
 
-};
+function getSavedSkill(){
 
-localStorage.setItem(
-'pz_sponsor_request',
-JSON.stringify(data)
-);
+  try{
 
-const status =
-document.getElementById('sStatus');
+    return JSON.parse(
+      localStorage.getItem('pz_skill')
+    ) || {
+      name:'',
+      skill:'Graphic Design',
+      about:''
+    };
 
-if(status){
+  }catch(error){
 
-status.textContent =
-'ধন্যবাদ! আপনার sponsor interest এই browser-এ সংরক্ষণ হয়েছে।';
+    return {
+      name:'',
+      skill:'Graphic Design',
+      about:''
+    };
+
+  }
 
 }
 
-}
-
-/* =========================================
-SKILL PROFILE
-========================================= */
 
 function saveSkill(){
 
-const name =
-document.getElementById('skillName')
-.value.trim();
+  const name =
+    document
+      .getElementById('skillName')
+      ?.value
+      .trim() || '';
 
-const skill =
-document.getElementById('skillType')
-.value;
+  const skill =
+    document
+      .getElementById('skillType')
+      ?.value || 'Graphic Design';
 
-const about =
-document.getElementById('skillAbout')
-.value.trim();
+  const about =
+    document
+      .getElementById('skillAbout')
+      ?.value
+      .trim() || '';
 
-if(!name){
 
-alert('আপনার নাম লিখুন');
+  if(!name){
 
-return;
+    alert('আপনার নাম লিখুন');
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    'pz_skill',
+    JSON.stringify({
+      name:name,
+      skill:skill,
+      about:about
+    })
+  );
+
+
+  updateSkillDisplay();
+
+  alert('Skill profile saved');
+
+  closeModal();
 
 }
 
-localStorage.setItem(
-'pz_skill',
-JSON.stringify({
 
-name:name,
-skill:skill,
-about:about
+function updateSkillDisplay(){
 
-})
-);
+  const skill =
+    getSavedSkill();
 
-alert(
-'Skill profile saved'
-);
+  const element =
+    document.getElementById('mySkillText');
 
-closeModal();
+  if(!element){
+    return;
+  }
+
+
+  if(!skill.name){
+
+    element.textContent =
+      'আপনার skill profile তৈরি করুন এবং কাজের সুযোগ নিন।';
+
+    return;
+
+  }
+
+
+  element.innerHTML =
+    '<b>' +
+    escapeHTML(skill.name) +
+    '</b> — ' +
+    escapeHTML(skill.skill) +
+    '<br>' +
+    escapeHTML(skill.about || 'Skill profile তৈরি করা হয়েছে।');
 
 }
 
-/* =========================================
-JOB SYSTEM
-========================================= */
 
-const defaultJobs=[
+/* =====================================================
+   JOB SYSTEM
+===================================================== */
 
-{
-title:'Facebook পোস্ট ডিজাইন',
-skill:'Graphic Design',
-budget:'৳500–৳1,500',
-desc:'একটি ব্যবসার জন্য ৫টি social media পোস্ট ডিজাইন।'
-},
+const defaultJobs = [
 
-{
-title:'Short Video Editing',
-skill:'Video Editing',
-budget:'৳1,000+',
-desc:'Reels/TikTok-এর জন্য short video edit।'
-},
+  {
+    title:'Facebook পোস্ট ডিজাইন',
+    skill:'Graphic Design',
+    budget:'৳500–৳1,500',
+    desc:'একটি ব্যবসার জন্য ৫টি social media পোস্ট ডিজাইন।'
+  },
 
-{
-title:'Data Entry Assistant',
-skill:'Data Entry',
-budget:'আলোচনা সাপেক্ষ',
-desc:'Excel/Google Sheet data entry কাজ।'
-},
+  {
+    title:'Short Video Editing',
+    skill:'Video Editing',
+    budget:'৳1,000+',
+    desc:'Reels/TikTok-এর জন্য short video edit।'
+  },
 
-{
-title:'Social Media Promotion',
-skill:'Digital Marketing',
-budget:'আলোচনা সাপেক্ষ',
-desc:'ছোট ব্যবসার social media page পরিচালনা।'
-}
+  {
+    title:'Data Entry Assistant',
+    skill:'Data Entry',
+    budget:'আলোচনা সাপেক্ষ',
+    desc:'Excel/Google Sheet data entry কাজ।'
+  },
+
+  {
+    title:'Social Media Promotion',
+    skill:'Digital Marketing',
+    budget:'আলোচনা সাপেক্ষ',
+    desc:'ছোট ব্যবসার social media page পরিচালনা।'
+  }
 
 ];
 
+
 function getJobs(){
 
-try{
+  try{
 
-const saved =
-localStorage.getItem('pz_jobs');
+    const saved =
+      JSON.parse(
+        localStorage.getItem('pz_jobs')
+      );
 
-if(saved){
+    if(Array.isArray(saved) && saved.length){
 
-const parsed =
-JSON.parse(saved);
+      return saved;
 
-if(Array.isArray(parsed)){
-return parsed;
-}
+    }
 
-}
+    return defaultJobs;
 
-return defaultJobs.slice();
+  }catch(error){
 
-}catch(e){
+    return defaultJobs;
 
-return defaultJobs.slice();
-
-}
+  }
 
 }
+
 
 function renderJobs(){
 
-const filter =
-document.getElementById('skillFilter')
-?.value || 'all';
+  const filter =
+    document
+      .getElementById('skillFilter')
+      ?.value || 'all';
 
-const jobs =
-getJobs();
 
-const list =
-document.getElementById('jobList');
+  const jobs =
+    getJobs();
 
-if(!list)return;
 
-const filtered =
-jobs.filter(function(j){
+  const list =
+    document.getElementById('jobList');
 
-return filter === 'all' ||
-j.skill === filter;
 
-});
+  if(!list){
+    return;
+  }
 
-if(!filtered.length){
 
-list.innerHTML =
-'<div class="panel">এই Skill-এর কোনো কাজ নেই।</div>';
+  const filtered =
+    jobs.filter(function(job){
 
-return;
+      return filter === 'all' ||
+             job.skill === filter;
+
+    });
+
+
+  if(!filtered.length){
+
+    list.innerHTML =
+      '<div class="panel empty">এই Skill-এর কোনো কাজ নেই।</div>';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    filtered.map(function(job,index){
+
+      return `
+
+        <div class="listItem">
+
+          <span class="badge">
+            ${escapeHTML(job.skill)}
+          </span>
+
+          <h3>
+            ${escapeHTML(job.title)}
+          </h3>
+
+          <p>
+            ${escapeHTML(job.desc)}
+          </p>
+
+          <p>
+            <b>Budget:</b>
+            ${escapeHTML(
+              job.budget || 'আলোচনা সাপেক্ষ'
+            )}
+          </p>
+
+          <button
+            class="btn"
+            onclick="applyJob(${index})">
+
+            Apply
+
+          </button>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+
+  const count =
+    document.getElementById('jobCount');
+
+  if(count){
+
+    count.textContent =
+      jobs.length;
+
+  }
 
 }
 
-list.innerHTML =
-filtered.map(function(j){
-
-return `
-
-<div class="listItem">
-
-<span class="badge">
-${escapeHTML(j.skill)}
-</span>
-
-<h3>
-${escapeHTML(j.title)}
-</h3>
-
-<p>
-${escapeHTML(j.desc)}
-</p>
-
-<p>
-<b>Budget:</b>
-${escapeHTML(j.budget || 'আলোচনা সাপেক্ষ')}
-</p>
-
-<button
-class="btn"
-onclick="applyJob()">
-
-Apply
-
-</button>
-
-</div>
-
-`;
-
-}).join('');
-
-}
-
-function applyJob(){
-
-alert(
-'Demo: কাজদাতার সাথে যোগাযোগের ব্যবস্থা পরবর্তী ধাপে যুক্ত করা হবে।'
-);
-
-}
 
 function addJob(){
 
-const title =
-document.getElementById('jTitle')
-.value.trim();
+  const title =
+    document
+      .getElementById('jTitle')
+      ?.value
+      .trim() || '';
 
-const skill =
-document.getElementById('jSkill')
-.value;
+  const skill =
+    document
+      .getElementById('jSkill')
+      ?.value || '';
 
-const desc =
-document.getElementById('jDesc')
-.value.trim();
+  const desc =
+    document
+      .getElementById('jDesc')
+      ?.value
+      .trim() || '';
 
-const budget =
-document.getElementById('jBudget')
-.value.trim();
+  const budget =
+    document
+      .getElementById('jBudget')
+      ?.value
+      .trim() || '';
 
-if(!title || !desc){
 
-alert(
-'কাজের নাম ও বিস্তারিত লিখুন'
-);
+  if(!title || !desc){
 
-return;
+    alert(
+      'কাজের নাম ও বিস্তারিত লিখুন'
+    );
 
-}
+    return;
 
-const jobs =
-getJobs();
+  }
 
-jobs.unshift({
 
-title:title,
-skill:skill,
-desc:desc,
-budget:budget
+  const jobs =
+    getJobs();
 
-});
 
-localStorage.setItem(
-'pz_jobs',
-JSON.stringify(jobs)
-);
+  jobs.unshift({
 
-closeModal();
+    title:title,
+    skill:skill,
+    desc:desc,
+    budget:budget
 
-showPage(
-'jobs',
-document.querySelectorAll('nav button')[2]
-);
+  });
 
-}
 
-function escapeHTML(s){
+  localStorage.setItem(
+    'pz_jobs',
+    JSON.stringify(jobs)
+  );
 
-return String(s || '')
-.replace(/[&<>"']/g,function(m){
 
-return {
+  closeModal();
 
-'&':'&',
-'<':'<',
-'>':'>',
-'"':'"',
-"'":'''
-
-}[m];
-
-});
+  showPage(
+    'jobs',
+    document.querySelectorAll('nav button')[2]
+  );
 
 }
 
-/* =========================================
-GAME SYSTEM
-========================================= */
+
+function applyJob(index){
+
+  alert(
+    'Demo mode: কাজদাতার সাথে যোগাযোগের ব্যবস্থা পরবর্তী ধাপে যুক্ত করা হবে।'
+  );
+
+}
+
+
+/* =====================================================
+   HTML SECURITY
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value || '')
+    .replace(/[&<>"']/g,function(match){
+
+      return {
+
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+
+      }[match];
+
+    });
+
+}
+
+
+/* =====================================================
+   GAME SYSTEM
+===================================================== */
 
 let gameTimer = null;
 let gameRunning = false;
 
-/* =========================================
-OPEN GAME
-========================================= */
 
-function openGame(type){
-
-document
-.getElementById('modal')
-.style.display='flex';
-
-if(type === 'tap'){
-startTapGame();
-}
-
-if(type === 'match'){
-startMatchGame();
-}
-
-if(type === 'fly'){
-startFlyGame();
-}
-
-if(type === 'brain'){
-startBrainGame();
-}
-
-/* =========================================
-TAP RUSH
-========================================= */
+/* =====================================================
+   TAP RUSH
+===================================================== */
 
 let tapScore = 0;
 let tapTime = 30;
 
+
 function startTapGame(){
 
-stopAllGames();
+  stopAllGames();
 
-tapScore=0;
-tapTime=30;
+  tapScore = 0;
+  tapTime = 30;
 
-document
-.getElementById('modalContent')
-.innerHTML=`
 
-<h2>⚡ Tap Rush</h2>
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = `
 
-<div class="gameInfo">
+    <h2>⚡ Tap Rush</h2>
 
-<div>
-সময়<br>
-<strong id="tapTime">30</strong>
-</div>
+    <div class="gameInfo">
 
-<div>
-Score<br>
-<strong id="tapScore">0</strong>
-</div>
+      <div>
+        সময়<br>
+        <strong id="tapTime">30</strong>
+      </div>
 
-</div>
+      <div>
+        Score<br>
+        <strong id="tapScore">0</strong>
+      </div>
 
-<div
-class="gameArea"
-id="tapArea">
+    </div>
 
-<div class="message">
-START চাপুন এবং target-এ যত দ্রুত সম্ভব tap করুন।
-</div>
+    <div
+      class="gameArea"
+      id="tapArea">
 
-</div>
+      <div class="message">
 
-<button
-class="btn"
-onclick="runTapGame()">
+        START চাপুন এবং target-এ
+        যত দ্রুত সম্ভব tap করুন।
 
-START GAME
+      </div>
 
-</button>
+    </div>
 
-`;
+    <button
+      class="btn startGame"
+      onclick="runTapGame()">
+
+      START GAME
+
+    </button>
+
+  `;
 
 }
+
 
 function runTapGame(){
 
-stopAllGames();
+  stopAllGames();
 
-tapScore=0;
-tapTime=30;
-gameRunning=true;
+  tapScore = 0;
+  tapTime = 30;
 
-const scoreBox =
-document.getElementById('tapScore');
+  gameRunning = true;
 
-const timeBox =
-document.getElementById('tapTime');
 
-const area =
-document.getElementById('tapArea');
+  const scoreBox =
+    document.getElementById('tapScore');
 
-if(!scoreBox || !timeBox || !area){
+  const timeBox =
+    document.getElementById('tapTime');
 
-gameRunning=false;
+  const area =
+    document.getElementById('tapArea');
 
-return;
+
+  if(!scoreBox || !timeBox || !area){
+
+    return;
+
+  }
+
+
+  scoreBox.textContent = '0';
+  timeBox.textContent = '30';
+
+  area.innerHTML = '';
+
+
+  createTarget();
+
+
+  gameTimer =
+    setInterval(function(){
+
+      if(!gameRunning){
+        return;
+      }
+
+
+      tapTime--;
+
+
+      if(timeBox){
+
+        timeBox.textContent =
+          tapTime;
+
+      }
+
+
+      if(tapTime <= 0){
+
+        endTapGame();
+
+      }
+
+    },1000);
 
 }
 
-scoreBox.textContent='0';
-timeBox.textContent='30';
-
-area.innerHTML='';
-
-createTarget();
-
-gameTimer =
-setInterval(function(){
-
-tapTime--;
-
-if(timeBox){
-timeBox.textContent=tapTime;
-}
-
-if(tapTime <= 0){
-
-endTapGame();
-
-}
-
-},1000);
-
-}
 
 function createTarget(){
 
-if(!gameRunning)return;
+  if(!gameRunning){
+    return;
+  }
 
-const area =
-document.getElementById('tapArea');
 
-if(!area)return;
+  const area =
+    document.getElementById('tapArea');
 
-const oldTarget =
-area.querySelector('.target');
 
-if(oldTarget){
-oldTarget.remove();
+  if(!area){
+    return;
+  }
+
+
+  const oldTarget =
+    area.querySelector('.target');
+
+
+  if(oldTarget){
+
+    oldTarget.remove();
+
+  }
+
+
+  const target =
+    document.createElement('div');
+
+
+  target.className =
+    'target';
+
+  target.textContent =
+    '⚡';
+
+
+  const maxX =
+    Math.max(
+      0,
+      area.clientWidth - 58
+    );
+
+  const maxY =
+    Math.max(
+      0,
+      area.clientHeight - 58
+    );
+
+
+  target.style.left =
+    Math.random() * maxX + 'px';
+
+  target.style.top =
+    Math.random() * maxY + 'px';
+
+
+  target.onclick =
+    function(event){
+
+      event.stopPropagation();
+
+      if(!gameRunning){
+        return;
+      }
+
+
+      tapScore++;
+
+
+      const scoreBox =
+        document.getElementById(
+          'tapScore'
+        );
+
+
+      if(scoreBox){
+
+        scoreBox.textContent =
+          tapScore;
+
+      }
+
+
+      createTarget();
+
+    };
+
+
+  area.appendChild(target);
+
 }
 
-const target =
-document.createElement('div');
-
-target.className='target';
-
-target.textContent='⚡';
-
-const maxX =
-Math.max(
-0,
-area.clientWidth - 58
-);
-
-const maxY =
-Math.max(
-0,
-area.clientHeight - 58
-);
-
-target.style.left =
-Math.random()*maxX+'px';
-
-target.style.top =
-Math.random()*maxY+'px';
-
-target.onclick=function(){
-
-if(!gameRunning)return;
-
-tapScore++;
-
-const scoreBox =
-document.getElementById('tapScore');
-
-if(scoreBox){
-scoreBox.textContent=tapScore;
-}
-
-createTarget();
-
-};
-
-area.appendChild(target);
-
-}
 
 function endTapGame(){
 
-if(!gameRunning)return;
+  if(!gameRunning){
+    return;
+  }
 
-gameRunning=false;
 
-if(gameTimer){
+  gameRunning = false;
 
-clearInterval(gameTimer);
-gameTimer=null;
+
+  if(gameTimer){
+
+    clearInterval(gameTimer);
+
+    gameTimer = null;
+
+  }
+
+
+  const earned =
+    tapScore;
+
+
+  addPoints(earned);
+
+
+  const area =
+    document.getElementById(
+      'tapArea'
+    );
+
+
+  if(area){
+
+    area.innerHTML = `
+
+      <div class="message">
+
+        <h2>🎉 Game Over!</h2>
+
+        <p>
+          আপনার Score:
+          <strong>${tapScore}</strong>
+        </p>
+
+        <p>
+          আপনি পেয়েছেন:
+          <strong>+${earned} Points</strong>
+        </p>
+
+        <button
+          class="btn"
+          onclick="startTapGame()">
+
+          আবার খেলুন
+
+        </button>
+
+      </div>
+
+    `;
+
+  }
 
 }
 
-const earned =
-tapScore;
 
-addPoints(earned);
+/* =====================================================
+   MATCH SEVEN
+===================================================== */
 
-const area =
-document.getElementById('tapArea');
+let matchFirst = null;
+let matchLocked = false;
+let matchPairs = 0;
+let matchScore = 0;
 
-if(area){
-
-area.innerHTML=`
-
-<div class="message">
-
-<h2>🎉 Game Over!</h2>
-
-<p>
-আপনার Score:
-<strong>${tapScore}</strong>
-</p>
-
-<p>
-আপনি পেয়েছেন:
-<strong>+${earned} Points</strong>
-</p>
-
-<button
-class="btn"
-onclick="startTapGame()">
-
-আবার খেলুন
-
-</button>
-
-</div>
-
-`;
-
-}
-
-}
-
-/* =========================================
-MATCH SEVEN
-========================================= */
-
-let matchFirst=null;
-let matchLocked=false;
-let matchPairs=0;
-let matchScore=0;
 
 function startMatchGame(){
 
-stopAllGames();
+  stopAllGames();
 
-matchFirst=null;
-matchLocked=false;
-matchPairs=0;
-matchScore=0;
 
-let numbers=[
-1,2,3,4,5,6,
-1,2,3,4,5,6
-];
+  matchFirst = null;
+  matchLocked = false;
+  matchPairs = 0;
+  matchScore = 0;
 
-numbers.sort(function(){
-return Math.random()-0.5;
-});
 
-document
-.getElementById('modalContent')
-.innerHTML=`
+  let numbers = [
 
-<h2>7️⃣ Match Seven</h2>
+    1,2,3,4,5,6,
+    1,2,3,4,5,6
 
-<div class="gameInfo">
+  ];
 
-<div>
-Pair<br>
-<strong id="matchPairs">0</strong>/6
-</div>
 
-<div>
-Score<br>
-<strong id="matchScore">0</strong>
-</div>
+  numbers.sort(
+    function(){
+      return Math.random() - 0.5;
+    }
+  );
 
-</div>
 
-<div
-class="matchGrid"
-id="matchGrid">
-</div>
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = `
 
-<p class="message">
-একই সংখ্যা দুইটি নির্বাচন করুন।
-</p>
+    <h2>7️⃣ Match Seven</h2>
 
-`;
+    <div class="gameInfo">
 
-const grid =
-document.getElementById('matchGrid');
+      <div>
+        Pair<br>
+        <strong id="matchPairs">0</strong>/6
+      </div>
 
-numbers.forEach(function(number,index){
+      <div>
+        Score<br>
+        <strong id="matchScore">0</strong>
+      </div>
 
-const button =
-document.createElement('button');
+    </div>
 
-button.className='matchCard';
+    <div
+      class="matchGrid"
+      id="matchGrid">
+    </div>
 
-button.textContent='?';
+    <p class="message">
+      একই সংখ্যা দুইটি নির্বাচন করুন।
+    </p>
 
-button.dataset.value=number;
-button.dataset.index=index;
+  `;
 
-button.onclick=function(){
 
-selectMatch(button);
+  const grid =
+    document.getElementById(
+      'matchGrid'
+    );
 
-};
 
-grid.appendChild(button);
+  numbers.forEach(
+    function(number,index){
 
-});
+      const button =
+        document.createElement(
+          'button'
+        );
+
+
+      button.className =
+        'matchCard';
+
+      button.textContent =
+        '?';
+
+      button.dataset.value =
+        number;
+
+      button.dataset.index =
+        index;
+
+
+      button.onclick =
+        function(){
+
+          selectMatch(button);
+
+        };
+
+
+      grid.appendChild(button);
+
+    }
+  );
 
 }
+
 
 function selectMatch(button){
 
-if(
-matchLocked ||
-button.classList.contains('matched') ||
-button === matchFirst
-){
+  if(
 
-return;
+    matchLocked ||
+    button.classList.contains('matched') ||
+    button === matchFirst
+
+  ){
+
+    return;
+
+  }
+
+
+  button.textContent =
+    button.dataset.value;
+
+  button.classList.add(
+    'selected'
+  );
+
+
+  if(!matchFirst){
+
+    matchFirst =
+      button;
+
+    return;
+
+  }
+
+
+  matchLocked = true;
+
+
+  if(
+    matchFirst.dataset.value ===
+    button.dataset.value
+  ){
+
+    const first =
+      matchFirst;
+
+    const second =
+      button;
+
+
+    setTimeout(
+      function(){
+
+        first.classList.add(
+          'matched'
+        );
+
+        second.classList.add(
+          'matched'
+        );
+
+
+        matchPairs++;
+
+        matchScore += 10;
+
+
+        const pairBox =
+          document.getElementById(
+            'matchPairs'
+          );
+
+        const scoreBox =
+          document.getElementById(
+            'matchScore'
+          );
+
+
+        if(pairBox){
+
+          pairBox.textContent =
+            matchPairs;
+
+        }
+
+
+        if(scoreBox){
+
+          scoreBox.textContent =
+            matchScore;
+
+        }
+
+
+        matchFirst = null;
+        matchLocked = false;
+
+
+        if(matchPairs >= 6){
+
+          addPoints(matchScore);
+
+
+          document.getElementById(
+            'modalContent'
+          ).innerHTML = `
+
+            <h2>
+              🎉 Match Complete!
+            </h2>
+
+            <p>
+              Score:
+              <strong>
+                ${matchScore}
+              </strong>
+            </p>
+
+            <p>
+              Points earned:
+              <strong>
+                +${matchScore}
+              </strong>
+            </p>
+
+            <button
+              class="btn"
+              onclick="startMatchGame()">
+
+              আবার খেলুন
+
+            </button>
+
+          `;
+
+        }
+
+      },
+      350
+    );
+
+  }else{
+
+    const first =
+      matchFirst;
+
+
+    setTimeout(
+      function(){
+
+        first.textContent =
+          '?';
+
+        button.textContent =
+          '?';
+
+
+        first.classList.remove(
+          'selected'
+        );
+
+        button.classList.remove(
+          'selected'
+        );
+
+
+        matchFirst = null;
+        matchLocked = false;
+
+      },
+      650
+    );
+
+  }
 
 }
 
-button.textContent =
-button.dataset.value;
 
-button.classList.add('selected');
+/* =====================================================
+   FLY HIGH
+===================================================== */
 
-if(!matchFirst){
+let flyCanvas = null;
+let flyCtx = null;
+let flyFrame = null;
+let flyScore = 0;
+let flyPlayer = null;
+let flyObstacles = [];
+let flyRunning = false;
 
-matchFirst=button;
-
-return;
-
-}
-
-matchLocked=true;
-
-if(
-matchFirst.dataset.value ===
-button.dataset.value
-){
-
-const first=matchFirst;
-const second=button;
-
-setTimeout(function(){
-
-first.classList.add('matched');
-second.classList.add('matched');
-
-matchPairs++;
-matchScore+=10;
-
-const pairBox =
-document.getElementById('matchPairs');
-
-const scoreBox =
-document.getElementById('matchScore');
-
-if(pairBox){
-pairBox.textContent=matchPairs;
-}
-
-if(scoreBox){
-scoreBox.textContent=matchScore;
-}
-
-matchFirst=null;
-matchLocked=false;
-
-if(matchPairs >= 6){
-
-addPoints(matchScore);
-
-document
-.getElementById('modalContent')
-.innerHTML=`
-
-<h2>🎉 Match Complete!</h2>
-
-<p>
-Score:
-<strong>${matchScore}</strong>
-</p>
-
-<p>
-Points earned:
-<strong>+${matchScore}</strong>
-</p>
-
-<button
-class="btn"
-onclick="startMatchGame()">
-
-আবার খেলুন
-
-</button>
-
-`;
-
-}
-
-},350);
-
-}else{
-
-const first=matchFirst;
-
-setTimeout(function(){
-
-first.textContent='?';
-button.textContent='?';
-
-first.classList.remove('selected');
-button.classList.remove('selected');
-
-matchFirst=null;
-matchLocked=false;
-
-},650);
-
-}
-
-}
-
-/* =========================================
-FLY HIGH
-========================================= */
-
-let flyCanvas=null;
-let flyCtx=null;
-let flyFrame=null;
-let flyScore=0;
-let flyPlayer=null;
-let flyObstacles=[];
-let flyRunning=false;
 
 function startFlyGame(){
 
-stopAllGames();
+  stopAllGames();
 
-document
-.getElementById('modalContent')
-.innerHTML=`
 
-<h2>🚀 Fly High</h2>
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = `
 
-<div class="gameInfo">
+    <h2>🚀 Fly High</h2>
 
-<div>
-Score<br>
-<strong id="flyScore">0</strong>
-</div>
+    <div class="gameInfo">
 
-<div>
-Control<br>
-<strong>Tap</strong>
-</div>
+      <div>
+        Score<br>
+        <strong id="flyScore">0</strong>
+      </div>
 
-</div>
+      <div>
+        Control<br>
+        <strong>Tap</strong>
+      </div>
 
-<canvas
-class="flyCanvas"
-id="flyCanvas"
-width="440"
-height="390"> </canvas>
+    </div>
 
-<button
-class="btn"
-onclick="runFlyGame()">
+    <canvas
+      class="flyCanvas"
+      id="flyCanvas"
+      width="440"
+      height="390">
+    </canvas>
 
-START GAME
+    <button
+      class="btn startGame"
+      onclick="runFlyGame()">
 
-</button>
+      START GAME
 
-`;
+    </button>
 
-flyCanvas =
-document.getElementById('flyCanvas');
+  `;
 
-if(flyCanvas){
 
-flyCtx =
-flyCanvas.getContext('2d');
+  flyCanvas =
+    document.getElementById(
+      'flyCanvas'
+    );
 
-drawFlyStart();
+
+  if(flyCanvas){
+
+    flyCtx =
+      flyCanvas.getContext('2d');
+
+    drawFlyStart();
+
+  }
 
 }
 
-}
 
 function drawFlyStart(){
 
-if(!flyCtx)return;
+  if(!flyCtx){
+    return;
+  }
 
-flyCtx.clearRect(
-0,
-0,
-flyCanvas.width,
-flyCanvas.height
-);
 
-flyCtx.fillStyle='#ffd21a';
+  flyCtx.clearRect(
+    0,
+    0,
+    flyCanvas.width,
+    flyCanvas.height
+  );
 
-flyCtx.font='22px Arial';
 
-flyCtx.textAlign='center';
+  flyCtx.fillStyle =
+    '#ffd21a';
 
-flyCtx.fillText(
-'START চাপুন',
-flyCanvas.width/2,
-195
-);
+  flyCtx.font =
+    '22px Arial';
+
+  flyCtx.textAlign =
+    'center';
+
+
+  flyCtx.fillText(
+    'START চাপুন',
+    flyCanvas.width / 2,
+    flyCanvas.height / 2
+  );
 
 }
+
 
 function runFlyGame(){
 
-stopAllGames();
+  stopAllGames();
 
-flyScore=0;
-flyRunning=true;
-flyObstacles=[];
 
-flyPlayer={
+  flyScore = 0;
+  flyRunning = true;
+  flyObstacles = [];
 
-x:70,
-y:190,
-size:20,
-velocity:0
 
-};
+  flyPlayer = {
 
-const scoreBox =
-document.getElementById('flyScore');
+    x:70,
+    y:190,
+    size:20,
+    velocity:0
 
-if(scoreBox){
-scoreBox.textContent='0';
+  };
+
+
+  const scoreBox =
+    document.getElementById(
+      'flyScore'
+    );
+
+
+  if(scoreBox){
+
+    scoreBox.textContent =
+      '0';
+
+  }
+
+
+  if(!flyCanvas || !flyCtx){
+
+    return;
+
+  }
+
+
+  flyCanvas.onclick =
+    function(){
+
+      if(flyRunning){
+
+        flyPlayer.velocity =
+          -6;
+
+      }
+
+    };
+
+
+  flyCanvas.ontouchstart =
+    function(event){
+
+      event.preventDefault();
+
+
+      if(flyRunning){
+
+        flyPlayer.velocity =
+          -6;
+
+      }
+
+    };
+
+
+  flyFrame =
+    requestAnimationFrame(
+      flyLoop
+    );
+
 }
 
-if(!flyCanvas || !flyCtx){
-
-flyRunning=false;
-
-return;
-
-}
-
-flyCanvas.onclick=function(){
-
-if(flyRunning){
-
-flyPlayer.velocity=-6;
-
-}
-
-};
-
-flyCanvas.ontouchstart=function(event){
-
-event.preventDefault();
-
-if(flyRunning){
-
-flyPlayer.velocity=-6;
-
-}
-
-};
-
-flyFrame =
-requestAnimationFrame(flyLoop);
-
-}
 
 function flyLoop(){
 
-if(!flyRunning)return;
+  if(!flyRunning){
+    return;
+  }
 
-flyCtx.clearRect(
-0,
-0,
-flyCanvas.width,
-flyCanvas.height
-);
 
-/* Gravity */
+  flyCtx.clearRect(
+    0,
+    0,
+    flyCanvas.width,
+    flyCanvas.height
+  );
 
-flyPlayer.velocity+=0.35;
 
-flyPlayer.y+=flyPlayer.velocity;
+  /* Gravity */
 
-/* New obstacle */
+  flyPlayer.velocity +=
+    0.35;
 
-if(Math.random()<0.025){
+  flyPlayer.y +=
+    flyPlayer.velocity;
 
-const gap=125;
 
-const top =
-45 + Math.random()*165;
+  /* New obstacle */
 
-flyObstacles.push({
+  if(Math.random() < 0.025){
 
-x:flyCanvas.width,
-top:top,
-bottom:top+gap,
-passed:false
+    const gap = 125;
 
-});
+    const top =
+      45 +
+      Math.random() * 165;
+
+
+    flyObstacles.push({
+
+      x:440,
+      top:top,
+      bottom:top + gap,
+      passed:false
+
+    });
+
+  }
+
+
+  /* Obstacles */
+
+  flyObstacles.forEach(
+    function(obstacle){
+
+      obstacle.x -= 3;
+
+
+      flyCtx.fillStyle =
+        '#53b85b';
+
+
+      flyCtx.fillRect(
+
+        obstacle.x,
+        0,
+        42,
+        obstacle.top
+
+      );
+
+
+      flyCtx.fillRect(
+
+        obstacle.x,
+        obstacle.bottom,
+        42,
+        390 - obstacle.bottom
+
+      );
+
+
+      if(
+
+        !obstacle.passed &&
+        obstacle.x < 70
+
+      ){
+
+        obstacle.passed = true;
+
+        flyScore++;
+
+
+        const scoreBox =
+          document.getElementById(
+            'flyScore'
+          );
+
+
+        if(scoreBox){
+
+          scoreBox.textContent =
+            flyScore;
+
+        }
+
+      }
+
+    }
+  );
+
+
+  flyObstacles =
+    flyObstacles.filter(
+      function(obstacle){
+
+        return obstacle.x > -50;
+
+      }
+    );
+
+
+  /* Player */
+
+  flyCtx.fillStyle =
+    '#ffd21a';
+
+
+  flyCtx.beginPath();
+
+
+  flyCtx.arc(
+
+    flyPlayer.x,
+    flyPlayer.y,
+    flyPlayer.size,
+    0,
+    Math.PI * 2
+
+  );
+
+
+  flyCtx.fill();
+
+
+  /* Collision */
+
+  const hitObstacle =
+    flyObstacles.some(
+      function(obstacle){
+
+        return (
+
+          flyPlayer.x + 18 >
+            obstacle.x &&
+
+          flyPlayer.x - 18 <
+            obstacle.x + 42 &&
+
+          (
+
+            flyPlayer.y - 18 <
+              obstacle.top ||
+
+            flyPlayer.y + 18 >
+              obstacle.bottom
+
+          )
+
+        );
+
+      }
+    );
+
+
+  if(
+
+    flyPlayer.y < 20 ||
+    flyPlayer.y > 370 ||
+    hitObstacle
+
+  ){
+
+    endFlyGame();
+
+    return;
+
+  }
+
+
+  flyFrame =
+    requestAnimationFrame(
+      flyLoop
+    );
 
 }
 
-/* Obstacles */
-
-flyObstacles.forEach(function(obstacle){
-
-obstacle.x-=3;
-
-flyCtx.fillStyle='#53b85b';
-
-flyCtx.fillRect(
-obstacle.x,
-0,
-42,
-obstacle.top
-);
-
-flyCtx.fillRect(
-obstacle.x,
-obstacle.bottom,
-42,
-flyCanvas.height-obstacle.bottom
-);
-
-if(
-!obstacle.passed &&
-obstacle.x < 70
-){
-
-obstacle.passed=true;
-
-flyScore++;
-
-const scoreBox =
-document.getElementById('flyScore');
-
-if(scoreBox){
-scoreBox.textContent=flyScore;
-}
-
-}
-
-});
-
-flyObstacles =
-flyObstacles.filter(function(obstacle){
-
-return obstacle.x > -50;
-
-});
-
-/* Player */
-
-flyCtx.fillStyle='#ffd21a';
-
-flyCtx.beginPath();
-
-flyCtx.arc(
-flyPlayer.x,
-flyPlayer.y,
-flyPlayer.size,
-0,
-Math.PI*2
-);
-
-flyCtx.fill();
-
-/* Collision */
-
-const hitObstacle =
-flyObstacles.some(function(obstacle){
-
-return(
-
-flyPlayer.x+18 > obstacle.x &&
-
-flyPlayer.x-18 <
-obstacle.x+42 &&
-
-(
-
-flyPlayer.y-18 <
-obstacle.top ||
-
-flyPlayer.y+18 >
-obstacle.bottom
-
-)
-
-);
-
-});
-
-if(
-flyPlayer.y < 20 ||
-flyPlayer.y >
-flyCanvas.height-20 ||
-hitObstacle
-){
-
-endFlyGame();
-
-return;
-
-}
-
-flyFrame =
-requestAnimationFrame(flyLoop);
-
-}
 
 function endFlyGame(){
 
-flyRunning=false;
+  flyRunning = false;
 
-if(flyFrame){
 
-cancelAnimationFrame(flyFrame);
+  if(flyFrame){
 
-flyFrame=null;
+    cancelAnimationFrame(
+      flyFrame
+    );
+
+    flyFrame = null;
+
+  }
+
+
+  const earned =
+    flyScore;
+
+
+  addPoints(earned);
+
+
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = `
+
+    <h2>🚀 Game Over!</h2>
+
+    <p>
+      Your Score:
+      <strong>${flyScore}</strong>
+    </p>
+
+    <p>
+      Points earned:
+      <strong>+${earned}</strong>
+    </p>
+
+    <button
+      class="btn"
+      onclick="startFlyGame()">
+
+      আবার খেলুন
+
+    </button>
+
+  `;
 
 }
 
-const earned =
-flyScore;
 
-addPoints(earned);
+/* =====================================================
+   BRAIN BOX
+===================================================== */
 
-document
-.getElementById('modalContent')
-.innerHTML=`
+let brainQuestion = 0;
+let brainScore = 0;
+let brainAnswer = 0;
 
-<h2>🚀 Game Over!</h2>
-
-<p>
-Your Score:
-<strong>${flyScore}</strong>
-</p>
-
-<p>
-Points earned:
-<strong>+${earned}</strong>
-</p>
-
-<button
-class="btn"
-onclick="startFlyGame()">
-
-আবার খেলুন
-
-</button>
-
-`;
-
-}
-
-/* =========================================
-BRAIN BOX
-========================================= */
-
-let brainQuestion=0;
-let brainScore=0;
-let brainAnswer=0;
 
 function startBrainGame(){
 
-stopAllGames();
+  stopAllGames();
 
-brainQuestion=0;
-brainScore=0;
 
-document
-.getElementById('modalContent')
-.innerHTML=`
+  brainQuestion = 0;
+  brainScore = 0;
 
-<h2>🧠 Brain Box</h2>
 
-<div class="gameInfo">
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = `
 
-<div>
-Question<br>
-<strong id="brainCount">0</strong>/10
-</div>
+    <h2>🧠 Brain Box</h2>
 
-<div>
-Score<br>
-<strong id="brainScore">0</strong>
-</div>
+    <div class="gameInfo">
 
-</div>
+      <div>
+        Question<br>
+        <strong id="brainCount">0</strong>/10
+      </div>
 
-<div id="brainContent"></div>
+      <div>
+        Score<br>
+        <strong id="brainScore">0</strong>
+      </div>
 
-`;
+    </div>
 
-nextBrainQuestion();
+    <div id="brainContent"></div>
+
+  `;
+
+
+  nextBrainQuestion();
 
 }
+
 
 function nextBrainQuestion(){
 
-brainQuestion++;
+  brainQuestion++;
 
-if(brainQuestion > 10){
 
-addPoints(brainScore);
+  if(brainQuestion > 10){
 
-document
-.getElementById('brainContent')
-.innerHTML=`
+    addPoints(brainScore);
 
-<div class="message">
 
-<h2>🧠 Challenge Complete!</h2>
+    document.getElementById(
+      'brainContent'
+    ).innerHTML = `
 
-<p>
-Score:
-<strong>${brainScore}</strong>
-</p>
+      <div class="message">
 
-<p>
-Points earned:
-<strong>+${brainScore}</strong>
-</p>
+        <h2>
+          🧠 Challenge Complete!
+        </h2>
 
-<button
-class="btn"
-onclick="startBrainGame()">
+        <p>
+          Score:
+          <strong>
+            ${brainScore}
+          </strong>
+        </p>
 
-আবার খেলুন
+        <p>
+          Points earned:
+          <strong>
+            +${brainScore}
+          </strong>
+        </p>
 
-</button>
+        <button
+          class="btn"
+          onclick="startBrainGame()">
 
-</div>
+          আবার খেলুন
 
-`;
+        </button>
 
-return;
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  const a =
+    Math.floor(
+      Math.random() * 10
+    ) + 1;
+
+
+  const b =
+    Math.floor(
+      Math.random() * 10
+    ) + 1;
+
+
+  const operations =
+    ['+','-','×'];
+
+
+  const op =
+    operations[
+      Math.floor(
+        Math.random() *
+        operations.length
+      )
+    ];
+
+
+  if(op === '+'){
+
+    brainAnswer =
+      a + b;
+
+  }
+
+
+  if(op === '-'){
+
+    brainAnswer =
+      a - b;
+
+  }
+
+
+  if(op === '×'){
+
+    brainAnswer =
+      a * b;
+
+  }
+
+
+  let answers = [
+
+    brainAnswer,
+    brainAnswer + 1,
+    brainAnswer - 1,
+    brainAnswer + 3
+
+  ];
+
+
+  answers.sort(
+    function(){
+      return Math.random() - 0.5;
+    }
+  );
+
+
+  const countBox =
+    document.getElementById(
+      'brainCount'
+    );
+
+
+  if(countBox){
+
+    countBox.textContent =
+      brainQuestion;
+
+  }
+
+
+  document.getElementById(
+    'brainContent'
+  ).innerHTML = `
+
+    <div class="question">
+
+      <div class="questionText">
+
+        ${a} ${op} ${b} = ?
+
+      </div>
+
+      <div class="answerGrid">
+
+        ${answers.map(
+          function(answer){
+
+            return `
+
+              <button
+                onclick="answerBrain(${answer})">
+
+                ${answer}
+
+              </button>
+
+            `;
+
+          }
+        ).join('')}
+
+      </div>
+
+    </div>
+
+  `;
 
 }
 
-const a =
-Math.floor(Math.random()*10)+1;
-
-const b =
-Math.floor(Math.random()*10)+1;
-
-const operations=[
-'+',
-'-',
-'×'
-];
-
-const op =
-operations[
-Math.floor(
-Math.random()*operations.length
-)
-];
-
-if(op === '+'){
-brainAnswer=a+b;
-}
-
-if(op === '-'){
-brainAnswer=a-b;
-}
-
-if(op === '×'){
-brainAnswer=a*b;
-}
-
-let answers=[
-
-brainAnswer,
-brainAnswer+1,
-brainAnswer-1,
-brainAnswer+3
-
-];
-
-/* Remove duplicate answers */
-
-answers =
-[...new Set(answers)];
-
-/* Ensure four choices */
-
-while(answers.length < 4){
-
-const extra =
-brainAnswer +
-Math.floor(Math.random()*9)-4;
-
-if(!answers.includes(extra)){
-answers.push(extra);
-}
-
-}
-
-answers.sort(function(){
-
-return Math.random()-0.5;
-
-});
-
-const countBox =
-document.getElementById('brainCount');
-
-if(countBox){
-countBox.textContent=brainQuestion;
-}
-
-document
-.getElementById('brainContent')
-.innerHTML=`
-
-<div class="question">
-
-<div class="questionText">
-${a} ${op} ${b} = ?
-</div>
-
-<div class="answerGrid">
-
-${answers.map(function(answer){
-
-return `
-
-<button
-onclick="answerBrain(${answer})">
-
-${answer}
-
-</button>
-
-`;
-
-}).join('')}
-
-</div>
-
-</div>
-
-`;
-
-}
 
 function answerBrain(answer){
 
-if(answer === brainAnswer){
+  if(answer === brainAnswer){
 
-brainScore+=10;
+    brainScore += 10;
 
-const scoreBox =
-document.getElementById('brainScore');
 
-if(scoreBox){
-scoreBox.textContent=brainScore;
+    const scoreBox =
+      document.getElementById(
+        'brainScore'
+      );
+
+
+    if(scoreBox){
+
+      scoreBox.textContent =
+        brainScore;
+
+    }
+
+  }
+
+
+  nextBrainQuestion();
+
 }
 
+
+/* =====================================================
+   OPEN GAME
+===================================================== */
+
+function openGame(type){
+
+  const modal =
+    document.getElementById('modal');
+
+
+  if(modal){
+
+    modal.style.display =
+      'flex';
+
+  }
+
+
+  if(type === 'tap'){
+
+    startTapGame();
+
+  }
+
+  if(type === 'match'){
+
+    startMatchGame();
+
+  }
+
+  if(type === 'fly'){
+
+    startFlyGame();
+
+  }
+
+  if(type === 'brain'){
+
+    startBrainGame();
+
+  }
+
 }
 
-nextBrainQuestion();
 
-}
-
-/* =========================================
-STOP ALL GAMES
-========================================= */
+/* =====================================================
+   STOP ALL GAMES
+===================================================== */
 
 function stopAllGames(){
 
-gameRunning=false;
+  gameRunning = false;
 
-if(gameTimer){
 
-clearInterval(gameTimer);
+  if(gameTimer){
 
-gameTimer=null;
+    clearInterval(gameTimer);
 
-}
+    gameTimer = null;
 
-flyRunning=false;
+  }
 
-if(flyFrame){
 
-cancelAnimationFrame(flyFrame);
+  flyRunning = false;
 
-flyFrame=null;
 
-}
+  if(flyFrame){
 
-}
+    cancelAnimationFrame(
+      flyFrame
+    );
 
-/* =========================================
-STARTUP
-========================================= */
+    flyFrame = null;
 
-const savedName =
-localStorage.getItem('pz_username');
+  }
 
-if(savedName){
 
-const profileName =
-document.getElementById('profileName');
+  if(flyCanvas){
 
-if(profileName){
-profileName.textContent=savedName;
-}
+    flyCanvas.onclick = null;
+    flyCanvas.ontouchstart = null;
+
+  }
 
 }
 
-render();
 
-renderJobs();
+/* =====================================================
+   STARTUP
+===================================================== */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function(){
+
+    render();
+
+    loadUser();
+
+    updateSkillDisplay();
+
+    renderJobs();
+
+  }
+);
+
+
+/* =====================================================
+   MODAL BACKDROP CLOSE
+===================================================== */
+
+document
+  .getElementById('modal')
+  ?.addEventListener(
+    'click',
+    function(event){
+
+      if(event.target === this){
+
+        closeModal();
+
+      }
+
+    }
+  );
 
 </script>
 
