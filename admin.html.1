@@ -1,0 +1,956 @@
+```html
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAYZONE — Admin Panel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#07131f;
+  color:#fff;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+.wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+header{
+  background:#0d2132;
+  border:1px solid #1d3b53;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+}
+
+h1{
+  margin:0 0 6px;
+  font-size:25px;
+}
+
+.sub{
+  color:#9fb4c7;
+  font-size:14px;
+}
+
+.status{
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+  background:#102b40;
+  color:#b9d8ee;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.login{
+  max-width:430px;
+  margin:60px auto;
+  background:#0d2132;
+  border:1px solid #1d3b53;
+  border-radius:18px;
+  padding:25px;
+}
+
+input,select{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border-radius:10px;
+  border:1px solid #31506a;
+  background:#081a29;
+  color:#fff;
+  outline:none;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#18a6d9;
+  color:#fff;
+}
+
+button.danger{
+  background:#b8324a;
+}
+
+button.secondary{
+  background:#24445b;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:#0d2132;
+  border:1px solid #1d3b53;
+  border-radius:15px;
+  padding:17px;
+}
+
+.card small{
+  color:#9fb4c7;
+}
+
+.number{
+  font-size:25px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.tab.active{
+  background:#18a6d9;
+}
+
+.panel{
+  background:#0d2132;
+  border:1px solid #1d3b53;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:18px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+th,td{
+  padding:11px;
+  border-bottom:1px solid #234055;
+  text-align:left;
+  font-size:13px;
+}
+
+th{
+  color:#9fd6ef;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#183a50;
+  font-size:12px;
+}
+
+.error{
+  color:#ff9ba8;
+}
+
+.ok{
+  color:#8ee6b0;
+}
+
+@media(max-width:800px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .wrap{
+    padding:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loginBox" class="login">
+
+  <h1>🔐 PLAYZONE Admin</h1>
+  <div class="sub">শুধুমাত্র অনুমোদিত Admin account-এর জন্য</div>
+
+  <input id="email" type="email" placeholder="Admin Email">
+
+  <input id="password" type="password" placeholder="Password">
+
+  <button id="loginBtn" style="width:100%;margin-top:8px">
+    Login
+  </button>
+
+  <div id="loginMsg" class="status hidden"></div>
+
+</div>
+
+
+<div id="adminApp" class="wrap hidden">
+
+<header>
+
+  <h1>🎛️ PLAYZONE Admin Panel</h1>
+
+  <div class="sub">
+    User, Jobs, Sponsors, Payouts, Games এবং Tournaments management
+  </div>
+
+  <div id="adminStatus" class="status">
+    Admin access যাচাই হচ্ছে...
+  </div>
+
+  <div style="margin-top:12px">
+    <button id="refreshBtn">🔄 Refresh</button>
+    <button id="logoutBtn" class="danger">Logout</button>
+  </div>
+
+</header>
+
+
+<div class="grid">
+
+  <div class="card">
+    <small>Users</small>
+    <div id="usersCount" class="number">—</div>
+  </div>
+
+  <div class="card">
+    <small>Jobs</small>
+    <div id="jobsCount" class="number">—</div>
+  </div>
+
+  <div class="card">
+    <small>Applications</small>
+    <div id="applicationsCount" class="number">—</div>
+  </div>
+
+  <div class="card">
+    <small>Sponsors</small>
+    <div id="sponsorsCount" class="number">—</div>
+  </div>
+
+  <div class="card">
+    <small>Payout Requests</small>
+    <div id="payoutsCount" class="number">—</div>
+  </div>
+
+</div>
+
+
+<div class="tabs">
+
+  <button class="tab active" data-section="users">
+    👥 Users
+  </button>
+
+  <button class="tab" data-section="jobs">
+    💼 Jobs
+  </button>
+
+  <button class="tab" data-section="applications">
+    📄 Applications
+  </button>
+
+  <button class="tab" data-section="sponsors">
+    📢 Sponsors
+  </button>
+
+  <button class="tab" data-section="payouts">
+    💰 Payouts
+  </button>
+
+  <button class="tab" data-section="games">
+    🎮 Games
+  </button>
+
+  <button class="tab" data-section="tournaments">
+    🏆 Tournaments
+  </button>
+
+</div>
+
+
+<div id="content" class="panel">
+
+  Loading...
+
+</div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL = "https://cavrhkprzbbtimlixbqp.supabase.co";
+
+/*
+  এখানে আপনার Supabase publishable key বসাবেন।
+  আপনার বর্তমান index.html-এ যে publishable key ব্যবহার করেছেন,
+  একই key এখানে ব্যবহার করুন।
+*/
+
+const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const client = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+const loginBox = document.getElementById("loginBox");
+const adminApp = document.getElementById("adminApp");
+const loginMsg = document.getElementById("loginMsg");
+const adminStatus = document.getElementById("adminStatus");
+const content = document.getElementById("content");
+
+
+function message(text, type=""){
+  loginMsg.textContent = text;
+  loginMsg.className = "status " + type;
+}
+
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  if(!email || !password){
+    message("Email এবং Password দিন।","error");
+    return;
+  }
+
+  message("Login হচ্ছে...");
+
+  const {error} =
+    await client.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+    message(error.message,"error");
+    return;
+  }
+
+  await checkAdmin();
+
+}
+
+
+document
+.getElementById("loginBtn")
+.addEventListener("click",login);
+
+
+async function checkAdmin(){
+
+  const {
+    data:{user}
+  } = await client.auth.getUser();
+
+  if(!user){
+
+    loginBox.classList.remove("hidden");
+    adminApp.classList.add("hidden");
+
+    return;
+  }
+
+
+  const {data,error} =
+    await client
+      .from("admin_users")
+      .select("role")
+      .eq("user_id",user.id)
+      .maybeSingle();
+
+
+  if(error){
+
+    loginBox.classList.remove("hidden");
+    adminApp.classList.add("hidden");
+
+    message(
+      "Admin যাচাই করা যাচ্ছে না: "+error.message,
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!data){
+
+    loginBox.classList.remove("hidden");
+    adminApp.classList.add("hidden");
+
+    message(
+      "এই account-এর Admin permission নেই।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(data.role !== "super_admin" && data.role !== "admin"){
+
+    loginBox.classList.remove("hidden");
+    adminApp.classList.add("hidden");
+
+    message(
+      "এই account-এর অনুমোদিত Admin role নেই।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  loginBox.classList.add("hidden");
+  adminApp.classList.remove("hidden");
+
+  adminStatus.innerHTML =
+    "✅ Admin access সক্রিয় — Role: <b>"
+    + data.role
+    + "</b>";
+
+  await loadDashboard();
+
+}
+
+
+async function logout(){
+
+  await client.auth.signOut();
+
+  adminApp.classList.add("hidden");
+  loginBox.classList.remove("hidden");
+
+}
+
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click",logout);
+
+
+async function countTable(table){
+
+  const {count,error} =
+    await client
+      .from(table)
+      .select("*",{count:"exact",head:true});
+
+  if(error) return "—";
+
+  return count ?? 0;
+}
+
+
+async function loadDashboard(){
+
+  document.getElementById("usersCount").textContent =
+    await countTable("profiles");
+
+  document.getElementById("jobsCount").textContent =
+    await countTable("jobs");
+
+  document.getElementById("applicationsCount").textContent =
+    await countTable("job_applications");
+
+  document.getElementById("sponsorsCount").textContent =
+    await countTable("sponsor_requests");
+
+  document.getElementById("payoutsCount").textContent =
+    await countTable("payout_requests");
+
+  loadSection("users");
+
+}
+
+
+async function loadSection(section){
+
+  content.innerHTML = "Loading...";
+
+
+  if(section === "users"){
+    await loadUsers();
+    return;
+  }
+
+  if(section === "jobs"){
+    await loadJobs();
+    return;
+  }
+
+  if(section === "applications"){
+    await loadApplications();
+    return;
+  }
+
+  if(section === "sponsors"){
+    await loadSponsors();
+    return;
+  }
+
+  if(section === "payouts"){
+    await loadPayouts();
+    return;
+  }
+
+  if(section === "games"){
+    await loadGames();
+    return;
+  }
+
+  if(section === "tournaments"){
+    await loadTournaments();
+    return;
+  }
+
+}
+
+
+async function loadUsers(){
+
+  const {data,error} =
+    await client
+      .from("profiles")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Users load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  if(!data.length){
+    content.innerHTML = "কোনো User পাওয়া যায়নি।";
+    return;
+  }
+
+  let html = `
+    <h2>👥 Users</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(row.name || "—")}</td>
+        <td>${escapeHtml(row.email || "—")}</td>
+        <td>${escapeHtml(String(row.points ?? 0))}</td>
+        <td><span class="badge">${escapeHtml(row.status || "active")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadJobs(){
+
+  const {data,error} =
+    await client
+      .from("jobs")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Jobs load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>💼 Jobs</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Title</th>
+      <th>Skill</th>
+      <th>Budget</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(row.title || "—")}</td>
+        <td>${escapeHtml(row.skill || "—")}</td>
+        <td>${escapeHtml(row.budget || "—")}</td>
+        <td><span class="badge">${escapeHtml(row.status || "—")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadApplications(){
+
+  const {data,error} =
+    await client
+      .from("job_applications")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Applications load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>📄 Job Applications</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Job ID</th>
+      <th>Applicant</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(String(row.job_id || "—"))}</td>
+        <td>${escapeHtml(String(row.applicant_id || "—"))}</td>
+        <td><span class="badge">${escapeHtml(row.status || "—")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadSponsors(){
+
+  const {data,error} =
+    await client
+      .from("sponsor_requests")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Sponsor load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>📢 Sponsor Requests</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Business</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(row.business_name || "—")}</td>
+        <td>${escapeHtml(row.phone || "—")}</td>
+        <td><span class="badge">${escapeHtml(row.status || "—")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadPayouts(){
+
+  const {data,error} =
+    await client
+      .from("payout_requests")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Payout load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>💰 Payout Requests</h2>
+
+    <div class="status">
+      ⚠️ Payment gateway এখনো সংযুক্ত করা হয়নি।
+      এই অংশে merchant payment পরে যুক্ত করা যাবে।
+    </div>
+
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>User</th>
+      <th>Amount</th>
+      <th>Currency</th>
+      <th>Method</th>
+      <th>Account</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(String(row.user_id || "—"))}</td>
+        <td>${escapeHtml(String(row.amount ?? 0))}</td>
+        <td>${escapeHtml(row.currency || "BDT")}</td>
+        <td>${escapeHtml(row.method || "—")}</td>
+        <td>${escapeHtml(row.account_number || "—")}</td>
+        <td><span class="badge">${escapeHtml(row.status || "—")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadGames(){
+
+  const {data,error} =
+    await client
+      .from("games")
+      .select("*")
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Games load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>🎮 Games</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(row.name || row.title || "—")}</td>
+        <td><span class="badge">${escapeHtml(row.status || "active")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+async function loadTournaments(){
+
+  const {data,error} =
+    await client
+      .from("tournaments")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+    content.innerHTML =
+      `<div class="error">Tournament load error: ${escapeHtml(error.message)}</div>`;
+    return;
+  }
+
+  let html = `
+    <h2>🏆 Tournaments</h2>
+    <div class="table-wrap">
+    <table>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  `;
+
+  data.forEach(row => {
+
+    html += `
+      <tr>
+        <td>${escapeHtml(row.name || row.title || "—")}</td>
+        <td><span class="badge">${escapeHtml(row.status || "—")}</span></td>
+        <td>${formatDate(row.created_at)}</td>
+      </tr>
+    `;
+
+  });
+
+  html += "</table></div>";
+
+  content.innerHTML = html;
+
+}
+
+
+document
+.getElementById("refreshBtn")
+.addEventListener("click",loadDashboard);
+
+
+document
+.querySelectorAll(".tab")
+.forEach(button => {
+
+  button.addEventListener("click",function(){
+
+    document
+      .querySelectorAll(".tab")
+      .forEach(x => x.classList.remove("active"));
+
+    this.classList.add("active");
+
+    loadSection(this.dataset.section);
+
+  });
+
+});
+
+
+function formatDate(value){
+
+  if(!value) return "—";
+
+  try{
+    return new Date(value).toLocaleString("bn-BD");
+  }catch(e){
+    return "—";
+  }
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+client.auth.onAuthStateChange(
+  async (event,session) => {
+
+    if(session){
+      await checkAdmin();
+    }
+
+  }
+);
+
+
+checkAdmin();
+
+</script>
+
+</body>
+</html>
+```
