@@ -1,0 +1,1034 @@
+```html
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLAYZONE — Admin Panel</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#081522;
+ color:#fff;
+ font-family:Arial,"Noto Sans Bengali",sans-serif
+}
+.wrap{
+ max-width:900px;
+ margin:auto;
+ padding:20px 14px 60px
+}
+header{
+ background:#102a42;
+ border-radius:16px;
+ padding:16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ margin-bottom:15px
+}
+.logo{
+ font-size:26px;
+ font-weight:900;
+ color:#ffd21a
+}
+.logo span{color:#fff}
+.btn{
+ border:0;
+ border-radius:10px;
+ padding:11px 15px;
+ background:#ffd21a;
+ color:#142536;
+ font-weight:800;
+ cursor:pointer
+}
+.btn.danger{
+ background:#c93838;
+ color:#fff
+}
+.btn.secondary{
+ background:#24445f;
+ color:#fff
+}
+.panel{
+ background:#193650;
+ border-radius:15px;
+ padding:16px;
+ margin:12px 0
+}
+.panel h2,.panel h3{
+ color:#ffd21a
+}
+.login{
+ max-width:480px;
+ margin:50px auto
+}
+input{
+ width:100%;
+ padding:13px;
+ margin:6px 0 10px;
+ border-radius:10px;
+ border:1px solid #47627c;
+ background:#0c1d2e;
+ color:#fff;
+ outline:none
+}
+input:focus{
+ border-color:#ffd21a
+}
+.statGrid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px
+}
+.stat{
+ background:#10283d;
+ border-radius:12px;
+ padding:15px
+}
+.stat b{
+ display:block;
+ color:#ffd21a;
+ font-size:23px;
+ margin-top:5px
+}
+.status{
+ padding:12px;
+ border-radius:10px;
+ background:#10283d;
+ margin:10px 0
+}
+.success{border-left:4px solid #43c76b}
+.error{border-left:4px solid #e04b4b}
+.warning{border-left:4px solid #ffd21a}
+.hidden{display:none!important}
+.tableWrap{
+ overflow-x:auto
+}
+table{
+ width:100%;
+ border-collapse:collapse;
+ min-width:600px
+}
+th,td{
+ padding:11px;
+ border-bottom:1px solid #31506c;
+ text-align:left;
+ font-size:13px
+}
+th{
+ color:#ffd21a;
+ background:#10283d
+}
+.badge{
+ display:inline-block;
+ padding:5px 8px;
+ border-radius:20px;
+ background:#294a65;
+ font-size:12px
+}
+.nav{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin:12px 0
+}
+.nav button{
+ background:#162f46;
+ color:#fff;
+ border:0;
+ padding:10px 13px;
+ border-radius:9px;
+ cursor:pointer
+}
+.nav button.active{
+ background:#ffd21a;
+ color:#142536
+}
+@media(max-width:600px){
+ .statGrid{
+  grid-template-columns:repeat(2,1fr)
+ }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+ <div class="logo">PLAY<span>ZONE</span> ADMIN</div>
+ <button class="btn danger hidden" id="logoutBtn" onclick="logout()">Logout</button>
+</header>
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="panel login">
+
+<h2>🔐 Admin Login</h2>
+
+<p>
+শুধু অনুমোদিত PLAYZONE Admin account এখানে প্রবেশ করতে পারবে।
+</p>
+
+<input
+ id="email"
+ type="email"
+ placeholder="Admin Email">
+
+<input
+ id="password"
+ type="password"
+ placeholder="Password">
+
+<button
+ class="btn"
+ onclick="adminLogin()">
+ Login
+</button>
+
+<div id="loginStatus"></div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPanel" class="hidden">
+
+<div id="adminStatus" class="status warning">
+Dashboard প্রস্তুত হচ্ছে...
+</div>
+
+<div class="nav">
+
+<button class="active" onclick="showSection('dashboard',this)">
+📊 Dashboard
+</button>
+
+<button onclick="showSection('jobs',this)">
+💼 Jobs
+</button>
+
+<button onclick="showSection('applications',this)">
+📨 Applications
+</button>
+
+<button onclick="showSection('sponsors',this)">
+📢 Sponsors
+</button>
+
+<button onclick="showSection('payouts',this)">
+💰 Payouts
+</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+<div class="panel">
+
+<h2>📊 PLAYZONE Dashboard</h2>
+
+<div class="statGrid">
+
+<div class="stat">
+👥 Users
+<b id="users">0</b>
+</div>
+
+<div class="stat">
+💼 Jobs
+<b id="jobs">0</b>
+</div>
+
+<div class="stat">
+📨 Applications
+<b id="applications">0</b>
+</div>
+
+<div class="stat">
+📢 Sponsors
+<b id="sponsors">0</b>
+</div>
+
+<div class="stat">
+💰 Payouts
+<b id="payouts">0</b>
+</div>
+
+<div class="stat">
+🏆 Pending
+<b id="pending">0</b>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>📈 Overview</h3>
+
+<p>
+Open Jobs:
+<strong id="openJobs">0</strong>
+</p>
+
+<p>
+Pending Applications:
+<strong id="pendingApplications">0</strong>
+</p>
+
+<p>
+Pending Sponsors:
+<strong id="pendingSponsors">0</strong>
+</p>
+
+<p>
+Pending Payouts:
+<strong id="pendingPayouts">0</strong>
+</p>
+
+<button
+ class="btn"
+ onclick="loadDashboard()">
+ ↻ Refresh
+</button>
+
+</div>
+
+</section>
+
+
+<!-- JOBS -->
+
+<section id="jobs" class="hidden">
+
+<div class="panel">
+
+<h2>💼 Jobs</h2>
+
+<div id="jobList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APPLICATIONS -->
+
+<section id="applications" class="hidden">
+
+<div class="panel">
+
+<h2>📨 Applications</h2>
+
+<div id="applicationList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SPONSORS -->
+
+<section id="sponsors" class="hidden">
+
+<div class="panel">
+
+<h2>📢 Sponsors</h2>
+
+<div id="sponsorList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PAYOUTS -->
+
+<section id="payouts" class="hidden">
+
+<div class="panel">
+
+<h2>💰 Payout Requests</h2>
+
+<div id="payoutList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+'https://cavrhkprzbbtimlixbqp.supabase.co';
+
+const SUPABASE_KEY =
+'sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
+
+const supabaseClient =
+window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
+
+let currentUser=null;
+
+
+/* =========================
+AUTH
+========================= */
+
+async function adminLogin(){
+
+ const email =
+ document.getElementById('email').value.trim();
+
+ const password =
+ document.getElementById('password').value;
+
+ const status =
+ document.getElementById('loginStatus');
+
+ if(!email || !password){
+
+  status.innerHTML =
+  '<div class="status error">Email ও Password দিন।</div>';
+
+  return;
+ }
+
+ status.innerHTML =
+ '<div class="status warning">Login হচ্ছে...</div>';
+
+ const {data,error} =
+ await supabaseClient.auth.signInWithPassword({
+  email:email,
+  password:password
+ });
+
+ if(error){
+
+  status.innerHTML =
+  '<div class="status error">'+
+  escapeHTML(error.message)+
+  '</div>';
+
+  return;
+ }
+
+ currentUser=data.user;
+
+ await checkAdmin();
+
+}
+
+
+async function checkAdmin(){
+
+ if(!currentUser){
+
+  showLogin();
+  return;
+ }
+
+ const {data,error} =
+ await supabaseClient
+ .from('profiles')
+ .select('role')
+ .eq('id',currentUser.id)
+ .maybeSingle();
+
+ if(error){
+
+  showError(error.message);
+  return;
+ }
+
+ if(!data || data.role!=='admin'){
+
+  await supabaseClient.auth.signOut({
+   scope:'local'
+  });
+
+  currentUser=null;
+
+  showError(
+   'এই account-এর Admin permission নেই।'
+  );
+
+  return;
+ }
+
+ document
+ .getElementById('loginBox')
+ .classList.add('hidden');
+
+ document
+ .getElementById('adminPanel')
+ .classList.remove('hidden');
+
+ document
+ .getElementById('logoutBtn')
+ .classList.remove('hidden');
+
+ document
+ .getElementById('adminStatus')
+ .className='status success';
+
+ document
+ .getElementById('adminStatus')
+ .textContent=
+ 'Admin হিসেবে সফলভাবে Login হয়েছে।';
+
+ loadDashboard();
+
+}
+
+
+async function logout(){
+
+ await supabaseClient.auth.signOut({
+  scope:'local'
+ });
+
+ currentUser=null;
+
+ document
+ .getElementById('adminPanel')
+ .classList.add('hidden');
+
+ document
+ .getElementById('logoutBtn')
+ .classList.add('hidden');
+
+ document
+ .getElementById('loginBox')
+ .classList.remove('hidden');
+
+}
+
+
+/* =========================
+DASHBOARD
+========================= */
+
+async function loadDashboard(){
+
+ if(!currentUser)return;
+
+ try{
+
+  const {data,error} =
+  await supabaseClient
+  .rpc('admin_dashboard_stats');
+
+  if(error)throw error;
+
+  const d=data||{};
+
+  setText('users',d.users);
+  setText('jobs',d.jobs);
+  setText('applications',d.applications);
+  setText('sponsors',d.sponsors);
+  setText('payouts',d.payouts);
+
+  setText(
+   'pending',
+   Number(d.pending_applications||0)+
+   Number(d.pending_sponsors||0)+
+   Number(d.pending_payouts||0)
+  );
+
+  setText('openJobs',d.open_jobs);
+  setText(
+   'pendingApplications',
+   d.pending_applications
+  );
+
+  setText(
+   'pendingSponsors',
+   d.pending_sponsors
+  );
+
+  setText(
+   'pendingPayouts',
+   d.pending_payouts
+  );
+
+ }catch(error){
+
+  document
+  .getElementById('adminStatus')
+  .className='status error';
+
+  document
+  .getElementById('adminStatus')
+  .textContent=
+  'Dashboard error: '+
+  error.message;
+
+ }
+
+}
+
+
+/* =========================
+SECTIONS
+========================= */
+
+function showSection(id,button){
+
+ [
+  'dashboard',
+  'jobs',
+  'applications',
+  'sponsors',
+  'payouts'
+ ].forEach(function(section){
+
+  document
+  .getElementById(section)
+  .classList.toggle(
+   'hidden',
+   section!==id
+  );
+
+ });
+
+ document
+ .querySelectorAll('.nav button')
+ .forEach(function(btn){
+  btn.classList.remove('active');
+ });
+
+ button.classList.add('active');
+
+ if(id==='jobs')loadJobs();
+ if(id==='applications')loadApplications();
+ if(id==='sponsors')loadSponsors();
+ if(id==='payouts')loadPayouts();
+
+}
+
+
+/* =========================
+JOBS
+========================= */
+
+async function loadJobs(){
+
+ const box=
+ document.getElementById('jobList');
+
+ box.innerHTML='Loading...';
+
+ const {data,error} =
+ await supabaseClient
+ .from('jobs')
+ .select('*')
+ .order('created_at',{
+  ascending:false
+ });
+
+ if(error){
+
+  box.innerHTML=
+  '<div class="status error">'+
+  escapeHTML(error.message)+
+  '</div>';
+
+  return;
+ }
+
+ if(!data || !data.length){
+
+  box.innerHTML=
+  '<div class="status">কোনো Job নেই।</div>';
+
+  return;
+ }
+
+ box.innerHTML=
+ data.map(function(job){
+
+  return `
+  <div class="panel">
+
+   <span class="badge">
+    ${escapeHTML(job.skill)}
+   </span>
+
+   <h3>
+    ${escapeHTML(job.title)}
+   </h3>
+
+   <p>
+    ${escapeHTML(job.description)}
+   </p>
+
+   <p>
+    Budget:
+    <b>${escapeHTML(job.budget||'N/A')}</b>
+   </p>
+
+   <p>
+    Status:
+    <span class="badge">
+     ${escapeHTML(job.status||'open')}
+    </span>
+   </p>
+
+  </div>
+  `;
+
+ }).join('');
+
+}
+
+
+/* =========================
+APPLICATIONS
+========================= */
+
+async function loadApplications(){
+
+ const box=
+ document.getElementById('applicationList');
+
+ box.innerHTML='Loading...';
+
+ const {data,error} =
+ await supabaseClient
+ .from('job_applications')
+ .select(`
+  id,
+  applicant_id,
+  job_id,
+  message,
+  status,
+  created_at,
+  jobs(title,skill)
+ `)
+ .order('created_at',{
+  ascending:false
+ });
+
+ if(error){
+
+  box.innerHTML=
+  '<div class="status error">'+
+  escapeHTML(error.message)+
+  '</div>';
+
+  return;
+ }
+
+ if(!data || !data.length){
+
+  box.innerHTML=
+  '<div class="status">কোনো Application নেই।</div>';
+
+  return;
+ }
+
+ box.innerHTML=
+ data.map(function(app){
+
+  return `
+  <div class="panel">
+
+   <h3>
+    ${escapeHTML(
+     app.jobs?.title||'Job'
+    )}
+   </h3>
+
+   <p>
+    Applicant ID:
+    ${escapeHTML(app.applicant_id)}
+   </p>
+
+   <p>
+    Message:
+    ${escapeHTML(app.message||'')}
+   </p>
+
+   <p>
+    Status:
+    <span class="badge">
+     ${escapeHTML(app.status||'pending')}
+    </span>
+   </p>
+
+  </div>
+  `;
+
+ }).join('');
+
+}
+
+
+/* =========================
+SPONSORS
+========================= */
+
+async function loadSponsors(){
+
+ const box=
+ document.getElementById('sponsorList');
+
+ box.innerHTML='Loading...';
+
+ const {data,error} =
+ await supabaseClient
+ .from('sponsors')
+ .select('*')
+ .order('created_at',{
+  ascending:false
+ });
+
+ if(error){
+
+  box.innerHTML=
+  '<div class="status error">'+
+  escapeHTML(error.message)+
+  '</div>';
+
+  return;
+ }
+
+ if(!data || !data.length){
+
+  box.innerHTML=
+  '<div class="status">কোনো Sponsor request নেই।</div>';
+
+  return;
+ }
+
+ box.innerHTML=
+ data.map(function(item){
+
+  return `
+  <div class="panel">
+
+   <h3>
+    ${escapeHTML(item.name||'Sponsor')}
+   </h3>
+
+   <p>
+    Phone:
+    ${escapeHTML(item.phone||'')}
+   </p>
+
+   <p>
+    Message:
+    ${escapeHTML(item.message||'')}
+   </p>
+
+   <span class="badge">
+    ${escapeHTML(item.status||'pending')}
+   </span>
+
+  </div>
+  `;
+
+ }).join('');
+
+}
+
+
+/* =========================
+PAYOUTS
+========================= */
+
+async function loadPayouts(){
+
+ const box=
+ document.getElementById('payoutList');
+
+ box.innerHTML='Loading...';
+
+ const {data,error} =
+ await supabaseClient
+ .from('payout_requests')
+ .select('*')
+ .order('created_at',{
+  ascending:false
+ });
+
+ if(error){
+
+  box.innerHTML=
+  '<div class="status error">'+
+  escapeHTML(error.message)+
+  '</div>';
+
+  return;
+ }
+
+ if(!data || !data.length){
+
+  box.innerHTML=
+  '<div class="status">কোনো Payout request নেই।</div>';
+
+  return;
+ }
+
+ box.innerHTML=
+ data.map(function(item){
+
+  return `
+  <div class="panel">
+
+   <h3>
+    💰 ${escapeHTML(item.name||'User')}
+   </h3>
+
+   <p>
+    Phone:
+    ${escapeHTML(item.phone||'')}
+   </p>
+
+   <p>
+    Method:
+    ${escapeHTML(item.method||'')}
+   </p>
+
+   <p>
+    Amount:
+    <b>${escapeHTML(item.amount||'0')}</b>
+   </p>
+
+   <span class="badge">
+    ${escapeHTML(item.status||'pending')}
+   </span>
+
+  </div>
+  `;
+
+ }).join('');
+
+}
+
+
+/* =========================
+HELPERS
+========================= */
+
+function setText(id,value){
+
+ const el=
+ document.getElementById(id);
+
+ if(el)
+ el.textContent=
+ Number(value||0).toLocaleString();
+
+}
+
+
+function escapeHTML(value){
+
+ return String(value||'')
+ .replace(
+  /[&<>"']/g,
+  function(m){
+
+   return {
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+   }[m];
+
+  }
+ );
+
+}
+
+
+function showLogin(){
+
+ document
+ .getElementById('loginBox')
+ .classList.remove('hidden');
+
+ document
+ .getElementById('adminPanel')
+ .classList.add('hidden');
+
+}
+
+
+function showError(message){
+
+ const box=
+ document.getElementById('loginStatus');
+
+ box.innerHTML=
+ '<div class="status error">'+
+ escapeHTML(message)+
+ '</div>';
+
+}
+
+
+/* =========================
+START
+========================= */
+
+(async function(){
+
+ const {data} =
+ await supabaseClient.auth.getSession();
+
+ currentUser=
+ data?.session?.user||null;
+
+ if(currentUser){
+
+  await checkAdmin();
+
+ }
+
+ supabaseClient.auth.onAuthStateChange(
+  function(event,session){
+
+   currentUser=
+   session?.user||null;
+
+  }
+ );
+
+})();
+
+</script>
+
+</body>
+</html>
+```
