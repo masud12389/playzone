@@ -189,7 +189,11 @@ textarea{min-height:90px;resize:vertical}
  color:#dce8f2
 }
 
-.notice{font-size:12px;color:#aebfce;line-height:1.6}
+.notice{
+ font-size:12px;
+ color:#aebfce;
+ line-height:1.6
+}
 
 .listItem{
  background:#10283d;
@@ -198,7 +202,11 @@ textarea{min-height:90px;resize:vertical}
  margin:8px 0
 }
 .listItem h3{margin:8px 0 5px}
-.listItem p{margin:5px 0;color:#c3d0dc;font-size:13px}
+.listItem p{
+ margin:5px 0;
+ color:#c3d0dc;
+ font-size:13px
+}
 
 .statGrid{
  display:grid;
@@ -277,7 +285,11 @@ textarea{min-height:90px;resize:vertical}
  font-weight:900
 }
 
-.message{text-align:center;padding:20px 5px;color:#cbd7e2}
+.message{
+ text-align:center;
+ padding:20px 5px;
+ color:#cbd7e2
+}
 
 .matchGrid{
  display:grid;
@@ -293,7 +305,10 @@ textarea{min-height:90px;resize:vertical}
  font-size:25px;
  font-weight:900
 }
-.matchCard.selected{background:#ffd21a;color:#172638}
+.matchCard.selected{
+ background:#ffd21a;
+ color:#172638
+}
 .matchCard.matched{visibility:hidden}
 
 .flyCanvas{
@@ -350,7 +365,11 @@ nav button{
  color:#cbd7e2;
  font-size:11px
 }
-nav b{display:block;font-size:18px;margin-bottom:2px}
+nav b{
+ display:block;
+ font-size:18px;
+ margin-bottom:2px
+}
 .active{color:#ffd21a!important}
 
 .hidden{display:none!important}
@@ -536,7 +555,6 @@ nav b{display:block;font-size:18px;margin-bottom:2px}
 
 </main>
 
-
 <section id="jobs" class="section hidden">
 
 <h2>💼 Skill & Job Hub</h2>
@@ -567,7 +585,6 @@ nav b{display:block;font-size:18px;margin-bottom:2px}
 
 </section>
 
-
 <section id="profile" class="section hidden">
 
 <div class="panel" style="margin:0 0 12px">
@@ -575,10 +592,7 @@ nav b{display:block;font-size:18px;margin-bottom:2px}
 <h2>👤 আমার প্রোফাইল</h2>
 
 <p>
-
 <strong id="profileName">Guest User</strong>
-```
- 
 </p>
 
 <p id="profileEmail">
@@ -660,7 +674,6 @@ Tournament
 
 </div>
 
-
 <nav>
 
 <button class="active" onclick="showPage('home',this)">
@@ -690,7 +703,6 @@ Tournament
 
 </nav>
 
-
 <div class="modal" id="modal">
 
 <div class="box">
@@ -703,29 +715,28 @@ Tournament
 
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
 const SUPABASE_URL =
 'https://cavrhkprzbbtimlixbqp.supabase.co';
-
-/*
- আপনার বর্তমান Publishable Key এখানে রাখুন।
-*/
 
 const SUPABASE_KEY =
 'sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
 
-let supabaseClient=null;
-let currentUser=null;
+let supabaseClient = null;
+let currentUser = null;
 
 try{
 
  if(window.supabase){
 
-  supabaseClient=
+  supabaseClient =
   window.supabase.createClient(
    SUPABASE_URL,
    SUPABASE_KEY
@@ -735,7 +746,7 @@ try{
 
 }catch(error){
 
- console.log('Supabase:',error);
+ console.error('Supabase initialization error:',error);
 
 }
 
@@ -744,34 +755,56 @@ try{
    LOCAL POINTS
 ===================================================== */
 
-let points=
+let points =
 Number(localStorage.getItem('pz_points') || 1000);
 
-let gamesPlayed=
+let gamesPlayed =
 Number(localStorage.getItem('pz_games_played') || 0);
 
 function render(){
 
- const p=document.getElementById('points');
- const pp=document.getElementById('profilePoints');
- const gp=document.getElementById('gamesPlayed');
+ const p =
+ document.getElementById('points');
 
- if(p)p.textContent=points.toLocaleString();
- if(pp)pp.textContent=points.toLocaleString();
- if(gp)gp.textContent=gamesPlayed;
+ const pp =
+ document.getElementById('profilePoints');
 
- localStorage.setItem('pz_points',points);
- localStorage.setItem('pz_games_played',gamesPlayed);
+ const gp =
+ document.getElementById('gamesPlayed');
+
+ if(p)
+ p.textContent =
+ points.toLocaleString();
+
+ if(pp)
+ pp.textContent =
+ points.toLocaleString();
+
+ if(gp)
+ gp.textContent =
+ gamesPlayed;
+
+ localStorage.setItem(
+  'pz_points',
+  points
+ );
+
+ localStorage.setItem(
+  'pz_games_played',
+  gamesPlayed
+ );
 
 }
 
 function addPoints(amount){
 
- amount=Number(amount||0);
+ amount =
+ Number(amount || 0);
 
- if(amount>0){
+ if(amount > 0){
 
-  points+=amount;
+  points += amount;
+
   render();
 
  }
@@ -781,6 +814,7 @@ function addPoints(amount){
 function gameFinished(){
 
  gamesPlayed++;
+
  render();
 
 }
@@ -792,70 +826,83 @@ function gameFinished(){
 
 function updateUserUI(){
 
- const headerBtn=
+ const headerBtn =
  document.getElementById('headerUserBtn');
 
- const heroBtn=
+ const heroBtn =
  document.getElementById('heroAuthBtn');
 
- const nameBox=
+ const nameBox =
  document.getElementById('profileName');
 
- const emailBox=
+ const emailBox =
  document.getElementById('profileEmail');
 
- const badge=
+ const badge =
  document.getElementById('profileBadge');
 
- const authArea=
+ const authArea =
  document.getElementById('profileAuthArea');
-
 
  if(currentUser){
 
-  const name=
+  const name =
   currentUser.user_metadata?.name ||
-  currentUser.email ||
+  currentUser.user_metadata?.full_name ||
+  currentUser.email?.split('@')[0] ||
   'PLAYZONE User';
 
   if(headerBtn){
 
-   headerBtn.textContent='👤 '+name;
+   headerBtn.textContent =
+   '👤 ' + name;
+
    headerBtn.classList.add('logged');
-   headerBtn.onclick=function(){
+
+   headerBtn.onclick =
+   function(){
+
     showPage(
      'profile',
      document.querySelectorAll('nav button')[4]
     );
+
    };
 
   }
 
   if(heroBtn){
 
-   heroBtn.textContent='👤 আমার প্রোফাইল';
-   heroBtn.onclick=function(){
+   heroBtn.textContent =
+   '👤 আমার প্রোফাইল';
+
+   heroBtn.onclick =
+   function(){
+
     showPage(
      'profile',
      document.querySelectorAll('nav button')[4]
     );
+
    };
 
   }
 
   if(nameBox)
-  nameBox.textContent=name;
+  nameBox.textContent =
+  name;
 
   if(emailBox)
-  emailBox.textContent=
-  'Email: '+(currentUser.email||'');
+  emailBox.textContent =
+  'Email: ' + (currentUser.email || '');
 
   if(badge)
-  badge.textContent='Verified User';
+  badge.textContent =
+  'Verified User';
 
   if(authArea){
 
-   authArea.innerHTML=`
+   authArea.innerHTML = `
 
     <button
      class="btn danger"
@@ -871,35 +918,49 @@ function updateUserUI(){
 
   if(headerBtn){
 
-   headerBtn.textContent='👤 Login';
+   headerBtn.textContent =
+   '👤 Login';
+
    headerBtn.classList.remove('logged');
-   headerBtn.onclick=function(){
+
+   headerBtn.onclick =
+   function(){
+
     openModal('login');
+
    };
 
   }
 
   if(heroBtn){
 
-   heroBtn.textContent='লগইন / রেজিস্টার';
-   heroBtn.onclick=function(){
+   heroBtn.textContent =
+   'লগইন / রেজিস্টার';
+
+   heroBtn.onclick =
+   function(){
+
     openModal('login');
+
    };
 
   }
 
   if(nameBox)
-  nameBox.textContent='Guest User';
+  nameBox.textContent =
+  'Guest User';
 
   if(emailBox)
-  emailBox.textContent='Login করলে Email দেখা যাবে।';
+  emailBox.textContent =
+  'Login করলে Email দেখা যাবে।';
 
   if(badge)
-  badge.textContent='Guest';
+  badge.textContent =
+  'Guest';
 
   if(authArea){
 
-   authArea.innerHTML=`
+   authArea.innerHTML = `
 
     <button
      class="btn"
@@ -928,13 +989,14 @@ function showPage(id,btn){
   'profile'
  ].forEach(function(page){
 
-  const el=document.getElementById(page);
+  const el =
+  document.getElementById(page);
 
   if(el){
 
    el.classList.toggle(
     'hidden',
-    page!==id
+    page !== id
    );
 
   }
@@ -952,10 +1014,10 @@ function showPage(id,btn){
  if(btn)
  btn.classList.add('active');
 
- if(id==='jobs')
+ if(id === 'jobs')
  renderJobs();
 
- if(id==='profile')
+ if(id === 'profile')
  updateUserUI();
 
  window.scrollTo({
@@ -981,11 +1043,11 @@ function closeModal(){
 
 function openModal(type){
 
- let c='';
+ let c = '';
 
- if(type==='login'){
+ if(type === 'login'){
 
-  c=`
+  c = `
 
   <h2>👤 PLAYZONE Account</h2>
 
@@ -1030,9 +1092,9 @@ function openModal(type){
  }
 
 
- if(type==='rewards'){
+ if(type === 'rewards'){
 
-  c=`
+  c = `
 
   <h2>🎁 Rewards</h2>
 
@@ -1059,9 +1121,9 @@ function openModal(type){
  }
 
 
- if(type==='tournament'){
+ if(type === 'tournament'){
 
-  c=`
+  c = `
 
   <h2>🏆 Tournament</h2>
 
@@ -1086,9 +1148,9 @@ function openModal(type){
  }
 
 
- if(type==='sponsor'){
+ if(type === 'sponsor'){
 
-  c=`
+  c = `
 
   <h2>📢 Sponsor / Business</h2>
 
@@ -1096,9 +1158,13 @@ function openModal(type){
   আপনার ব্যবসা বা প্রতিষ্ঠান PLAYZONE-এ প্রচার করতে আগ্রহী হলে তথ্য দিন।
   </p>
 
-  <input id="sName" placeholder="ব্যবসা/প্রতিষ্ঠানের নাম">
+  <input
+   id="sName"
+   placeholder="ব্যবসা/প্রতিষ্ঠানের নাম">
 
-  <input id="sPhone" placeholder="মোবাইল নম্বর">
+  <input
+   id="sPhone"
+   placeholder="মোবাইল নম্বর">
 
   <textarea
    id="sMsg"
@@ -1117,13 +1183,15 @@ function openModal(type){
  }
 
 
- if(type==='postjob'){
+ if(type === 'postjob'){
 
-  c=`
+  c = `
 
   <h2>➕ কাজ পোস্ট করুন</h2>
 
-  <input id="jTitle" placeholder="কাজের নাম">
+  <input
+   id="jTitle"
+   placeholder="কাজের নাম">
 
   <select id="jSkill">
 
@@ -1134,7 +1202,9 @@ function openModal(type){
 
   </select>
 
-  <input id="jBudget" placeholder="Budget (ঐচ্ছিক)">
+  <input
+   id="jBudget"
+   placeholder="Budget (ঐচ্ছিক)">
 
   <textarea
    id="jDesc"
@@ -1155,37 +1225,37 @@ function openModal(type){
  }
 
 
- if(type==='skill'){
+ if(type === 'skill'){
 
-  const saved=
+  const saved =
   JSON.parse(
    localStorage.getItem('pz_skill') || '{}'
   );
 
-  c=`
+  c = `
 
   <h2>🎯 Skill Profile</h2>
 
   <input
    id="skillName"
-   value="${escapeHTML(saved.name||'')}"
+   value="${escapeHTML(saved.name || '')}"
    placeholder="আপনার নাম">
 
   <select id="skillType">
 
-   <option ${saved.skill==='Graphic Design'?'selected':''}>
+   <option ${saved.skill === 'Graphic Design' ? 'selected' : ''}>
    Graphic Design
    </option>
 
-   <option ${saved.skill==='Video Editing'?'selected':''}>
+   <option ${saved.skill === 'Video Editing' ? 'selected' : ''}>
    Video Editing
    </option>
 
-   <option ${saved.skill==='Data Entry'?'selected':''}>
+   <option ${saved.skill === 'Data Entry' ? 'selected' : ''}>
    Data Entry
    </option>
 
-   <option ${saved.skill==='Digital Marketing'?'selected':''}>
+   <option ${saved.skill === 'Digital Marketing' ? 'selected' : ''}>
    Digital Marketing
    </option>
 
@@ -1193,7 +1263,7 @@ function openModal(type){
 
   <textarea
    id="skillAbout"
-   placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ">${escapeHTML(saved.about||'')}</textarea>
+   placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ">${escapeHTML(saved.about || '')}</textarea>
 
   <button
    class="btn"
@@ -1206,9 +1276,9 @@ function openModal(type){
  }
 
 
- if(type==='payout'){
+ if(type === 'payout'){
 
-  c=`
+  c = `
 
   <h2>💰 Payout Request</h2>
 
@@ -1222,9 +1292,13 @@ function openModal(type){
   এটি বর্তমানে request form হিসেবে কাজ করবে।
   </p>
 
-  <input id="payoutName" placeholder="আপনার নাম">
+  <input
+   id="payoutName"
+   placeholder="আপনার নাম">
 
-  <input id="payoutPhone" placeholder="Payment number">
+  <input
+   id="payoutPhone"
+   placeholder="Payment number">
 
   <select id="payoutMethod">
    <option>bKash</option>
@@ -1249,9 +1323,13 @@ function openModal(type){
 
  }
 
+ document.getElementById(
+  'modalContent'
+ ).innerHTML = c;
 
- document.getElementById('modalContent').innerHTML=c;
- document.getElementById('modal').style.display='flex';
+ document.getElementById(
+  'modal'
+ ).style.display='flex';
 
 }
 
@@ -1262,30 +1340,30 @@ function openModal(type){
 
 async function registerUser(){
 
- const name=
+ const name =
  document.getElementById('authName')?.value.trim();
 
- const email=
+ const email =
  document.getElementById('authEmail')?.value.trim();
 
- const password=
+ const password =
  document.getElementById('authPassword')?.value;
 
- const status=
+ const status =
  document.getElementById('authStatus');
 
- if(!name||!email||!password){
+ if(!name || !email || !password){
 
-  status.textContent=
+  status.textContent =
   'নাম, ইমেইল ও password দিন।';
 
   return;
 
  }
 
- if(password.length<6){
+ if(password.length < 6){
 
-  status.textContent=
+  status.textContent =
   'Password কমপক্ষে 6 অক্ষরের দিন।';
 
   return;
@@ -1294,26 +1372,33 @@ async function registerUser(){
 
  if(!supabaseClient){
 
-  status.textContent=
+  status.textContent =
   'Supabase connection পাওয়া যায়নি।';
 
   return;
 
  }
 
- status.textContent='Account তৈরি হচ্ছে...';
+ status.textContent =
+ 'Account তৈরি হচ্ছে...';
 
  try{
 
-  const {data,error}=
+  const {data,error} =
   await supabaseClient.auth.signUp({
 
    email:email,
+
    password:password,
 
    options:{
+    emailRedirectTo:
+    window.location.origin +
+    window.location.pathname,
+
     data:{
-     name:name
+     name:name,
+     full_name:name
     }
    }
 
@@ -1321,7 +1406,9 @@ async function registerUser(){
 
   if(error){
 
-   status.textContent=error.message;
+   status.textContent =
+   error.message;
+
    return;
 
   }
@@ -1331,13 +1418,39 @@ async function registerUser(){
    name
   );
 
-  status.textContent=
-  'Registration সফল। Gmail থেকে Email confirm করুন।';
+  if(data?.session){
+
+   currentUser =
+   data.user || null;
+
+   updateUserUI();
+
+   status.textContent =
+   'Registration সফল!';
+
+   setTimeout(function(){
+
+    closeModal();
+
+    showPage(
+     'profile',
+     document.querySelectorAll('nav button')[4]
+    );
+
+   },700);
+
+  }else{
+
+   status.innerHTML =
+   'Registration সফল হয়েছে।<br>আপনার Email inbox-এ গিয়ে confirmation link-এ ক্লিক করুন। তারপর Login করুন।';
+
+  }
 
  }catch(error){
 
-  status.textContent=
-  error.message||'Registration failed';
+  status.textContent =
+  error.message ||
+  'Registration failed';
 
  }
 
@@ -1350,18 +1463,18 @@ async function registerUser(){
 
 async function loginUser(){
 
- const email=
+ const email =
  document.getElementById('authEmail')?.value.trim();
 
- const password=
+ const password =
  document.getElementById('authPassword')?.value;
 
- const status=
+ const status =
  document.getElementById('authStatus');
 
- if(!email||!password){
+ if(!email || !password){
 
-  status.textContent=
+  status.textContent =
   'ইমেইল ও password দিন।';
 
   return;
@@ -1370,18 +1483,19 @@ async function loginUser(){
 
  if(!supabaseClient){
 
-  status.textContent=
+  status.textContent =
   'Supabase connection পাওয়া যায়নি।';
 
   return;
 
  }
 
- status.textContent='Login হচ্ছে...';
+ status.textContent =
+ 'Login হচ্ছে...';
 
  try{
 
-  const {data,error}=
+  const {data,error} =
   await supabaseClient.auth.signInWithPassword({
 
    email:email,
@@ -1391,16 +1505,20 @@ async function loginUser(){
 
   if(error){
 
-   status.textContent=error.message;
+   status.textContent =
+   error.message;
+
    return;
 
   }
 
-  currentUser=data.user;
+  currentUser =
+  data.user || null;
 
-  const name=
-  currentUser.user_metadata?.name||
-  currentUser.email||
+  const name =
+  currentUser?.user_metadata?.name ||
+  currentUser?.user_metadata?.full_name ||
+  currentUser?.email?.split('@')[0] ||
   'PLAYZONE User';
 
   localStorage.setItem(
@@ -1410,7 +1528,8 @@ async function loginUser(){
 
   updateUserUI();
 
-  status.textContent='Login সফল!';
+  status.textContent =
+  'Login সফল!';
 
   setTimeout(function(){
 
@@ -1425,8 +1544,9 @@ async function loginUser(){
 
  }catch(error){
 
-  status.textContent=
-  error.message||'Login failed';
+  status.textContent =
+  error.message ||
+  'Login failed';
 
  }
 
@@ -1439,11 +1559,12 @@ async function loginUser(){
 
 async function logoutUser(){
 
- if(!supabaseClient)return;
+ if(!supabaseClient)
+ return;
 
  try{
 
-  const {error}=
+  const {error} =
   await supabaseClient.auth.signOut();
 
   if(error){
@@ -1453,9 +1574,11 @@ async function logoutUser(){
 
   }
 
-  currentUser=null;
+  currentUser = null;
 
-  localStorage.removeItem('pz_username');
+  localStorage.removeItem(
+   'pz_username'
+  );
 
   updateUserUI();
 
@@ -1464,12 +1587,15 @@ async function logoutUser(){
    document.querySelectorAll('nav button')[0]
   );
 
-  alert('Logout সফল হয়েছে।');
+  alert(
+   'Logout সফল হয়েছে।'
+  );
 
  }catch(error){
 
   alert(
-   error.message||'Logout failed'
+   error.message ||
+   'Logout failed'
   );
 
  }
@@ -1483,38 +1609,73 @@ async function logoutUser(){
 
 async function loadSupabaseUser(){
 
- if(!supabaseClient)return;
+ if(!supabaseClient){
+
+  updateUserUI();
+
+  return;
+
+ }
 
  try{
 
-  const {data,error}=
+  const {data,error} =
   await supabaseClient.auth.getSession();
 
   if(error){
-   console.log(error);
+
+   console.error(
+    'Session error:',
+    error
+   );
+
    return;
+
   }
 
-  currentUser=
-  data?.session?.user||null;
+  currentUser =
+  data?.session?.user || null;
 
   updateUserUI();
 
   supabaseClient.auth.onAuthStateChange(
    function(event,session){
 
-    currentUser=
-    session?.user||null;
+    currentUser =
+    session?.user || null;
 
     updateUserUI();
+
+    if(event === 'SIGNED_IN'){
+
+     const name =
+     currentUser?.user_metadata?.name ||
+     currentUser?.user_metadata?.full_name ||
+     currentUser?.email?.split('@')[0] ||
+     'PLAYZONE User';
+
+     localStorage.setItem(
+      'pz_username',
+      name
+     );
+
+    }
+
+    if(event === 'SIGNED_OUT'){
+
+     localStorage.removeItem(
+      'pz_username'
+     );
+
+    }
 
    }
   );
 
  }catch(error){
 
-  console.log(
-   'Session:',
+  console.error(
+   'Supabase session:',
    error
   );
 
@@ -1529,16 +1690,16 @@ async function loadSupabaseUser(){
 
 function submitSponsor(){
 
- const name=
+ const name =
  document.getElementById('sName')?.value.trim();
 
- const phone=
+ const phone =
  document.getElementById('sPhone')?.value.trim();
 
- const message=
+ const message =
  document.getElementById('sMsg')?.value.trim();
 
- if(!name||!phone){
+ if(!name || !phone){
 
   alert(
    'ব্যবসার নাম ও মোবাইল নম্বর দিন'
@@ -1548,7 +1709,7 @@ function submitSponsor(){
 
  }
 
- const request={
+ const request = {
 
   name:name,
   phone:phone,
@@ -1564,7 +1725,7 @@ function submitSponsor(){
 
  document.getElementById(
   'sStatus'
- ).textContent=
+ ).textContent =
  'ধন্যবাদ! Sponsor interest সংরক্ষণ হয়েছে।';
 
 }
@@ -1576,18 +1737,21 @@ function submitSponsor(){
 
 function saveSkill(){
 
- const name=
+ const name =
  document.getElementById('skillName')?.value.trim();
 
- const skill=
+ const skill =
  document.getElementById('skillType')?.value;
 
- const about=
+ const about =
  document.getElementById('skillAbout')?.value.trim();
 
  if(!name){
 
-  alert('আপনার নাম লিখুন');
+  alert(
+   'আপনার নাম লিখুন'
+  );
+
   return;
 
  }
@@ -1595,13 +1759,17 @@ function saveSkill(){
  localStorage.setItem(
   'pz_skill',
   JSON.stringify({
+
    name:name,
    skill:skill,
    about:about
+
   })
  );
 
- alert('Skill profile saved');
+ alert(
+  'Skill profile saved'
+ );
 
  closeModal();
 
@@ -1614,21 +1782,23 @@ function saveSkill(){
 
 function submitPayout(){
 
- const name=
+ const name =
  document.getElementById('payoutName')?.value.trim();
 
- const phone=
+ const phone =
  document.getElementById('payoutPhone')?.value.trim();
 
- const method=
+ const method =
  document.getElementById('payoutMethod')?.value;
 
- const amount=
+ const amount =
  Number(
-  document.getElementById('payoutAmount')?.value||0
+  document.getElementById(
+   'payoutAmount'
+  )?.value || 0
  );
 
- if(!name||!phone||!amount){
+ if(!name || !phone || !amount){
 
   alert(
    'নাম, payment number ও amount দিন'
@@ -1638,14 +1808,17 @@ function submitPayout(){
 
  }
 
- if(amount<=0){
+ if(amount <= 0){
 
-  alert('সঠিক amount দিন');
+  alert(
+   'সঠিক amount দিন'
+  );
+
   return;
 
  }
 
- const request={
+ const request = {
 
   name:name,
   phone:phone,
@@ -1664,7 +1837,7 @@ function submitPayout(){
 
  document.getElementById(
   'payoutStatus'
- ).textContent=
+ ).textContent =
  'Payout request সংরক্ষণ হয়েছে। Merchant payment এখনো চালু হয়নি।';
 
 }
@@ -1674,7 +1847,7 @@ function submitPayout(){
    JOBS
 ===================================================== */
 
-const defaultJobs=[
+const defaultJobs = [
 
  {
   title:'Facebook পোস্ট ডিজাইন',
@@ -1710,15 +1883,25 @@ function getJobs(){
 
  try{
 
-  const stored=
+  const stored =
   JSON.parse(
    localStorage.getItem('pz_jobs')
   );
 
-  if(Array.isArray(stored)&&stored.length)
+  if(
+   Array.isArray(stored) &&
+   stored.length
+  )
   return stored;
 
- }catch(error){}
+ }catch(error){
+
+  console.error(
+   'Jobs:',
+   error
+  );
+
+ }
 
  return defaultJobs;
 
@@ -1726,34 +1909,42 @@ function getJobs(){
 
 function renderJobs(){
 
- const filter=
- document.getElementById('skillFilter')?.value||'all';
+ const filter =
+ document.getElementById(
+  'skillFilter'
+ )?.value || 'all';
 
- const jobs=getJobs();
+ const jobs =
+ getJobs();
 
- const list=
- document.getElementById('jobList');
+ const list =
+ document.getElementById(
+  'jobList'
+ );
 
- if(!list)return;
+ if(!list)
+ return;
 
- const filtered=
+ const filtered =
  jobs.filter(function(job){
 
-  return filter==='all'||
-  job.skill===filter;
+  return (
+   filter === 'all' ||
+   job.skill === filter
+  );
 
  });
 
  if(!filtered.length){
 
-  list.innerHTML=
+  list.innerHTML =
   '<div class="empty">এই Skill-এর কোনো কাজ নেই।</div>';
 
   return;
 
  }
 
- list.innerHTML=
+ list.innerHTML =
  filtered.map(function(job){
 
   return `
@@ -1764,13 +1955,20 @@ function renderJobs(){
     ${escapeHTML(job.skill)}
    </span>
 
-   <h3>${escapeHTML(job.title)}</h3>
+   <h3>
+    ${escapeHTML(job.title)}
+   </h3>
 
-   <p>${escapeHTML(job.desc)}</p>
+   <p>
+    ${escapeHTML(job.desc)}
+   </p>
 
    <p>
     <b>Budget:</b>
-    ${escapeHTML(job.budget||'আলোচনা সাপেক্ষ')}
+    ${escapeHTML(
+     job.budget ||
+     'আলোচনা সাপেক্ষ'
+    )}
    </p>
 
    <button
@@ -1789,19 +1987,27 @@ function renderJobs(){
 
 function addJob(){
 
- const title=
- document.getElementById('jTitle')?.value.trim();
+ const title =
+ document.getElementById(
+  'jTitle'
+ )?.value.trim();
 
- const skill=
- document.getElementById('jSkill')?.value;
+ const skill =
+ document.getElementById(
+  'jSkill'
+ )?.value;
 
- const desc=
- document.getElementById('jDesc')?.value.trim();
+ const desc =
+ document.getElementById(
+  'jDesc'
+ )?.value.trim();
 
- const budget=
- document.getElementById('jBudget')?.value.trim();
+ const budget =
+ document.getElementById(
+  'jBudget'
+ )?.value.trim();
 
- if(!title||!desc){
+ if(!title || !desc){
 
   alert(
    'কাজের নাম ও বিস্তারিত লিখুন'
@@ -1811,13 +2017,16 @@ function addJob(){
 
  }
 
- const jobs=getJobs();
+ const jobs =
+ getJobs();
 
  jobs.unshift({
+
   title:title,
   skill:skill,
   desc:desc,
   budget:budget
+
  });
 
  localStorage.setItem(
@@ -1826,13 +2035,28 @@ function addJob(){
  );
 
  closeModal();
+
  renderJobs();
 
- alert('Job successfully posted');
+ alert(
+  'Job successfully posted'
+ );
 
 }
 
 function applyJob(){
+
+ if(!currentUser){
+
+  alert(
+   'Apply করতে আগে Login করুন।'
+  );
+
+  openModal('login');
+
+  return;
+
+ }
 
  alert(
   'Job application system backend-এর পরের ধাপে যুক্ত হবে।'
@@ -1842,17 +2066,19 @@ function applyJob(){
 
 function escapeHTML(value){
 
- return String(value||'')
+ return String(value || '')
  .replace(
   /[&<>"']/g,
   function(m){
 
    return {
+
     '&':'&amp;',
     '<':'&lt;',
     '>':'&gt;',
     '"':'&quot;',
     "'":'&#039;'
+
    }[m];
 
   }
@@ -1865,42 +2091,47 @@ function escapeHTML(value){
    GAME SYSTEM
 ===================================================== */
 
-let gameTimer=null;
-let gameRunning=false;
+let gameTimer = null;
+let gameRunning = false;
 
-let tapScore=0;
-let tapTime=30;
+let tapScore = 0;
+let tapTime = 30;
 
 function openGame(type){
 
- document.getElementById('modal')
- .style.display='flex';
+ document.getElementById(
+  'modal'
+ ).style.display='flex';
 
- if(type==='tap')
+ if(type === 'tap')
  startTapGame();
 
- if(type==='match')
+ if(type === 'match')
  startMatchGame();
 
- if(type==='fly')
+ if(type === 'fly')
  startFlyGame();
 
- if(type==='brain')
+ if(type === 'brain')
  startBrainGame();
 
 }
 
 
-/* TAP */
+/* =====================================================
+   TAP RUSH
+===================================================== */
 
 function startTapGame(){
 
  stopAllGames();
 
- tapScore=0;
- tapTime=30;
+ tapScore = 0;
+ tapTime = 30;
 
- document.getElementById('modalContent').innerHTML=`
+ document.getElementById(
+  'modalContent'
+ ).innerHTML = `
 
  <h2>⚡ Tap Rush</h2>
 
@@ -1918,7 +2149,9 @@ function startTapGame(){
 
  </div>
 
- <div class="gameArea" id="tapArea">
+ <div
+  class="gameArea"
+  id="tapArea">
 
   <div class="message">
    START চাপুন এবং target-এ যত দ্রুত সম্ভব tap করুন।
@@ -1926,7 +2159,9 @@ function startTapGame(){
 
  </div>
 
- <button class="btn" onclick="runTapGame()">
+ <button
+  class="btn"
+  onclick="runTapGame()">
   START GAME
  </button>
 
@@ -1938,20 +2173,27 @@ function runTapGame(){
 
  stopAllGames();
 
- tapScore=0;
- tapTime=30;
- gameRunning=true;
+ tapScore = 0;
+ tapTime = 30;
+ gameRunning = true;
 
- const scoreBox=
- document.getElementById('tapScore');
+ const scoreBox =
+ document.getElementById(
+  'tapScore'
+ );
 
- const timeBox=
- document.getElementById('tapTime');
+ const timeBox =
+ document.getElementById(
+  'tapTime'
+ );
 
- const area=
- document.getElementById('tapArea');
+ const area =
+ document.getElementById(
+  'tapArea'
+ );
 
- if(!scoreBox||!timeBox||!area)return;
+ if(!scoreBox || !timeBox || !area)
+ return;
 
  scoreBox.textContent='0';
  timeBox.textContent='30';
@@ -1960,15 +2202,18 @@ function runTapGame(){
 
  createTarget();
 
- gameTimer=setInterval(function(){
+ gameTimer =
+ setInterval(function(){
 
-  if(!gameRunning)return;
+  if(!gameRunning)
+  return;
 
   tapTime--;
 
-  timeBox.textContent=tapTime;
+  timeBox.textContent =
+  tapTime;
 
-  if(tapTime<=0)
+  if(tapTime <= 0)
   endTapGame();
 
  },1000);
@@ -1977,47 +2222,70 @@ function runTapGame(){
 
 function createTarget(){
 
- if(!gameRunning)return;
+ if(!gameRunning)
+ return;
 
- const area=
- document.getElementById('tapArea');
+ const area =
+ document.getElementById(
+  'tapArea'
+ );
 
- if(!area)return;
+ if(!area)
+ return;
 
- const old=
- area.querySelector('.target');
+ const old =
+ area.querySelector(
+  '.target'
+ );
 
- if(old)old.remove();
+ if(old)
+ old.remove();
 
- const target=
- document.createElement('div');
+ const target =
+ document.createElement(
+  'div'
+ );
 
- target.className='target';
- target.textContent='⚡';
+ target.className =
+ 'target';
 
- const maxX=
- Math.max(0,area.clientWidth-58);
+ target.textContent =
+ '⚡';
 
- const maxY=
- Math.max(0,area.clientHeight-58);
+ const maxX =
+ Math.max(
+  0,
+  area.clientWidth - 58
+ );
 
- target.style.left=
- Math.random()*maxX+'px';
+ const maxY =
+ Math.max(
+  0,
+  area.clientHeight - 58
+ );
 
- target.style.top=
- Math.random()*maxY+'px';
+ target.style.left =
+ Math.random() * maxX + 'px';
 
- target.onclick=function(){
+ target.style.top =
+ Math.random() * maxY + 'px';
 
-  if(!gameRunning)return;
+ target.onclick =
+ function(){
+
+  if(!gameRunning)
+  return;
 
   tapScore++;
 
-  const box=
-  document.getElementById('tapScore');
+  const box =
+  document.getElementById(
+   'tapScore'
+  );
 
   if(box)
-  box.textContent=tapScore;
+  box.textContent =
+  tapScore;
 
   createTarget();
 
@@ -2029,29 +2297,36 @@ function createTarget(){
 
 function endTapGame(){
 
- if(!gameRunning)return;
+ if(!gameRunning)
+ return;
 
  gameRunning=false;
 
  if(gameTimer){
 
-  clearInterval(gameTimer);
+  clearInterval(
+   gameTimer
+  );
+
   gameTimer=null;
 
  }
 
  gameFinished();
 
- const earned=tapScore;
+ const earned =
+ tapScore;
 
  addPoints(earned);
 
- const area=
- document.getElementById('tapArea');
+ const area =
+ document.getElementById(
+  'tapArea'
+ );
 
  if(area){
 
-  area.innerHTML=`
+  area.innerHTML = `
 
   <div class="message">
 
@@ -2067,7 +2342,9 @@ function endTapGame(){
     <strong>+${earned} Points</strong>
    </p>
 
-   <button class="btn" onclick="startTapGame()">
+   <button
+    class="btn"
+    onclick="startTapGame()">
     আবার খেলুন
    </button>
 
@@ -2080,32 +2357,36 @@ function endTapGame(){
 }
 
 
-/* MATCH */
+/* =====================================================
+   MATCH SEVEN
+===================================================== */
 
-let matchFirst=null;
-let matchLocked=false;
-let matchPairs=0;
-let matchScore=0;
+let matchFirst = null;
+let matchLocked = false;
+let matchPairs = 0;
+let matchScore = 0;
 
 function startMatchGame(){
 
  stopAllGames();
 
- matchFirst=null;
- matchLocked=false;
- matchPairs=0;
- matchScore=0;
+ matchFirst = null;
+ matchLocked = false;
+ matchPairs = 0;
+ matchScore = 0;
 
- let numbers=[
+ let numbers = [
   1,2,3,4,5,6,
   1,2,3,4,5,6
  ];
 
  numbers.sort(
-  ()=>Math.random()-0.5
+  () => Math.random() - 0.5
  );
 
- document.getElementById('modalContent').innerHTML=`
+ document.getElementById(
+  'modalContent'
+ ).innerHTML = `
 
  <h2>7️⃣ Match Seven</h2>
 
@@ -2123,7 +2404,10 @@ function startMatchGame(){
 
  </div>
 
- <div class="matchGrid" id="matchGrid"></div>
+ <div
+  class="matchGrid"
+  id="matchGrid">
+ </div>
 
  <p class="message">
   একই সংখ্যা দুইটি নির্বাচন করুন।
@@ -2131,44 +2415,63 @@ function startMatchGame(){
 
  `;
 
- const grid=
- document.getElementById('matchGrid');
+ const grid =
+ document.getElementById(
+  'matchGrid'
+ );
 
- numbers.forEach(function(number){
+ numbers.forEach(
+  function(number){
 
-  const button=
-  document.createElement('button');
+   const button =
+   document.createElement(
+    'button'
+   );
 
-  button.className='matchCard';
-  button.textContent='?';
-  button.dataset.value=number;
+   button.className =
+   'matchCard';
 
-  button.onclick=function(){
-   selectMatch(button);
-  };
+   button.textContent =
+   '?';
 
-  grid.appendChild(button);
+   button.dataset.value =
+   number;
 
- });
+   button.onclick =
+   function(){
+
+    selectMatch(button);
+
+   };
+
+   grid.appendChild(button);
+
+  }
+ );
 
 }
 
 function selectMatch(button){
 
  if(
-  matchLocked||
-  button.classList.contains('matched')||
-  button===matchFirst
- )return;
+  matchLocked ||
+  button.classList.contains('matched') ||
+  button === matchFirst
+ )
+ return;
 
- button.textContent=
+ button.textContent =
  button.dataset.value;
 
- button.classList.add('selected');
+ button.classList.add(
+  'selected'
+ );
 
  if(!matchFirst){
 
-  matchFirst=button;
+  matchFirst =
+  button;
+
   return;
 
  }
@@ -2176,100 +2479,135 @@ function selectMatch(button){
  matchLocked=true;
 
  if(
-  matchFirst.dataset.value===
+  matchFirst.dataset.value ===
   button.dataset.value
  ){
 
-  const first=matchFirst;
-  const second=button;
+  const first =
+  matchFirst;
 
-  setTimeout(function(){
+  const second =
+  button;
 
-   first.classList.add('matched');
-   second.classList.add('matched');
+  setTimeout(
+   function(){
 
-   matchPairs++;
-   matchScore+=10;
+    first.classList.add(
+     'matched'
+    );
 
-   document.getElementById(
-    'matchPairs'
-   ).textContent=matchPairs;
+    second.classList.add(
+     'matched'
+    );
 
-   document.getElementById(
-    'matchScore'
-   ).textContent=matchScore;
+    matchPairs++;
 
-   matchFirst=null;
-   matchLocked=false;
-
-   if(matchPairs>=6){
-
-    gameFinished();
-    addPoints(matchScore);
+    matchScore += 10;
 
     document.getElementById(
-     'modalContent'
-    ).innerHTML=`
+     'matchPairs'
+    ).textContent =
+    matchPairs;
 
-    <h2>🎉 Match Complete!</h2>
+    document.getElementById(
+     'matchScore'
+    ).textContent =
+    matchScore;
 
-    <p>
-     Score:
-     <strong>${matchScore}</strong>
-    </p>
+    matchFirst=null;
+    matchLocked=false;
 
-    <p>
-     Points earned:
-     <strong>+${matchScore}</strong>
-    </p>
+    if(matchPairs >= 6){
 
-    <button class="btn" onclick="startMatchGame()">
-     আবার খেলুন
-    </button>
+     gameFinished();
 
-    `;
+     addPoints(
+      matchScore
+     );
 
-   }
+     document.getElementById(
+      'modalContent'
+     ).innerHTML = `
 
-  },350);
+     <h2>🎉 Match Complete!</h2>
+
+     <p>
+      Score:
+      <strong>${matchScore}</strong>
+     </p>
+
+     <p>
+      Points earned:
+      <strong>+${matchScore}</strong>
+     </p>
+
+     <button
+      class="btn"
+      onclick="startMatchGame()">
+      আবার খেলুন
+     </button>
+
+     `;
+
+    }
+
+   },
+   350
+  );
 
  }else{
 
-  const first=matchFirst;
+  const first =
+  matchFirst;
 
-  setTimeout(function(){
+  setTimeout(
+   function(){
 
-   first.textContent='?';
-   button.textContent='?';
+    first.textContent =
+    '?';
 
-   first.classList.remove('selected');
-   button.classList.remove('selected');
+    button.textContent =
+    '?';
 
-   matchFirst=null;
-   matchLocked=false;
+    first.classList.remove(
+     'selected'
+    );
 
-  },650);
+    button.classList.remove(
+     'selected'
+    );
+
+    matchFirst=null;
+    matchLocked=false;
+
+   },
+   650
+  );
 
  }
 
 }
 
 
-/* FLY */
+/* =====================================================
+   FLY HIGH
+===================================================== */
 
-let flyCanvas=null;
-let flyCtx=null;
-let flyFrame=null;
-let flyScore=0;
-let flyPlayer=null;
-let flyObstacles=[];
-let flyRunning=false;
+let flyCanvas = null;
+let flyCtx = null;
+let flyFrame = null;
+let flyScore = 0;
+let flyPlayer = null;
+let flyObstacles = [];
+let flyRunning = false;
 
 function startFlyGame(){
 
  stopAllGames();
 
- document.getElementById('modalContent').innerHTML=`
+ document.getElementById(
+  'modalContent'
+ ).innerHTML = `
 
  <h2>🚀 Fly High</h2>
 
@@ -2294,17 +2632,23 @@ function startFlyGame(){
   height="390">
  </canvas>
 
- <button class="btn" onclick="runFlyGame()">
+ <button
+  class="btn"
+  onclick="runFlyGame()">
   START GAME
  </button>
 
  `;
 
- flyCanvas=
- document.getElementById('flyCanvas');
+ flyCanvas =
+ document.getElementById(
+  'flyCanvas'
+ );
 
- flyCtx=
- flyCanvas.getContext('2d');
+ flyCtx =
+ flyCanvas.getContext(
+  '2d'
+ );
 
  drawFlyStart();
 
@@ -2312,13 +2656,24 @@ function startFlyGame(){
 
 function drawFlyStart(){
 
- if(!flyCtx)return;
+ if(!flyCtx)
+ return;
 
- flyCtx.clearRect(0,0,440,390);
+ flyCtx.clearRect(
+  0,
+  0,
+  440,
+  390
+ );
 
- flyCtx.fillStyle='#ffd21a';
- flyCtx.font='22px Arial';
- flyCtx.textAlign='center';
+ flyCtx.fillStyle =
+ '#ffd21a';
+
+ flyCtx.font =
+ '22px Arial';
+
+ flyCtx.textAlign =
+ 'center';
 
  flyCtx.fillText(
   'START চাপুন',
@@ -2347,14 +2702,16 @@ function runFlyGame(){
   'flyScore'
  ).textContent='0';
 
- flyCanvas.onclick=function(){
+ flyCanvas.onclick =
+ function(){
 
   if(flyRunning)
   flyPlayer.velocity=-6;
 
  };
 
- flyCanvas.ontouchstart=function(event){
+ flyCanvas.ontouchstart =
+ function(event){
 
   event.preventDefault();
 
@@ -2363,14 +2720,17 @@ function runFlyGame(){
 
  };
 
- flyFrame=
- requestAnimationFrame(flyLoop);
+ flyFrame =
+ requestAnimationFrame(
+  flyLoop
+ );
 
 }
 
 function flyLoop(){
 
- if(!flyRunning)return;
+ if(!flyRunning)
+ return;
 
  flyCtx.clearRect(
   0,
@@ -2379,71 +2739,86 @@ function flyLoop(){
   flyCanvas.height
  );
 
- flyPlayer.velocity+=0.35;
- flyPlayer.y+=flyPlayer.velocity;
+ flyPlayer.velocity += 0.35;
+ flyPlayer.y +=
+ flyPlayer.velocity;
 
- if(Math.random()<0.025){
+ if(Math.random() < 0.025){
 
   const gap=125;
 
-  const top=
-  45+Math.random()*165;
+  const top =
+  45 +
+  Math.random() * 165;
 
   flyObstacles.push({
+
    x:440,
    top:top,
    bottom:top+gap,
    passed:false
+
   });
 
  }
 
- flyObstacles.forEach(function(obstacle){
+ flyObstacles.forEach(
+  function(obstacle){
 
-  obstacle.x-=3;
+   obstacle.x -= 3;
 
-  flyCtx.fillStyle='#53b85b';
+   flyCtx.fillStyle =
+   '#53b85b';
 
-  flyCtx.fillRect(
-   obstacle.x,
-   0,
-   42,
-   obstacle.top
-  );
+   flyCtx.fillRect(
+    obstacle.x,
+    0,
+    42,
+    obstacle.top
+   );
 
-  flyCtx.fillRect(
-   obstacle.x,
-   obstacle.bottom,
-   42,
-   390-obstacle.bottom
-  );
+   flyCtx.fillRect(
+    obstacle.x,
+    obstacle.bottom,
+    42,
+    390 -
+    obstacle.bottom
+   );
 
-  if(
-   !obstacle.passed&&
-   obstacle.x<70
-  ){
+   if(
+    !obstacle.passed &&
+    obstacle.x < 70
+   ){
 
-   obstacle.passed=true;
-   flyScore++;
+    obstacle.passed=true;
 
-   const score=
-   document.getElementById('flyScore');
+    flyScore++;
 
-   if(score)
-   score.textContent=flyScore;
+    const score =
+    document.getElementById(
+     'flyScore'
+    );
+
+    if(score)
+    score.textContent =
+    flyScore;
+
+   }
 
   }
+ );
 
- });
+ flyObstacles =
+ flyObstacles.filter(
+  function(obstacle){
 
- flyObstacles=
- flyObstacles.filter(function(obstacle){
+   return obstacle.x > -50;
 
-  return obstacle.x>-50;
+  }
+ );
 
- });
-
- flyCtx.fillStyle='#ffd21a';
+ flyCtx.fillStyle =
+ '#ffd21a';
 
  flyCtx.beginPath();
 
@@ -2452,40 +2827,52 @@ function flyLoop(){
   flyPlayer.y,
   flyPlayer.size,
   0,
-  Math.PI*2
+  Math.PI * 2
  );
 
  flyCtx.fill();
 
- const hitObstacle=
- flyObstacles.some(function(obstacle){
+ const hitObstacle =
+ flyObstacles.some(
+  function(obstacle){
 
-  return(
+   return(
 
-   flyPlayer.x+18>obstacle.x&&
-   flyPlayer.x-18<obstacle.x+42&&
-   (
-    flyPlayer.y-18<obstacle.top||
-    flyPlayer.y+18>obstacle.bottom
-   )
+    flyPlayer.x + 18 >
+    obstacle.x &&
 
-  );
+    flyPlayer.x - 18 <
+    obstacle.x + 42 &&
 
- });
+    (
+     flyPlayer.y - 18 <
+     obstacle.top ||
+
+     flyPlayer.y + 18 >
+     obstacle.bottom
+    )
+
+   );
+
+  }
+ );
 
  if(
-  flyPlayer.y<20||
-  flyPlayer.y>370||
+  flyPlayer.y < 20 ||
+  flyPlayer.y > 370 ||
   hitObstacle
  ){
 
   endFlyGame();
+
   return;
 
  }
 
- flyFrame=
- requestAnimationFrame(flyLoop);
+ flyFrame =
+ requestAnimationFrame(
+  flyLoop
+ );
 
 }
 
@@ -2495,20 +2882,24 @@ function endFlyGame(){
 
  if(flyFrame){
 
-  cancelAnimationFrame(flyFrame);
+  cancelAnimationFrame(
+   flyFrame
+  );
+
   flyFrame=null;
 
  }
 
  gameFinished();
 
- const earned=flyScore;
+ const earned =
+ flyScore;
 
  addPoints(earned);
 
  document.getElementById(
   'modalContent'
- ).innerHTML=`
+ ).innerHTML = `
 
  <h2>🚀 Game Over!</h2>
 
@@ -2522,7 +2913,9 @@ function endFlyGame(){
   <strong>+${earned}</strong>
  </p>
 
- <button class="btn" onclick="startFlyGame()">
+ <button
+  class="btn"
+  onclick="startFlyGame()">
   আবার খেলুন
  </button>
 
@@ -2531,7 +2924,9 @@ function endFlyGame(){
 }
 
 
-/* BRAIN */
+/* =====================================================
+   BRAIN BOX
+===================================================== */
 
 let brainQuestion=0;
 let brainScore=0;
@@ -2546,7 +2941,7 @@ function startBrainGame(){
 
  document.getElementById(
   'modalContent'
- ).innerHTML=`
+ ).innerHTML = `
 
  <h2>🧠 Brain Box</h2>
 
@@ -2576,14 +2971,17 @@ function nextBrainQuestion(){
 
  brainQuestion++;
 
- if(brainQuestion>10){
+ if(brainQuestion > 10){
 
   gameFinished();
-  addPoints(brainScore);
+
+  addPoints(
+   brainScore
+  );
 
   document.getElementById(
    'brainContent'
-  ).innerHTML=`
+  ).innerHTML = `
 
   <div class="message">
 
@@ -2599,7 +2997,9 @@ function nextBrainQuestion(){
     <strong>+${brainScore}</strong>
    </p>
 
-   <button class="btn" onclick="startBrainGame()">
+   <button
+    class="btn"
+    onclick="startBrainGame()">
     আবার খেলুন
    </button>
 
@@ -2611,48 +3011,65 @@ function nextBrainQuestion(){
 
  }
 
- const a=
- Math.floor(Math.random()*10)+1;
+ const a =
+ Math.floor(
+  Math.random() * 10
+ ) + 1;
 
- const b=
- Math.floor(Math.random()*10)+1;
+ const b =
+ Math.floor(
+  Math.random() * 10
+ ) + 1;
 
- const operations=['+','-','×'];
+ const operations =
+ [
+  '+',
+  '-',
+  '×'
+ ];
 
- const op=
+ const op =
  operations[
   Math.floor(
-   Math.random()*operations.length
+   Math.random() *
+   operations.length
   )
  ];
 
- if(op==='+')
- brainAnswer=a+b;
+ if(op === '+')
+ brainAnswer =
+ a + b;
 
- if(op==='-')
- brainAnswer=a-b;
+ if(op === '-')
+ brainAnswer =
+ a - b;
 
- if(op==='×')
- brainAnswer=a*b;
+ if(op === '×')
+ brainAnswer =
+ a * b;
 
- let answers=[
+ let answers = [
+
   brainAnswer,
-  brainAnswer+1,
-  brainAnswer-1,
-  brainAnswer+3
+  brainAnswer + 1,
+  brainAnswer - 1,
+  brainAnswer + 3
+
  ];
 
  answers.sort(
-  ()=>Math.random()-0.5
+  () =>
+  Math.random() - 0.5
  );
 
  document.getElementById(
   'brainCount'
- ).textContent=brainQuestion;
+ ).textContent =
+ brainQuestion;
 
  document.getElementById(
   'brainContent'
- ).innerHTML=`
+ ).innerHTML = `
 
  <div class="question">
 
@@ -2662,20 +3079,22 @@ function nextBrainQuestion(){
 
   <div class="answerGrid">
 
-   ${answers.map(function(answer){
+   ${answers.map(
+    function(answer){
 
-    return `
+     return `
 
-    <button
-     onclick="answerBrain(${answer})">
+     <button
+      onclick="answerBrain(${answer})">
 
-     ${answer}
+      ${answer}
 
-    </button>
+     </button>
 
-    `;
+     `;
 
-   }).join('')}
+    }
+   ).join('')}
 
   </div>
 
@@ -2687,13 +3106,14 @@ function nextBrainQuestion(){
 
 function answerBrain(answer){
 
- if(answer===brainAnswer){
+ if(answer === brainAnswer){
 
-  brainScore+=10;
+  brainScore += 10;
 
   document.getElementById(
    'brainScore'
-  ).textContent=brainScore;
+  ).textContent =
+  brainScore;
 
  }
 
@@ -2702,7 +3122,9 @@ function answerBrain(answer){
 }
 
 
-/* STOP */
+/* =====================================================
+   STOP GAMES
+===================================================== */
 
 function stopAllGames(){
 
@@ -2710,7 +3132,10 @@ function stopAllGames(){
 
  if(gameTimer){
 
-  clearInterval(gameTimer);
+  clearInterval(
+   gameTimer
+  );
+
   gameTimer=null;
 
  }
@@ -2730,26 +3155,22 @@ function stopAllGames(){
 }
 
 
-/* STARTUP */
+/* =====================================================
+   STARTUP
+===================================================== */
 
 render();
+
 renderJobs();
+
 updateUserUI();
-async function loadProfileName() {
-  const { data: { user } } = await supabase.auth.getUser();
 
-  if (user) {
-    const name =
-      user.user_metadata?.name ||
-      user.user_metadata?.full_name ||
-      user.email?.split('@')[0] ||
-      "User";
-
-    document.getElementById("profileName").textContent = name;
-  }
-}
-
-loadProfileName();
+/*
+ IMPORTANT:
+ এখানে আর loadProfileName() নেই।
+ loadSupabaseUser() একাই current login session
+ এবং profile name/email update করবে।
+*/
 
 loadSupabaseUser();
 
@@ -2757,3 +3178,4 @@ loadSupabaseUser();
 
 </body>
 </html>
+```
