@@ -2735,10 +2735,25 @@ function stopAllGames(){
 render();
 renderJobs();
 updateUserUI();
+async function loadProfileName() {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (user) {
+    const name =
+      user.user_metadata?.name ||
+      user.user_metadata?.full_name ||
+      user.email?.split('@')[0] ||
+      "User";
+
+    document.getElementById("profileName").textContent = name;
+  }
+}
+
+loadProfileName();
+
 loadSupabaseUser();
 
 </script>
 
 </body>
 </html>
-```
