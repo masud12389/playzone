@@ -1,8 +1,928 @@
 <!doctype html>
-<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PlayZone Admin</title>
-<style>*{box-sizing:border-box}body{margin:0;background:#0b1725;color:#fff;font-family:Arial,"Noto Sans Bengali",sans-serif}.top{padding:18px;background:#132a40;display:flex;justify-content:space-between}.brand{color:#ffd21a;font-weight:900;font-size:24px}.wrap{padding:16px;max-width:1000px;margin:auto}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.panel{background:#18324b;border-radius:14px;padding:16px}.num{font-size:28px;font-weight:900;color:#ffd21a}.panel{margin-top:14px}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #31506c;text-align:left}button{background:#ffd21a;border:0;border-radius:9px;padding:9px 12px;font-weight:700}@media(max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}table{font-size:13px}}</style></head>
-<body><header class="top"><div class="brand">PLAYZONE ADMIN</div><div>⚙️</div></header>
-<div class="wrap"><h1>Dashboard</h1><div class="cards"><div class="card">Users<div class="num">1,248</div></div><div class="card">Games<div class="num">12</div></div><div class="card">Tournaments<div class="num">18</div></div><div class="card">Ad Revenue<div class="num">৳ 48,500</div></div></div>
-<div class="panel"><h2>Recent Users</h2><table><tr><th>User</th><th>Points</th><th>Status</th></tr><tr><td>Demo User</td><td>1,000</td><td>Active</td></tr><tr><td>Player 102</td><td>4,250</td><td>Active</td></tr><tr><td>Player 103</td><td>780</td><td>Review</td></tr></table></div>
-<div class="panel"><h2>Admin Actions</h2><button onclick="alert('Game manager demo')">Game Manager</button> <button onclick="alert('Tournament manager demo')">Tournament Manager</button> <button onclick="alert('Sponsor manager demo')">Sponsor Manager</button></div>
-</div></body></html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>PLAYZONE ADMIN</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#081522;
+  color:#fff;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:15px;
+}
+
+header{
+  background:#132b43;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+header h2{
+  margin:0;
+  color:#ffd21c;
+}
+
+.panel{
+  background:#15344f;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.statGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.stat{
+  background:#1b405e;
+  padding:15px;
+  border-radius:10px;
+}
+
+.stat b{
+  display:block;
+  font-size:25px;
+  color:#ffd21c;
+  margin-top:5px;
+}
+
+.btn{
+  border:0;
+  background:#ffd21c;
+  color:#111;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:4px 3px 4px 0;
+}
+
+.btn.danger{
+  background:#ff4d4d;
+  color:#fff;
+}
+
+.btn.success{
+  background:#20c878;
+  color:#fff;
+}
+
+.btn.secondary{
+  background:#2b5878;
+  color:#fff;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:0;
+  border-radius:8px;
+  background:#0b2235;
+  color:#fff;
+}
+
+textarea{
+  min-height:100px;
+}
+
+.status{
+  padding:12px;
+  border-radius:8px;
+  background:#102b42;
+  margin:10px 0;
+}
+
+.error{
+  background:#562222;
+}
+
+.successBox{
+  background:#164d38;
+}
+
+.job,
+.application{
+  background:#102b42;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.badge{
+  display:inline-block;
+  background:#ffd21c;
+  color:#111;
+  padding:4px 8px;
+  border-radius:15px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.badge.pending{
+  background:#ffb52e;
+}
+
+.badge.accepted{
+  background:#20c878;
+  color:#fff;
+}
+
+.badge.rejected{
+  background:#ff4d4d;
+  color:#fff;
+}
+
+.small{
+  color:#b8c7d5;
+  font-size:13px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:500px){
+  .statGrid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+  <h2>👑 PLAYZONE ADMIN</h2>
+</header>
+
+<!-- LOGIN -->
+<div id="loginBox" class="panel">
+
+  <h3>🔐 Admin Login</h3>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin Gmail">
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Password">
+
+  <button class="btn" onclick="adminLogin()">
+    Login
+  </button>
+
+  <div id="loginStatus"></div>
+
+</div>
+
+
+<!-- ADMIN -->
+<div id="adminPanel" class="hidden">
+
+  <div class="panel">
+
+    <h2>Dashboard</h2>
+
+    <div id="adminStatus" class="status">
+      Dashboard লোড হচ্ছে...
+    </div>
+
+  </div>
+
+
+  <!-- STATS -->
+  <div class="statGrid">
+
+    <div class="stat">
+      👥 Users
+      <b id="usersCount">0</b>
+    </div>
+
+    <div class="stat">
+      💼 Jobs
+      <b id="jobsCount">0</b>
+    </div>
+
+    <div class="stat">
+      📨 Applications
+      <b id="applicationsCount">0</b>
+    </div>
+
+    <div class="stat">
+      ⏳ Pending
+      <b id="pendingCount">0</b>
+    </div>
+
+  </div>
+
+
+  <!-- ACTIONS -->
+  <div class="panel">
+
+    <h3>⚙️ Admin Actions</h3>
+
+    <button class="btn" onclick="loadAll()">
+      🔄 Refresh
+    </button>
+
+    <button class="btn secondary"
+      onclick="showSection('jobsSection')">
+      💼 Jobs
+    </button>
+
+    <button class="btn secondary"
+      onclick="showSection('applicationsSection')">
+      📨 Applications
+    </button>
+
+    <button class="btn danger"
+      onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+
+  <!-- JOBS -->
+  <section id="jobsSection" class="panel">
+
+    <h3>💼 All Jobs</h3>
+
+    <div id="jobsList">
+      লোড হচ্ছে...
+    </div>
+
+  </section>
+
+
+  <!-- APPLICATIONS -->
+  <section id="applicationsSection" class="panel">
+
+    <h3>📨 All Applications</h3>
+
+    <div id="applicationsList">
+      লোড হচ্ছে...
+    </div>
+
+  </section>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+'https://cavrhkprzbbtimlixbqp.supabase.co';
+
+const SUPABASE_KEY =
+'sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================================
+   ADMIN LOGIN
+========================================= */
+
+async function adminLogin(){
+
+  const email =
+    document.getElementById('email')
+    .value.trim();
+
+  const password =
+    document.getElementById('password')
+    .value;
+
+  const status =
+    document.getElementById('loginStatus');
+
+  if(!email || !password){
+
+    status.innerHTML =
+      '<div class="status error">Email এবং Password দিন।</div>';
+
+    return;
+  }
+
+  status.innerHTML =
+    '<div class="status">Login হচ্ছে...</div>';
+
+  try{
+
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
+        email:email,
+        password:password
+      });
+
+    if(error) throw error;
+
+    if(!data.user){
+
+      throw new Error('User পাওয়া যায়নি।');
+
+    }
+
+    /* ADMIN ROLE CHECK */
+
+    const {data:profile,error:profileError} =
+      await supabaseClient
+        .from('profiles')
+        .select('id,name,role')
+        .eq('id',data.user.id)
+        .single();
+
+    if(profileError)
+      throw profileError;
+
+    if(profile.role !== 'admin'){
+
+      await supabaseClient.auth.signOut();
+
+      throw new Error(
+        'এই account-এর Admin permission নেই।'
+      );
+
+    }
+
+    document
+      .getElementById('loginBox')
+      .classList.add('hidden');
+
+    document
+      .getElementById('adminPanel')
+      .classList.remove('hidden');
+
+    document
+      .getElementById('adminStatus')
+      .innerHTML =
+      '<div class="status successBox">' +
+      '✅ Admin Login সফল। স্বাগতম ' +
+      escapeHTML(profile.name || 'Admin') +
+      '</div>';
+
+    await loadAll();
+
+  }catch(error){
+
+    console.log(error);
+
+    status.innerHTML =
+      '<div class="status error">' +
+      escapeHTML(
+        error.message ||
+        'Login failed'
+      ) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD EVERYTHING
+========================================= */
+
+async function loadAll(){
+
+  await Promise.all([
+    loadStats(),
+    loadJobs(),
+    loadApplications()
+  ]);
+
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+async function loadStats(){
+
+  try{
+
+    const users =
+      await supabaseClient
+        .from('profiles')
+        .select('id',{
+          count:'exact',
+          head:true
+        });
+
+    const jobs =
+      await supabaseClient
+        .from('jobs')
+        .select('id',{
+          count:'exact',
+          head:true
+        });
+
+    const apps =
+      await supabaseClient
+        .from('job_applications')
+        .select('id',{
+          count:'exact',
+          head:true
+        });
+
+    const pending =
+      await supabaseClient
+        .from('job_applications')
+        .select('id',{
+          count:'exact',
+          head:true
+        })
+        .eq('status','pending');
+
+    document.getElementById('usersCount')
+      .textContent =
+      users.count || 0;
+
+    document.getElementById('jobsCount')
+      .textContent =
+      jobs.count || 0;
+
+    document.getElementById('applicationsCount')
+      .textContent =
+      apps.count || 0;
+
+    document.getElementById('pendingCount')
+      .textContent =
+      pending.count || 0;
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD JOBS
+========================================= */
+
+async function loadJobs(){
+
+  const box =
+    document.getElementById('jobsList');
+
+  box.innerHTML =
+    '<div class="status">Jobs লোড হচ্ছে...</div>';
+
+  try{
+
+    const {data,error} =
+      await supabaseClient
+        .from('jobs')
+        .select(
+          'id,poster_id,title,skill,description,budget,status,created_at'
+        )
+        .order(
+          'created_at',
+          {ascending:false}
+        );
+
+    if(error) throw error;
+
+    if(!data || !data.length){
+
+      box.innerHTML =
+        '<div class="status">এখনো কোনো Job নেই।</div>';
+
+      return;
+    }
+
+    box.innerHTML =
+      data.map(job => `
+
+        <div class="job">
+
+          <span class="badge">
+            ${escapeHTML(job.skill || 'Skill')}
+          </span>
+
+          <h3>
+            ${escapeHTML(job.title || 'Untitled Job')}
+          </h3>
+
+          <p>
+            ${escapeHTML(job.description || '')}
+          </p>
+
+          <p>
+            💰 Budget:
+            <b>
+              ${escapeHTML(job.budget || 'আলোচনা সাপেক্ষ')}
+            </b>
+          </p>
+
+          <p>
+            Status:
+            <span class="badge">
+              ${escapeHTML(job.status || '')}
+            </span>
+          </p>
+
+          <p class="small">
+            Job ID:
+            ${escapeHTML(job.id)}
+          </p>
+
+        </div>
+
+      `).join('');
+
+  }catch(error){
+
+    box.innerHTML =
+      '<div class="status error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD APPLICATIONS
+========================================= */
+
+async function loadApplications(){
+
+  const box =
+    document.getElementById('applicationsList');
+
+  box.innerHTML =
+    '<div class="status">Applications লোড হচ্ছে...</div>';
+
+  try{
+
+    const {data,error} =
+      await supabaseClient
+        .from('job_applications')
+        .select(`
+          id,
+          job_id,
+          applicant_id,
+          message,
+          status,
+          created_at,
+          jobs(
+            title,
+            skill,
+            budget
+          )
+        `)
+        .order(
+          'created_at',
+          {ascending:false}
+        );
+
+    if(error) throw error;
+
+    if(!data || !data.length){
+
+      box.innerHTML =
+        '<div class="status">এখনো কোনো Application নেই।</div>';
+
+      return;
+
+    }
+
+    box.innerHTML =
+      data.map(app => {
+
+        const job =
+          app.jobs || {};
+
+        const status =
+          app.status || 'pending';
+
+        return `
+
+          <div class="application">
+
+            <span class="badge ${status}">
+              ${escapeHTML(status)}
+            </span>
+
+            <h3>
+              📨 ${escapeHTML(
+                job.title || 'Job'
+              )}
+            </h3>
+
+            <p>
+              🎯 Skill:
+              ${escapeHTML(
+                job.skill || ''
+              )}
+            </p>
+
+            <p>
+              💰 Budget:
+              ${escapeHTML(
+                job.budget || ''
+              )}
+            </p>
+
+            <p>
+              👤 Applicant ID:
+              <br>
+              <span class="small">
+                ${escapeHTML(
+                  app.applicant_id
+                )}
+              </span>
+            </p>
+
+            <p>
+              💬 Message:
+              <br>
+              ${escapeHTML(
+                app.message || 'কোনো message নেই'
+              )}
+            </p>
+
+            <p class="small">
+              Application ID:
+              ${escapeHTML(app.id)}
+            </p>
+
+            <p class="small">
+              ${formatDate(app.created_at)}
+            </p>
+
+            ${
+              status === 'pending'
+              ?
+              `
+                <button
+                  class="btn success"
+                  onclick="
+                    updateApplication(
+                      '${app.id}',
+                      'accepted'
+                    )
+                  ">
+                  ✅ Accept
+                </button>
+
+                <button
+                  class="btn danger"
+                  onclick="
+                    updateApplication(
+                      '${app.id}',
+                      'rejected'
+                    )
+                  ">
+                  ❌ Reject
+                </button>
+              `
+              :
+              ''
+            }
+
+          </div>
+
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    box.innerHTML =
+      '<div class="status error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================================
+   ACCEPT / REJECT
+========================================= */
+
+async function updateApplication(
+  applicationId,
+  newStatus
+){
+
+  const confirmText =
+    newStatus === 'accepted'
+    ? 'এই Application Accept করবেন?'
+    : 'এই Application Reject করবেন?';
+
+  if(!confirm(confirmText))
+    return;
+
+  try{
+
+    const {error} =
+      await supabaseClient
+        .from('job_applications')
+        .update({
+          status:newStatus
+        })
+        .eq(
+          'id',
+          applicationId
+        );
+
+    if(error) throw error;
+
+    alert(
+      newStatus === 'accepted'
+      ? '✅ Application Accepted'
+      : '❌ Application Rejected'
+    );
+
+    await loadAll();
+
+  }catch(error){
+
+    alert(
+      'Error: ' +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+function showSection(id){
+
+  document
+    .getElementById(id)
+    ?.scrollIntoView({
+      behavior:'smooth'
+    });
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+}
+
+
+/* =========================================
+   SESSION CHECK
+========================================= */
+
+async function checkSession(){
+
+  const {
+    data
+  } =
+  await supabaseClient
+    .auth.getSession();
+
+  if(!data.session)
+    return;
+
+  const user =
+    data.session.user;
+
+  const {
+    data:profile
+  } =
+  await supabaseClient
+    .from('profiles')
+    .select('name,role')
+    .eq('id',user.id)
+    .single();
+
+  if(profile && profile.role === 'admin'){
+
+    document
+      .getElementById('loginBox')
+      .classList.add('hidden');
+
+    document
+      .getElementById('adminPanel')
+      .classList.remove('hidden');
+
+    document
+      .getElementById('adminStatus')
+      .innerHTML =
+      '<div class="status successBox">' +
+      '✅ Admin Session Active — ' +
+      escapeHTML(
+        profile.name || 'Admin'
+      ) +
+      '</div>';
+
+    await loadAll();
+
+  }
+
+}
+
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+function formatDate(value){
+
+  if(!value)
+    return '';
+
+  try{
+
+    return new Date(value)
+      .toLocaleString(
+        'bn-BD',
+        {
+          dateStyle:'medium',
+          timeStyle:'short'
+        }
+      );
+
+  }catch(e){
+
+    return value;
+
+  }
+
+}
+
+
+/* START */
+
+checkSession();
+
+</script>
+
+</body>
+</html>
