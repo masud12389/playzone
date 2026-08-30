@@ -29,11 +29,7 @@ header{
  align-items:center;
  box-shadow:0 2px 12px #0005
 }
-.logo{
- font-size:27px;
- font-weight:900;
- color:#ffd21a
-}
+.logo{font-size:27px;font-weight:900;color:#ffd21a}
 .logo span{color:#fff}
 
 .userBox{display:flex;align-items:center;gap:8px}
@@ -45,10 +41,7 @@ header{
  padding:8px 11px;
  font-weight:700
 }
-.userBtn.logged{
- border-color:#ffd21a;
- color:#ffd21a
-}
+.userBtn.logged{border-color:#ffd21a;color:#ffd21a}
 
 .hero{
  margin:14px;
@@ -85,11 +78,7 @@ header{
  gap:10px
 }
 .wallet small{color:#b8cad9}
-.points{
- font-size:23px;
- font-weight:900;
- color:#ffd21a
-}
+.points{font-size:23px;font-weight:900;color:#ffd21a}
 
 .tabs{
  display:grid;
@@ -113,11 +102,7 @@ header{
  grid-template-columns:repeat(2,1fr);
  gap:12px
 }
-.card{
- background:#19344d;
- border-radius:15px;
- overflow:hidden
-}
+.card{background:#19344d;border-radius:15px;overflow:hidden}
 .thumb{
  height:110px;
  display:flex;
@@ -144,7 +129,7 @@ header{
  background:#193650;
  border-radius:15px;
  padding:16px;
- margin:12px 0
+ margin:12px 14px
 }
 .panel h2,.panel h3{color:#ffd21a}
 
@@ -182,8 +167,7 @@ textarea{min-height:90px;resize:vertical}
  padding:5px 9px;
  border-radius:20px;
  font-size:12px;
- color:#dce8f2;
- margin-right:5px
+ color:#dce8f2
 }
 
 .notice{font-size:12px;color:#aebfce;line-height:1.6}
@@ -345,12 +329,15 @@ nav button{
  background:none;
  border:0;
  color:#cbd7e2;
- font-size:10px
+ font-size:11px
 }
-nav b{display:block;font-size:17px;margin-bottom:2px}
+nav b{display:block;font-size:18px;margin-bottom:2px}
 .active{color:#ffd21a!important}
 
 .hidden{display:none!important}
+
+#adminNavBtn{display:none}
+#adminNavBtn.adminVisible{display:block}
 
 .status{
  padding:10px;
@@ -394,15 +381,13 @@ nav b{display:block;font-size:17px;margin-bottom:2px}
  font-size:12px
 }
 
-#adminNavBtn{display:none}
-
 @media(max-width:480px){
  .hero h1{font-size:24px}
  .grid{gap:9px}
  .thumb{height:100px;font-size:18px}
  .feature{grid-template-columns:1fr}
  .wallet{align-items:flex-start}
- nav button{font-size:9px}
+ nav button{font-size:10px}
 }
 </style>
 </head>
@@ -423,41 +408,38 @@ nav b{display:block;font-size:17px;margin-bottom:2px}
 
 <section class="hero">
 
-<h1>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h1>
+ <h1>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h1>
 
-<p>
-Skill games, tournaments, sponsor rewards
-এবং Skill/Job Hub — সবকিছু এক প্ল্যাটফর্মে।
-</p>
+ <p>
+ Skill games, tournaments, sponsor rewards
+ এবং Skill/Job Hub — সবকিছু এক প্ল্যাটফর্মে।
+ </p>
 
-<button class="btn" id="heroAuthBtn">
-লগইন / রেজিস্টার
-</button>
+ <button class="btn" id="heroAuthBtn">
+  লগইন / রেজিস্টার
+ </button>
 
 </section>
 
 <div class="wallet">
 
-<div>
-<small>Virtual Points</small>
-<div class="points" id="points">1,000</div>
-</div>
+ <div>
+  <small>Virtual Points</small>
+  <div class="points" id="points">1,000</div>
+ </div>
 
-<button class="btn" onclick="openModal('rewards')">
-🎁 Rewards
-</button>
+ <button class="btn" onclick="openModal('rewards')">
+  🎁 Rewards
+ </button>
 
 </div>
 
 <div class="tabs">
-<div class="tab">🔥 জনপ্রিয়</div>
-<div class="tab">🎯 Skill</div>
-<div class="tab">💼 কাজ</div>
-<div class="tab">📢 Sponsor</div>
+ <div class="tab">🔥 জনপ্রিয়</div>
+ <div class="tab">🎯 Skill</div>
+ <div class="tab">💼 কাজ</div>
+ <div class="tab">📢 Sponsor</div>
 </div>
-
-
-<!-- HOME -->
 
 <main id="home" class="section">
 
@@ -466,35 +448,34 @@ Skill games, tournaments, sponsor rewards
 <div class="grid">
 
 <article class="card">
-<div class="thumb a">⚡ TAP RUSH</div>
-<h3>Tap Rush</h3>
-<p>৩০ সেকেন্ডে যত বেশি target tap করুন।</p>
-<button class="btn play" onclick="openGame('tap')">PLAY</button>
+ <div class="thumb a">⚡ TAP RUSH</div>
+ <h3>Tap Rush</h3>
+ <p>৩০ সেকেন্ডে যত বেশি target tap করুন।</p>
+ <button class="btn play" onclick="openGame('tap')">PLAY</button>
 </article>
 
 <article class="card">
-<div class="thumb b">7️⃣ MATCH 7</div>
-<h3>Match Seven</h3>
-<p>একই সংখ্যা মিলিয়ে দ্রুত score করুন।</p>
-<button class="btn play" onclick="openGame('match')">PLAY</button>
+ <div class="thumb b">7️⃣ MATCH 7</div>
+ <h3>Match Seven</h3>
+ <p>একই সংখ্যা মিলিয়ে দ্রুত score করুন।</p>
+ <button class="btn play" onclick="openGame('match')">PLAY</button>
 </article>
 
 <article class="card">
-<div class="thumb c">🚀 FLY HIGH</div>
-<h3>Fly High</h3>
-<p>বাধা এড়িয়ে যতদূর সম্ভব এগিয়ে যান।</p>
-<button class="btn play" onclick="openGame('fly')">PLAY</button>
+ <div class="thumb c">🚀 FLY HIGH</div>
+ <h3>Fly High</h3>
+ <p>বাধা এড়িয়ে যতদূর সম্ভব এগিয়ে যান।</p>
+ <button class="btn play" onclick="openGame('fly')">PLAY</button>
 </article>
 
 <article class="card">
-<div class="thumb d">🧠 BRAIN BOX</div>
-<h3>Brain Box</h3>
-<p>দ্রুত প্রশ্নের সঠিক উত্তর দিয়ে score করুন।</p>
-<button class="btn play" onclick="openGame('brain')">PLAY</button>
+ <div class="thumb d">🧠 BRAIN BOX</div>
+ <h3>Brain Box</h3>
+ <p>দ্রুত প্রশ্নের সঠিক উত্তর দিয়ে score করুন।</p>
+ <button class="btn play" onclick="openGame('brain')">PLAY</button>
 </article>
 
 </div>
-
 
 <div class="panel">
 
@@ -503,43 +484,41 @@ Skill games, tournaments, sponsor rewards
 <div class="feature">
 
 <div class="mini">
-<b>🎨</b><br>
-Graphic Design
-<br>
-<span class="notice">ডিজাইন কাজের সুযোগ</span>
+ <b>🎨</b><br>
+ Graphic Design
+ <br>
+ <span class="notice">ডিজাইন কাজের সুযোগ</span>
 </div>
 
 <div class="mini">
-<b>🎬</b><br>
-Video Editing
-<br>
-<span class="notice">ভিডিও এডিটিং কাজ</span>
+ <b>🎬</b><br>
+ Video Editing
+ <br>
+ <span class="notice">ভিডিও এডিটিং কাজ</span>
 </div>
 
 <div class="mini">
-<b>⌨️</b><br>
-Data Entry
-<br>
-<span class="notice">অনলাইন কাজ</span>
+ <b>⌨️</b><br>
+ Data Entry
+ <br>
+ <span class="notice">অনলাইন কাজ</span>
 </div>
 
 <div class="mini">
-<b>📣</b><br>
-Digital Marketing
-<br>
-<span class="notice">ব্যবসার প্রচারণা</span>
+ <b>📣</b><br>
+ Digital Marketing
+ <br>
+ <span class="notice">ব্যবসার প্রচারণা</span>
 </div>
 
 </div>
 
-<button class="btn full"
-style="margin-top:12px"
-onclick="showPage('jobs',this)">
-কাজ ও Skill Hub দেখুন
+<button class="btn full" style="margin-top:12px"
+ onclick="showPage('jobs',document.querySelectorAll('nav button')[2])">
+ কাজ ও Skill Hub দেখুন
 </button>
 
 </div>
-
 
 <div class="panel">
 
@@ -551,7 +530,7 @@ onclick="showPage('jobs',this)">
 </p>
 
 <button class="btn" onclick="openModal('sponsor')">
-Sponsor করুন
+ Sponsor করুন
 </button>
 
 </div>
@@ -559,13 +538,11 @@ Sponsor করুন
 </main>
 
 
-<!-- JOBS -->
-
 <section id="jobs" class="section hidden">
 
 <h2>💼 Skill & Job Hub</h2>
 
-<div class="panel">
+<div class="panel" style="margin:0 0 12px">
 
 <p>
 দক্ষতা অনুযায়ী কাজ খুঁজুন অথবা নিজের প্রয়োজনীয় কাজ পোস্ট করুন।
@@ -594,7 +571,6 @@ Sponsor করুন
 </div>
 
 <div id="jobStatus"></div>
-
 <div id="jobList"></div>
 
 <div class="panel">
@@ -602,9 +578,9 @@ Sponsor করুন
 <h3>📨 আমার Job Applications</h3>
 
 <div id="myApplications">
-<div class="empty">
-Login করলে আপনার Job Applications দেখা যাবে।
-</div>
+ <div class="empty">
+  Login করলে আপনার Job Applications দেখা যাবে।
+ </div>
 </div>
 
 </div>
@@ -612,17 +588,13 @@ Login করলে আপনার Job Applications দেখা যাবে।
 </section>
 
 
-<!-- PROFILE -->
-
 <section id="profile" class="section hidden">
 
-<div class="panel">
+<div class="panel" style="margin:0 0 12px">
 
 <h2>👤 আমার প্রোফাইল</h2>
 
-<p>
-<strong id="profileName">Guest User</strong>
-</p>
+<p><strong id="profileName">Guest User</strong></p>
 
 <p id="profileEmail">
 Login করলে Email দেখা যাবে।
@@ -633,9 +605,7 @@ Points:
 <b id="profilePoints">1,000</b>
 </p>
 
-<span class="badge" id="profileBadge">
-Guest
-</span>
+<span class="badge" id="profileBadge">Guest</span>
 
 <div id="profileAuthArea" style="margin-top:14px"></div>
 
@@ -644,17 +614,16 @@ Guest
 <div class="statGrid">
 
 <div class="stat">
-Games
-<b id="gamesPlayed">0</b>
+ Games
+ <b id="gamesPlayed">0</b>
 </div>
 
 <div class="stat">
-Jobs
-<b id="myJobs">0</b>
+ Jobs
+ <b id="myJobs">0</b>
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -671,7 +640,6 @@ Skill Profile
 
 </div>
 
-
 <div class="panel">
 
 <h3>💰 Payout</h3>
@@ -686,14 +654,13 @@ Payout Request
 
 </div>
 
-
 <div class="panel">
 
 <h3>🏆 Tournament</h3>
 
 <p>
-Skill-based tournament এবং leaderboard system
-পরবর্তী ধাপে যুক্ত করা যাবে।
+Tournament participation এবং leaderboard system
+পরবর্তী backend integration-এর সঙ্গে সংযুক্ত করা যাবে।
 </p>
 
 <button class="btn" onclick="openModal('tournament')">
@@ -702,15 +669,14 @@ Tournament
 
 </div>
 
-
 <div class="panel">
 
 <h3>📨 আমার আবেদন</h3>
 
 <div id="profileApplications">
-<div class="empty">
-Login করলে আবেদনগুলো দেখা যাবে।
-</div>
+ <div class="empty">
+  Login করলে আবেদনগুলো দেখা যাবে।
+ </div>
 </div>
 
 </div>
@@ -718,56 +684,75 @@ Login করলে আবেদনগুলো দেখা যাবে।
 </section>
 
 
-<!-- ADMIN INFO -->
-
 <section id="admin" class="section hidden">
 
 <h2>👑 Admin Dashboard</h2>
 
-<div class="panel">
-
-<div class="status warning" id="adminStatus">
-Admin Dashboard লোড হচ্ছে...
+<div id="adminStatus"
+ class="status warning">
+ Admin data লোড হচ্ছে...
 </div>
 
 <div class="statGrid">
 
 <div class="stat">
-Users
-<b id="adminUsers">0</b>
+ 👥 Users
+ <b id="adminUsers">0</b>
 </div>
 
 <div class="stat">
-Jobs
-<b id="adminJobs">0</b>
+ 💼 Jobs
+ <b id="adminJobs">0</b>
 </div>
 
 <div class="stat">
-Applications
-<b id="adminApplications">0</b>
+ 📨 Applications
+ <b id="adminApplications">0</b>
 </div>
 
 <div class="stat">
-Sponsors
-<b id="adminSponsors">0</b>
+ 📢 Sponsors
+ <b id="adminSponsors">0</b>
 </div>
 
 <div class="stat">
-Payouts
-<b id="adminPayouts">0</b>
+ 💰 Payouts
+ <b id="adminPayouts">0</b>
 </div>
 
 <div class="stat">
-Pending
-<b id="adminPending">0</b>
+ 🏆 Pending Payouts
+ <b id="adminPendingPayouts">0</b>
 </div>
 
 </div>
 
-<br>
+<div class="panel">
 
-<button class="btn" onclick="window.location.href='admin.html'">
-👑 Full Admin Panel
+<h3>📊 PLAYZONE Overview</h3>
+
+<p>
+Open Jobs:
+<b id="adminOpenJobs">0</b>
+</p>
+
+<p>
+Pending Applications:
+<b id="adminPendingApplications">0</b>
+</p>
+
+<p>
+Pending Sponsors:
+<b id="adminPendingSponsors">0</b>
+</p>
+
+<p>
+Total Virtual Points:
+<b id="adminTotalPoints">0</b>
+</p>
+
+<button class="btn" onclick="loadAdminDashboard()">
+↻ Refresh Dashboard
 </button>
 
 </div>
@@ -777,11 +762,10 @@ Pending
 </div>
 
 
-<!-- NAV -->
-
 <nav>
 
-<button class="active" onclick="showPage('home',this)">
+<button class="active"
+ onclick="showPage('home',this)">
 ⌂
 <b>Home</b>
 </button>
@@ -806,15 +790,15 @@ Pending
 <b>Profile</b>
 </button>
 
-<button id="adminNavBtn" onclick="showPage('admin',this)">
+<button id="adminNavBtn"
+ class="hidden"
+ onclick="showPage('admin',this)">
 👑
 <b>Admin</b>
 </button>
 
 </nav>
 
-
-<!-- MODAL -->
 
 <div class="modal" id="modal">
 
@@ -834,7 +818,7 @@ Pending
 <script>
 
 /* =====================================================
-SUPABASE
+   SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -848,1906 +832,1890 @@ let currentUser=null;
 
 try{
 
-supabaseClient=
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+ if(window.supabase){
+
+  supabaseClient=
+  window.supabase.createClient(
+   SUPABASE_URL,
+   SUPABASE_KEY
+  );
+
+ }
 
 }catch(error){
-
-console.log(error);
-
+ console.log('Supabase:',error);
 }
 
 
 /* =====================================================
-LOCAL DATA
+   LOCAL POINTS
 ===================================================== */
 
 let points=
-Number(localStorage.getItem('pz_points')||1000);
+Number(localStorage.getItem('pz_points') || 1000);
 
 let gamesPlayed=
-Number(localStorage.getItem('pz_games_played')||0);
+Number(localStorage.getItem('pz_games_played') || 0);
 
 function render(){
 
-const p=document.getElementById('points');
-const pp=document.getElementById('profilePoints');
-const gp=document.getElementById('gamesPlayed');
+ const p=document.getElementById('points');
+ const pp=document.getElementById('profilePoints');
+ const gp=document.getElementById('gamesPlayed');
 
-if(p)p.textContent=points.toLocaleString();
-if(pp)pp.textContent=points.toLocaleString();
-if(gp)gp.textContent=gamesPlayed;
+ if(p)p.textContent=points.toLocaleString();
+ if(pp)pp.textContent=points.toLocaleString();
+ if(gp)gp.textContent=gamesPlayed;
 
-localStorage.setItem('pz_points',points);
-localStorage.setItem('pz_games_played',gamesPlayed);
+ localStorage.setItem('pz_points',points);
+ localStorage.setItem('pz_games_played',gamesPlayed);
 
 }
 
 function addPoints(amount){
 
-amount=Number(amount||0);
+ amount=Number(amount||0);
 
-if(amount>0){
-
-points+=amount;
-render();
-
-}
+ if(amount>0){
+  points+=amount;
+  render();
+ }
 
 }
 
 function gameFinished(){
 
-gamesPlayed++;
-render();
+ gamesPlayed++;
+ render();
 
 }
 
 
 /* =====================================================
-AUTH UI
+   AUTH UI
 ===================================================== */
 
 function updateUserUI(){
 
-const headerBtn=
-document.getElementById('headerUserBtn');
+ const headerBtn=
+ document.getElementById('headerUserBtn');
 
-const heroBtn=
-document.getElementById('heroAuthBtn');
+ const heroBtn=
+ document.getElementById('heroAuthBtn');
 
-const nameBox=
-document.getElementById('profileName');
+ const nameBox=
+ document.getElementById('profileName');
 
-const emailBox=
-document.getElementById('profileEmail');
+ const emailBox=
+ document.getElementById('profileEmail');
 
-const badge=
-document.getElementById('profileBadge');
+ const badge=
+ document.getElementById('profileBadge');
 
-const authArea=
-document.getElementById('profileAuthArea');
+ const authArea=
+ document.getElementById('profileAuthArea');
 
-if(currentUser){
+ if(currentUser){
 
-const name=
-currentUser.user_metadata?.name||
-currentUser.user_metadata?.full_name||
-currentUser.email?.split('@')[0]||
-'PLAYZONE User';
+  const name=
+  currentUser.user_metadata?.name ||
+  currentUser.user_metadata?.full_name ||
+  currentUser.email?.split('@')[0] ||
+  'PLAYZONE User';
 
-if(headerBtn){
+  if(headerBtn){
 
-headerBtn.textContent='👤 '+name;
-headerBtn.classList.add('logged');
+   headerBtn.textContent='👤 '+name;
+   headerBtn.classList.add('logged');
 
-headerBtn.onclick=function(){
+   headerBtn.onclick=function(){
 
-showPage(
-'profile',
-document.querySelectorAll('nav button')[4]
-);
+    showPage(
+     'profile',
+     document.querySelectorAll('nav button')[4]
+    );
 
-};
+   };
 
-}
+  }
 
-if(heroBtn){
+  if(heroBtn){
 
-heroBtn.textContent='👤 আমার প্রোফাইল';
+   heroBtn.textContent='👤 আমার প্রোফাইল';
 
-heroBtn.onclick=function(){
+   heroBtn.onclick=function(){
 
-showPage(
-'profile',
-document.querySelectorAll('nav button')[4]
-);
+    showPage(
+     'profile',
+     document.querySelectorAll('nav button')[4]
+    );
 
-};
+   };
 
-}
+  }
 
-if(nameBox)
-nameBox.textContent=name;
+  if(nameBox)
+  nameBox.textContent=name;
 
-if(emailBox)
-emailBox.textContent='Email: '+(currentUser.email||'');
+  if(emailBox)
+  emailBox.textContent=
+  'Email: '+(currentUser.email||'');
 
-if(badge)
-badge.textContent='Verified User';
+  if(badge)
+  badge.textContent='Verified User';
 
-if(authArea){
+  if(authArea){
 
-authArea.innerHTML=
-'<button class="btn danger" onclick="logoutUser()">Logout</button>';
+   authArea.innerHTML=`
 
-}
+   <button
+    class="btn danger"
+    onclick="logoutUser()">
+    Logout
+   </button>
 
-loadMyApplications();
-updateMyJobCount();
-updateAdminUI();
+   `;
 
-}else{
+  }
 
-if(headerBtn){
+  loadMyApplications();
+  updateMyJobCount();
+  updateAdminUI();
 
-headerBtn.textContent='👤 Login';
-headerBtn.classList.remove('logged');
+ }else{
 
-headerBtn.onclick=function(){
-openModal('login');
-};
+  if(headerBtn){
 
-}
+   headerBtn.textContent='👤 Login';
+   headerBtn.classList.remove('logged');
 
-if(heroBtn){
+   headerBtn.onclick=function(){
+    openModal('login');
+   };
 
-heroBtn.textContent='লগইন / রেজিস্টার';
+  }
 
-heroBtn.onclick=function(){
-openModal('login');
-};
+  if(heroBtn){
 
-}
+   heroBtn.textContent='লগইন / রেজিস্টার';
 
-if(nameBox)
-nameBox.textContent='Guest User';
+   heroBtn.onclick=function(){
+    openModal('login');
+   };
 
-if(emailBox)
-emailBox.textContent='Login করলে Email দেখা যাবে।';
+  }
 
-if(badge)
-badge.textContent='Guest';
+  if(nameBox)
+  nameBox.textContent='Guest User';
 
-if(authArea){
+  if(emailBox)
+  emailBox.textContent=
+  'Login করলে Email দেখা যাবে।';
 
-authArea.innerHTML=
-'<button class="btn" onclick="openModal(\'login\')">Login / Register</button>';
+  if(badge)
+  badge.textContent='Guest';
 
-}
+  if(authArea){
 
-updateAdminUI();
+   authArea.innerHTML=`
 
-}
+   <button
+    class="btn"
+    onclick="openModal('login')">
+    Login / Register
+   </button>
+
+   `;
+
+  }
+
+  updateAdminUI();
+
+ }
 
 }
 
 
 /* =====================================================
-NAVIGATION
+   NAVIGATION
 ===================================================== */
 
 function showPage(id,btn){
 
-['home','jobs','profile','admin'].forEach(function(page){
+ [
+  'home',
+  'jobs',
+  'profile',
+  'admin'
+ ].forEach(function(page){
 
-const el=document.getElementById(page);
+  const el=document.getElementById(page);
 
-if(el)
-el.classList.toggle('hidden',page!==id);
+  if(el)
+  el.classList.toggle(
+   'hidden',
+   page!==id
+  );
 
-});
+ });
 
-document.querySelectorAll('nav button')
-.forEach(function(button){
-button.classList.remove('active');
-});
+ document
+ .querySelectorAll('nav button')
+ .forEach(function(button){
+  button.classList.remove('active');
+ });
 
-if(btn)
-btn.classList.add('active');
+ if(btn)
+ btn.classList.add('active');
 
-if(id==='jobs'){
-renderJobs();
-loadJobsFromSupabase();
-}
+ if(id==='jobs'){
+  renderJobs();
+  loadJobsFromSupabase();
+ }
 
-if(id==='profile'){
-updateUserUI();
-}
+ if(id==='profile'){
+  updateUserUI();
+ }
 
-if(id==='admin'){
-loadAdminDashboard();
-}
+ if(id==='admin'){
+  loadAdminDashboard();
+ }
 
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
+ window.scrollTo({
+  top:0,
+  behavior:'smooth'
+ });
 
 }
 
 
 /* =====================================================
-MODAL
+   MODAL
 ===================================================== */
 
 function closeModal(){
 
-document.getElementById('modal').style.display='none';
+ document.getElementById('modal')
+ .style.display='none';
 
-stopAllGames();
+ stopAllGames();
 
 }
 
 function openModal(type){
 
-let c='';
+ let c='';
 
+ if(type==='login'){
 
-/* LOGIN */
+  c=`
 
-if(type==='login'){
+  <h2>👤 PLAYZONE Account</h2>
 
-c=`
+  <p>
+  Account তৈরি করুন অথবা আপনার account-এ Login করুন।
+  </p>
 
-<h2>👤 PLAYZONE Account</h2>
+  <input id="authName"
+   placeholder="আপনার নাম">
 
-<p>
-Account তৈরি করুন অথবা আপনার account-এ Login করুন।
-</p>
+  <input id="authEmail"
+   type="email"
+   placeholder="ইমেইল">
 
-<input
-id="authName"
-placeholder="আপনার নাম">
+  <input id="authPassword"
+   type="password"
+   placeholder="Password (কমপক্ষে 6 অক্ষর)">
 
-<input
-id="authEmail"
-type="email"
-placeholder="ইমেইল">
+  <div class="row">
 
-<input
-id="authPassword"
-type="password"
-placeholder="Password (কমপক্ষে 6 অক্ষর)">
+   <button class="btn"
+    onclick="registerUser()">
+    Register
+   </button>
 
-<div class="row">
+   <button class="btn secondary"
+    onclick="loginUser()">
+    Login
+   </button>
 
-<button class="btn" onclick="registerUser()">
-Register
-</button>
+  </div>
 
-<button class="btn secondary" onclick="loginUser()">
-Login
-</button>
+  <p id="authStatus" class="notice"></p>
 
-</div>
+  `;
 
-<p id="authStatus" class="notice"></p>
+ }
 
-`;
 
-}
+ if(type==='rewards'){
 
+  c=`
 
-/* REWARDS */
+  <h2>🎁 Rewards</h2>
 
-if(type==='rewards'){
+  <div class="status success">
 
-c=`
+   আপনার Virtual Points:
+   <strong>${points.toLocaleString()}</strong>
 
-<h2>🎁 Rewards</h2>
+  </div>
 
-<div class="status success">
-আপনার Virtual Points:
-<strong>${points.toLocaleString()}</strong>
-</div>
+  <p>
+  PLAYZONE-এর points skill activity-এর score হিসেবে ব্যবহৃত হচ্ছে।
+  Points নিজে থেকে নগদ টাকা নয়।
+  </p>
 
-<p>
-PLAYZONE-এর points skill activity-এর score হিসেবে ব্যবহৃত হচ্ছে।
-Points নিজে থেকে নগদ টাকা নয়।
-</p>
+  <button class="btn"
+   onclick="openModal('payout')">
+   Payout Request
+  </button>
 
-<button class="btn" onclick="openModal('payout')">
-Payout Request
-</button>
+  `;
 
-`;
+ }
 
-}
 
+ if(type==='tournament'){
 
-/* TOURNAMENT */
+  c=`
 
-if(type==='tournament'){
+  <h2>🏆 Tournament</h2>
 
-c=`
+  <div class="status">
 
-<h2>🏆 Tournament</h2>
+   <b>Skill Tournament</b>
 
-<div class="status">
+   <p>
+   Skill-based tournament, leaderboard এবং sponsor-funded
+   prize system এখানে যুক্ত করা হবে।
+   </p>
 
-<b>Skill Tournament</b>
+  </div>
 
-<p>
-Skill-based tournament, leaderboard এবং sponsor-funded
-prize system পরবর্তী ধাপে যুক্ত করা হবে।
-</p>
+  <p class="notice">
+  Real-money entry/payment এবং prize payout চালুর আগে
+  প্রয়োজনীয় আইনগত ও payment compliance সম্পন্ন করতে হবে।
+  </p>
 
-</div>
+  `;
 
-<p class="notice">
-Real-money entry/payment এবং prize payout চালুর আগে
-প্রয়োজনীয় আইনগত ও payment compliance সম্পন্ন করতে হবে।
-</p>
+ }
 
-`;
 
-}
+ if(type==='sponsor'){
 
+  c=`
 
-/* SPONSOR */
+  <h2>📢 Sponsor / Business</h2>
 
-if(type==='sponsor'){
+  <p>
+  আপনার ব্যবসা বা প্রতিষ্ঠান PLAYZONE-এ প্রচার করতে আগ্রহী হলে তথ্য দিন।
+  </p>
 
-c=`
+  <input id="sName"
+   placeholder="ব্যবসা/প্রতিষ্ঠানের নাম">
 
-<h2>📢 Sponsor / Business</h2>
+  <input id="sPhone"
+   placeholder="মোবাইল নম্বর">
 
-<p>
-আপনার ব্যবসা বা প্রতিষ্ঠান PLAYZONE-এ প্রচার করতে আগ্রহী হলে তথ্য দিন।
-</p>
+  <textarea id="sMsg"
+   placeholder="কী ধরনের বিজ্ঞাপন বা sponsorship চান?"></textarea>
 
-<input id="sName" placeholder="ব্যবসা/প্রতিষ্ঠানের নাম">
+  <button class="btn"
+   onclick="submitSponsor()">
+   আগ্রহ জানাই
+  </button>
 
-<input id="sPhone" placeholder="মোবাইল নম্বর">
+  <p id="sStatus" class="notice"></p>
 
-<textarea
-id="sMsg"
-placeholder="কী ধরনের বিজ্ঞাপন বা sponsorship চান?"></textarea>
+  `;
 
-<button class="btn" onclick="submitSponsor()">
-আগ্রহ জানাই
-</button>
+ }
 
-<p id="sStatus" class="notice"></p>
 
-`;
+ if(type==='postjob'){
 
-}
+  if(!currentUser){
 
+   c=`
 
-/* POST JOB */
+   <h2>🔐 Login প্রয়োজন</h2>
 
-if(type==='postjob'){
+   <p>
+   কাজ পোস্ট করতে আগে PLAYZONE account-এ Login করুন।
+   </p>
 
-if(!currentUser){
+   <button class="btn"
+    onclick="openModal('login')">
+    Login / Register
+   </button>
 
-c=`
+   `;
 
-<h2>🔐 Login প্রয়োজন</h2>
+  }else{
 
-<p>
-কাজ পোস্ট করতে আগে PLAYZONE account-এ Login করুন।
-</p>
+   c=`
 
-<button class="btn" onclick="openModal('login')">
-Login / Register
-</button>
+   <h2>➕ কাজ পোস্ট করুন</h2>
 
-`;
+   <input id="jTitle"
+    placeholder="কাজের নাম">
 
-}else{
+   <select id="jSkill">
 
-c=`
+    <option>Graphic Design</option>
+    <option>Video Editing</option>
+    <option>Data Entry</option>
+    <option>Digital Marketing</option>
 
-<h2>➕ কাজ পোস্ট করুন</h2>
+   </select>
 
-<input id="jTitle" placeholder="কাজের নাম">
+   <input id="jBudget"
+    placeholder="Budget (ঐচ্ছিক)">
 
-<select id="jSkill">
+   <textarea id="jDesc"
+    placeholder="কাজের বিস্তারিত"></textarea>
 
-<option>Graphic Design</option>
-<option>Video Editing</option>
-<option>Data Entry</option>
-<option>Digital Marketing</option>
+   <button class="btn"
+    onclick="addJob()">
+    Publish Job
+   </button>
 
-</select>
+   <p id="jobPostStatus" class="notice"></p>
 
-<input id="jBudget" placeholder="Budget (ঐচ্ছিক)">
+   `;
 
-<textarea
-id="jDesc"
-placeholder="কাজের বিস্তারিত"></textarea>
+  }
 
-<button class="btn" onclick="addJob()">
-Publish Job
-</button>
+ }
 
-<p id="jobPostStatus" class="notice"></p>
 
-`;
+ if(type==='skill'){
 
-}
+  const saved=
+  JSON.parse(
+   localStorage.getItem('pz_skill') || '{}'
+  );
 
-}
+  c=`
 
+  <h2>🎯 Skill Profile</h2>
 
-/* SKILL */
+  <input id="skillName"
+   value="${escapeHTML(saved.name||'')}"
+   placeholder="আপনার নাম">
 
-if(type==='skill'){
+  <select id="skillType">
 
-const saved=
-JSON.parse(
-localStorage.getItem('pz_skill')||'{}'
-);
+   <option ${saved.skill==='Graphic Design'?'selected':''}>
+   Graphic Design
+   </option>
 
-c=`
+   <option ${saved.skill==='Video Editing'?'selected':''}>
+   Video Editing
+   </option>
 
-<h2>🎯 Skill Profile</h2>
+   <option ${saved.skill==='Data Entry'?'selected':''}>
+   Data Entry
+   </option>
 
-<input
-id="skillName"
-value="${escapeHTML(saved.name||'')}"
-placeholder="আপনার নাম">
+   <option ${saved.skill==='Digital Marketing'?'selected':''}>
+   Digital Marketing
+   </option>
 
-<select id="skillType">
+  </select>
 
-<option ${saved.skill==='Graphic Design'?'selected':''}>
-Graphic Design
-</option>
+  <textarea id="skillAbout"
+   placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ">${escapeHTML(saved.about||'')}</textarea>
 
-<option ${saved.skill==='Video Editing'?'selected':''}>
-Video Editing
-</option>
+  <button class="btn"
+   onclick="saveSkill()">
+   Save Skill
+  </button>
 
-<option ${saved.skill==='Data Entry'?'selected':''}>
-Data Entry
-</option>
+  `;
 
-<option ${saved.skill==='Digital Marketing'?'selected':''}>
-Digital Marketing
-</option>
+ }
 
-</select>
 
-<textarea
-id="skillAbout"
-placeholder="আপনার দক্ষতার সংক্ষিপ্ত বিবরণ">${escapeHTML(saved.about||'')}</textarea>
+ if(type==='payout'){
 
-<button class="btn" onclick="saveSkill()">
-Save Skill
-</button>
+  c=`
 
-`;
+  <h2>💰 Payout Request</h2>
 
-}
+  <div class="status warning">
+   Current Points:
+   <strong>${points.toLocaleString()}</strong>
+  </div>
 
+  <p>
+  Payment merchant integration এখনো চালু করা হয়নি।
+  এটি বর্তমানে request form হিসেবে কাজ করবে।
+  </p>
 
-/* PAYOUT */
+  <input id="payoutName"
+   placeholder="আপনার নাম">
 
-if(type==='payout'){
+  <input id="payoutPhone"
+   placeholder="Payment number">
 
-if(!currentUser){
+  <select id="payoutMethod">
+   <option>bKash</option>
+   <option>Nagad</option>
+  </select>
 
-c=`
+  <input id="payoutAmount"
+   type="number"
+   min="1"
+   placeholder="কত amount request করবেন?">
 
-<h2>🔐 Login প্রয়োজন</h2>
+  <button class="btn"
+   onclick="submitPayout()">
+   Request Payout
+  </button>
 
-<p>Payout request করার আগে Login করুন।</p>
+  <p id="payoutStatus" class="notice"></p>
 
-<button class="btn" onclick="openModal('login')">
-Login / Register
-</button>
+  `;
 
-`;
+ }
 
-}else{
-
-c=`
-
-<h2>💰 Payout Request</h2>
-
-<div class="status warning">
-Current Points:
-<strong>${points.toLocaleString()}</strong>
-</div>
-
-<p class="notice">
-Merchant payment integration এখনো চালু করা হয়নি।
-</p>
-
-<input id="payoutName" placeholder="আপনার নাম">
-
-<input id="payoutPhone" placeholder="Payment number">
-
-<select id="payoutMethod">
-<option>bKash</option>
-<option>Nagad</option>
-</select>
-
-<input
-id="payoutAmount"
-type="number"
-min="1"
-placeholder="কত amount request করবেন?">
-
-<button class="btn" onclick="submitPayout()">
-Request Payout
-</button>
-
-<p id="payoutStatus" class="notice"></p>
-
-`;
-
-}
-
-}
-
-document.getElementById('modalContent').innerHTML=c;
-
-document.getElementById('modal').style.display='flex';
+ document.getElementById('modalContent').innerHTML=c;
+ document.getElementById('modal').style.display='flex';
 
 }
 
 
 /* =====================================================
-REGISTER
+   REGISTER
 ===================================================== */
 
 async function registerUser(){
 
-const name=
-document.getElementById('authName')?.value.trim();
+ const name=
+ document.getElementById('authName')?.value.trim();
 
-const email=
-document.getElementById('authEmail')?.value.trim();
+ const email=
+ document.getElementById('authEmail')?.value.trim();
 
-const password=
-document.getElementById('authPassword')?.value;
+ const password=
+ document.getElementById('authPassword')?.value;
 
-const status=
-document.getElementById('authStatus');
+ const status=
+ document.getElementById('authStatus');
 
-if(!name||!email||!password){
+ if(!name||!email||!password){
 
-status.textContent='নাম, ইমেইল ও password দিন।';
-return;
+  status.textContent=
+  'নাম, ইমেইল ও password দিন।';
 
-}
+  return;
+ }
 
-if(password.length<6){
+ if(password.length<6){
 
-status.textContent='Password কমপক্ষে 6 অক্ষরের দিন।';
-return;
+  status.textContent=
+  'Password কমপক্ষে 6 অক্ষরের দিন।';
 
-}
+  return;
+ }
 
-status.textContent='Account তৈরি হচ্ছে...';
+ if(!supabaseClient){
 
-const {data,error}=
-await supabaseClient.auth.signUp({
+  status.textContent=
+  'Supabase connection পাওয়া যায়নি।';
 
-email,
-password,
+  return;
+ }
 
-options:{
-data:{
-name:name
-}
-}
+ status.textContent='Account তৈরি হচ্ছে...';
 
-});
+ try{
 
-if(error){
+  const {data,error}=
+  await supabaseClient.auth.signUp({
 
-status.textContent=error.message;
-return;
+   email,
+   password,
 
-}
+   options:{
+    data:{name}
+   }
 
-status.textContent=
-data?.session
-?'Registration সফল।'
-:'Registration সফল। আপনার Email confirm করুন।';
+  });
+
+  if(error){
+
+   status.textContent=error.message;
+   return;
+
+  }
+
+  localStorage.setItem(
+   'pz_username',
+   name
+  );
+
+  status.textContent=
+   data?.session
+   ? 'Registration সফল।'
+   : 'Registration সফল। আপনার Email confirm করুন।';
+
+ }catch(error){
+
+  status.textContent=
+  error.message||'Registration failed';
+
+ }
 
 }
 
 
 /* =====================================================
-LOGIN
+   LOGIN
 ===================================================== */
 
 async function loginUser(){
 
-const email=
-document.getElementById('authEmail')?.value.trim();
+ const email=
+ document.getElementById('authEmail')?.value.trim();
 
-const password=
-document.getElementById('authPassword')?.value;
+ const password=
+ document.getElementById('authPassword')?.value;
 
-const status=
-document.getElementById('authStatus');
+ const status=
+ document.getElementById('authStatus');
 
-if(!email||!password){
+ if(!email||!password){
 
-status.textContent='ইমেইল ও password দিন।';
-return;
+  status.textContent=
+  'ইমেইল ও password দিন।';
 
-}
+  return;
+ }
 
-status.textContent='Login হচ্ছে...';
+ if(!supabaseClient){
 
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
+  status.textContent=
+  'Supabase connection পাওয়া যায়নি।';
 
-if(error){
+  return;
+ }
 
-status.textContent=error.message;
-return;
+ status.textContent='Login হচ্ছে...';
 
-}
+ try{
 
-currentUser=data.user;
+  const {data,error}=
+  await supabaseClient.auth.signInWithPassword({
+   email,
+   password
+  });
 
-updateUserUI();
+  if(error){
 
-status.textContent='Login সফল!';
+   status.textContent=error.message;
+   return;
 
-setTimeout(function(){
+  }
 
-closeModal();
+  currentUser=data.user;
 
-showPage(
-'profile',
-document.querySelectorAll('nav button')[4]
-);
+  localStorage.setItem(
+   'pz_username',
+   currentUser.user_metadata?.name ||
+   currentUser.email ||
+   'PLAYZONE User'
+  );
 
-},700);
+  updateUserUI();
+
+  status.textContent='Login সফল!';
+
+  setTimeout(function(){
+
+   closeModal();
+
+   showPage(
+    'profile',
+    document.querySelectorAll('nav button')[4]
+   );
+
+  },700);
+
+ }catch(error){
+
+  status.textContent=
+  error.message||'Login failed';
+
+ }
 
 }
 
 
 /* =====================================================
-LOGOUT
+   LOGOUT
 ===================================================== */
 
 async function logoutUser(){
 
-const {error}=
-await supabaseClient.auth.signOut();
+ if(!supabaseClient)return;
 
-if(error){
+ try{
 
-alert(error.message);
-return;
+  const {error}=
+  await supabaseClient.auth.signOut();
 
-}
+  if(error){
 
-currentUser=null;
+   alert(error.message);
+   return;
 
-updateUserUI();
+  }
 
-showPage(
-'home',
-document.querySelectorAll('nav button')[0]
-);
+  currentUser=null;
 
-alert('Logout সফল হয়েছে।');
+  localStorage.removeItem('pz_username');
+
+  updateUserUI();
+
+  showPage(
+   'home',
+   document.querySelectorAll('nav button')[0]
+  );
+
+  alert('Logout সফল হয়েছে।');
+
+ }catch(error){
+
+  alert(
+   error.message||'Logout failed'
+  );
+
+ }
 
 }
 
 
 /* =====================================================
-SESSION
+   SESSION
 ===================================================== */
 
 async function loadSupabaseUser(){
 
-const {data,error}=
-await supabaseClient.auth.getSession();
+ if(!supabaseClient)return;
 
-if(error){
+ try{
 
-console.log(error);
-return;
+  const {data,error}=
+  await supabaseClient.auth.getSession();
 
-}
+  if(error){
+   console.log(error);
+   return;
+  }
 
-currentUser=
-data?.session?.user||null;
+  currentUser=
+  data?.session?.user||null;
 
-updateUserUI();
+  updateUserUI();
 
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
+  supabaseClient.auth.onAuthStateChange(
+   function(event,session){
 
-currentUser=
-session?.user||null;
+    currentUser=
+    session?.user||null;
 
-updateUserUI();
+    updateUserUI();
+    updateAdminUI();
 
-});
+   }
+  );
+
+ }catch(error){
+
+  console.log('Session:',error);
+
+ }
 
 }
 
 
 /* =====================================================
-SPONSOR
+   SPONSOR
 ===================================================== */
 
-async function submitSponsor(){
+function submitSponsor(){
 
-const name=
-document.getElementById('sName')?.value.trim();
+ const name=
+ document.getElementById('sName')?.value.trim();
 
-const phone=
-document.getElementById('sPhone')?.value.trim();
+ const phone=
+ document.getElementById('sPhone')?.value.trim();
 
-const message=
-document.getElementById('sMsg')?.value.trim();
+ const message=
+ document.getElementById('sMsg')?.value.trim();
 
-const status=
-document.getElementById('sStatus');
+ if(!name||!phone){
 
-if(!name||!phone){
+  alert('ব্যবসার নাম ও মোবাইল নম্বর দিন');
+  return;
 
-status.textContent='ব্যবসার নাম ও মোবাইল নম্বর দিন।';
-return;
+ }
 
-}
+ const request={
+  name,
+  phone,
+  message,
+  date:new Date().toISOString()
+ };
 
-if(!supabaseClient){
+ localStorage.setItem(
+  'pz_sponsor_request',
+  JSON.stringify(request)
+ );
 
-status.textContent='Database connection নেই।';
-return;
-
-}
-
-status.textContent='Request পাঠানো হচ্ছে...';
-
-try{
-
-const {error}=
-await supabaseClient
-.from('sponsors')
-.insert({
-
-user_id:currentUser?.id||null,
-name:name,
-phone:phone,
-message:message,
-status:'pending'
-
-});
-
-if(error){
-
-status.textContent=error.message;
-return;
-
-}
-
-status.textContent=
-'Sponsor interest সফলভাবে পাঠানো হয়েছে।';
-
-}catch(error){
-
-status.textContent=
-error.message||'Request failed';
-
-}
+ document.getElementById('sStatus').textContent=
+ 'ধন্যবাদ! Sponsor interest সংরক্ষণ হয়েছে।';
 
 }
 
 
 /* =====================================================
-SKILL
+   SKILL
 ===================================================== */
 
 function saveSkill(){
 
-const name=
-document.getElementById('skillName')?.value.trim();
+ const name=
+ document.getElementById('skillName')?.value.trim();
 
-const skill=
-document.getElementById('skillType')?.value;
+ const skill=
+ document.getElementById('skillType')?.value;
 
-const about=
-document.getElementById('skillAbout')?.value.trim();
+ const about=
+ document.getElementById('skillAbout')?.value.trim();
 
-if(!name){
+ if(!name){
 
-alert('আপনার নাম লিখুন');
-return;
+  alert('আপনার নাম লিখুন');
+  return;
 
-}
+ }
 
-localStorage.setItem(
-'pz_skill',
-JSON.stringify({
-name,
-skill,
-about
-})
-);
+ localStorage.setItem(
+  'pz_skill',
+  JSON.stringify({
+   name,
+   skill,
+   about
+  })
+ );
 
-alert('Skill profile saved');
-
-closeModal();
+ alert('Skill profile saved');
+ closeModal();
 
 }
 
 
 /* =====================================================
-PAYOUT
+   PAYOUT
 ===================================================== */
 
-async function submitPayout(){
+function submitPayout(){
 
-const name=
-document.getElementById('payoutName')?.value.trim();
+ const name=
+ document.getElementById('payoutName')?.value.trim();
 
-const phone=
-document.getElementById('payoutPhone')?.value.trim();
+ const phone=
+ document.getElementById('payoutPhone')?.value.trim();
 
-const method=
-document.getElementById('payoutMethod')?.value;
+ const method=
+ document.getElementById('payoutMethod')?.value;
 
-const amount=
-Number(
-document.getElementById('payoutAmount')?.value||0
-);
+ const amount=
+ Number(
+  document.getElementById('payoutAmount')?.value||0
+ );
 
-const status=
-document.getElementById('payoutStatus');
+ if(!name||!phone||!amount){
 
-if(!name||!phone||!amount){
+  alert(
+   'নাম, payment number ও amount দিন'
+  );
 
-status.textContent=
-'নাম, payment number ও amount দিন।';
+  return;
 
-return;
+ }
 
-}
+ if(amount<=0){
 
-if(amount<=0){
+  alert('সঠিক amount দিন');
+  return;
 
-status.textContent='সঠিক amount দিন।';
-return;
+ }
 
-}
+ const request={
+  name,
+  phone,
+  method,
+  amount,
+  points,
+  status:'pending',
+  date:new Date().toISOString()
+ };
 
-status.textContent='Payout request পাঠানো হচ্ছে...';
+ localStorage.setItem(
+  'pz_payout_request',
+  JSON.stringify(request)
+ );
 
-try{
-
-const {error}=
-await supabaseClient
-.from('payout_requests')
-.insert({
-
-user_id:currentUser.id,
-name:name,
-phone:phone,
-method:method,
-amount:amount,
-points:points,
-status:'pending'
-
-});
-
-if(error){
-
-status.textContent=error.message;
-return;
-
-}
-
-status.textContent=
-'Payout request সফলভাবে পাঠানো হয়েছে।';
-
-}catch(error){
-
-status.textContent=
-error.message||'Payout failed';
-
-}
+ document.getElementById(
+  'payoutStatus'
+ ).textContent=
+ 'Payout request সংরক্ষণ হয়েছে। Merchant payment এখনো চালু হয়নি।';
 
 }
 
 
 /* =====================================================
-JOB SYSTEM
+   JOB DATABASE
 ===================================================== */
 
 let jobsCache=[];
 
-
-/* LOAD JOBS */
-
 async function loadJobsFromSupabase(){
 
-const list=
-document.getElementById('jobList');
+ const list=document.getElementById('jobList');
+ const status=document.getElementById('jobStatus');
 
-const status=
-document.getElementById('jobStatus');
+ if(list)
+ list.innerHTML=
+ '<div class="empty">Jobs লোড হচ্ছে...</div>';
 
-if(list)
-list.innerHTML=
-'<div class="empty">Jobs লোড হচ্ছে...</div>';
+ if(!supabaseClient){
 
-if(!supabaseClient){
+  if(status)
+  status.innerHTML=
+  '<div class="status error">Supabase connection পাওয়া যায়নি।</div>';
 
-if(status)
-status.innerHTML=
-'<div class="status error">Supabase connection পাওয়া যায়নি।</div>';
+  return;
+ }
 
-return;
+ try{
 
-}
+  const {data,error}=
+  await supabaseClient
+  .from('jobs')
+  .select(
+   'id,poster_id,title,skill,description,budget,status,created_at'
+  )
+  .order('created_at',{ascending:false});
 
-try{
+  if(error){
 
-const {data,error}=
-await supabaseClient
-.from('jobs')
-.select(
-'id,poster_id,title,skill,description,budget,status,created_at'
-)
-.order(
-'created_at',
-{ascending:false}
-);
+   if(status)
+   status.innerHTML=
+   '<div class="status error">'+
+   escapeHTML(error.message)+
+   '</div>';
 
-if(error){
+   return;
 
-if(status)
-status.innerHTML=
-'<div class="status error">'+
-escapeHTML(error.message)+
-'</div>';
+  }
 
-return;
+  jobsCache=
+  Array.isArray(data)?data:[];
 
-}
+  renderJobs();
 
-jobsCache=
-Array.isArray(data)?data:[];
+ }catch(error){
 
-renderJobs();
+  if(status)
+  status.innerHTML=
+  '<div class="status error">'+
+  escapeHTML(error.message||'Jobs load failed')+
+  '</div>';
 
-}catch(error){
-
-if(status)
-status.innerHTML=
-'<div class="status error">'+
-escapeHTML(error.message||'Jobs load failed')+
-'</div>';
+ }
 
 }
 
-}
-
-
-/* RENDER */
 
 function renderJobs(){
 
-const filter=
-document.getElementById('skillFilter')?.value||'all';
+ const filter=
+ document.getElementById('skillFilter')?.value||'all';
 
-const list=
-document.getElementById('jobList');
+ const list=
+ document.getElementById('jobList');
 
-if(!list)return;
+ if(!list)return;
 
-if(!jobsCache.length){
+ const filtered=
+ jobsCache.filter(function(job){
 
-list.innerHTML=
-'<div class="empty">এখনো কোনো Job পোস্ট করা হয়নি।</div>';
+  return(
+   job.status!=='closed' &&
+   (
+    filter==='all' ||
+    job.skill===filter
+   )
+  );
 
-return;
+ });
 
-}
+ if(!filtered.length){
 
-const filtered=
-jobsCache.filter(function(job){
+  list.innerHTML=
+  '<div class="empty">এখনো কোনো Job পোস্ট করা হয়নি।</div>';
 
-return filter==='all'||job.skill===filter;
+  return;
 
-});
+ }
 
-if(!filtered.length){
+ list.innerHTML=
+ filtered.map(function(job){
 
-list.innerHTML=
-'<div class="empty">এই Skill-এর কোনো কাজ নেই।</div>';
+  const isMine=
+  currentUser &&
+  job.poster_id===currentUser.id;
 
-return;
+  return `
 
-}
+  <div class="listItem">
 
-list.innerHTML=
-filtered.map(function(job){
+   <span class="badge">
+    ${escapeHTML(job.skill)}
+   </span>
 
-const isMine=
-currentUser&&
-job.poster_id===currentUser.id;
+   ${isMine
+    ? '<span class="badge">আমার পোস্ট</span>'
+    : ''
+   }
 
-return `
+   <h3>${escapeHTML(job.title)}</h3>
 
-<div class="listItem">
+   <p>${escapeHTML(job.description)}</p>
 
-<span class="badge">
-${escapeHTML(job.skill)}
-</span>
+   <p>
+    <b>Budget:</b>
+    ${escapeHTML(job.budget||'আলোচনা সাপেক্ষ')}
+   </p>
 
-${isMine?
-'<span class="badge">আমার পোস্ট</span>':''}
+   <p class="notice">
+    ${formatDate(job.created_at)}
+   </p>
 
-<h3>${escapeHTML(job.title)}</h3>
+   ${
+    isMine
 
-<p>${escapeHTML(job.description)}</p>
+    ?
 
-<p>
-<b>Budget:</b>
-${escapeHTML(job.budget||'আলোচনা সাপেক্ষ')}
-</p>
+    `
+    <button class="btn secondary"
+     onclick="viewJobApplications('${job.id}')">
+     📨 Applications দেখুন
+    </button>
+    `
 
-<p class="notice">
-${formatDate(job.created_at)}
-</p>
+    :
 
-${
-isMine
+    `
+    <button class="btn"
+     onclick="applyJob('${job.id}')">
+     Apply
+    </button>
+    `
+   }
 
-?
+  </div>
 
-`
-<button
-class="btn secondary"
-onclick="viewJobApplications('${job.id}')">
-📨 Applications দেখুন
-</button>
-`
+  `;
 
-:
-
-`
-<button
-class="btn"
-onclick="applyJob('${job.id}')">
-Apply
-</button>
-`
-}
-
-</div>
-
-`;
-
-}).join('');
-
-}
-
-
-/* ADD JOB */
-
-async function addJob(){
-
-if(!currentUser){
-
-alert('কাজ পোস্ট করতে আগে Login করুন।');
-return;
-
-}
-
-const title=
-document.getElementById('jTitle')?.value.trim();
-
-const skill=
-document.getElementById('jSkill')?.value;
-
-const desc=
-document.getElementById('jDesc')?.value.trim();
-
-const budget=
-document.getElementById('jBudget')?.value.trim();
-
-const status=
-document.getElementById('jobPostStatus');
-
-if(!title||!desc){
-
-status.textContent=
-'কাজের নাম ও বিস্তারিত লিখুন।';
-
-return;
-
-}
-
-status.textContent='Job publish হচ্ছে...';
-
-try{
-
-const {data,error}=
-await supabaseClient
-.from('jobs')
-.insert({
-
-poster_id:currentUser.id,
-title:title,
-skill:skill,
-description:desc,
-budget:budget||null,
-status:'open'
-
-})
-.select()
-.single();
-
-if(error){
-
-status.textContent=error.message;
-return;
-
-}
-
-jobsCache.unshift(data);
-
-closeModal();
-
-renderJobs();
-
-updateMyJobCount();
-
-alert('Job successfully posted!');
-
-}catch(error){
-
-status.textContent=
-error.message||'Job post failed';
-
-}
+ }).join('');
 
 }
 
 
 /* =====================================================
-APPLICATION
+   ADD JOB
+===================================================== */
+
+async function addJob(){
+
+ if(!currentUser){
+
+  alert('কাজ পোস্ট করতে আগে Login করুন।');
+  return;
+
+ }
+
+ const title=
+ document.getElementById('jTitle')?.value.trim();
+
+ const skill=
+ document.getElementById('jSkill')?.value;
+
+ const desc=
+ document.getElementById('jDesc')?.value.trim();
+
+ const budget=
+ document.getElementById('jBudget')?.value.trim();
+
+ const status=
+ document.getElementById('jobPostStatus');
+
+ if(!title||!desc){
+
+  if(status)
+  status.textContent=
+  'কাজের নাম ও বিস্তারিত লিখুন';
+
+  return;
+
+ }
+
+ if(status)
+ status.textContent='Job publish হচ্ছে...';
+
+ try{
+
+  const {data,error}=
+  await supabaseClient
+  .from('jobs')
+  .insert({
+   poster_id:currentUser.id,
+   title,
+   skill,
+   description:desc,
+   budget:budget||null,
+   status:'open'
+  })
+  .select()
+  .single();
+
+  if(error){
+
+   if(status)
+   status.textContent=error.message;
+
+   return;
+
+  }
+
+  jobsCache.unshift(data);
+
+  closeModal();
+  renderJobs();
+  updateMyJobCount();
+
+  alert('Job successfully posted!');
+
+ }catch(error){
+
+  if(status)
+  status.textContent=
+  error.message||'Job post failed';
+
+ }
+
+}
+
+
+/* =====================================================
+   APPLY
 ===================================================== */
 
 async function applyJob(jobId){
 
-if(!currentUser){
+ if(!currentUser){
 
-openModal('login');
-return;
+  openModal('login');
+  return;
 
-}
+ }
 
-const job=
-jobsCache.find(function(item){
-return item.id===jobId;
-});
+ const job=
+ jobsCache.find(function(item){
+  return item.id===jobId;
+ });
 
-if(!job){
+ if(!job){
 
-alert('Job পাওয়া যায়নি।');
-return;
+  alert('Job পাওয়া যায়নি।');
+  return;
 
-}
+ }
 
-if(job.poster_id===currentUser.id){
+ if(job.poster_id===currentUser.id){
 
-alert('নিজের Job-এ Apply করা যাবে না।');
-return;
+  alert('নিজের Job-এ Apply করা যাবে না।');
+  return;
 
-}
+ }
 
-const existing=
-await checkExistingApplication(jobId);
+ const existing=
+ await checkExistingApplication(jobId);
 
-if(existing){
+ if(existing){
 
-alert('আপনি এই Job-এ ইতোমধ্যে Apply করেছেন।');
-return;
+  alert(
+   'আপনি এই Job-এ ইতোমধ্যে Apply করেছেন।'
+  );
 
-}
+  return;
 
-openApplicationModal(job);
+ }
+
+ openApplicationModal(job);
 
 }
 
 
 function openApplicationModal(job){
 
-document.getElementById('modalContent').innerHTML=`
+ const c=`
 
-<h2>📨 Job Apply</h2>
+ <h2>📨 Job Apply</h2>
 
-<div class="status">
+ <div class="status">
 
-<b>${escapeHTML(job.title)}</b>
+  <b>${escapeHTML(job.title)}</b>
 
-<p>
-Skill: ${escapeHTML(job.skill)}
-</p>
+  <p>
+   Skill: ${escapeHTML(job.skill)}
+  </p>
 
-<p>
-Budget: ${escapeHTML(job.budget||'আলোচনা সাপেক্ষ')}
-</p>
+  <p>
+   Budget: ${escapeHTML(job.budget||'আলোচনা সাপেক্ষ')}
+  </p>
 
-</div>
+ </div>
 
-<textarea
-id="applyMessage"
-placeholder="আপনি কেন এই কাজের জন্য উপযুক্ত, সংক্ষেপে লিখুন..."></textarea>
+ <textarea id="applyMessage"
+  placeholder="আপনি কেন এই কাজের জন্য উপযুক্ত, সংক্ষেপে লিখুন..."></textarea>
 
-<button
-class="btn"
-onclick="submitJobApplication('${job.id}')">
-Apply Now
-</button>
+ <button class="btn"
+  onclick="submitJobApplication('${job.id}')">
+  Apply Now
+ </button>
 
-<p id="applyStatus" class="notice"></p>
+ <p id="applyStatus" class="notice"></p>
 
-`;
+ `;
 
-document.getElementById('modal').style.display='flex';
-
-}
-
-
-async function submitJobApplication(jobId){
-
-if(!currentUser){
-
-alert('আগে Login করুন।');
-return;
-
-}
-
-const message=
-document.getElementById('applyMessage')?.value.trim()||'';
-
-const status=
-document.getElementById('applyStatus');
-
-status.textContent='Application পাঠানো হচ্ছে...';
-
-const existing=
-await checkExistingApplication(jobId);
-
-if(existing){
-
-status.textContent=
-'আপনি ইতোমধ্যে Apply করেছেন।';
-
-return;
-
-}
-
-try{
-
-const {error}=
-await supabaseClient
-.from('job_applications')
-.insert({
-
-job_id:jobId,
-applicant_id:currentUser.id,
-message:message,
-status:'pending'
-
-});
-
-if(error){
-
-status.textContent=error.message;
-return;
-
-}
-
-status.textContent=
-'Application সফলভাবে পাঠানো হয়েছে!';
-
-setTimeout(function(){
-
-closeModal();
-loadMyApplications();
-
-},700);
-
-}catch(error){
-
-status.textContent=
-error.message||'Application failed';
-
-}
-
-}
-
-
-/* EXISTING APPLICATION */
-
-async function checkExistingApplication(jobId){
-
-if(!currentUser)return false;
-
-try{
-
-const {data,error}=
-await supabaseClient
-.from('job_applications')
-.select('id')
-.eq('job_id',jobId)
-.eq('applicant_id',currentUser.id)
-.maybeSingle();
-
-if(error){
-
-console.log(error);
-return false;
-
-}
-
-return !!data;
-
-}catch(error){
-
-return false;
-
-}
+ document.getElementById('modalContent').innerHTML=c;
+ document.getElementById('modal').style.display='flex';
 
 }
 
 
 /* =====================================================
-MY APPLICATIONS
+   SUBMIT APPLICATION
+===================================================== */
+
+async function submitJobApplication(jobId){
+
+ if(!currentUser){
+
+  alert('আগে Login করুন।');
+  return;
+
+ }
+
+ const message=
+ document.getElementById(
+  'applyMessage'
+ )?.value.trim()||'';
+
+ const status=
+ document.getElementById(
+  'applyStatus'
+ );
+
+ if(status)
+ status.textContent=
+ 'Application পাঠানো হচ্ছে...';
+
+ try{
+
+  const existing=
+  await checkExistingApplication(jobId);
+
+  if(existing){
+
+   if(status)
+   status.textContent=
+   'আপনি ইতোমধ্যে Apply করেছেন।';
+
+   return;
+
+  }
+
+  const {error}=
+  await supabaseClient
+  .from('job_applications')
+  .insert({
+   job_id:jobId,
+   applicant_id:currentUser.id,
+   message,
+   status:'pending'
+  });
+
+  if(error){
+
+   if(status)
+   status.textContent=error.message;
+
+   return;
+
+  }
+
+  if(status)
+  status.textContent=
+  'Application সফলভাবে পাঠানো হয়েছে!';
+
+  setTimeout(function(){
+
+   closeModal();
+   loadMyApplications();
+
+  },700);
+
+ }catch(error){
+
+  if(status)
+  status.textContent=
+  error.message||'Application failed';
+
+ }
+
+}
+
+
+/* =====================================================
+   CHECK APPLICATION
+===================================================== */
+
+async function checkExistingApplication(jobId){
+
+ if(!currentUser||!supabaseClient)
+ return false;
+
+ try{
+
+  const {data,error}=
+  await supabaseClient
+  .from('job_applications')
+  .select('id')
+  .eq('job_id',jobId)
+  .eq('applicant_id',currentUser.id)
+  .maybeSingle();
+
+  if(error){
+
+   console.log(error);
+   return false;
+
+  }
+
+  return !!data;
+
+ }catch(error){
+
+  return false;
+
+ }
+
+}
+
+
+/* =====================================================
+   MY APPLICATIONS
 ===================================================== */
 
 async function loadMyApplications(){
 
-const boxes=[
-document.getElementById('myApplications'),
-document.getElementById('profileApplications')
-];
+ const boxes=[
+  document.getElementById('myApplications'),
+  document.getElementById('profileApplications')
+ ];
 
-if(!currentUser){
+ if(!currentUser){
 
-boxes.forEach(function(box){
+  boxes.forEach(function(box){
 
-if(box)
-box.innerHTML=
-'<div class="empty">Login করলে আবেদনগুলো দেখা যাবে।</div>';
+   if(box)
+   box.innerHTML=
+   '<div class="empty">Login করলে আবেদনগুলো দেখা যাবে।</div>';
 
-});
+  });
 
-return;
+  return;
 
-}
+ }
 
-boxes.forEach(function(box){
+ boxes.forEach(function(box){
 
-if(box)
-box.innerHTML=
-'<div class="empty">Applications লোড হচ্ছে...</div>';
+  if(box)
+  box.innerHTML=
+  '<div class="empty">Applications লোড হচ্ছে...</div>';
 
-});
+ });
 
-try{
+ try{
 
-const {data,error}=
-await supabaseClient
-.from('job_applications')
-.select(`
-id,
-job_id,
-message,
-status,
-created_at,
-jobs(
-title,
-skill,
-budget
-)
-`)
-.eq('applicant_id',currentUser.id)
-.order(
-'created_at',
-{ascending:false}
-);
+  const {data,error}=
+  await supabaseClient
+  .from('job_applications')
+  .select(`
+   id,
+   job_id,
+   message,
+   status,
+   created_at,
+   jobs(
+    title,
+    skill,
+    budget
+   )
+  `)
+  .eq('applicant_id',currentUser.id)
+  .order('created_at',{ascending:false});
 
-if(error){
+  if(error){
 
-boxes.forEach(function(box){
+   boxes.forEach(function(box){
 
-if(box)
-box.innerHTML=
-'<div class="status error">'+
-escapeHTML(error.message)+
-'</div>';
+    if(box)
+    box.innerHTML=
+    '<div class="status error">'+
+    escapeHTML(error.message)+
+    '</div>';
 
-});
+   });
 
-return;
+   return;
 
-}
+  }
 
-if(!data||!data.length){
+  if(!data||!data.length){
 
-boxes.forEach(function(box){
+   boxes.forEach(function(box){
 
-if(box)
-box.innerHTML=
-'<div class="empty">আপনি এখনো কোনো Job-এ Apply করেননি।</div>';
+    if(box)
+    box.innerHTML=
+    '<div class="empty">আপনি এখনো কোনো Job-এ Apply করেননি।</div>';
 
-});
+   });
 
-return;
+   return;
 
-}
+  }
 
-const html=
-data.map(function(app){
+  const html=
+  data.map(function(app){
 
-const job=app.jobs||{};
+   const job=app.jobs||{};
 
-return `
+   const statusText=
+   app.status||'pending';
 
-<div class="application">
+   return `
 
-<h4>
-${escapeHTML(job.title||'Job')}
-</h4>
+   <div class="application">
 
-<p>
-Skill:
-${escapeHTML(job.skill||'')}
-</p>
+    <h4>
+     ${escapeHTML(job.title||'Job')}
+    </h4>
 
-<p>
-আপনার message:
-${escapeHTML(app.message||'')}
-</p>
+    <p>
+     Skill:
+     ${escapeHTML(job.skill||'')}
+    </p>
 
-<p>
-Status:
-<span class="statusBadge">
-${escapeHTML(app.status||'pending')}
-</span>
-</p>
+    <p>
+     আপনার message:
+     ${escapeHTML(app.message||'')}
+    </p>
 
-<p class="notice">
-${formatDate(app.created_at)}
-</p>
+    <p>
+     Status:
+     <span class="statusBadge">
+      ${escapeHTML(statusText)}
+     </span>
+    </p>
 
-</div>
+    <p class="notice">
+     ${formatDate(app.created_at)}
+    </p>
 
-`;
+   </div>
 
-}).join('');
+   `;
 
-boxes.forEach(function(box){
+  }).join('');
 
-if(box)
-box.innerHTML=html;
+  boxes.forEach(function(box){
 
-});
+   if(box)
+   box.innerHTML=html;
 
-}catch(error){
+  });
 
-console.log(error);
+ }catch(error){
 
-}
+  console.log(error);
+
+ }
 
 }
 
 
 /* =====================================================
-JOB APPLICATIONS FOR POSTER
+   JOB OWNER APPLICATIONS
 ===================================================== */
 
 async function viewJobApplications(jobId){
 
-if(!currentUser){
+ if(!currentUser){
 
-openModal('login');
-return;
+  openModal('login');
+  return;
 
-}
+ }
 
-const job=
-jobsCache.find(function(item){
-return item.id===jobId;
-});
+ const job=
+ jobsCache.find(function(item){
+  return item.id===jobId;
+ });
 
-if(!job){
+ if(!job){
 
-alert('Job পাওয়া যায়নি।');
-return;
+  alert('Job পাওয়া যায়নি।');
+  return;
 
-}
+ }
 
-if(job.poster_id!==currentUser.id){
+ if(job.poster_id!==currentUser.id){
 
-alert('শুধু Job poster Applications দেখতে পারবেন।');
-return;
+  alert(
+   'শুধু Job poster Applications দেখতে পারবেন।'
+  );
 
-}
+  return;
 
-document.getElementById('modalContent').innerHTML=`
+ }
 
-<h2>📨 Job Applications</h2>
+ document.getElementById('modalContent').innerHTML=`
 
-<p>
-<b>${escapeHTML(job.title)}</b>
-</p>
+ <h2>📨 Job Applications</h2>
 
-<div id="applicationsBox">
-<div class="empty">Applications লোড হচ্ছে...</div>
-</div>
+ <p>
+ <b>${escapeHTML(job.title)}</b>
+ </p>
 
-`;
+ <div id="applicationsBox">
+  <div class="empty">
+   Applications লোড হচ্ছে...
+  </div>
+ </div>
 
-document.getElementById('modal').style.display='flex';
+ `;
 
-try{
+ document.getElementById('modal').style.display='flex';
 
-const {data,error}=
-await supabaseClient
-.from('job_applications')
-.select(`
-id,
-applicant_id,
-message,
-status,
-created_at
-`)
-.eq('job_id',jobId)
-.order(
-'created_at',
-{ascending:false}
-);
+ try{
 
-const box=
-document.getElementById('applicationsBox');
+  const {data,error}=
+  await supabaseClient
+  .from('job_applications')
+  .select(`
+   id,
+   applicant_id,
+   message,
+   status,
+   created_at
+  `)
+  .eq('job_id',jobId)
+  .order('created_at',{ascending:false});
 
-if(error){
+  const box=
+  document.getElementById('applicationsBox');
 
-box.innerHTML=
-'<div class="status error">'+
-escapeHTML(error.message)+
-'</div>';
+  if(error){
 
-return;
+   if(box)
+   box.innerHTML=
+   '<div class="status error">'+
+   escapeHTML(error.message)+
+   '</div>';
 
-}
+   return;
 
-if(!data||!data.length){
+  }
 
-box.innerHTML=
-'<div class="empty">এই Job-এ এখনো কোনো Application নেই।</div>';
+  if(!data||!data.length){
 
-return;
+   if(box)
+   box.innerHTML=
+   '<div class="empty">এই Job-এ এখনো কোনো Application নেই।</div>';
 
-}
+   return;
 
-box.innerHTML=
-data.map(function(app){
+  }
 
-return `
+  if(box){
 
-<div class="application">
+   box.innerHTML=
+   data.map(function(app){
 
-<h4>👤 Applicant</h4>
+    return `
 
-<p>
-Applicant ID:
-${escapeHTML(app.applicant_id)}
-</p>
+    <div class="application">
 
-<p>
-Message:
-${escapeHTML(app.message||'')}
-</p>
+     <h4>👤 Applicant</h4>
 
-<p>
-Status:
-<span class="statusBadge">
-${escapeHTML(app.status||'pending')}
-</span>
-</p>
+     <p>
+      Applicant ID:
+      ${escapeHTML(app.applicant_id)}
+     </p>
 
-${
-app.status==='pending'
+     <p>
+      Message:
+      ${escapeHTML(app.message||'')}
+     </p>
 
-?
+     <p>
+      Status:
+      <span class="statusBadge">
+       ${escapeHTML(app.status||'pending')}
+      </span>
+     </p>
 
-`
+     <p class="notice">
+      ${formatDate(app.created_at)}
+     </p>
 
-<div class="row">
+     ${
+      app.status==='pending'
 
-<button
-class="btn successBtn"
-onclick="updateApplicationStatus(
-'${app.id}',
-'accepted',
-'${jobId}'
-)">
-Accept
-</button>
+      ?
 
-<button
-class="btn danger"
-onclick="updateApplicationStatus(
-'${app.id}',
-'rejected',
-'${jobId}'
-)">
-Reject
-</button>
+      `
+      <div class="row">
 
-</div>
+       <button class="btn successBtn"
+        onclick="updateApplicationStatus(
+         '${app.id}',
+         'accepted',
+         '${jobId}'
+        )">
+        Accept
+       </button>
 
-`
+       <button class="btn danger"
+        onclick="updateApplicationStatus(
+         '${app.id}',
+         'rejected',
+         '${jobId}'
+        )">
+        Reject
+       </button>
 
-:''
-}
+      </div>
+      `
 
-</div>
+      :
 
-`;
+      ''
 
-}).join('');
+     }
 
-}catch(error){
+    </div>
 
-console.log(error);
+    `;
 
-}
+   }).join('');
 
-}
+  }
 
+ }catch(error){
 
-/* STATUS UPDATE */
+  console.log(error);
 
-async function updateApplicationStatus(
-applicationId,
-newStatus,
-jobId
-){
-
-if(!currentUser)return;
-
-try{
-
-const {data:job,error:jobError}=
-await supabaseClient
-.from('jobs')
-.select('poster_id')
-.eq('id',jobId)
-.single();
-
-if(jobError){
-
-alert(jobError.message);
-return;
-
-}
-
-if(job.poster_id!==currentUser.id){
-
-alert('অনুমতি নেই।');
-return;
-
-}
-
-const {error}=
-await supabaseClient
-.from('job_applications')
-.update({
-status:newStatus
-})
-.eq('id',applicationId);
-
-if(error){
-
-alert(error.message);
-return;
-
-}
-
-alert(
-newStatus==='accepted'
-?'Application Accepted!'
-:'Application Rejected!'
-);
-
-viewJobApplications(jobId);
-
-}catch(error){
-
-alert(error.message||'Status update failed');
-
-}
+ }
 
 }
 
 
 /* =====================================================
-MY JOB COUNT
+   UPDATE APPLICATION STATUS
+===================================================== */
+
+async function updateApplicationStatus(
+ applicationId,
+ newStatus,
+ jobId
+){
+
+ if(!currentUser||!supabaseClient)
+ return;
+
+ if(
+  newStatus!=='accepted' &&
+  newStatus!=='rejected'
+ ){
+  return;
+ }
+
+ try{
+
+  const {data:job,error:jobError}=
+  await supabaseClient
+  .from('jobs')
+  .select('poster_id')
+  .eq('id',jobId)
+  .single();
+
+  if(jobError){
+
+   alert(jobError.message);
+   return;
+
+  }
+
+  if(job.poster_id!==currentUser.id){
+
+   alert('অনুমতি নেই।');
+   return;
+
+  }
+
+  const {error}=
+  await supabaseClient
+  .from('job_applications')
+  .update({
+   status:newStatus
+  })
+  .eq('id',applicationId)
+  .eq('job_id',jobId);
+
+  if(error){
+
+   alert(error.message);
+   return;
+
+  }
+
+  alert(
+   newStatus==='accepted'
+   ? 'Application Accepted!'
+   : 'Application Rejected!'
+  );
+
+  viewJobApplications(jobId);
+
+ }catch(error){
+
+  alert(
+   error.message||'Status update failed'
+  );
+
+ }
+
+}
+
+
+/* =====================================================
+   MY JOB COUNT
 ===================================================== */
 
 async function updateMyJobCount(){
 
-if(!currentUser)return;
+ const box=
+ document.getElementById('myJobs');
 
-const box=
-document.getElementById('myJobs');
+ if(!box||!currentUser||!supabaseClient)
+ return;
 
-if(!box)return;
+ try{
 
-const {count,error}=
-await supabaseClient
-.from('jobs')
-.select(
-'id',
-{count:'exact',head:true}
-)
-.eq(
-'poster_id',
-currentUser.id
-);
+  const {count,error}=
+  await supabaseClient
+  .from('jobs')
+  .select('id',{
+   count:'exact',
+   head:true
+  })
+  .eq('poster_id',currentUser.id);
 
-if(!error)
-box.textContent=count||0;
+  if(!error)
+  box.textContent=count||0;
+
+ }catch(error){}
 
 }
 
 
 /* =====================================================
-ADMIN
+   DATE
 ===================================================== */
 
-async function isCurrentUserAdmin(){
+function formatDate(date){
 
-if(!currentUser)return false;
+ if(!date)return '';
 
-try{
+ try{
 
-const {data,error}=
-await supabaseClient
-.from('profiles')
-.select('role')
-.eq('id',currentUser.id)
-.maybeSingle();
+  return new Date(date).toLocaleString(
+   'bn-BD',
+   {
+    year:'numeric',
+    month:'short',
+    day:'numeric'
+   }
+  );
 
-return !error&&data?.role==='admin';
+ }catch(error){
 
-}catch(error){
+  return '';
 
-return false;
-
-}
-
-}
-
-
-async function updateAdminUI(){
-
-const btn=
-document.getElementById('adminNavBtn');
-
-if(!btn)return;
-
-const admin=
-await isCurrentUserAdmin();
-
-btn.style.display=
-admin?'block':'none';
-
-if(admin)
-loadAdminDashboard();
-
-}
-
-
-async function loadAdminDashboard(){
-
-const status=
-document.getElementById('adminStatus');
-
-if(!currentUser){
-
-if(status)
-status.textContent='Admin login প্রয়োজন।';
-
-return;
-
-}
-
-const admin=
-await isCurrentUserAdmin();
-
-if(!admin){
-
-if(status)
-status.textContent=
-'এই account-এর Admin permission নেই।';
-
-return;
-
-}
-
-try{
-
-const {data,error}=
-await supabaseClient
-.rpc('admin_dashboard_stats');
-
-if(error)throw error;
-
-const d=data||{};
-
-setText('adminUsers',d.users);
-setText('adminJobs',d.jobs);
-setText('adminApplications',d.applications);
-setText('adminSponsors',d.sponsors);
-setText('adminPayouts',d.payouts);
-
-const pending=
-Number(d.pending_applications||0)+
-Number(d.pending_sponsors||0)+
-Number(d.pending_payouts||0);
-
-setText('adminPending',pending);
-
-if(status){
-
-status.className='status success';
-
-status.textContent=
-'Admin Dashboard চালু আছে।';
-
-}
-
-}catch(error){
-
-if(status){
-
-status.className='status error';
-
-status.textContent=
-'Dashboard load failed: '+
-(error.message||'Unknown error');
-
-}
-
-}
+ }
 
 }
 
 
 /* =====================================================
-GAMES
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+ return String(value||'')
+ .replace(
+  /[&<>"']/g,
+  function(m){
+
+   return {
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+   }[m];
+
+  }
+ );
+
+}
+
+
+/* =====================================================
+   GAME SYSTEM
 ===================================================== */
 
 let gameTimer=null;
@@ -2757,190 +2725,203 @@ let tapScore=0;
 let tapTime=30;
 
 
+/* TAP */
+
 function openGame(type){
 
-document.getElementById('modal').style.display='flex';
+ document.getElementById('modal').style.display='flex';
 
-if(type==='tap')startTapGame();
-if(type==='match')startMatchGame();
-if(type==='fly')startFlyGame();
-if(type==='brain')startBrainGame();
+ if(type==='tap')startTapGame();
+ if(type==='match')startMatchGame();
+ if(type==='fly')startFlyGame();
+ if(type==='brain')startBrainGame();
 
 }
 
 
-/* TAP */
-
 function startTapGame(){
 
-stopAllGames();
+ stopAllGames();
 
-tapScore=0;
-tapTime=30;
+ tapScore=0;
+ tapTime=30;
 
-document.getElementById('modalContent').innerHTML=`
+ document.getElementById('modalContent').innerHTML=`
 
-<h2>⚡ Tap Rush</h2>
+ <h2>⚡ Tap Rush</h2>
 
-<div class="gameInfo">
+ <div class="gameInfo">
 
-<div>
-সময়<br>
-<strong id="tapTime">30</strong>
-</div>
+  <div>
+   সময়<br>
+   <strong id="tapTime">30</strong>
+  </div>
 
-<div>
-Score<br>
-<strong id="tapScore">0</strong>
-</div>
+  <div>
+   Score<br>
+   <strong id="tapScore">0</strong>
+  </div>
 
-</div>
+ </div>
 
-<div class="gameArea" id="tapArea">
+ <div class="gameArea" id="tapArea">
 
-<div class="message">
-START চাপুন এবং target-এ যত দ্রুত সম্ভব tap করুন।
-</div>
+  <div class="message">
+   START চাপুন এবং target-এ যত দ্রুত সম্ভব tap করুন।
+  </div>
 
-</div>
+ </div>
 
-<button class="btn" onclick="runTapGame()">
-START GAME
-</button>
+ <button class="btn" onclick="runTapGame()">
+  START GAME
+ </button>
 
-`;
+ `;
 
 }
 
 
 function runTapGame(){
 
-stopAllGames();
+ stopAllGames();
 
-tapScore=0;
-tapTime=30;
-gameRunning=true;
+ tapScore=0;
+ tapTime=30;
+ gameRunning=true;
 
-const scoreBox=document.getElementById('tapScore');
-const timeBox=document.getElementById('tapTime');
-const area=document.getElementById('tapArea');
+ const scoreBox=document.getElementById('tapScore');
+ const timeBox=document.getElementById('tapTime');
+ const area=document.getElementById('tapArea');
 
-if(!scoreBox||!timeBox||!area)return;
+ if(!scoreBox||!timeBox||!area)return;
 
-scoreBox.textContent='0';
-timeBox.textContent='30';
+ scoreBox.textContent='0';
+ timeBox.textContent='30';
 
-area.innerHTML='';
+ area.innerHTML='';
 
-createTarget();
+ createTarget();
 
-gameTimer=setInterval(function(){
+ gameTimer=setInterval(function(){
 
-if(!gameRunning)return;
+  if(!gameRunning)return;
 
-tapTime--;
+  tapTime--;
 
-timeBox.textContent=tapTime;
+  timeBox.textContent=tapTime;
 
-if(tapTime<=0)
-endTapGame();
+  if(tapTime<=0)
+  endTapGame();
 
-},1000);
+ },1000);
 
 }
 
 
 function createTarget(){
 
-if(!gameRunning)return;
+ if(!gameRunning)return;
 
-const area=document.getElementById('tapArea');
+ const area=document.getElementById('tapArea');
 
-if(!area)return;
+ if(!area)return;
 
-const old=area.querySelector('.target');
+ const old=area.querySelector('.target');
 
-if(old)old.remove();
+ if(old)old.remove();
 
-const target=document.createElement('div');
+ const target=document.createElement('div');
 
-target.className='target';
-target.textContent='⚡';
+ target.className='target';
+ target.textContent='⚡';
 
-const maxX=Math.max(0,area.clientWidth-58);
-const maxY=Math.max(0,area.clientHeight-58);
+ const maxX=Math.max(
+  0,
+  area.clientWidth-58
+ );
 
-target.style.left=Math.random()*maxX+'px';
-target.style.top=Math.random()*maxY+'px';
+ const maxY=Math.max(
+  0,
+  area.clientHeight-58
+ );
 
-target.onclick=function(){
+ target.style.left=
+ Math.random()*maxX+'px';
 
-if(!gameRunning)return;
+ target.style.top=
+ Math.random()*maxY+'px';
 
-tapScore++;
+ target.onclick=function(){
 
-const box=document.getElementById('tapScore');
+  if(!gameRunning)return;
 
-if(box)
-box.textContent=tapScore;
+  tapScore++;
 
-createTarget();
+  const box=
+  document.getElementById('tapScore');
 
-};
+  if(box)
+  box.textContent=tapScore;
 
-area.appendChild(target);
+  createTarget();
+
+ };
+
+ area.appendChild(target);
 
 }
 
 
 function endTapGame(){
 
-if(!gameRunning)return;
+ if(!gameRunning)return;
 
-gameRunning=false;
+ gameRunning=false;
 
-if(gameTimer){
+ if(gameTimer){
 
-clearInterval(gameTimer);
-gameTimer=null;
+  clearInterval(gameTimer);
+  gameTimer=null;
 
-}
+ }
 
-gameFinished();
+ gameFinished();
 
-const earned=tapScore;
+ const earned=tapScore;
 
-addPoints(earned);
+ addPoints(earned);
 
-const area=document.getElementById('tapArea');
+ const area=
+ document.getElementById('tapArea');
 
-if(area){
+ if(area){
 
-area.innerHTML=`
+  area.innerHTML=`
 
-<div class="message">
+  <div class="message">
 
-<h2>🎉 Game Over!</h2>
+   <h2>🎉 Game Over!</h2>
 
-<p>
-আপনার Score:
-<strong>${tapScore}</strong>
-</p>
+   <p>
+    আপনার Score:
+    <strong>${tapScore}</strong>
+   </p>
 
-<p>
-আপনি পেয়েছেন:
-<strong>+${earned} Points</strong>
-</p>
+   <p>
+    আপনি পেয়েছেন:
+    <strong>+${earned} Points</strong>
+   </p>
 
-<button class="btn" onclick="startTapGame()">
-আবার খেলুন
-</button>
+   <button class="btn"
+    onclick="startTapGame()">
+    আবার খেলুন
+   </button>
 
-</div>
+  </div>
 
-`;
+  `;
 
-}
+ }
 
 }
 
@@ -2952,156 +2933,172 @@ let matchLocked=false;
 let matchPairs=0;
 let matchScore=0;
 
-
 function startMatchGame(){
 
-stopAllGames();
+ stopAllGames();
 
-matchFirst=null;
-matchLocked=false;
-matchPairs=0;
-matchScore=0;
+ matchFirst=null;
+ matchLocked=false;
+ matchPairs=0;
+ matchScore=0;
 
-let numbers=[
-1,2,3,4,5,6,
-1,2,3,4,5,6
-];
+ let numbers=[
+  1,2,3,4,5,6,
+  1,2,3,4,5,6
+ ];
 
-numbers.sort(()=>Math.random()-0.5);
+ numbers.sort(
+  ()=>Math.random()-0.5
+ );
 
-document.getElementById('modalContent').innerHTML=`
+ document.getElementById('modalContent').innerHTML=`
 
-<h2>7️⃣ Match Seven</h2>
+ <h2>7️⃣ Match Seven</h2>
 
-<div class="gameInfo">
+ <div class="gameInfo">
 
-<div>
-Pair<br>
-<strong id="matchPairs">0</strong>/6
-</div>
+  <div>
+   Pair<br>
+   <strong id="matchPairs">0</strong>/6
+  </div>
 
-<div>
-Score<br>
-<strong id="matchScore">0</strong>
-</div>
+  <div>
+   Score<br>
+   <strong id="matchScore">0</strong>
+  </div>
 
-</div>
+ </div>
 
-<div class="matchGrid" id="matchGrid"></div>
+ <div class="matchGrid" id="matchGrid"></div>
 
-<p class="message">
-একই সংখ্যা দুইটি নির্বাচন করুন।
-</p>
+ <p class="message">
+  একই সংখ্যা দুইটি নির্বাচন করুন।
+ </p>
 
-`;
+ `;
 
-const grid=document.getElementById('matchGrid');
+ const grid=
+ document.getElementById('matchGrid');
 
-numbers.forEach(function(number){
+ numbers.forEach(function(number){
 
-const button=document.createElement('button');
+  const button=
+  document.createElement('button');
 
-button.className='matchCard';
-button.textContent='?';
-button.dataset.value=number;
+  button.className='matchCard';
+  button.textContent='?';
+  button.dataset.value=number;
 
-button.onclick=function(){
-selectMatch(button);
-};
+  button.onclick=function(){
+   selectMatch(button);
+  };
 
-grid.appendChild(button);
+  grid.appendChild(button);
 
-});
+ });
 
 }
 
 
 function selectMatch(button){
 
-if(
-matchLocked||
-button.classList.contains('matched')||
-button===matchFirst
-)return;
+ if(
+  matchLocked||
+  button.classList.contains('matched')||
+  button===matchFirst
+ )return;
 
-button.textContent=button.dataset.value;
-button.classList.add('selected');
+ button.textContent=
+ button.dataset.value;
 
-if(!matchFirst){
+ button.classList.add('selected');
 
-matchFirst=button;
-return;
+ if(!matchFirst){
 
-}
+  matchFirst=button;
+  return;
 
-matchLocked=true;
+ }
 
-if(matchFirst.dataset.value===button.dataset.value){
+ matchLocked=true;
 
-const first=matchFirst;
-const second=button;
+ if(
+  matchFirst.dataset.value===
+  button.dataset.value
+ ){
 
-setTimeout(function(){
+  const first=matchFirst;
+  const second=button;
 
-first.classList.add('matched');
-second.classList.add('matched');
+  setTimeout(function(){
 
-matchPairs++;
-matchScore+=10;
+   first.classList.add('matched');
+   second.classList.add('matched');
 
-document.getElementById('matchPairs').textContent=matchPairs;
-document.getElementById('matchScore').textContent=matchScore;
+   matchPairs++;
+   matchScore+=10;
 
-matchFirst=null;
-matchLocked=false;
+   document.getElementById(
+    'matchPairs'
+   ).textContent=matchPairs;
 
-if(matchPairs>=6){
+   document.getElementById(
+    'matchScore'
+   ).textContent=matchScore;
 
-gameFinished();
-addPoints(matchScore);
+   matchFirst=null;
+   matchLocked=false;
 
-document.getElementById('modalContent').innerHTML=`
+   if(matchPairs>=6){
 
-<h2>🎉 Match Complete!</h2>
+    gameFinished();
+    addPoints(matchScore);
 
-<p>
-Score:
-<strong>${matchScore}</strong>
-</p>
+    document.getElementById(
+     'modalContent'
+    ).innerHTML=`
 
-<p>
-Points earned:
-<strong>+${matchScore}</strong>
-</p>
+    <h2>🎉 Match Complete!</h2>
 
-<button class="btn" onclick="startMatchGame()">
-আবার খেলুন
-</button>
+    <p>
+     Score:
+     <strong>${matchScore}</strong>
+    </p>
 
-`;
+    <p>
+     Points earned:
+     <strong>+${matchScore}</strong>
+    </p>
 
-}
+    <button class="btn"
+     onclick="startMatchGame()">
+     আবার খেলুন
+    </button>
 
-},350);
+    `;
 
-}else{
+   }
 
-const first=matchFirst;
+  },350);
 
-setTimeout(function(){
+ }else{
 
-first.textContent='?';
-button.textContent='?';
+  const first=matchFirst;
 
-first.classList.remove('selected');
-button.classList.remove('selected');
+  setTimeout(function(){
 
-matchFirst=null;
-matchLocked=false;
+   first.textContent='?';
+   button.textContent='?';
 
-},650);
+   first.classList.remove('selected');
+   button.classList.remove('selected');
 
-}
+   matchFirst=null;
+   matchLocked=false;
+
+  },650);
+
+ }
 
 }
 
@@ -3116,256 +3113,276 @@ let flyPlayer=null;
 let flyObstacles=[];
 let flyRunning=false;
 
-
 function startFlyGame(){
 
-stopAllGames();
+ stopAllGames();
 
-document.getElementById('modalContent').innerHTML=`
+ document.getElementById('modalContent').innerHTML=`
 
-<h2>🚀 Fly High</h2>
+ <h2>🚀 Fly High</h2>
 
-<div class="gameInfo">
+ <div class="gameInfo">
 
-<div>
-Score<br>
-<strong id="flyScore">0</strong>
-</div>
+  <div>
+   Score<br>
+   <strong id="flyScore">0</strong>
+  </div>
 
-<div>
-Control<br>
-<strong>Tap</strong>
-</div>
+  <div>
+   Control<br>
+   <strong>Tap</strong>
+  </div>
 
-</div>
+ </div>
 
-<canvas
-class="flyCanvas"
-id="flyCanvas"
-width="440"
-height="390">
-</canvas>
+ <canvas
+  class="flyCanvas"
+  id="flyCanvas"
+  width="440"
+  height="390">
+ </canvas>
 
-<button class="btn" onclick="runFlyGame()">
-START GAME
-</button>
+ <button class="btn"
+  onclick="runFlyGame()">
+  START GAME
+ </button>
 
-`;
+ `;
 
-flyCanvas=document.getElementById('flyCanvas');
+ flyCanvas=
+ document.getElementById('flyCanvas');
 
-flyCtx=flyCanvas.getContext('2d');
+ flyCtx=
+ flyCanvas.getContext('2d');
 
-drawFlyStart();
+ drawFlyStart();
 
 }
 
 
 function drawFlyStart(){
 
-if(!flyCtx)return;
+ if(!flyCtx)return;
 
-flyCtx.clearRect(0,0,440,390);
+ flyCtx.clearRect(
+  0,0,440,390
+ );
 
-flyCtx.fillStyle='#ffd21a';
-flyCtx.font='22px Arial';
-flyCtx.textAlign='center';
+ flyCtx.fillStyle='#ffd21a';
+ flyCtx.font='22px Arial';
+ flyCtx.textAlign='center';
 
-flyCtx.fillText(
-'START চাপুন',
-220,
-195
-);
+ flyCtx.fillText(
+  'START চাপুন',
+  220,
+  195
+ );
 
 }
 
 
 function runFlyGame(){
 
-stopAllGames();
+ stopAllGames();
 
-flyScore=0;
-flyRunning=true;
-flyObstacles=[];
+ flyScore=0;
+ flyRunning=true;
+ flyObstacles=[];
 
-flyPlayer={
-x:70,
-y:190,
-size:20,
-velocity:0
-};
+ flyPlayer={
+  x:70,
+  y:190,
+  size:20,
+  velocity:0
+ };
 
-document.getElementById('flyScore').textContent='0';
+ document.getElementById(
+  'flyScore'
+ ).textContent='0';
 
-flyCanvas.onclick=function(){
+ flyCanvas.onclick=function(){
 
-if(flyRunning)
-flyPlayer.velocity=-6;
+  if(flyRunning)
+  flyPlayer.velocity=-6;
 
-};
+ };
 
-flyCanvas.ontouchstart=function(event){
+ flyCanvas.ontouchstart=function(event){
 
-event.preventDefault();
+  event.preventDefault();
 
-if(flyRunning)
-flyPlayer.velocity=-6;
+  if(flyRunning)
+  flyPlayer.velocity=-6;
 
-};
+ };
 
-flyFrame=requestAnimationFrame(flyLoop);
+ flyFrame=
+ requestAnimationFrame(flyLoop);
 
 }
 
 
 function flyLoop(){
 
-if(!flyRunning)return;
+ if(!flyRunning)return;
 
-flyCtx.clearRect(
-0,0,
-flyCanvas.width,
-flyCanvas.height
-);
+ flyCtx.clearRect(
+  0,0,
+  flyCanvas.width,
+  flyCanvas.height
+ );
 
-flyPlayer.velocity+=0.35;
-flyPlayer.y+=flyPlayer.velocity;
+ flyPlayer.velocity+=0.35;
+ flyPlayer.y+=flyPlayer.velocity;
 
-if(Math.random()<0.025){
+ if(Math.random()<0.025){
 
-const gap=125;
-const top=45+Math.random()*165;
+  const gap=125;
+  const top=45+Math.random()*165;
 
-flyObstacles.push({
-x:440,
-top:top,
-bottom:top+gap,
-passed:false
-});
+  flyObstacles.push({
+   x:440,
+   top,
+   bottom:top+gap,
+   passed:false
+  });
 
-}
+ }
 
-flyObstacles.forEach(function(obstacle){
+ flyObstacles.forEach(function(obstacle){
 
-obstacle.x-=3;
+  obstacle.x-=3;
 
-flyCtx.fillStyle='#53b85b';
+  flyCtx.fillStyle='#53b85b';
 
-flyCtx.fillRect(
-obstacle.x,
-0,
-42,
-obstacle.top
-);
+  flyCtx.fillRect(
+   obstacle.x,
+   0,
+   42,
+   obstacle.top
+  );
 
-flyCtx.fillRect(
-obstacle.x,
-obstacle.bottom,
-42,
-390-obstacle.bottom
-);
+  flyCtx.fillRect(
+   obstacle.x,
+   obstacle.bottom,
+   42,
+   390-obstacle.bottom
+  );
 
-if(!obstacle.passed&&obstacle.x<70){
+  if(
+   !obstacle.passed&&
+   obstacle.x<70
+  ){
 
-obstacle.passed=true;
-flyScore++;
+   obstacle.passed=true;
+   flyScore++;
 
-const score=document.getElementById('flyScore');
+   const score=
+   document.getElementById('flyScore');
 
-if(score)
-score.textContent=flyScore;
+   if(score)
+   score.textContent=flyScore;
 
-}
+  }
 
-});
+ });
 
-flyObstacles=
-flyObstacles.filter(function(obstacle){
+ flyObstacles=
+ flyObstacles.filter(function(obstacle){
 
-return obstacle.x>-50;
+  return obstacle.x>-50;
 
-});
+ });
 
-flyCtx.fillStyle='#ffd21a';
+ flyCtx.fillStyle='#ffd21a';
 
-flyCtx.beginPath();
+ flyCtx.beginPath();
 
-flyCtx.arc(
-flyPlayer.x,
-flyPlayer.y,
-flyPlayer.size,
-0,
-Math.PI*2
-);
+ flyCtx.arc(
+  flyPlayer.x,
+  flyPlayer.y,
+  flyPlayer.size,
+  0,
+  Math.PI*2
+ );
 
-flyCtx.fill();
+ flyCtx.fill();
 
-const hitObstacle=
-flyObstacles.some(function(obstacle){
+ const hitObstacle=
+ flyObstacles.some(function(obstacle){
 
-return(
-flyPlayer.x+18>obstacle.x&&
-flyPlayer.x-18<obstacle.x+42&&
-(
-flyPlayer.y-18<obstacle.top||
-flyPlayer.y+18>obstacle.bottom
-)
-);
+  return(
 
-});
+   flyPlayer.x+18>obstacle.x&&
+   flyPlayer.x-18<obstacle.x+42&&
+   (
+    flyPlayer.y-18<obstacle.top||
+    flyPlayer.y+18>obstacle.bottom
+   )
 
-if(
-flyPlayer.y<20||
-flyPlayer.y>370||
-hitObstacle
-){
+  );
 
-endFlyGame();
-return;
+ });
 
-}
+ if(
+  flyPlayer.y<20||
+  flyPlayer.y>370||
+  hitObstacle
+ ){
 
-flyFrame=requestAnimationFrame(flyLoop);
+  endFlyGame();
+  return;
+
+ }
+
+ flyFrame=
+ requestAnimationFrame(flyLoop);
 
 }
 
 
 function endFlyGame(){
 
-flyRunning=false;
+ flyRunning=false;
 
-if(flyFrame){
+ if(flyFrame){
 
-cancelAnimationFrame(flyFrame);
-flyFrame=null;
+  cancelAnimationFrame(
+   flyFrame
+  );
 
-}
+  flyFrame=null;
 
-gameFinished();
+ }
 
-const earned=flyScore;
+ gameFinished();
 
-addPoints(earned);
+ const earned=flyScore;
 
-document.getElementById('modalContent').innerHTML=`
+ addPoints(earned);
 
-<h2>🚀 Game Over!</h2>
+ document.getElementById(
+  'modalContent'
+ ).innerHTML=`
 
-<p>
-Your Score:
-<strong>${flyScore}</strong>
-</p>
+ <h2>🚀 Game Over!</h2>
 
-<p>
-Points earned:
-<strong>+${earned}</strong>
-</p>
+ <p>
+  Your Score:
+  <strong>${flyScore}</strong>
+ </p>
 
-<button class="btn" onclick="startFlyGame()">
-আবার খেলুন
-</button>
+ <p>
+  Points earned:
+  <strong>+${earned}</strong>
+ </p>
 
-`;
+ <button class="btn"
+  onclick="startFlyGame()">
+  আবার খেলুন
+ </button>
+
+ `;
 
 }
 
@@ -3376,254 +3393,421 @@ let brainQuestion=0;
 let brainScore=0;
 let brainAnswer=0;
 
-
 function startBrainGame(){
 
-stopAllGames();
+ stopAllGames();
 
-brainQuestion=0;
-brainScore=0;
+ brainQuestion=0;
+ brainScore=0;
 
-document.getElementById('modalContent').innerHTML=`
+ document.getElementById(
+  'modalContent'
+ ).innerHTML=`
 
-<h2>🧠 Brain Box</h2>
+ <h2>🧠 Brain Box</h2>
 
-<div class="gameInfo">
+ <div class="gameInfo">
 
-<div>
-Question<br>
-<strong id="brainCount">0</strong>/10
-</div>
+  <div>
+   Question<br>
+   <strong id="brainCount">0</strong>/10
+  </div>
 
-<div>
-Score<br>
-<strong id="brainScore">0</strong>
-</div>
+  <div>
+   Score<br>
+   <strong id="brainScore">0</strong>
+  </div>
 
-</div>
+ </div>
 
-<div id="brainContent"></div>
+ <div id="brainContent"></div>
 
-`;
+ `;
 
-nextBrainQuestion();
+ nextBrainQuestion();
 
 }
 
 
 function nextBrainQuestion(){
 
-brainQuestion++;
+ brainQuestion++;
 
-if(brainQuestion>10){
+ if(brainQuestion>10){
 
-gameFinished();
-addPoints(brainScore);
+  gameFinished();
+  addPoints(brainScore);
 
-document.getElementById('brainContent').innerHTML=`
+  document.getElementById(
+   'brainContent'
+  ).innerHTML=`
 
-<div class="message">
+  <div class="message">
 
-<h2>🧠 Challenge Complete!</h2>
+   <h2>🧠 Challenge Complete!</h2>
 
-<p>
-Score:
-<strong>${brainScore}</strong>
-</p>
+   <p>
+    Score:
+    <strong>${brainScore}</strong>
+   </p>
 
-<p>
-Points earned:
-<strong>+${brainScore}</strong>
-</p>
+   <p>
+    Points earned:
+    <strong>+${brainScore}</strong>
+   </p>
 
-<button class="btn" onclick="startBrainGame()">
-আবার খেলুন
-</button>
+   <button class="btn"
+    onclick="startBrainGame()">
+    আবার খেলুন
+   </button>
 
-</div>
+  </div>
 
-`;
+  `;
 
-return;
+  return;
 
-}
+ }
 
-const a=Math.floor(Math.random()*10)+1;
-const b=Math.floor(Math.random()*10)+1;
+ const a=
+ Math.floor(Math.random()*10)+1;
 
-const operations=['+','-','×'];
+ const b=
+ Math.floor(Math.random()*10)+1;
 
-const op=
-operations[
-Math.floor(Math.random()*operations.length)
-];
+ const operations=['+','-','×'];
 
-if(op==='+')
-brainAnswer=a+b;
+ const op=
+ operations[
+  Math.floor(
+   Math.random()*operations.length
+  )
+ ];
 
-if(op==='-')
-brainAnswer=a-b;
+ if(op==='+')
+ brainAnswer=a+b;
 
-if(op==='×')
-brainAnswer=a*b;
+ if(op==='-')
+ brainAnswer=a-b;
 
-let answers=[
-brainAnswer,
-brainAnswer+1,
-brainAnswer-1,
-brainAnswer+3
-];
+ if(op==='×')
+ brainAnswer=a*b;
 
-answers.sort(()=>Math.random()-0.5);
+ let answers=[
+  brainAnswer,
+  brainAnswer+1,
+  brainAnswer-1,
+  brainAnswer+3
+ ];
 
-document.getElementById('brainCount').textContent=brainQuestion;
+ answers.sort(
+  ()=>Math.random()-0.5
+ );
 
-document.getElementById('brainContent').innerHTML=`
+ document.getElementById(
+  'brainCount'
+ ).textContent=brainQuestion;
 
-<div class="question">
+ document.getElementById(
+  'brainContent'
+ ).innerHTML=`
 
-<div class="questionText">
-${a} ${op} ${b} = ?
-</div>
+ <div class="question">
 
-<div class="answerGrid">
+  <div class="questionText">
+   ${a} ${op} ${b} = ?
+  </div>
 
-${answers.map(function(answer){
+  <div class="answerGrid">
 
-return `
+   ${answers.map(function(answer){
 
-<button onclick="answerBrain(${answer})">
-${answer}
-</button>
+    return `
 
-`;
+    <button
+     onclick="answerBrain(${answer})">
 
-}).join('')}
+     ${answer}
 
-</div>
+    </button>
 
-</div>
+    `;
 
-`;
+   }).join('')}
+
+  </div>
+
+ </div>
+
+ `;
 
 }
 
 
 function answerBrain(answer){
 
-if(answer===brainAnswer){
+ if(answer===brainAnswer){
 
-brainScore+=10;
+  brainScore+=10;
 
-document.getElementById('brainScore').textContent=brainScore;
+  document.getElementById(
+   'brainScore'
+  ).textContent=brainScore;
 
-}
+ }
 
-nextBrainQuestion();
+ nextBrainQuestion();
 
 }
 
 
 /* =====================================================
-STOP GAMES
+   STOP GAMES
 ===================================================== */
 
 function stopAllGames(){
 
-gameRunning=false;
+ gameRunning=false;
 
-if(gameTimer){
+ if(gameTimer){
 
-clearInterval(gameTimer);
-gameTimer=null;
+  clearInterval(gameTimer);
+  gameTimer=null;
 
-}
+ }
 
-flyRunning=false;
+ flyRunning=false;
 
-if(flyFrame){
+ if(flyFrame){
 
-cancelAnimationFrame(flyFrame);
-flyFrame=null;
+  cancelAnimationFrame(
+   flyFrame
+  );
 
-}
+  flyFrame=null;
+
+ }
 
 }
 
 
 /* =====================================================
-HELPERS
+   ADMIN
 ===================================================== */
 
-function formatDate(date){
+async function isCurrentUserAdmin(){
 
-if(!date)return '';
+ if(!currentUser||!supabaseClient)
+ return false;
 
-try{
+ try{
 
-return new Date(date).toLocaleString(
-'bn-BD',
-{
-year:'numeric',
-month:'short',
-day:'numeric'
-}
-);
+  const {data,error}=
+  await supabaseClient
+  .from('profiles')
+  .select('role')
+  .eq('id',currentUser.id)
+  .single();
 
-}catch(error){
+  return(
+   !error &&
+   data?.role==='admin'
+  );
 
-return '';
+ }catch(error){
 
-}
+  return false;
 
-}
-
-
-function escapeHTML(value){
-
-return String(value??'')
-.replace(
-/[&<>"']/g,
-function(m){
-
-return {
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[m];
-
-}
-);
+ }
 
 }
 
 
-function setText(id,value){
+async function updateAdminUI(){
 
-const el=document.getElementById(id);
+ const btn=
+ document.getElementById('adminNavBtn');
 
-if(el)
-el.textContent=
-Number(value||0).toLocaleString();
+ if(!btn)return;
+
+ let isAdmin=false;
+
+ if(currentUser&&supabaseClient){
+
+  try{
+
+   const {data,error}=
+   await supabaseClient.rpc(
+    'is_current_user_admin'
+   );
+
+   isAdmin=
+   !error &&
+   data===true;
+
+  }catch(error){
+
+   isAdmin=false;
+
+  }
+
+ }
+
+ btn.classList.toggle(
+  'hidden',
+  !isAdmin
+ );
+
+ btn.classList.toggle(
+  'adminVisible',
+  isAdmin
+ );
+
+}
+
+
+async function loadAdminDashboard(){
+
+ const status=
+ document.getElementById('adminStatus');
+
+ const nav=
+ document.getElementById('adminNavBtn');
+
+ if(!currentUser){
+
+  if(nav){
+
+   nav.classList.add('hidden');
+   nav.classList.remove('adminVisible');
+
+  }
+
+  if(status){
+
+   status.className='status error';
+   status.textContent=
+   'Admin login প্রয়োজন।';
+
+  }
+
+  return;
+
+ }
+
+ const admin=
+ await isCurrentUserAdmin();
+
+ if(!admin){
+
+  if(nav){
+
+   nav.classList.add('hidden');
+   nav.classList.remove('adminVisible');
+
+  }
+
+  if(status){
+
+   status.className='status error';
+   status.textContent=
+   'এই account-এর Admin permission নেই।';
+
+  }
+
+  return;
+
+ }
+
+ if(nav){
+
+  nav.classList.remove('hidden');
+  nav.classList.add('adminVisible');
+
+ }
+
+ if(status){
+
+  status.className='status warning';
+  status.textContent=
+  'Dashboard লোড হচ্ছে...';
+
+ }
+
+ try{
+
+  const {data,error}=
+  await supabaseClient.rpc(
+   'admin_dashboard_stats'
+  );
+
+  if(error)
+  throw error;
+
+  const d=data||{};
+
+  const set=function(id,value){
+
+   const el=
+   document.getElementById(id);
+
+   if(el){
+
+    el.textContent=
+    Number(value||0).toLocaleString();
+
+   }
+
+  };
+
+  set('adminUsers',d.users);
+  set('adminJobs',d.jobs);
+  set('adminApplications',d.applications);
+  set('adminSponsors',d.sponsors);
+  set('adminPayouts',d.payouts);
+  set('adminPendingPayouts',d.pending_payouts);
+  set('adminOpenJobs',d.open_jobs);
+  set('adminPendingApplications',d.pending_applications);
+  set('adminPendingSponsors',d.pending_sponsors);
+  set('adminTotalPoints',d.total_points);
+
+  if(status){
+
+   status.className='status success';
+   status.textContent=
+   'Admin Dashboard চালু আছে।';
+
+  }
+
+ }catch(error){
+
+  console.log(error);
+
+  if(status){
+
+   status.className='status error';
+   status.textContent=
+   'Dashboard load failed: '+
+   (error.message||'Unknown error');
+
+  }
+
+ }
 
 }
 
 
 /* =====================================================
-STARTUP
+   STARTUP
 ===================================================== */
 
 render();
 
-if(supabaseClient){
+updateUserUI();
 
 loadSupabaseUser();
 
 loadJobsFromSupabase();
-
-}
 
 </script>
 
