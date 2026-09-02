@@ -15,14 +15,17 @@ body{
   background:#081522;
   color:#fff;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
+  font-size:16px;
 }
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+
 .wrap{
   max-width:760px;
   margin:auto;
   padding-bottom:90px;
 }
+
 header{
   position:sticky;
   top:0;
@@ -31,44 +34,65 @@ header{
   border-bottom:1px solid #19344c;
   padding:14px 16px;
 }
+
 .logo{
-  font-size:25px;
+  font-size:27px;
   font-weight:900;
   color:#00e5ff;
 }
+
 .tag{
   color:#9eb3c7;
-  font-size:13px;
-  margin-top:3px;
+  font-size:14px;
+  margin-top:4px;
 }
+
 .top-user{
   margin-top:9px;
-  font-size:13px;
+  font-size:14px;
   color:#b7c9d8;
+  word-break:break-word;
 }
+
 nav{
   display:flex;
   gap:7px;
   overflow-x:auto;
   padding:10px 0 2px;
 }
+
 nav button{
   flex:0 0 auto;
   border:1px solid #244761;
   background:#102a40;
   color:#dff8ff;
   border-radius:10px;
-  padding:9px 12px;
+  padding:10px 13px;
+  font-size:15px;
 }
+
 nav button.active{
   background:#00bcd4;
   color:#00141b;
   border-color:#00e5ff;
   font-weight:bold;
 }
-main{padding:16px}
-.page{display:none}
-.page.active{display:block}
+
+#navLogout{
+  display:none;
+}
+
+main{
+  padding:16px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
 
 .hero{
   background:linear-gradient(135deg,#0c2940,#09202f);
@@ -77,14 +101,17 @@ main{padding:16px}
   padding:22px;
   margin-bottom:15px;
 }
+
 .hero h1{
   margin:0 0 8px;
-  font-size:29px;
+  font-size:31px;
 }
+
 .hero p{
   margin:0;
   color:#b7c9d8;
-  line-height:1.6;
+  line-height:1.7;
+  font-size:16px;
 }
 
 .grid{
@@ -92,9 +119,13 @@ main{padding:16px}
   grid-template-columns:repeat(2,1fr);
   gap:12px;
 }
+
 @media(max-width:520px){
-  .grid{grid-template-columns:1fr}
+  .grid{
+    grid-template-columns:1fr;
+  }
 }
+
 .card{
   background:#0d2133;
   border:1px solid #1b3b52;
@@ -102,62 +133,85 @@ main{padding:16px}
   padding:16px;
   margin-bottom:12px;
 }
+
+.card h2{
+  font-size:23px;
+}
+
 .card h3,.card h4{
   margin:0 0 8px;
 }
+
 .muted{
   color:#9eb3c7;
-  font-size:13px;
+  font-size:14px;
+  line-height:1.55;
 }
+
 .small{
-  font-size:12px;
+  font-size:13px;
   color:#91a9bb;
+  line-height:1.5;
 }
+
 .points{
-  font-size:28px;
+  font-size:29px;
   font-weight:900;
   color:#00e5ff;
 }
+
 .stat{
   text-align:center;
 }
+
 .stat .num{
-  font-size:26px;
+  font-size:27px;
   font-weight:900;
   color:#00e5ff;
 }
+
 .stat .lbl{
   color:#9eb3c7;
-  font-size:12px;
+  font-size:14px;
+  margin-top:4px;
 }
 
 .btn{
   border:0;
   border-radius:11px;
-  padding:10px 14px;
+  padding:11px 15px;
   background:#00bcd4;
   color:#00141b;
   font-weight:bold;
   margin:3px;
+  font-size:15px;
 }
-.btn:hover{filter:brightness(1.08)}
+
+.btn:hover{
+  filter:brightness(1.08);
+}
+
 .btn.secondary{
   background:#17344b;
   color:#dff8ff;
   border:1px solid #2a5069;
 }
+
 .btn.success{
   background:#16c784;
   color:#001b12;
 }
+
 .btn.danger{
   background:#ef5350;
   color:#fff;
 }
+
 .btn.warning{
   background:#ffb300;
   color:#171000;
 }
+
 .btn.dark{
   background:#10202f;
   color:#bcd0de;
@@ -167,24 +221,30 @@ main{padding:16px}
 .form-group{
   margin-bottom:12px;
 }
+
 label{
   display:block;
   margin-bottom:6px;
   color:#c9d8e3;
-  font-size:13px;
+  font-size:14px;
+  font-weight:600;
 }
+
 input,textarea,select{
   width:100%;
   border:1px solid #294a61;
   background:#081824;
   color:#fff;
   border-radius:10px;
-  padding:11px 12px;
+  padding:12px;
   outline:none;
+  font-size:15px;
 }
+
 input:focus,textarea:focus,select:focus{
   border-color:#00bcd4;
 }
+
 textarea{
   min-height:100px;
   resize:vertical;
@@ -194,40 +254,70 @@ textarea{
   display:inline-block;
   padding:5px 9px;
   border-radius:20px;
-  font-size:11px;
+  font-size:12px;
   font-weight:bold;
 }
-.badge.open{background:#164f63;color:#70edff}
-.badge.pending{background:#59440c;color:#ffd86b}
-.badge.accepted{background:#0c563f;color:#5ff2bc}
-.badge.rejected{background:#5b2020;color:#ff8d8d}
-.badge.closed{background:#303943;color:#aeb9c2}
-.badge.admin{background:#4b2164;color:#e9aaff}
+
+.badge.open{
+  background:#164f63;
+  color:#70edff;
+}
+
+.badge.pending{
+  background:#59440c;
+  color:#ffd86b;
+}
+
+.badge.accepted{
+  background:#0c563f;
+  color:#5ff2bc;
+}
+
+.badge.rejected{
+  background:#5b2020;
+  color:#ff8d8d;
+}
+
+.badge.closed{
+  background:#303943;
+  color:#aeb9c2;
+}
+
+.badge.admin{
+  background:#4b2164;
+  color:#e9aaff;
+}
 
 .job-title{
-  font-size:18px;
+  font-size:19px;
   font-weight:bold;
 }
+
 .job-meta{
   color:#9eb3c7;
-  font-size:13px;
+  font-size:14px;
   margin:6px 0;
 }
+
 .job-desc{
   color:#d1dce5;
-  line-height:1.55;
+  line-height:1.65;
   margin:10px 0;
+  font-size:15px;
 }
+
 .budget{
   color:#ffd166;
   font-weight:bold;
 }
+
 .row{
   display:flex;
   gap:8px;
   align-items:center;
   flex-wrap:wrap;
 }
+
 .space{
   display:flex;
   justify-content:space-between;
@@ -237,24 +327,35 @@ textarea{
 }
 
 .notice{
-  padding:12px;
+  padding:13px;
   border-radius:11px;
   background:#102c40;
   border:1px solid #24536c;
   color:#cceaf4;
   margin-bottom:12px;
-  line-height:1.5;
+  line-height:1.6;
+  font-size:14px;
 }
+
 .error{
   color:#ff9d9d;
 }
+
 .success-text{
   color:#65f0ba;
 }
+
 .empty{
   text-align:center;
   color:#91a9bb;
   padding:20px;
+  line-height:1.6;
+}
+
+.loading{
+  padding:15px;
+  text-align:center;
+  color:#8fa8ba;
 }
 
 .modal{
@@ -267,7 +368,11 @@ textarea{
   z-index:1000;
   padding:15px;
 }
-.modal.show{display:flex}
+
+.modal.show{
+  display:flex;
+}
+
 .modal-box{
   width:100%;
   max-width:520px;
@@ -279,6 +384,7 @@ textarea{
   padding:18px;
   position:relative;
 }
+
 .modal-close{
   position:absolute;
   right:12px;
@@ -286,10 +392,11 @@ textarea{
   border:0;
   background:transparent;
   color:#a9c0cf;
-  font-size:25px;
+  font-size:27px;
 }
+
 .modal-title{
-  font-size:21px;
+  font-size:22px;
   font-weight:bold;
   margin-bottom:15px;
 }
@@ -297,6 +404,7 @@ textarea{
 .game{
   text-align:center;
 }
+
 .game-area{
   position:relative;
   min-height:260px;
@@ -306,6 +414,7 @@ textarea{
   overflow:hidden;
   margin:10px 0;
 }
+
 .tap-target{
   position:absolute;
   width:52px;
@@ -319,12 +428,14 @@ textarea{
   font-weight:900;
   user-select:none;
 }
+
 .memory-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:8px;
   padding:12px;
 }
+
 .memory-card{
   height:65px;
   border-radius:10px;
@@ -333,15 +444,18 @@ textarea{
   color:transparent;
   font-size:23px;
 }
+
 .memory-card.open{
   color:#fff;
   background:#164a61;
 }
+
 .quiz-question{
   font-size:18px;
   line-height:1.5;
   margin:15px 0;
 }
+
 .quiz-option{
   width:100%;
   margin:5px 0;
@@ -355,19 +469,17 @@ textarea{
   background:#081a28;
 }
 
-.admin-only{display:none}
-.loading{
-  padding:15px;
-  text-align:center;
-  color:#8fa8ba;
+.admin-only{
+  display:none;
 }
 
 footer{
   text-align:center;
   padding:20px 10px;
   color:#647d8e;
-  font-size:12px;
+  font-size:13px;
 }
+
 hr{
   border:0;
   border-top:1px solid #1d3a4e;
@@ -381,255 +493,610 @@ hr{
 <div class="wrap">
 
 <header>
+
   <div class="logo">PLAYZONE</div>
-  <div class="tag">খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</div>
-  <div id="topUser" class="top-user">Guest</div>
+
+  <div class="tag">
+    খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন
+  </div>
+
+  <div id="topUser" class="top-user">
+    Guest • Login করুন
+  </div>
 
   <nav>
-    <button id="navHome" onclick="showPage('home')">🏠 Home</button>
-    <button id="navJobs" onclick="showPage('jobs')">💼 Jobs</button>
-    <button id="navProfile" onclick="showPage('profile')">👤 Profile</button>
-    <button id="navAdmin" class="admin-only" onclick="showPage('admin')">🛡️ Admin</button>
+
+    <button
+      id="navHome"
+      onclick="showPage('home')">
+      🏠 Home
+    </button>
+
+    <button
+      id="navJobs"
+      onclick="showPage('jobs')">
+      💼 Jobs
+    </button>
+
+    <button
+      id="navProfile"
+      onclick="showPage('profile')">
+      👤 Profile
+    </button>
+
+    <button
+      id="navAdmin"
+      class="admin-only"
+      onclick="showPage('admin')">
+      🛡️ Admin
+    </button>
+
+    <!-- NEW REAL LOGOUT BUTTON -->
+    <button
+      id="navLogout"
+      onclick="logoutUser()">
+      🚪 Logout
+    </button>
+
   </nav>
+
 </header>
+
 
 <main>
 
-<!-- HOME -->
+<!-- =====================================================
+     HOME
+===================================================== -->
+
 <section id="page-home" class="page active">
 
   <div class="hero">
+
     <h1>PLAYZONE</h1>
+
     <p>
       আপনার দক্ষতা দেখান, গেম খেলুন, Points অর্জন করুন এবং
       কাজের সুযোগ খুঁজে নিন।
     </p>
+
     <div class="row" style="margin-top:14px">
-      <button class="btn" onclick="showPage('jobs')">💼 Jobs দেখুন</button>
-      <button class="btn secondary" onclick="openModal('auth')">🔐 Login / Register</button>
+
+      <button
+        class="btn"
+        onclick="showPage('jobs')">
+        💼 Jobs দেখুন
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="openModal('auth')">
+        🔐 Login / Register
+      </button>
+
     </div>
+
   </div>
 
+
   <div class="grid">
+
     <div class="card stat">
       <div class="num" id="homePoints">1000</div>
       <div class="lbl">Virtual Points</div>
     </div>
+
     <div class="card stat">
       <div class="num" id="homeGames">0</div>
       <div class="lbl">Games Played</div>
     </div>
+
     <div class="card stat">
       <div class="num" id="homeJobs">0</div>
       <div class="lbl">Available Jobs</div>
     </div>
+
     <div class="card stat">
       <div class="num" id="homeApps">0</div>
       <div class="lbl">My Applications</div>
     </div>
+
   </div>
 
+
   <h2>🎮 Skill Games</h2>
+
 
   <div class="grid">
 
     <div class="card">
+
       <h3>⚡ Tap Rush</h3>
-      <p class="muted">৩০ সেকেন্ডে যত বেশি Target tap করতে পারবেন।</p>
-      <button class="btn" onclick="openModal('tapGame')">Play</button>
+
+      <p class="muted">
+        ৩০ সেকেন্ডে যত বেশি Target tap করতে পারবেন।
+      </p>
+
+      <button
+        class="btn"
+        onclick="openModal('tapGame')">
+        Play
+      </button>
+
     </div>
 
+
     <div class="card">
+
       <h3>🧠 Match Seven</h3>
-      <p class="muted">Matching pair খুঁজে Points অর্জন করুন।</p>
-      <button class="btn" onclick="openModal('matchGame')">Play</button>
+
+      <p class="muted">
+        Matching pair খুঁজে Points অর্জন করুন।
+      </p>
+
+      <button
+        class="btn"
+        onclick="openModal('matchGame')">
+        Play
+      </button>
+
     </div>
 
+
     <div class="card">
+
       <h3>🚀 Fly High</h3>
-      <p class="muted">Obstacle এ ধাক্কা না খেয়ে যত দূর সম্ভব যান।</p>
-      <button class="btn" onclick="openModal('flyGame')">Play</button>
+
+      <p class="muted">
+        Obstacle এ ধাক্কা না খেয়ে যত দূর সম্ভব যান।
+      </p>
+
+      <button
+        class="btn"
+        onclick="openModal('flyGame')">
+        Play
+      </button>
+
     </div>
 
+
     <div class="card">
+
       <h3>❓ Brain Box</h3>
-      <p class="muted">Quiz উত্তর দিয়ে Points অর্জন করুন।</p>
-      <button class="btn" onclick="openModal('brainGame')">Play</button>
+
+      <p class="muted">
+        Quiz উত্তর দিয়ে Points অর্জন করুন।
+      </p>
+
+      <button
+        class="btn"
+        onclick="openModal('brainGame')">
+        Play
+      </button>
+
     </div>
 
   </div>
 
 </section>
 
-<!-- JOBS -->
+
+<!-- =====================================================
+     JOBS
+===================================================== -->
+
 <section id="page-jobs" class="page">
 
   <div class="space">
+
     <div>
-      <h2 style="margin-bottom:4px">💼 Skill & Job Hub</h2>
-      <div class="muted">দক্ষতা অনুযায়ী কাজ খুঁজুন এবং Apply করুন।</div>
+
+      <h2 style="margin-bottom:4px">
+        💼 Skill & Job Hub
+      </h2>
+
+      <div class="muted">
+        দক্ষতা অনুযায়ী কাজ খুঁজুন এবং Apply করুন।
+      </div>
+
     </div>
-    <button class="btn secondary" onclick="loadJobsFromSupabase()">↻ Refresh</button>
+
+    <button
+      class="btn secondary"
+      onclick="loadJobsFromSupabase()">
+      ↻ Refresh
+    </button>
+
   </div>
+
 
   <div class="notice">
-    <b>Skills:</b> Graphic Design • Video Editing • Data Entry • Digital Marketing
+
+    <b>Skills:</b>
+    Graphic Design • Video Editing • Data Entry • Digital Marketing
+
   </div>
 
+
   <div id="jobsList">
-    <div class="loading">Jobs loading...</div>
+
+    <div class="loading">
+      Jobs loading...
+    </div>
+
   </div>
+
 
   <hr>
 
+
   <div class="card">
+
     <h3>➕ নতুন Job পোস্ট করুন</h3>
 
     <div class="form-group">
+
       <label>Job Title</label>
-      <input id="jobTitle" placeholder="যেমন: Facebook পোস্ট ডিজাইন">
+
+      <input
+        id="jobTitle"
+        placeholder="যেমন: Facebook পোস্ট ডিজাইন">
+
     </div>
 
+
     <div class="form-group">
+
       <label>Skill</label>
+
       <select id="jobSkill">
+
         <option>Graphic Design</option>
         <option>Video Editing</option>
         <option>Data Entry</option>
         <option>Digital Marketing</option>
         <option>Other</option>
+
       </select>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Description</label>
-      <textarea id="jobDescription" placeholder="কাজের বিস্তারিত লিখুন"></textarea>
+
+      <textarea
+        id="jobDescription"
+        placeholder="কাজের বিস্তারিত লিখুন"></textarea>
+
     </div>
+
 
     <div class="form-group">
+
       <label>Budget</label>
-      <input id="jobBudget" placeholder="যেমন: আলোচনা সাপেক্ষ / 500 BDT">
+
+      <input
+        id="jobBudget"
+        placeholder="যেমন: আলোচনা সাপেক্ষ / 500 BDT">
+
     </div>
 
-    <button class="btn" onclick="addJob()">Post Job</button>
+
+    <button
+      class="btn"
+      onclick="addJob()">
+      Post Job
+    </button>
+
   </div>
 
+
   <div class="card">
+
     <h3>📨 আমার Applications</h3>
-    <button class="btn secondary" onclick="loadMyApplications()">Refresh Applications</button>
-    <div id="myApplications" style="margin-top:10px">
-      <div class="empty">Login করলে আপনার Applications এখানে দেখা যাবে।</div>
+
+    <button
+      class="btn secondary"
+      onclick="loadMyApplications()">
+      Refresh Applications
+    </button>
+
+    <div
+      id="myApplications"
+      style="margin-top:10px">
+
+      <div class="empty">
+        Login করলে আপনার Applications এখানে দেখা যাবে।
+      </div>
+
     </div>
+
   </div>
 
 </section>
 
-<!-- PROFILE -->
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
 <section id="page-profile" class="page">
 
   <div class="card">
+
     <h2>👤 Profile</h2>
 
+
     <div id="profileGuest">
+
       <div class="notice">
         Profile দেখতে Login করুন।
       </div>
-      <button class="btn" onclick="openModal('auth')">Login / Register</button>
+
+      <button
+        class="btn"
+        onclick="openModal('auth')">
+        Login / Register
+      </button>
+
     </div>
 
-    <div id="profileUser" style="display:none">
+
+    <div
+      id="profileUser"
+      style="display:none">
+
 
       <div class="space">
+
         <div>
-          <div class="muted">Name</div>
-          <div id="profileName" style="font-size:22px;font-weight:bold"></div>
+
+          <div class="muted">
+            Name
+          </div>
+
+          <div
+            id="profileName"
+            style="font-size:22px;font-weight:bold">
+          </div>
+
         </div>
 
-        <span id="profileAdminBadge" class="badge admin" style="display:none">ADMIN</span>
+
+        <span
+          id="profileAdminBadge"
+          class="badge admin"
+          style="display:none">
+          ADMIN
+        </span>
+
       </div>
+
 
       <hr>
 
+
       <div class="grid">
-        <div class="card">
-          <div class="muted">Points</div>
-          <div id="profilePoints" class="points">1000</div>
-        </div>
 
         <div class="card">
-          <div class="muted">Games Played</div>
-          <div id="profileGames" class="points">0</div>
+
+          <div class="muted">
+            Points
+          </div>
+
+          <div
+            id="profilePoints"
+            class="points">
+            1000
+          </div>
+
         </div>
+
+
+        <div class="card">
+
+          <div class="muted">
+            Games Played
+          </div>
+
+          <div
+            id="profileGames"
+            class="points">
+            0
+          </div>
+
+        </div>
+
       </div>
+
 
       <div class="form-group">
-        <label>Skill Profile</label>
+
+        <label>
+          Skill Profile
+        </label>
+
         <select id="profileSkill">
-          <option value="">Skill নির্বাচন করুন</option>
-          <option>Graphic Design</option>
-          <option>Video Editing</option>
-          <option>Data Entry</option>
-          <option>Digital Marketing</option>
+
+          <option value="">
+            Skill নির্বাচন করুন
+          </option>
+
+          <option>
+            Graphic Design
+          </option>
+
+          <option>
+            Video Editing
+          </option>
+
+          <option>
+            Data Entry
+          </option>
+
+          <option>
+            Digital Marketing
+          </option>
+
         </select>
+
       </div>
 
-      <button class="btn" onclick="saveSkill()">Save Skill</button>
-      <button class="btn danger" onclick="logoutUser()">Logout</button>
+
+      <button
+        class="btn"
+        onclick="saveSkill()">
+        Save Skill
+      </button>
+
+
+      <button
+        class="btn danger"
+        onclick="logoutUser()">
+        🚪 Logout
+      </button>
 
     </div>
+
   </div>
 
 </section>
 
-<!-- ADMIN -->
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
 <section id="page-admin" class="page">
 
   <div class="card">
+
     <div class="space">
+
       <div>
-        <h2>🛡️ Admin Dashboard</h2>
-        <div class="muted">শুধুমাত্র Admin ব্যবহার করতে পারবেন।</div>
+
+        <h2>
+          🛡️ Admin Dashboard
+        </h2>
+
+        <div class="muted">
+          শুধুমাত্র Admin ব্যবহার করতে পারবেন।
+        </div>
+
       </div>
-      <span class="badge admin">ADMIN</span>
+
+      <span class="badge admin">
+        ADMIN
+      </span>
+
     </div>
+
   </div>
+
 
   <div id="adminStats" class="grid">
-    <div class="card stat"><div class="num">0</div><div class="lbl">Users</div></div>
-    <div class="card stat"><div class="num">0</div><div class="lbl">Jobs</div></div>
-    <div class="card stat"><div class="num">0</div><div class="lbl">Applications</div></div>
-    <div class="card stat"><div class="num">0</div><div class="lbl">Sponsors</div></div>
-    <div class="card stat"><div class="num">0</div><div class="lbl">Payouts</div></div>
-    <div class="card stat"><div class="num">0</div><div class="lbl">Pending Payouts</div></div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Users</div>
+    </div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Jobs</div>
+    </div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Applications</div>
+    </div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Sponsors</div>
+    </div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Payouts</div>
+    </div>
+
+    <div class="card stat">
+      <div class="num">0</div>
+      <div class="lbl">Pending Payouts</div>
+    </div>
+
   </div>
 
+
   <div class="card">
+
     <div class="space">
+
       <div>
-        <h3>📨 All Applications</h3>
+
+        <h3>
+          📨 All Applications
+        </h3>
+
         <div class="muted">
           Application status পরিবর্তন করার ক্ষমতা শুধু Admin-এর।
         </div>
+
       </div>
-      <button class="btn secondary" onclick="adminLoadApplications()">↻ Refresh</button>
+
+      <button
+        class="btn secondary"
+        onclick="adminLoadApplications()">
+        ↻ Refresh
+      </button>
+
     </div>
 
-    <div id="adminApplications" style="margin-top:12px">
-      <div class="empty">Applications loading...</div>
+
+    <div
+      id="adminApplications"
+      style="margin-top:12px">
+
+      <div class="empty">
+        Applications loading...
+      </div>
+
     </div>
+
   </div>
 
+
   <div class="card">
-    <h3>💼 Jobs Management</h3>
-    <button class="btn secondary" onclick="adminLoadJobs()">Refresh Jobs</button>
-    <div id="adminJobs" style="margin-top:12px">
-      <div class="empty">Jobs এখানে দেখা যাবে।</div>
+
+    <h3>
+      💼 Jobs Management
+    </h3>
+
+    <button
+      class="btn secondary"
+      onclick="adminLoadJobs()">
+      Refresh Jobs
+    </button>
+
+    <div
+      id="adminJobs"
+      style="margin-top:12px">
+
+      <div class="empty">
+        Jobs এখানে দেখা যাবে।
+      </div>
+
     </div>
+
   </div>
 
 </section>
 
 </main>
+
 
 <footer>
   PLAYZONE — Skill & Opportunity Platform
@@ -638,155 +1105,404 @@ hr{
 </div>
 
 
-<!-- AUTH MODAL -->
+<!-- =====================================================
+     AUTH MODAL
+===================================================== -->
+
 <div id="modal-auth" class="modal">
+
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">🔐 PLAYZONE Account</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
+
+
+    <div class="modal-title">
+      🔐 PLAYZONE Account
+    </div>
+
 
     <div class="form-group">
-      <label>Name — Register করার সময়</label>
-      <input id="authName" placeholder="আপনার নাম">
+
+      <label>
+        Name — Register করার সময়
+      </label>
+
+      <input
+        id="authName"
+        placeholder="আপনার নাম">
+
     </div>
+
 
     <div class="form-group">
-      <label>Email</label>
-      <input id="authEmail" type="email" placeholder="you@example.com">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="you@example.com">
+
     </div>
+
 
     <div class="form-group">
-      <label>Password</label>
-      <input id="authPassword" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="কমপক্ষে ৬ অক্ষর">
+
     </div>
 
-    <div id="authMessage" class="small"></div>
 
-    <div class="row" style="margin-top:12px">
-      <button class="btn" onclick="registerUser()">Register</button>
-      <button class="btn secondary" onclick="loginUser()">Login</button>
+    <div
+      id="authMessage"
+      class="small">
     </div>
+
+
+    <div
+      class="row"
+      style="margin-top:12px">
+
+      <button
+        class="btn"
+        onclick="registerUser()">
+        Register
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="loginUser()">
+        Login
+      </button>
+
+    </div>
+
   </div>
+
 </div>
 
 
-<!-- APPLY MODAL -->
+<!-- =====================================================
+     APPLY MODAL
+===================================================== -->
+
 <div id="modal-apply" class="modal">
+
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">📨 Apply for Job</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div id="applyJobInfo" class="notice"></div>
 
-    <div class="form-group">
-      <label>আপনার Message / Proposal</label>
-      <textarea id="applicationMessage"
-        placeholder="আপনি কেন এই কাজটি করতে পারবেন তা লিখুন"></textarea>
+    <div class="modal-title">
+      📨 Apply for Job
     </div>
 
-    <div id="applyMessage" class="small"></div>
 
-    <button class="btn success" onclick="submitJobApplication()">Submit Application</button>
+    <div
+      id="applyJobInfo"
+      class="notice">
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        আপনার Message / Proposal
+      </label>
+
+      <textarea
+        id="applicationMessage"
+        placeholder="আপনি কেন এই কাজটি করতে পারবেন তা লিখুন"></textarea>
+
+    </div>
+
+
+    <div
+      id="applyMessage"
+      class="small">
+    </div>
+
+
+    <button
+      class="btn success"
+      onclick="submitJobApplication()">
+      Submit Application
+    </button>
+
   </div>
+
 </div>
 
 
-<!-- VIEW APPLICATIONS MODAL -->
-<div id="modal-view-applications" class="modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
+<!-- =====================================================
+     VIEW APPLICATIONS MODAL
+===================================================== -->
 
-    <div class="modal-title">📨 Job Applications</div>
+<div id="modal-view-applications" class="modal">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
+
+
+    <div class="modal-title">
+      📨 Job Applications
+    </div>
+
 
     <div id="jobApplicationsList">
-      <div class="loading">Loading...</div>
+
+      <div class="loading">
+        Loading...
+      </div>
+
     </div>
+
   </div>
+
 </div>
 
 
-<!-- TAP GAME -->
+<!-- =====================================================
+     TAP GAME
+===================================================== -->
+
 <div id="modal-tapGame" class="modal">
+
   <div class="modal-box game">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">⚡ Tap Rush</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div class="space">
-      <b>Score: <span id="tapScore">0</span></b>
-      <b>Time: <span id="tapTime">30</span>s</b>
+
+    <div class="modal-title">
+      ⚡ Tap Rush
     </div>
 
-    <div id="tapArea" class="game-area"></div>
 
-    <button class="btn" onclick="startTapGame()">Start Game</button>
+    <div class="space">
+
+      <b>
+        Score:
+        <span id="tapScore">0</span>
+      </b>
+
+      <b>
+        Time:
+        <span id="tapTime">30</span>s
+      </b>
+
+    </div>
+
+
+    <div
+      id="tapArea"
+      class="game-area">
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="startTapGame()">
+      Start Game
+    </button>
+
   </div>
+
 </div>
 
 
-<!-- MATCH GAME -->
+<!-- =====================================================
+     MATCH GAME
+===================================================== -->
+
 <div id="modal-matchGame" class="modal">
+
   <div class="modal-box game">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">🧠 Match Seven</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div class="space">
-      <b>Score: <span id="matchScore">0</span></b>
+
+    <div class="modal-title">
+      🧠 Match Seven
     </div>
 
-    <div id="memoryGrid" class="memory-grid"></div>
 
-    <button class="btn" onclick="startMatchGame()">Start / Restart</button>
+    <div class="space">
+
+      <b>
+        Score:
+        <span id="matchScore">0</span>
+      </b>
+
+    </div>
+
+
+    <div
+      id="memoryGrid"
+      class="memory-grid">
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="startMatchGame()">
+      Start / Restart
+    </button>
+
   </div>
+
 </div>
 
 
-<!-- FLY GAME -->
+<!-- =====================================================
+     FLY GAME
+===================================================== -->
+
 <div id="modal-flyGame" class="modal">
+
   <div class="modal-box game">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">🚀 Fly High</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div class="space">
-      <b>Score: <span id="flyScore">0</span></b>
+
+    <div class="modal-title">
+      🚀 Fly High
     </div>
 
-    <canvas id="flyCanvas" width="700" height="260"></canvas>
 
-    <button class="btn" onclick="startFlyGame()">Start Game</button>
-    <button class="btn secondary" onclick="flyJump()">Jump</button>
+    <div class="space">
+
+      <b>
+        Score:
+        <span id="flyScore">0</span>
+      </b>
+
+    </div>
+
+
+    <canvas
+      id="flyCanvas"
+      width="700"
+      height="260">
+    </canvas>
+
+
+    <button
+      class="btn"
+      onclick="startFlyGame()">
+      Start Game
+    </button>
+
+
+    <button
+      class="btn secondary"
+      onclick="flyJump()">
+      Jump
+    </button>
+
   </div>
+
 </div>
 
 
-<!-- BRAIN GAME -->
-<div id="modal-brainGame" class="modal">
-  <div class="modal-box game">
-    <button class="modal-close" onclick="closeModal()">×</button>
+<!-- =====================================================
+     BRAIN GAME
+===================================================== -->
 
-    <div class="modal-title">❓ Brain Box</div>
+<div id="modal-brainGame" class="modal">
+
+  <div class="modal-box game">
+
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
+
+
+    <div class="modal-title">
+      ❓ Brain Box
+    </div>
+
 
     <div id="quizBox">
-      <div class="empty">Start চাপুন</div>
+
+      <div class="empty">
+        Start চাপুন
+      </div>
+
     </div>
 
-    <button class="btn" onclick="startBrainGame()">Start Quiz</button>
+
+    <button
+      class="btn"
+      onclick="startBrainGame()">
+      Start Quiz
+    </button>
+
   </div>
+
 </div>
 
 
-<!-- JOB DETAIL MODAL -->
+<!-- =====================================================
+     JOB DETAIL MODAL
+===================================================== -->
+
 <div id="modal-jobDetail" class="modal">
+
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
 
-    <div class="modal-title">💼 Job Details</div>
+    <button
+      class="modal-close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div id="jobDetailContent"></div>
+
+    <div class="modal-title">
+      💼 Job Details
+    </div>
+
+
+    <div id="jobDetailContent">
+    </div>
+
   </div>
+
 </div>
 
 
@@ -835,12 +1551,14 @@ let flyCtx = null;
 let flyFrame = null;
 let flyScore = 0;
 let flyRunning = false;
+
 let flyPlayer = {
   x:80,
   y:120,
   vy:0,
   size:18
 };
+
 let flyObstacles = [];
 
 let quizIndex = 0;
@@ -852,70 +1570,173 @@ let quizScore = 0;
 ========================================================= */
 
 function escapeHTML(value){
+
   return String(value ?? '')
     .replace(/&/g,'&amp;')
     .replace(/</g,'&lt;')
     .replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;')
     .replace(/'/g,'&#039;');
+
 }
+
 
 function safeDate(date){
+
   try{
-    return new Date(date).toLocaleString('bn-BD');
+
+    return new Date(date)
+      .toLocaleString('bn-BD');
+
   }catch(e){
+
     return '';
+
   }
+
 }
+
 
 function getPoints(){
-  return Number(localStorage.getItem('pz_points') || 1000);
+
+  return Number(
+    localStorage.getItem('pz_points') || 1000
+  );
+
 }
+
 
 function setPoints(value){
-  localStorage.setItem('pz_points', String(Math.max(0,Math.floor(value))));
+
+  localStorage.setItem(
+    'pz_points',
+    String(
+      Math.max(
+        0,
+        Math.floor(value)
+      )
+    )
+  );
+
   updatePointsUI();
+
 }
+
 
 function addPoints(value){
-  setPoints(getPoints()+Number(value||0));
+
+  setPoints(
+    getPoints()+Number(value||0)
+  );
+
 }
+
 
 function getGamesPlayed(){
-  return Number(localStorage.getItem('pz_games_played') || 0);
+
+  return Number(
+    localStorage.getItem('pz_games_played') || 0
+  );
+
 }
+
 
 function addGamePlayed(){
-  const n = getGamesPlayed()+1;
-  localStorage.setItem('pz_games_played',String(n));
+
+  const n =
+    getGamesPlayed()+1;
+
+  localStorage.setItem(
+    'pz_games_played',
+    String(n)
+  );
+
   updatePointsUI();
+
 }
+
 
 function getSkill(){
+
   return localStorage.getItem('pz_skill') || '';
+
 }
+
 
 function updatePointsUI(){
-  const points = getPoints();
-  const games = getGamesPlayed();
 
-  document.getElementById('homePoints').textContent = points;
-  document.getElementById('homeGames').textContent = games;
+  const points =
+    getPoints();
 
-  document.getElementById('profilePoints').textContent = points;
-  document.getElementById('profileGames').textContent = games;
+  const games =
+    getGamesPlayed();
+
+  const homePoints =
+    document.getElementById('homePoints');
+
+  const homeGames =
+    document.getElementById('homeGames');
+
+  const profilePoints =
+    document.getElementById('profilePoints');
+
+  const profileGames =
+    document.getElementById('profileGames');
+
+  if(homePoints)
+    homePoints.textContent=points;
+
+  if(homeGames)
+    homeGames.textContent=games;
+
+  if(profilePoints)
+    profilePoints.textContent=points;
+
+  if(profileGames)
+    profileGames.textContent=games;
+
 }
 
-function setAuthMessage(message,success=false){
-  const el = document.getElementById('authMessage');
-  el.className = success ? 'small success-text' : 'small error';
-  el.textContent = message || '';
+
+function setAuthMessage(
+  message,
+  success=false
+){
+
+  const el =
+    document.getElementById('authMessage');
+
+  if(!el) return;
+
+  el.className =
+    success
+    ? 'small success-text'
+    : 'small error';
+
+  el.textContent =
+    message || '';
+
 }
 
-function setApplyMessage(message,success=false){
-  const el = document.getElementById('applyMessage');
-  el.className = success ? 'small success-text' : 'small error';
-  el.textContent = message || '';
+
+function setApplyMessage(
+  message,
+  success=false
+){
+
+  const el =
+    document.getElementById('applyMessage');
+
+  if(!el) return;
+
+  el.className =
+    success
+    ? 'small success-text'
+    : 'small error';
+
+  el.textContent =
+    message || '';
+
 }
 
 
@@ -926,78 +1747,149 @@ function setApplyMessage(message,success=false){
 function showPage(page){
 
   document.querySelectorAll('.page')
-    .forEach(p=>p.classList.remove('active'));
+    .forEach(p=>{
+      p.classList.remove('active');
+    });
 
-  const target = document.getElementById('page-'+page);
+
+  const target =
+    document.getElementById('page-'+page);
 
   if(!target) return;
 
+
   target.classList.add('active');
 
+
   document.querySelectorAll('nav button')
-    .forEach(b=>b.classList.remove('active'));
+    .forEach(b=>{
+      b.classList.remove('active');
+    });
+
 
   if(page==='home'){
-    document.getElementById('navHome').classList.add('active');
+
+    document
+      .getElementById('navHome')
+      .classList.add('active');
+
   }
+
 
   if(page==='jobs'){
-    document.getElementById('navJobs').classList.add('active');
+
+    document
+      .getElementById('navJobs')
+      .classList.add('active');
+
     loadJobsFromSupabase();
+
   }
+
 
   if(page==='profile'){
-    document.getElementById('navProfile').classList.add('active');
+
+    document
+      .getElementById('navProfile')
+      .classList.add('active');
+
     renderProfile();
+
   }
+
 
   if(page==='admin'){
-    document.getElementById('navAdmin').classList.add('active');
+
+    document
+      .getElementById('navAdmin')
+      .classList.add('active');
+
 
     if(isAdmin){
+
       loadAdminDashboard();
+
       adminLoadApplications();
+
       adminLoadJobs();
+
     }
+
   }
 
-  window.scrollTo({top:0,behavior:'smooth'});
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
 }
 
+
 function openModal(name){
-  const modal = document.getElementById('modal-'+name);
+
+  const modal =
+    document.getElementById(
+      'modal-'+name
+    );
 
   if(!modal) return;
 
+
   modal.classList.add('show');
 
+
   if(name==='tapGame'){
+
     stopAllGames();
+
     resetTapGame();
+
   }
+
 
   if(name==='matchGame'){
+
     stopAllGames();
+
     startMatchGame();
+
   }
+
 
   if(name==='flyGame'){
+
     stopAllGames();
+
     resetFlyGame();
+
   }
+
 
   if(name==='brainGame'){
+
     stopAllGames();
-    document.getElementById('quizBox').innerHTML =
+
+    document
+      .getElementById('quizBox')
+      .innerHTML =
       '<div class="empty">Start Quiz চাপুন।</div>';
+
   }
+
 }
 
+
 function closeModal(){
-  document.querySelectorAll('.modal')
-    .forEach(m=>m.classList.remove('show'));
+
+  document
+    .querySelectorAll('.modal')
+    .forEach(m=>{
+      m.classList.remove('show');
+    });
 
   stopAllGames();
+
 }
 
 
@@ -1008,104 +1900,240 @@ function closeModal(){
 async function registerUser(){
 
   const name =
-    document.getElementById('authName').value.trim();
+    document
+      .getElementById('authName')
+      .value
+      .trim();
+
 
   const email =
-    document.getElementById('authEmail').value.trim();
+    document
+      .getElementById('authEmail')
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById('authPassword').value;
+    document
+      .getElementById('authPassword')
+      .value;
+
 
   if(!name || !email || !password){
-    setAuthMessage('Name, Email এবং Password দিন।');
+
+    setAuthMessage(
+      'Name, Email এবং Password দিন।'
+    );
+
     return;
+
   }
+
 
   if(password.length < 6){
-    setAuthMessage('Password কমপক্ষে ৬ অক্ষরের হতে হবে।');
+
+    setAuthMessage(
+      'Password কমপক্ষে ৬ অক্ষরের হতে হবে।'
+    );
+
     return;
+
   }
 
-  setAuthMessage('Register হচ্ছে...');
+
+  setAuthMessage(
+    'Register হচ্ছে...'
+  );
+
 
   const {data,error} =
     await supabaseClient.auth.signUp({
+
       email,
+
       password,
+
       options:{
         data:{
           name:name
         }
       }
+
     });
 
+
   if(error){
-    setAuthMessage(error.message);
+
+    setAuthMessage(
+      error.message
+    );
+
     return;
+
   }
 
+
   if(data.session){
+
     setAuthMessage(
       'Registration সফল হয়েছে। আপনি Login হয়েছেন।',
       true
     );
+
   }else{
+
     setAuthMessage(
       'Registration সফল। Email confirmation প্রয়োজন হতে পারে।',
       true
     );
+
   }
+
 }
+
 
 async function loginUser(){
 
   const email =
-    document.getElementById('authEmail').value.trim();
+    document
+      .getElementById('authEmail')
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById('authPassword').value;
+    document
+      .getElementById('authPassword')
+      .value;
+
 
   if(!email || !password){
-    setAuthMessage('Email এবং Password দিন।');
+
+    setAuthMessage(
+      'Email এবং Password দিন।'
+    );
+
     return;
+
   }
 
-  setAuthMessage('Login হচ্ছে...');
+
+  setAuthMessage(
+    'Login হচ্ছে...'
+  );
+
 
   const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
+    await supabaseClient.auth
+      .signInWithPassword({
+        email,
+        password
+      });
+
 
   if(error){
-    setAuthMessage(error.message);
+
+    setAuthMessage(
+      error.message
+    );
+
     return;
+
   }
 
-  currentUser = data.user;
 
-  setAuthMessage('Login সফল হয়েছে।',true);
+  currentUser =
+    data.user;
+
+
+  setAuthMessage(
+    'Login সফল হয়েছে।',
+    true
+  );
+
 
   await loadSupabaseUser();
 
+
   setTimeout(()=>{
+
     closeModal();
+
   },700);
+
 }
+
+
+/* =========================================================
+   REAL SUPABASE LOGOUT
+========================================================= */
 
 async function logoutUser(){
 
-  await supabaseClient.auth.signOut();
+  if(!currentUser){
+
+    openModal('auth');
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      'আপনি কি PLAYZONE থেকে Logout করতে চান?'
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  const {error} =
+    await supabaseClient.auth.signOut({
+      scope:'local'
+    });
+
+
+  if(error){
+
+    console.error(
+      'Logout error:',
+      error
+    );
+
+    alert(
+      'Logout করা যায়নি:\n'+
+      error.message
+    );
+
+    return;
+
+  }
+
 
   currentUser = null;
+
   currentProfile = null;
+
   isAdmin = false;
 
+
   updateAuthUI();
+
   updateAdminUI();
 
+
   showPage('home');
+
+
+  alert(
+    'সফলভাবে Logout হয়েছে।'
+  );
+
 }
 
 
@@ -1117,97 +2145,210 @@ async function loadSupabaseUser(){
 
   const {
     data:{session}
-  } = await supabaseClient.auth.getSession();
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
 
-  currentUser = session?.user || null;
+
+  currentUser =
+    session?.user || null;
+
 
   if(currentUser){
+
     currentProfile = {
+
       name:
-        currentUser.user_metadata?.name ||
-        currentUser.email?.split('@')[0] ||
+        currentUser
+          .user_metadata
+          ?.name ||
+
+        currentUser
+          .email
+          ?.split('@')[0] ||
+
         'PLAYZONE User'
+
     };
+
   }else{
-    currentProfile = null;
+
+    currentProfile=null;
+
   }
 
+
   updateAuthUI();
+
   await updateAdminUI();
 
   updatePointsUI();
 
+
   if(currentUser){
+
     await loadMyApplications();
+
   }
+
 }
+
 
 function updateAuthUI(){
 
   const topUser =
-    document.getElementById('topUser');
+    document.getElementById(
+      'topUser'
+    );
+
+
+  const navLogout =
+    document.getElementById(
+      'navLogout'
+    );
+
 
   if(currentUser){
 
     const name =
-      currentUser.user_metadata?.name ||
-      currentUser.email?.split('@')[0] ||
+      currentUser
+        .user_metadata
+        ?.name ||
+
+      currentUser
+        .email
+        ?.split('@')[0] ||
+
       'User';
 
+
     topUser.textContent =
-      '👤 '+name+' • '+currentUser.email;
+      '👤 '+
+      name+
+      ' • '+
+      currentUser.email;
+
+
+    if(navLogout){
+
+      navLogout.style.display =
+        'block';
+
+    }
 
   }else{
-    topUser.textContent = 'Guest • Login করুন';
+
+    topUser.textContent =
+      'Guest • Login করুন';
+
+
+    if(navLogout){
+
+      navLogout.style.display =
+        'none';
+
+    }
+
   }
 
+
   renderProfile();
+
 }
+
 
 function renderProfile(){
 
   const guest =
-    document.getElementById('profileGuest');
+    document.getElementById(
+      'profileGuest'
+    );
+
 
   const user =
-    document.getElementById('profileUser');
+    document.getElementById(
+      'profileUser'
+    );
+
 
   if(!currentUser){
 
     guest.style.display='block';
+
     user.style.display='none';
 
     return;
+
   }
 
+
   guest.style.display='none';
+
   user.style.display='block';
 
+
   const name =
-    currentUser.user_metadata?.name ||
-    currentUser.email?.split('@')[0] ||
+    currentUser
+      .user_metadata
+      ?.name ||
+
+    currentUser
+      .email
+      ?.split('@')[0] ||
+
     'User';
 
-  document.getElementById('profileName').textContent =
-    name;
 
-  document.getElementById('profileSkill').value =
-    getSkill();
+  document
+    .getElementById(
+      'profileName'
+    )
+    .textContent=name;
 
-  document.getElementById('profileAdminBadge').style.display =
-    isAdmin ? 'inline-block' : 'none';
+
+  document
+    .getElementById(
+      'profileSkill'
+    )
+    .value=getSkill();
+
+
+  document
+    .getElementById(
+      'profileAdminBadge'
+    )
+    .style.display =
+      isAdmin
+      ? 'inline-block'
+      : 'none';
+
 
   updatePointsUI();
+
 }
+
 
 function saveSkill(){
 
   const skill =
-    document.getElementById('profileSkill').value;
+    document
+      .getElementById(
+        'profileSkill'
+      )
+      .value;
 
-  localStorage.setItem('pz_skill',skill);
 
-  alert('Skill Profile Save হয়েছে।');
+  localStorage.setItem(
+    'pz_skill',
+    skill
+  );
+
+
+  alert(
+    'Skill Profile Save হয়েছে।'
+  );
+
 }
 
 
@@ -1218,43 +2359,72 @@ function saveSkill(){
 async function checkAdmin(){
 
   if(!currentUser){
+
     return false;
+
   }
+
 
   try{
 
     const {data,error} =
-      await supabaseClient.rpc(
-        'is_current_user_admin'
-      );
+      await supabaseClient
+        .rpc(
+          'is_current_user_admin'
+        );
+
 
     if(error){
-      console.error('Admin check error:',error);
+
+      console.error(
+        'Admin check error:',
+        error
+      );
+
       return false;
+
     }
+
 
     return data === true;
 
+
   }catch(e){
+
     console.error(e);
+
     return false;
+
   }
+
 }
+
 
 async function updateAdminUI(){
 
-  isAdmin = await checkAdmin();
+  isAdmin =
+    await checkAdmin();
+
 
   const adminNav =
-    document.getElementById('navAdmin');
+    document.getElementById(
+      'navAdmin'
+    );
+
 
   if(isAdmin){
+
     adminNav.style.display='block';
+
   }else{
+
     adminNav.style.display='none';
+
   }
 
+
   renderProfile();
+
 }
 
 
@@ -1265,69 +2435,110 @@ async function updateAdminUI(){
 async function loadJobsFromSupabase(){
 
   const container =
-    document.getElementById('jobsList');
+    document.getElementById(
+      'jobsList'
+    );
+
 
   container.innerHTML =
     '<div class="loading">Jobs loading...</div>';
+
 
   try{
 
     const {data,error} =
       await supabaseClient
-      .from('jobs')
-      .select(
-        'id,poster_id,title,skill,description,budget,status,created_at'
-      )
-      .order('created_at',{ascending:false});
+        .from('jobs')
+        .select(
+          'id,poster_id,title,skill,description,budget,status,created_at'
+        )
+        .order(
+          'created_at',
+          {ascending:false}
+        );
+
 
     if(error){
+
       container.innerHTML =
         '<div class="notice error">Jobs load error: '+
         escapeHTML(error.message)+
         '</div>';
+
       return;
+
     }
 
-    jobsCache = data || [];
 
-    document.getElementById('homeJobs').textContent =
-      jobsCache.filter(j=>j.status!=='closed').length;
+    jobsCache =
+      data || [];
+
+
+    document
+      .getElementById(
+        'homeJobs'
+      )
+      .textContent =
+      jobsCache
+        .filter(j=>j.status!=='closed')
+        .length;
+
 
     renderJobs();
 
+
   }catch(e){
+
+    console.error(e);
 
     container.innerHTML =
       '<div class="notice error">Unexpected error.</div>';
 
   }
+
 }
+
 
 function renderJobs(){
 
   const container =
-    document.getElementById('jobsList');
+    document.getElementById(
+      'jobsList'
+    );
+
 
   const jobs =
-    jobsCache.filter(j=>j.status!=='closed');
+    jobsCache
+      .filter(
+        j=>j.status!=='closed'
+      );
+
 
   if(!jobs.length){
+
     container.innerHTML =
       '<div class="empty">এখনো কোনো Job পোস্ট করা হয়নি।</div>';
+
     return;
+
   }
+
 
   container.innerHTML =
     jobs.map(job=>{
 
       const own =
         currentUser &&
-        job.poster_id === currentUser.id;
+        job.poster_id ===
+        currentUser.id;
+
 
       return `
+
         <div class="card">
 
           <div class="space">
+
             <div class="job-title">
               ${escapeHTML(job.title)}
             </div>
@@ -1335,27 +2546,38 @@ function renderJobs(){
             <span class="badge ${escapeHTML(job.status||'open')}">
               ${escapeHTML(job.status||'open')}
             </span>
+
           </div>
 
+
           <div class="job-meta">
-            🎯 Skill: ${escapeHTML(job.skill)}
+            🎯 Skill:
+            ${escapeHTML(job.skill)}
           </div>
+
 
           <div class="job-desc">
             ${escapeHTML(job.description)}
           </div>
 
+
           <div class="space">
 
             <div class="budget">
-              💰 Budget: ${escapeHTML(job.budget || 'আলোচনা সাপেক্ষ')}
+              💰 Budget:
+              ${escapeHTML(
+                job.budget ||
+                'আলোচনা সাপেক্ষ'
+              )}
             </div>
+
 
             <div class="small">
               ${safeDate(job.created_at)}
             </div>
 
           </div>
+
 
           <div style="margin-top:10px">
 
@@ -1365,15 +2587,20 @@ function renderJobs(){
               View Details
             </button>
 
+
             ${
               own
+
               ?
+
               `<button
                 class="btn dark"
                 onclick="viewJobApplications('${job.id}')">
                 📨 Applications
               </button>`
+
               :
+
               `<button
                 class="btn"
                 onclick="applyJob('${job.id}')">
@@ -1384,60 +2611,122 @@ function renderJobs(){
           </div>
 
         </div>
+
       `;
 
     }).join('');
+
 }
+
 
 async function addJob(){
 
   if(!currentUser){
-    alert('Job পোস্ট করতে Login করতে হবে।');
+
+    alert(
+      'Job পোস্ট করতে Login করতে হবে।'
+    );
+
     openModal('auth');
+
     return;
+
   }
+
 
   const title =
-    document.getElementById('jobTitle').value.trim();
+    document
+      .getElementById('jobTitle')
+      .value
+      .trim();
+
 
   const skill =
-    document.getElementById('jobSkill').value;
+    document
+      .getElementById('jobSkill')
+      .value;
+
 
   const description =
-    document.getElementById('jobDescription').value.trim();
+    document
+      .getElementById('jobDescription')
+      .value
+      .trim();
+
 
   const budget =
-    document.getElementById('jobBudget').value.trim();
+    document
+      .getElementById('jobBudget')
+      .value
+      .trim();
+
 
   if(!title || !description){
-    alert('Job Title এবং Description দিন।');
+
+    alert(
+      'Job Title এবং Description দিন।'
+    );
+
     return;
+
   }
+
 
   const {error} =
     await supabaseClient
-    .from('jobs')
-    .insert({
-      poster_id:currentUser.id,
-      title,
-      skill,
-      description,
-      budget,
-      status:'open'
-    });
+      .from('jobs')
+      .insert({
+
+        poster_id:
+          currentUser.id,
+
+        title,
+
+        skill,
+
+        description,
+
+        budget,
+
+        status:'open'
+
+      });
+
 
   if(error){
-    alert('Job পোস্ট করা যায়নি:\n'+error.message);
+
+    alert(
+      'Job পোস্ট করা যায়নি:\n'+
+      error.message
+    );
+
     return;
+
   }
 
-  document.getElementById('jobTitle').value='';
-  document.getElementById('jobDescription').value='';
-  document.getElementById('jobBudget').value='';
 
-  alert('Job সফলভাবে পোস্ট হয়েছে।');
+  document
+    .getElementById('jobTitle')
+    .value='';
+
+
+  document
+    .getElementById('jobDescription')
+    .value='';
+
+
+  document
+    .getElementById('jobBudget')
+    .value='';
+
+
+  alert(
+    'Job সফলভাবে পোস্ট হয়েছে।'
+  );
+
 
   await loadJobsFromSupabase();
+
 }
 
 
@@ -1448,63 +2737,104 @@ async function addJob(){
 function viewJobDetail(jobId){
 
   const job =
-    jobsCache.find(j=>String(j.id)===String(jobId));
+    jobsCache.find(
+      j=>String(j.id)===
+      String(jobId)
+    );
+
 
   if(!job){
-    alert('Job পাওয়া যায়নি।');
+
+    alert(
+      'Job পাওয়া যায়নি।'
+    );
+
     return;
+
   }
 
-  document.getElementById('jobDetailContent').innerHTML = `
 
-    <div class="card">
+  document
+    .getElementById(
+      'jobDetailContent'
+    )
+    .innerHTML = `
 
-      <div class="job-title">
-        ${escapeHTML(job.title)}
+      <div class="card">
+
+        <div class="job-title">
+          ${escapeHTML(job.title)}
+        </div>
+
+
+        <div class="job-meta">
+          🎯 Skill:
+          ${escapeHTML(job.skill)}
+        </div>
+
+
+        <hr>
+
+
+        <div class="job-desc">
+          ${escapeHTML(job.description)}
+        </div>
+
+
+        <div class="budget">
+          💰 Budget:
+          ${escapeHTML(
+            job.budget ||
+            'আলোচনা সাপেক্ষ'
+          )}
+        </div>
+
+
+        <div
+          class="small"
+          style="margin-top:8px">
+
+          Posted:
+          ${safeDate(job.created_at)}
+
+        </div>
+
+
+        <div
+          style="margin-top:14px">
+
+          ${
+            currentUser &&
+            job.poster_id===currentUser.id
+
+            ?
+
+            `<button
+              class="btn dark"
+              onclick="closeModal();viewJobApplications('${job.id}')">
+              📨 Applications
+            </button>`
+
+            :
+
+            `<button
+              class="btn"
+              onclick="closeModal();applyJob('${job.id}')">
+              Apply Now
+            </button>`
+          }
+
+        </div>
+
       </div>
 
-      <div class="job-meta">
-        🎯 Skill: ${escapeHTML(job.skill)}
-      </div>
+    `;
 
-      <hr>
 
-      <div class="job-desc">
-        ${escapeHTML(job.description)}
-      </div>
+  openModal(
+    'jobDetail'
+  );
 
-      <div class="budget">
-        💰 Budget:
-        ${escapeHTML(job.budget || 'আলোচনা সাপেক্ষ')}
-      </div>
-
-      <div class="small" style="margin-top:8px">
-        Posted: ${safeDate(job.created_at)}
-      </div>
-
-      <div style="margin-top:14px">
-
-        ${
-          currentUser && job.poster_id===currentUser.id
-          ?
-          `<button class="btn dark"
-            onclick="closeModal();viewJobApplications('${job.id}')">
-            📨 Applications
-          </button>`
-          :
-          `<button class="btn"
-            onclick="closeModal();applyJob('${job.id}')">
-            Apply Now
-          </button>`
-        }
-
-      </div>
-
-    </div>
-
-  `;
-
-  openModal('jobDetail');
 }
 
 
@@ -1515,151 +2845,297 @@ function viewJobDetail(jobId){
 async function applyJob(jobId){
 
   if(!currentUser){
-    alert('Apply করতে Login করুন।');
+
+    alert(
+      'Apply করতে Login করুন।'
+    );
+
     openModal('auth');
+
     return;
+
   }
+
 
   const job =
-    jobsCache.find(j=>String(j.id)===String(jobId));
+    jobsCache.find(
+      j=>String(j.id)===
+      String(jobId)
+    );
+
 
   if(!job){
-    alert('Job পাওয়া যায়নি।');
+
+    alert(
+      'Job পাওয়া যায়নি।'
+    );
+
     return;
+
   }
 
-  if(job.poster_id===currentUser.id){
-    alert('নিজের Job-এ Apply করা যাবে না।');
+
+  if(
+    job.poster_id===
+    currentUser.id
+  ){
+
+    alert(
+      'নিজের Job-এ Apply করা যাবে না।'
+    );
+
     return;
+
   }
+
 
   const existing =
-    await checkExistingApplication(jobId);
+    await checkExistingApplication(
+      jobId
+    );
+
 
   if(existing){
+
     alert(
-      'আপনি এই Job-এ আগে থেকেই Application করেছেন।\nStatus: '+
+      'আপনি এই Job-এ আগে থেকেই Application করেছেন.\nStatus: '+
       existing.status
     );
+
     return;
+
   }
 
-  selectedApplyJobId = jobId;
 
-  document.getElementById('applyJobInfo').innerHTML =
-    '<b>'+escapeHTML(job.title)+'</b><br>'+
-    'Skill: '+escapeHTML(job.skill)+'<br>'+
-    'Budget: '+escapeHTML(job.budget || 'আলোচনা সাপেক্ষ');
+  selectedApplyJobId =
+    jobId;
 
-  document.getElementById('applicationMessage').value='';
+
+  document
+    .getElementById(
+      'applyJobInfo'
+    )
+    .innerHTML =
+      '<b>'+
+      escapeHTML(job.title)+
+      '</b><br>'+
+      'Skill: '+
+      escapeHTML(job.skill)+
+      '<br>'+
+      'Budget: '+
+      escapeHTML(
+        job.budget ||
+        'আলোচনা সাপেক্ষ'
+      );
+
+
+  document
+    .getElementById(
+      'applicationMessage'
+    )
+    .value='';
+
+
   setApplyMessage('');
 
-  openModal('apply');
+
+  openModal(
+    'apply'
+  );
+
 }
 
-async function checkExistingApplication(jobId){
+
+async function checkExistingApplication(
+  jobId
+){
 
   const {data,error} =
     await supabaseClient
-    .from('job_applications')
-    .select('id,status')
-    .eq('job_id',jobId)
-    .eq('applicant_id',currentUser.id)
-    .maybeSingle();
+      .from('job_applications')
+      .select(
+        'id,status'
+      )
+      .eq(
+        'job_id',
+        jobId
+      )
+      .eq(
+        'applicant_id',
+        currentUser.id
+      )
+      .maybeSingle();
+
 
   if(error){
+
     console.error(error);
+
     return null;
+
   }
 
+
   return data;
+
 }
+
 
 async function submitJobApplication(){
 
   if(!currentUser){
-    setApplyMessage('প্রথমে Login করুন।');
+
+    setApplyMessage(
+      'প্রথমে Login করুন।'
+    );
+
     return;
+
   }
+
 
   if(!selectedApplyJobId){
-    setApplyMessage('Job নির্বাচন করা হয়নি।');
+
+    setApplyMessage(
+      'Job নির্বাচন করা হয়নি।'
+    );
+
     return;
+
   }
+
 
   const message =
-    document.getElementById('applicationMessage')
-    .value.trim();
+    document
+      .getElementById(
+        'applicationMessage'
+      )
+      .value
+      .trim();
+
 
   if(!message){
-    setApplyMessage('আপনার Proposal / Message লিখুন।');
+
+    setApplyMessage(
+      'আপনার Proposal / Message লিখুন।'
+    );
+
     return;
+
   }
 
-  setApplyMessage('Application submit হচ্ছে...');
+
+  setApplyMessage(
+    'Application submit হচ্ছে...'
+  );
+
 
   const {error} =
     await supabaseClient
-    .from('job_applications')
-    .insert({
-      job_id:selectedApplyJobId,
-      applicant_id:currentUser.id,
-      message:message,
-      status:'pending'
-    });
+      .from('job_applications')
+      .insert({
+
+        job_id:
+          selectedApplyJobId,
+
+        applicant_id:
+          currentUser.id,
+
+        message:
+          message,
+
+        status:
+          'pending'
+
+      });
+
 
   if(error){
-    setApplyMessage(error.message);
+
+    setApplyMessage(
+      error.message
+    );
+
     return;
+
   }
+
 
   setApplyMessage(
     'Application সফলভাবে জমা হয়েছে। Status: pending',
     true
   );
 
+
   await loadMyApplications();
 
+
   setTimeout(()=>{
+
     closeModal();
+
   },900);
+
 }
+
 
 async function loadMyApplications(){
 
   const container =
-    document.getElementById('myApplications');
+    document.getElementById(
+      'myApplications'
+    );
+
 
   if(!currentUser){
 
     container.innerHTML =
       '<div class="empty">Login করলে Applications এখানে দেখা যাবে।</div>';
 
-    document.getElementById('homeApps').textContent='0';
+
+    document
+      .getElementById(
+        'homeApps'
+      )
+      .textContent='0';
+
 
     return;
+
   }
+
 
   container.innerHTML =
     '<div class="loading">Loading...</div>';
 
+
   const {data,error} =
     await supabaseClient
-    .from('job_applications')
-    .select(`
-      id,
-      job_id,
-      message,
-      status,
-      created_at,
-      jobs(
-        title,
-        skill,
-        budget
+      .from('job_applications')
+      .select(`
+
+        id,
+        job_id,
+        message,
+        status,
+        created_at,
+
+        jobs(
+          title,
+          skill,
+          budget
+        )
+
+      `)
+      .eq(
+        'applicant_id',
+        currentUser.id
       )
-    `)
-    .eq('applicant_id',currentUser.id)
-    .order('created_at',{ascending:false});
+      .order(
+        'created_at',
+        {ascending:false}
+      );
+
 
   if(error){
 
@@ -1669,12 +3145,21 @@ async function loadMyApplications(){
       '</div>';
 
     return;
+
   }
 
-  const apps = data || [];
 
-  document.getElementById('homeApps').textContent =
+  const apps =
+    data || [];
+
+
+  document
+    .getElementById(
+      'homeApps'
+    )
+    .textContent =
     apps.length;
+
 
   if(!apps.length){
 
@@ -1682,96 +3167,162 @@ async function loadMyApplications(){
       '<div class="empty">আপনি এখনো কোনো Job-এ Apply করেননি।</div>';
 
     return;
+
   }
+
 
   container.innerHTML =
     apps.map(app=>{
 
-      const job = app.jobs || {};
+      const job =
+        app.jobs || {};
+
 
       return `
+
         <div class="card">
 
           <div class="space">
 
             <div>
+
               <div class="job-title">
-                ${escapeHTML(job.title || 'Job')}
+                ${escapeHTML(
+                  job.title ||
+                  'Job'
+                )}
               </div>
 
               <div class="job-meta">
-                ${escapeHTML(job.skill || '')}
+                ${escapeHTML(
+                  job.skill ||
+                  ''
+                )}
               </div>
+
             </div>
 
-            <span class="badge ${escapeHTML(app.status)}">
+
+            <span
+              class="badge ${escapeHTML(app.status)}">
+
               ${escapeHTML(app.status)}
+
             </span>
 
           </div>
 
-          <div class="small" style="margin-top:8px">
-            Applied: ${safeDate(app.created_at)}
+
+          <div
+            class="small"
+            style="margin-top:8px">
+
+            Applied:
+            ${safeDate(app.created_at)}
+
           </div>
+
 
           <div class="job-desc">
             ${escapeHTML(app.message)}
           </div>
 
         </div>
+
       `;
 
     }).join('');
+
 }
 
 
 /* =========================================================
-   JOB POSTER VIEW ONLY
-   IMPORTANT:
-   Status change is NOT allowed here.
-   Only ADMIN can change status.
+   JOB POSTER APPLICATION VIEW
 ========================================================= */
 
-async function viewJobApplications(jobId){
+async function viewJobApplications(
+  jobId
+){
 
   if(!currentUser){
-    alert('Login করুন।');
+
+    alert(
+      'Login করুন।'
+    );
+
     return;
+
   }
+
 
   const job =
-    jobsCache.find(j=>String(j.id)===String(jobId));
+    jobsCache.find(
+      j=>String(j.id)===
+      String(jobId)
+    );
+
 
   if(!job){
-    alert('Job পাওয়া যায়নি।');
+
+    alert(
+      'Job পাওয়া যায়নি।'
+    );
+
     return;
+
   }
 
-  if(job.poster_id!==currentUser.id && !isAdmin){
-    alert('আপনি এই Applications দেখতে পারবেন না।');
+
+  if(
+    job.poster_id!==currentUser.id &&
+    !isAdmin
+  ){
+
+    alert(
+      'আপনি এই Applications দেখতে পারবেন না।'
+    );
+
     return;
+
   }
+
 
   const container =
-    document.getElementById('jobApplicationsList');
+    document.getElementById(
+      'jobApplicationsList'
+    );
+
 
   container.innerHTML =
     '<div class="loading">Loading...</div>';
 
-  openModal('view-applications');
+
+  openModal(
+    'view-applications'
+  );
+
 
   const {data,error} =
     await supabaseClient
-    .from('job_applications')
-    .select(`
-      id,
-      applicant_id,
-      message,
-      status,
-      created_at
-    `)
-    .eq('job_id',jobId)
-    .order('created_at',{ascending:false});
+      .from('job_applications')
+      .select(`
+
+        id,
+        applicant_id,
+        message,
+        status,
+        created_at
+
+      `)
+      .eq(
+        'job_id',
+        jobId
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
+
 
   if(error){
 
@@ -1781,15 +3332,22 @@ async function viewJobApplications(jobId){
       '</div>';
 
     return;
+
   }
 
-  if(!data || !data.length){
+
+  if(
+    !data ||
+    !data.length
+  ){
 
     container.innerHTML =
       '<div class="empty">এই Job-এ এখনো কোনো Application নেই।</div>';
 
     return;
+
   }
+
 
   container.innerHTML =
     data.map(app=>`
@@ -1797,32 +3355,49 @@ async function viewJobApplications(jobId){
       <div class="card">
 
         <div class="space">
-          <b>Applicant</b>
-          <span class="badge ${escapeHTML(app.status)}">
+
+          <b>
+            Applicant
+          </b>
+
+          <span
+            class="badge ${escapeHTML(app.status)}">
+
             ${escapeHTML(app.status)}
+
           </span>
+
         </div>
 
+
         <div class="small">
+
           Applicant ID:
           ${escapeHTML(app.applicant_id)}
+
         </div>
+
 
         <div class="job-desc">
           ${escapeHTML(app.message)}
         </div>
 
+
         <div class="small">
           ${safeDate(app.created_at)}
         </div>
 
+
         <div class="notice">
+
           Application status পরিবর্তন শুধু Admin করতে পারবেন।
+
         </div>
 
       </div>
 
     `).join('');
+
 }
 
 
@@ -1833,48 +3408,103 @@ async function viewJobApplications(jobId){
 async function loadAdminDashboard(){
 
   if(!isAdmin){
-    alert('Admin access required.');
+
+    alert(
+      'Admin access required.'
+    );
+
     showPage('home');
+
     return;
+
   }
+
 
   const {data,error} =
     await supabaseClient
-    .rpc('admin_dashboard_stats');
+      .rpc(
+        'admin_dashboard_stats'
+      );
+
 
   if(error){
 
     console.error(error);
 
-    document.getElementById('adminStats').innerHTML =
+
+    document
+      .getElementById(
+        'adminStats'
+      )
+      .innerHTML =
       '<div class="notice error">'+
       'Admin stats load error: '+
       escapeHTML(error.message)+
       '</div>';
 
     return;
+
   }
 
-  /*
-    RPC response may be object or array.
-  */
 
   const stats =
-    Array.isArray(data) ? (data[0] || {}) : (data || {});
+    Array.isArray(data)
+    ? (data[0] || {})
+    : (data || {});
+
 
   const values = [
-    ['Users',stats.users ?? stats.user_count ?? 0],
-    ['Jobs',stats.jobs ?? stats.job_count ?? 0],
-    ['Applications',stats.applications ?? stats.application_count ?? 0],
-    ['Sponsors',stats.sponsors ?? stats.sponsor_count ?? 0],
-    ['Payouts',stats.payouts ?? stats.payout_count ?? 0],
-    ['Pending Payouts',
+
+    [
+      'Users',
+      stats.users ??
+      stats.user_count ??
+      0
+    ],
+
+    [
+      'Jobs',
+      stats.jobs ??
+      stats.job_count ??
+      0
+    ],
+
+    [
+      'Applications',
+      stats.applications ??
+      stats.application_count ??
+      0
+    ],
+
+    [
+      'Sponsors',
+      stats.sponsors ??
+      stats.sponsor_count ??
+      0
+    ],
+
+    [
+      'Payouts',
+      stats.payouts ??
+      stats.payout_count ??
+      0
+    ],
+
+    [
+      'Pending Payouts',
       stats.pending_payouts ??
       stats.pending_payout_count ??
-      0]
+      0
+    ]
+
   ];
 
-  document.getElementById('adminStats').innerHTML =
+
+  document
+    .getElementById(
+      'adminStats'
+    )
+    .innerHTML =
     values.map(item=>`
 
       <div class="card stat">
@@ -1890,6 +3520,7 @@ async function loadAdminDashboard(){
       </div>
 
     `).join('');
+
 }
 
 
@@ -1900,33 +3531,47 @@ async function loadAdminDashboard(){
 async function adminLoadApplications(){
 
   if(!isAdmin){
+
     return;
+
   }
 
+
   const container =
-    document.getElementById('adminApplications');
+    document.getElementById(
+      'adminApplications'
+    );
+
 
   container.innerHTML =
     '<div class="loading">Applications loading...</div>';
 
+
   const {data,error} =
     await supabaseClient
-    .from('job_applications')
-    .select(`
-      id,
-      job_id,
-      applicant_id,
-      message,
-      status,
-      created_at,
-      jobs(
-        title,
-        skill,
-        budget,
-        poster_id
-      )
-    `)
-    .order('created_at',{ascending:false});
+      .from('job_applications')
+      .select(`
+
+        id,
+        job_id,
+        applicant_id,
+        message,
+        status,
+        created_at,
+
+        jobs(
+          title,
+          skill,
+          budget,
+          poster_id
+        )
+
+      `)
+      .order(
+        'created_at',
+        {ascending:false}
+      );
+
 
   if(error){
 
@@ -1937,9 +3582,13 @@ async function adminLoadApplications(){
       '</div>';
 
     return;
+
   }
 
-  const apps = data || [];
+
+  const apps =
+    data || [];
+
 
   if(!apps.length){
 
@@ -1947,12 +3596,16 @@ async function adminLoadApplications(){
       '<div class="empty">এখনো কোনো Application নেই।</div>';
 
     return;
+
   }
+
 
   container.innerHTML =
     apps.map(app=>{
 
-      const job = app.jobs || {};
+      const job =
+        app.jobs || {};
+
 
       return `
 
@@ -1961,65 +3614,113 @@ async function adminLoadApplications(){
           <div class="space">
 
             <div>
+
               <div class="job-title">
-                ${escapeHTML(job.title || 'Job')}
+                ${escapeHTML(
+                  job.title ||
+                  'Job'
+                )}
               </div>
 
               <div class="job-meta">
-                🎯 ${escapeHTML(job.skill || '')}
+                🎯
+                ${escapeHTML(
+                  job.skill ||
+                  ''
+                )}
               </div>
+
             </div>
 
-            <span class="badge ${escapeHTML(app.status)}">
+
+            <span
+              class="badge ${escapeHTML(app.status)}">
+
               ${escapeHTML(app.status)}
+
             </span>
 
           </div>
 
-          <div class="small" style="margin-top:7px">
+
+          <div
+            class="small"
+            style="margin-top:7px">
+
             Applicant ID:
-            ${escapeHTML(app.applicant_id)}
+            ${escapeHTML(
+              app.applicant_id
+            )}
+
           </div>
 
+
           <div class="small">
+
             Job ID:
-            ${escapeHTML(app.job_id)}
+            ${escapeHTML(
+              app.job_id
+            )}
+
           </div>
+
 
           <div class="job-desc">
             ${escapeHTML(app.message)}
           </div>
 
+
           <div class="small">
-            Applied: ${safeDate(app.created_at)}
+
+            Applied:
+            ${safeDate(
+              app.created_at
+            )}
+
           </div>
 
+
           <hr>
+
 
           <div class="row">
 
             <button
               class="btn warning"
               onclick="adminUpdateApplicationStatus('${app.id}','pending')">
+
               Pending
+
             </button>
+
 
             <button
               class="btn success"
               onclick="adminUpdateApplicationStatus('${app.id}','accepted')">
+
               Accept
+
             </button>
+
 
             <button
               class="btn danger"
               onclick="adminUpdateApplicationStatus('${app.id}','rejected')">
+
               Reject
+
             </button>
 
           </div>
 
-          <div class="small" style="margin-top:6px">
-            Admin যেকোনো সময় status Pending / Accepted / Rejected করতে পারবেন।
+
+          <div
+            class="small"
+            style="margin-top:6px">
+
+            Admin যেকোনো সময় status
+            Pending / Accepted / Rejected করতে পারবেন।
+
           </div>
 
         </div>
@@ -2027,7 +3728,9 @@ async function adminLoadApplications(){
       `;
 
     }).join('');
+
 }
+
 
 async function adminUpdateApplicationStatus(
   applicationId,
@@ -2036,35 +3739,60 @@ async function adminUpdateApplicationStatus(
 
   if(!isAdmin){
 
-    alert('শুধুমাত্র Admin status পরিবর্তন করতে পারবেন।');
+    alert(
+      'শুধুমাত্র Admin status পরিবর্তন করতে পারবেন।'
+    );
 
     return;
+
   }
+
 
   const allowed =
-    ['pending','accepted','rejected'];
+    [
+      'pending',
+      'accepted',
+      'rejected'
+    ];
 
-  if(!allowed.includes(newStatus)){
-    alert('Invalid status.');
+
+  if(
+    !allowed.includes(newStatus)
+  ){
+
+    alert(
+      'Invalid status.'
+    );
+
     return;
+
   }
+
 
   const confirmText =
     'Application status "'+
     newStatus+
     '" করতে চান?';
 
+
   if(!confirm(confirmText)){
+
     return;
+
   }
+
 
   const {error} =
     await supabaseClient
-    .from('job_applications')
-    .update({
-      status:newStatus
-    })
-    .eq('id',applicationId);
+      .from('job_applications')
+      .update({
+        status:newStatus
+      })
+      .eq(
+        'id',
+        applicationId
+      );
+
 
   if(error){
 
@@ -2074,7 +3802,9 @@ async function adminUpdateApplicationStatus(
     );
 
     return;
+
   }
+
 
   alert(
     'Application status সফলভাবে "'+
@@ -2082,9 +3812,13 @@ async function adminUpdateApplicationStatus(
     '" হয়েছে।'
   );
 
+
   await adminLoadApplications();
+
   await loadAdminDashboard();
+
   await loadMyApplications();
+
 }
 
 
@@ -2095,22 +3829,33 @@ async function adminUpdateApplicationStatus(
 async function adminLoadJobs(){
 
   if(!isAdmin){
+
     return;
+
   }
 
+
   const container =
-    document.getElementById('adminJobs');
+    document.getElementById(
+      'adminJobs'
+    );
+
 
   container.innerHTML =
     '<div class="loading">Jobs loading...</div>';
 
+
   const {data,error} =
     await supabaseClient
-    .from('jobs')
-    .select(
-      'id,poster_id,title,skill,description,budget,status,created_at'
-    )
-    .order('created_at',{ascending:false});
+      .from('jobs')
+      .select(
+        'id,poster_id,title,skill,description,budget,status,created_at'
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
+
 
   if(error){
 
@@ -2120,15 +3865,22 @@ async function adminLoadJobs(){
       '</div>';
 
     return;
+
   }
 
-  if(!data || !data.length){
+
+  if(
+    !data ||
+    !data.length
+  ){
 
     container.innerHTML =
       '<div class="empty">কোনো Job নেই।</div>';
 
     return;
+
   }
+
 
   container.innerHTML =
     data.map(job=>`
@@ -2138,54 +3890,85 @@ async function adminLoadJobs(){
         <div class="space">
 
           <div>
+
             <div class="job-title">
               ${escapeHTML(job.title)}
             </div>
 
             <div class="job-meta">
-              🎯 ${escapeHTML(job.skill)}
+              🎯
+              ${escapeHTML(job.skill)}
             </div>
+
           </div>
 
-          <span class="badge ${escapeHTML(job.status)}">
+
+          <span
+            class="badge ${escapeHTML(job.status)}">
+
             ${escapeHTML(job.status)}
+
           </span>
 
         </div>
+
 
         <div class="job-desc">
           ${escapeHTML(job.description)}
         </div>
 
+
         <div class="budget">
-          💰 ${escapeHTML(job.budget || 'আলোচনা সাপেক্ষ')}
+          💰
+          ${escapeHTML(
+            job.budget ||
+            'আলোচনা সাপেক্ষ'
+          )}
         </div>
+
 
         <div class="small">
-          Poster ID: ${escapeHTML(job.poster_id)}
+
+          Poster ID:
+          ${escapeHTML(job.poster_id)}
+
         </div>
 
-        <div class="row" style="margin-top:10px">
+
+        <div
+          class="row"
+          style="margin-top:10px">
 
           <button
             class="btn secondary"
             onclick="adminViewApplications('${job.id}')">
+
             📨 Applications
+
           </button>
+
 
           ${
             job.status==='open'
+
             ?
+
             `<button
               class="btn danger"
               onclick="adminCloseJob('${job.id}')">
+
               Close Job
+
             </button>`
+
             :
+
             `<button
               class="btn success"
               onclick="adminOpenJob('${job.id}')">
+
               Open Job
+
             </button>`
           }
 
@@ -2194,65 +3977,133 @@ async function adminLoadJobs(){
       </div>
 
     `).join('');
+
 }
 
-async function adminViewApplications(jobId){
 
-  await viewJobApplications(jobId);
+async function adminViewApplications(
+  jobId
+){
+
+  await viewJobApplications(
+    jobId
+  );
+
 }
 
-async function adminCloseJob(jobId){
+
+async function adminCloseJob(
+  jobId
+){
 
   if(!isAdmin){
-    alert('Admin access required.');
+
+    alert(
+      'Admin access required.'
+    );
+
     return;
+
   }
 
-  if(!confirm('এই Job Close করতে চান?')){
+
+  if(
+    !confirm(
+      'এই Job Close করতে চান?'
+    )
+  ){
+
     return;
+
   }
+
 
   const {error} =
     await supabaseClient
-    .from('jobs')
-    .update({status:'closed'})
-    .eq('id',jobId);
+      .from('jobs')
+      .update({
+        status:'closed'
+      })
+      .eq(
+        'id',
+        jobId
+      );
+
 
   if(error){
-    alert(error.message);
+
+    alert(
+      error.message
+    );
+
     return;
+
   }
 
-  alert('Job closed হয়েছে।');
+
+  alert(
+    'Job closed হয়েছে।'
+  );
+
 
   await loadJobsFromSupabase();
+
   await adminLoadJobs();
+
   await loadAdminDashboard();
+
 }
 
-async function adminOpenJob(jobId){
+
+async function adminOpenJob(
+  jobId
+){
 
   if(!isAdmin){
-    alert('Admin access required.');
+
+    alert(
+      'Admin access required.'
+    );
+
     return;
+
   }
+
 
   const {error} =
     await supabaseClient
-    .from('jobs')
-    .update({status:'open'})
-    .eq('id',jobId);
+      .from('jobs')
+      .update({
+        status:'open'
+      })
+      .eq(
+        'id',
+        jobId
+      );
+
 
   if(error){
-    alert(error.message);
+
+    alert(
+      error.message
+    );
+
     return;
+
   }
 
-  alert('Job আবার Open হয়েছে।');
+
+  alert(
+    'Job আবার Open হয়েছে।'
+  );
+
 
   await loadJobsFromSupabase();
+
   await adminLoadJobs();
+
   await loadAdminDashboard();
+
 }
 
 
@@ -2263,102 +4114,216 @@ async function adminOpenJob(jobId){
 function resetTapGame(){
 
   tapScore=0;
+
   tapTime=30;
 
-  document.getElementById('tapScore').textContent=0;
-  document.getElementById('tapTime').textContent=30;
 
-  document.getElementById('tapArea').innerHTML =
+  document
+    .getElementById(
+      'tapScore'
+    )
+    .textContent=0;
+
+
+  document
+    .getElementById(
+      'tapTime'
+    )
+    .textContent=30;
+
+
+  document
+    .getElementById(
+      'tapArea'
+    )
+    .innerHTML =
     '<div class="empty">Start Game চাপুন</div>';
+
 }
+
 
 function startTapGame(){
 
-  clearInterval(tapTimer);
+  clearInterval(
+    tapTimer
+  );
+
 
   tapScore=0;
+
   tapTime=30;
 
-  document.getElementById('tapScore').textContent=0;
-  document.getElementById('tapTime').textContent=30;
+
+  document
+    .getElementById(
+      'tapScore'
+    )
+    .textContent=0;
+
+
+  document
+    .getElementById(
+      'tapTime'
+    )
+    .textContent=30;
+
 
   const area =
-    document.getElementById('tapArea');
+    document.getElementById(
+      'tapArea'
+    );
+
 
   area.innerHTML='';
 
+
   createTapTarget();
 
-  tapTimer=setInterval(()=>{
 
-    tapTime--;
+  tapTimer =
+    setInterval(()=>{
 
-    document.getElementById('tapTime').textContent =
-      tapTime;
+      tapTime--;
 
-    if(tapTime<=0){
 
-      clearInterval(tapTimer);
+      document
+        .getElementById(
+          'tapTime'
+        )
+        .textContent =
+        tapTime;
 
-      if(tapTarget){
-        tapTarget.remove();
-        tapTarget=null;
+
+      if(tapTime<=0){
+
+        clearInterval(
+          tapTimer
+        );
+
+
+        tapTimer=null;
+
+
+        if(tapTarget){
+
+          tapTarget.remove();
+
+          tapTarget=null;
+
+        }
+
+
+        addPoints(
+          tapScore
+        );
+
+
+        addGamePlayed();
+
+
+        area.innerHTML +=
+          `<div class="empty">
+
+            Game Over!
+            Score: ${tapScore}
+
+            <br>
+
+            +${tapScore}
+            Points
+
+          </div>`;
+
       }
 
-      addPoints(tapScore);
-      addGamePlayed();
+    },1000);
 
-      area.innerHTML +=
-        `<div class="empty">
-          Game Over! Score: ${tapScore}
-          <br>+${tapScore} Points
-        </div>`;
-
-    }
-
-  },1000);
 }
+
 
 function createTapTarget(){
 
   const area =
-    document.getElementById('tapArea');
+    document.getElementById(
+      'tapArea'
+    );
+
 
   if(tapTarget){
+
     tapTarget.remove();
+
   }
 
-  tapTarget =
-    document.createElement('div');
 
-  tapTarget.className='tap-target';
-  tapTarget.textContent='TAP';
+  tapTarget =
+    document.createElement(
+      'div'
+    );
+
+
+  tapTarget.className =
+    'tap-target';
+
+
+  tapTarget.textContent =
+    'TAP';
+
 
   const maxX =
-    Math.max(10,area.clientWidth-62);
+    Math.max(
+      10,
+      area.clientWidth-62
+    );
+
 
   const maxY =
-    Math.max(10,area.clientHeight-62);
+    Math.max(
+      10,
+      area.clientHeight-62
+    );
+
 
   tapTarget.style.left =
-    Math.floor(Math.random()*maxX)+'px';
+    Math.floor(
+      Math.random()*maxX
+    )+
+    'px';
+
 
   tapTarget.style.top =
-    Math.floor(Math.random()*maxY)+'px';
+    Math.floor(
+      Math.random()*maxY
+    )+
+    'px';
+
 
   tapTarget.onclick=()=>{
 
-    if(tapTime<=0) return;
+    if(tapTime<=0)
+      return;
+
 
     tapScore++;
 
-    document.getElementById('tapScore').textContent =
+
+    document
+      .getElementById(
+        'tapScore'
+      )
+      .textContent =
       tapScore;
 
+
     createTapTarget();
+
   };
 
-  area.appendChild(tapTarget);
+
+  area.appendChild(
+    tapTarget
+  );
+
 }
 
 
@@ -2370,97 +4335,193 @@ function startMatchGame(){
 
   stopMatchTimer();
 
+
   matchFirst=null;
+
   matchLocked=false;
+
   matchScore=0;
 
-  document.getElementById('matchScore').textContent=0;
+
+  document
+    .getElementById(
+      'matchScore'
+    )
+    .textContent=0;
+
 
   const symbols =
-    ['🍎','🍎','⭐','⭐','🎯','🎯','🔥','🔥'];
+    [
+      '🍎','🍎',
+      '⭐','⭐',
+      '🎯','🎯',
+      '🔥','🔥'
+    ];
+
 
   matchPairs =
-    symbols.sort(()=>Math.random()-.5);
+    symbols.sort(
+      ()=>Math.random()-.5
+    );
+
 
   const grid =
-    document.getElementById('memoryGrid');
+    document.getElementById(
+      'memoryGrid'
+    );
+
 
   grid.innerHTML='';
 
-  matchPairs.forEach((symbol,index)=>{
 
-    const card =
-      document.createElement('button');
+  matchPairs.forEach(
+    (symbol,index)=>{
 
-    card.className='memory-card';
-    card.dataset.index=index;
-    card.dataset.symbol=symbol;
-    card.textContent=symbol;
+      const card =
+        document.createElement(
+          'button'
+        );
 
-    card.onclick=()=>memoryClick(card);
 
-    grid.appendChild(card);
-  });
+      card.className =
+        'memory-card';
+
+
+      card.dataset.index =
+        index;
+
+
+      card.dataset.symbol =
+        symbol;
+
+
+      card.textContent =
+        symbol;
+
+
+      card.onclick=()=>{
+        memoryClick(card);
+      };
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
 }
+
 
 function memoryClick(card){
 
-  if(matchLocked) return;
-  if(card.classList.contains('open')) return;
+  if(matchLocked)
+    return;
 
-  card.classList.add('open');
+
+  if(
+    card.classList
+      .contains('open')
+  )
+    return;
+
+
+  card.classList.add(
+    'open'
+  );
+
 
   if(!matchFirst){
 
     matchFirst=card;
+
     return;
+
   }
 
-  if(matchFirst.dataset.symbol===card.dataset.symbol){
+
+  if(
+    matchFirst.dataset.symbol===
+    card.dataset.symbol
+  ){
 
     matchScore+=10;
 
-    document.getElementById('matchScore').textContent =
+
+    document
+      .getElementById(
+        'matchScore'
+      )
+      .textContent =
       matchScore;
 
+
     matchFirst=null;
+
 
     const openCards =
       document.querySelectorAll(
         '.memory-card.open'
       );
 
-    if(openCards.length===matchPairs.length){
 
-      addPoints(matchScore);
+    if(
+      openCards.length===
+      matchPairs.length
+    ){
+
+      addPoints(
+        matchScore
+      );
+
+
       addGamePlayed();
 
+
       setTimeout(()=>{
+
         alert(
           'Match Seven complete!\n+'+
           matchScore+
           ' Points'
         );
+
       },200);
+
     }
 
   }else{
 
     matchLocked=true;
 
-    const first=matchFirst;
+
+    const first =
+      matchFirst;
+
 
     setTimeout(()=>{
 
-      first.classList.remove('open');
-      card.classList.remove('open');
+      first.classList.remove(
+        'open'
+      );
+
+
+      card.classList.remove(
+        'open'
+      );
+
 
       matchFirst=null;
+
       matchLocked=false;
 
     },650);
+
   }
+
 }
+
 
 function stopMatchTimer(){}
 
@@ -2472,128 +4533,250 @@ function stopMatchTimer(){}
 function resetFlyGame(){
 
   flyCanvas =
-    document.getElementById('flyCanvas');
+    document.getElementById(
+      'flyCanvas'
+    );
+
 
   flyCtx =
-    flyCanvas.getContext('2d');
+    flyCanvas.getContext(
+      '2d'
+    );
+
 
   flyScore=0;
+
   flyRunning=false;
 
-  document.getElementById('flyScore').textContent=0;
+
+  document
+    .getElementById(
+      'flyScore'
+    )
+    .textContent=0;
+
 
   drawFlyScene();
+
 }
+
 
 function startFlyGame(){
 
   if(flyRunning){
+
     return;
+
   }
+
 
   resetFlyGame();
 
+
   flyRunning=true;
 
+
   flyPlayer={
+
     x:80,
+
     y:120,
+
     vy:0,
+
     size:18
+
   };
+
 
   flyObstacles=[];
 
+
   let frameCount=0;
+
 
   function loop(){
 
     if(!flyRunning){
+
       return;
+
     }
+
 
     frameCount++;
 
-    flyPlayer.vy += 0.38;
-    flyPlayer.y += flyPlayer.vy;
 
-    if(frameCount%90===0){
+    flyPlayer.vy+=0.38;
+
+    flyPlayer.y+=
+      flyPlayer.vy;
+
+
+    if(
+      frameCount%90===0
+    ){
 
       const gap=95;
+
 
       const top =
         25+
         Math.random()*
-        (flyCanvas.height-gap-60);
+        (
+          flyCanvas.height-
+          gap-
+          60
+        );
+
 
       flyObstacles.push({
-        x:flyCanvas.width,
-        top:top,
-        gap:gap,
-        passed:false
+
+        x:
+          flyCanvas.width,
+
+        top:
+          top,
+
+        gap:
+          gap,
+
+        passed:
+          false
+
       });
+
     }
 
-    flyObstacles.forEach(o=>{
-      o.x-=3;
-    });
+
+    flyObstacles
+      .forEach(o=>{
+
+        o.x-=3;
+
+      });
+
 
     flyObstacles =
-      flyObstacles.filter(o=>o.x>-70);
+      flyObstacles.filter(
+        o=>o.x>-70
+      );
 
-    for(const o of flyObstacles){
 
-      if(!o.passed && o.x < flyPlayer.x){
-
-        o.passed=true;
-        flyScore++;
-
-        document.getElementById('flyScore').textContent =
-          flyScore;
-      }
+    for(
+      const o of flyObstacles
+    ){
 
       if(
-        flyPlayer.x+flyPlayer.size > o.x &&
-        flyPlayer.x-flyPlayer.size < o.x+45 &&
-        (
-          flyPlayer.y-flyPlayer.size < o.top ||
-          flyPlayer.y+flyPlayer.size > o.top+o.gap
-        )
+        !o.passed &&
+        o.x<flyPlayer.x
       ){
-        endFlyGame();
-        return;
+
+        o.passed=true;
+
+        flyScore++;
+
+
+        document
+          .getElementById(
+            'flyScore'
+          )
+          .textContent =
+          flyScore;
+
       }
+
+
+      if(
+
+        flyPlayer.x+
+        flyPlayer.size>
+        o.x &&
+
+        flyPlayer.x-
+        flyPlayer.size<
+        o.x+45 &&
+
+        (
+
+          flyPlayer.y-
+          flyPlayer.size<
+          o.top ||
+
+          flyPlayer.y+
+          flyPlayer.size>
+          o.top+
+          o.gap
+
+        )
+
+      ){
+
+        endFlyGame();
+
+        return;
+
+      }
+
     }
 
+
     if(
+
       flyPlayer.y<0 ||
-      flyPlayer.y>flyCanvas.height
+
+      flyPlayer.y>
+      flyCanvas.height
+
     ){
+
       endFlyGame();
+
       return;
+
     }
+
 
     drawFlyScene();
 
-    flyFrame=requestAnimationFrame(loop);
+
+    flyFrame =
+      requestAnimationFrame(
+        loop
+      );
+
   }
 
-  flyFrame=requestAnimationFrame(loop);
+
+  flyFrame =
+    requestAnimationFrame(
+      loop
+    );
+
 }
+
 
 function flyJump(){
 
   if(!flyRunning){
+
     startFlyGame();
+
     return;
+
   }
 
+
   flyPlayer.vy=-6;
+
 }
+
 
 function drawFlyScene(){
 
-  if(!flyCtx) return;
+  if(!flyCtx)
+    return;
+
 
   flyCtx.clearRect(
     0,
@@ -2602,7 +4785,10 @@ function drawFlyScene(){
     flyCanvas.height
   );
 
+
   flyCtx.fillStyle='#0b2638';
+
+
   flyCtx.fillRect(
     0,
     0,
@@ -2610,65 +4796,109 @@ function drawFlyScene(){
     flyCanvas.height
   );
 
+
   flyCtx.fillStyle='#00e5ff';
+
 
   flyCtx.beginPath();
 
+
   flyCtx.arc(
+
     flyPlayer.x,
+
     flyPlayer.y,
+
     flyPlayer.size,
+
     0,
+
     Math.PI*2
+
   );
+
 
   flyCtx.fill();
 
+
   flyCtx.fillStyle='#16c784';
 
-  flyObstacles.forEach(o=>{
 
-    flyCtx.fillRect(
-      o.x,
-      0,
-      45,
-      o.top
-    );
+  flyObstacles
+    .forEach(o=>{
 
-    flyCtx.fillRect(
-      o.x,
-      o.top+o.gap,
-      45,
-      flyCanvas.height
-    );
+      flyCtx.fillRect(
 
-  });
+        o.x,
+
+        0,
+
+        45,
+
+        o.top
+
+      );
+
+
+      flyCtx.fillRect(
+
+        o.x,
+
+        o.top+
+        o.gap,
+
+        45,
+
+        flyCanvas.height
+
+      );
+
+    });
+
 }
+
 
 function endFlyGame(){
 
   flyRunning=false;
 
+
   if(flyFrame){
-    cancelAnimationFrame(flyFrame);
+
+    cancelAnimationFrame(
+      flyFrame
+    );
+
+    flyFrame=null;
+
   }
 
-  addPoints(flyScore);
+
+  addPoints(
+    flyScore
+  );
+
+
   addGamePlayed();
 
+
   drawFlyScene();
+
 
   setTimeout(()=>{
 
     alert(
+
       'Fly High Game Over!\nScore: '+
       flyScore+
       '\n+'+
       flyScore+
       ' Points'
+
     );
 
   },100);
+
 }
 
 
@@ -2679,119 +4909,233 @@ function endFlyGame(){
 const quizQuestions = [
 
   {
-    q:'HTML এর পূর্ণরূপ কী?',
+
+    q:
+      'HTML এর পূর্ণরূপ কী?',
+
     options:[
+
       'Hyper Text Markup Language',
+
       'High Text Machine Language',
+
       'Hyper Tool Multi Language',
+
       'Home Text Markup Language'
+
     ],
+
     answer:0
+
   },
 
+
   {
-    q:'CSS কী কাজে ব্যবহার হয়?',
+
+    q:
+      'CSS কী কাজে ব্যবহার হয়?',
+
     options:[
+
       'Database',
+
       'Website Design',
+
       'Email',
+
       'Server Hardware'
+
     ],
+
     answer:1
+
   },
 
+
   {
-    q:'JavaScript মূলত কী?',
+
+    q:
+      'JavaScript মূলত কী?',
+
     options:[
+
       'Programming Language',
+
       'Image Format',
+
       'Database',
+
       'Operating System'
+
     ],
+
     answer:0
+
   },
 
+
   {
-    q:'Supabase কী ধরনের Platform?',
+
+    q:
+      'Supabase কী ধরনের Platform?',
+
     options:[
+
       'Backend Platform',
+
       'Photo Editor',
+
       'Video Game',
+
       'Browser'
+
     ],
+
     answer:0
+
   }
 
 ];
 
+
 function startBrainGame(){
 
   quizIndex=0;
+
   quizScore=0;
 
+
   showQuizQuestion();
+
 }
+
 
 function showQuizQuestion(){
 
   const box =
-    document.getElementById('quizBox');
+    document.getElementById(
+      'quizBox'
+    );
 
-  if(quizIndex>=quizQuestions.length){
 
-    addPoints(quizScore);
+  if(
+    quizIndex>=
+    quizQuestions.length
+  ){
+
+    addPoints(
+      quizScore
+    );
+
+
     addGamePlayed();
+
 
     box.innerHTML =
       `<div class="notice success-text">
-        Quiz Complete!<br>
-        Score: ${quizScore}<br>
-        +${quizScore} Points
+
+        Quiz Complete!
+
+        <br>
+
+        Score:
+        ${quizScore}
+
+        <br>
+
+        +${quizScore}
+        Points
+
       </div>`;
 
+
     return;
+
   }
 
+
   const q =
-    quizQuestions[quizIndex];
+    quizQuestions[
+      quizIndex
+    ];
+
 
   box.innerHTML = `
 
     <div class="quiz-question">
-      <b>Question ${quizIndex+1}/${quizQuestions.length}</b>
+
+      <b>
+        Question
+        ${quizIndex+1}/
+        ${quizQuestions.length}
+      </b>
+
       <br><br>
+
       ${escapeHTML(q.q)}
+
     </div>
 
+
     <div>
-      ${q.options.map((option,index)=>`
+
+      ${q.options.map(
+        (option,index)=>`
+
         <button
           class="btn secondary quiz-option"
           onclick="answerQuiz(${index})">
-          ${String.fromCharCode(65+index)}.
+
+          ${String.fromCharCode(
+            65+index
+          )}.
+
           ${escapeHTML(option)}
+
         </button>
+
       `).join('')}
+
     </div>
 
   `;
+
 }
+
 
 function answerQuiz(index){
 
   const q =
-    quizQuestions[quizIndex];
+    quizQuestions[
+      quizIndex
+    ];
 
-  if(index===q.answer){
+
+  if(
+    index===q.answer
+  ){
+
     quizScore+=10;
-    alert('সঠিক উত্তর! +10');
+
+
+    alert(
+      'সঠিক উত্তর! +10'
+    );
+
   }else{
-    alert('ভুল উত্তর!');
+
+    alert(
+      'ভুল উত্তর!'
+    );
+
   }
+
 
   quizIndex++;
 
+
   showQuizQuestion();
+
 }
 
 
@@ -2802,16 +5146,29 @@ function answerQuiz(index){
 function stopAllGames(){
 
   if(tapTimer){
-    clearInterval(tapTimer);
+
+    clearInterval(
+      tapTimer
+    );
+
     tapTimer=null;
+
   }
+
 
   if(flyFrame){
-    cancelAnimationFrame(flyFrame);
+
+    cancelAnimationFrame(
+      flyFrame
+    );
+
     flyFrame=null;
+
   }
 
+
   flyRunning=false;
+
 }
 
 
@@ -2822,33 +5179,65 @@ function stopAllGames(){
 function submitSponsor(){
 
   const name =
-    prompt('Sponsor Name লিখুন');
+    prompt(
+      'Sponsor Name লিখুন'
+    );
 
-  if(!name) return;
+
+  if(!name)
+    return;
+
 
   const amount =
-    prompt('Sponsor Amount লিখুন');
+    prompt(
+      'Sponsor Amount লিখুন'
+    );
 
-  if(!amount) return;
+
+  if(!amount)
+    return;
+
 
   const sponsors =
     JSON.parse(
-      localStorage.getItem('pz_sponsors') || '[]'
+      localStorage.getItem(
+        'pz_sponsors'
+      ) ||
+      '[]'
     );
 
+
   sponsors.push({
-    id:Date.now(),
+
+    id:
+      Date.now(),
+
     name,
+
     amount,
-    created_at:new Date().toISOString()
+
+    created_at:
+      new Date()
+        .toISOString()
+
   });
 
+
   localStorage.setItem(
+
     'pz_sponsors',
-    JSON.stringify(sponsors)
+
+    JSON.stringify(
+      sponsors
+    )
+
   );
 
-  alert('Sponsor information save হয়েছে।');
+
+  alert(
+    'Sponsor information save হয়েছে।'
+  );
+
 }
 
 
@@ -2860,37 +5249,77 @@ function requestPayout(){
 
   if(!currentUser){
 
-    alert('Payout request করতে Login করুন।');
+    alert(
+      'Payout request করতে Login করুন।'
+    );
 
-    openModal('auth');
+
+    openModal(
+      'auth'
+    );
+
 
     return;
+
   }
 
-  const amount =
-    prompt('Payout Amount লিখুন');
 
-  if(!amount) return;
+  const amount =
+    prompt(
+      'Payout Amount লিখুন'
+    );
+
+
+  if(!amount)
+    return;
+
 
   const payouts =
     JSON.parse(
-      localStorage.getItem('pz_payouts') || '[]'
+
+      localStorage.getItem(
+        'pz_payouts'
+      ) ||
+      '[]'
+
     );
 
+
   payouts.push({
-    id:Date.now(),
-    user_id:currentUser.id,
+
+    id:
+      Date.now(),
+
+    user_id:
+      currentUser.id,
+
     amount,
-    status:'pending',
-    created_at:new Date().toISOString()
+
+    status:
+      'pending',
+
+    created_at:
+      new Date()
+        .toISOString()
+
   });
 
+
   localStorage.setItem(
+
     'pz_payouts',
-    JSON.stringify(payouts)
+
+    JSON.stringify(
+      payouts
+    )
+
   );
 
-  alert('Payout request submitted হয়েছে।');
+
+  alert(
+    'Payout request submitted হয়েছে।'
+  );
+
 }
 
 
@@ -2902,19 +5331,32 @@ async function init(){
 
   updatePointsUI();
 
+
   const skill =
     getSkill();
 
+
   if(skill){
-    document.getElementById('profileSkill').value =
-      skill;
+
+    document
+      .getElementById(
+        'profileSkill'
+      )
+      .value=skill;
+
   }
+
 
   await loadSupabaseUser();
 
+
   await loadJobsFromSupabase();
 
-  showPage('home');
+
+  showPage(
+    'home'
+  );
+
 }
 
 
@@ -2922,85 +5364,132 @@ async function init(){
    AUTH STATE LISTENER
 ========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-  async (event,session)=>{
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    async(
+      event,
+      session
+    )=>{
 
-    currentUser =
-      session?.user || null;
+      currentUser =
+        session?.user || null;
 
-    if(currentUser){
-
-      currentProfile={
-        name:
-          currentUser.user_metadata?.name ||
-          currentUser.email?.split('@')[0] ||
-          'PLAYZONE User'
-      };
-
-    }else{
-
-      currentProfile=null;
-      isAdmin=false;
-
-    }
-
-    updateAuthUI();
-
-    /*
-      Avoid heavy async operations directly inside
-      Supabase auth callback.
-    */
-
-    setTimeout(async()=>{
-
-      await updateAdminUI();
 
       if(currentUser){
-        await loadMyApplications();
+
+        currentProfile={
+
+          name:
+
+            currentUser
+              .user_metadata
+              ?.name ||
+
+            currentUser
+              .email
+              ?.split('@')[0] ||
+
+            'PLAYZONE User'
+
+        };
+
+      }else{
+
+        currentProfile=null;
+
+        isAdmin=false;
+
       }
 
-    },0);
-  }
-);
+
+      updateAuthUI();
+
+
+      /*
+        Heavy async operations are
+        delayed outside auth callback.
+      */
+
+      setTimeout(
+        async()=>{
+
+          await updateAdminUI();
+
+
+          if(currentUser){
+
+            await loadMyApplications();
+
+          }
+
+        },
+        0
+      );
+
+    }
+  );
 
 
 /* =========================================================
    CLOSE MODAL WHEN CLICK OUTSIDE
 ========================================================= */
 
-document.querySelectorAll('.modal')
-.forEach(modal=>{
+document
+  .querySelectorAll('.modal')
+  .forEach(modal=>{
 
-  modal.addEventListener('click',e=>{
+    modal.addEventListener(
+      'click',
+      e=>{
 
-    if(e.target===modal){
-      closeModal();
-    }
+        if(
+          e.target===modal
+        ){
+
+          closeModal();
+
+        }
+
+      }
+    );
 
   });
-
-});
 
 
 /* =========================================================
    KEYBOARD
 ========================================================= */
 
-document.addEventListener('keydown',e=>{
+document.addEventListener(
+  'keydown',
+  e=>{
 
-  if(e.code==='Space'){
+    if(
+      e.code==='Space'
+    ){
 
-    const flyModal =
-      document.getElementById('modal-flyGame');
+      const flyModal =
+        document.getElementById(
+          'modal-flyGame'
+        );
 
-    if(flyModal.classList.contains('show')){
-      e.preventDefault();
-      flyJump();
+
+      if(
+        flyModal.classList
+          .contains('show')
+      ){
+
+        e.preventDefault();
+
+        flyJump();
+
+      }
+
     }
 
   }
-
-});
+);
 
 
 /* =========================================================
