@@ -1,3072 +1,587 @@
+
 <!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#07111f">
 <title>PLAYZONE — Skill & Opportunity Platform</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
+
 html{scroll-behavior:smooth}
+
 body{
-  margin:0;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(0,210,255,.13),transparent 28%),
-    radial-gradient(circle at 90% 15%,rgba(124,58,237,.15),transparent 30%),
-    #07111f;
-  color:#fff;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  min-height:100vh;
+ margin:0;
+ background:#07131f;
+ color:#fff;
+ font-family:Arial,"Noto Sans Bengali",sans-serif;
 }
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+
 .wrap{
-  max-width:760px;
-  margin:auto;
-  padding:0 14px 100px;
+ max-width:760px;
+ margin:auto;
+ padding-bottom:90px;
 }
 
 /* HEADER */
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(7,17,31,.88);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.07);
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:rgba(7,19,31,.94);
+ backdrop-filter:blur(12px);
+ border-bottom:1px solid rgba(255,255,255,.08);
 }
+
 .header-inner{
-  max-width:760px;
-  margin:auto;
-  padding:12px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:14px 16px;
 }
+
 .logo{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:.8px;
-  background:linear-gradient(90deg,#22d3ee,#8b5cf6);
-  -webkit-background-clip:text;
-  color:transparent;
+ font-size:22px;
+ font-weight:900;
+ letter-spacing:.5px;
 }
-.user-chip{
-  font-size:12px;
-  padding:7px 11px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:30px;
-  background:rgba(255,255,255,.05);
-  color:#cbd5e1;
+
+.logo span{
+ color:#20e3a2;
+}
+
+.user{
+ font-size:14px;
+ color:#b9c8d6;
 }
 
 /* NAV */
-.top-nav{
-  max-width:760px;
-  margin:auto;
-  display:flex;
-  gap:5px;
-  overflow-x:auto;
-  padding:0 10px 10px;
-  scrollbar-width:none;
-}
-.top-nav::-webkit-scrollbar{display:none}
-.nav-btn{
-  flex:0 0 auto;
-  border:0;
-  color:#9fb0c7;
-  background:transparent;
-  padding:8px 11px;
-  border-radius:12px;
-  font-size:12px;
-}
-.nav-btn:hover,
-.nav-btn.active{
-  color:#fff;
-  background:rgba(34,211,238,.12);
+.nav{
+ display:flex;
+ gap:7px;
+ overflow-x:auto;
+ padding:0 12px 12px;
+ scrollbar-width:none;
 }
 
-/* SECTIONS */
-.page{display:none}
-.page.active{display:block}
-.section-title{
-  margin:24px 0 12px;
-  font-size:21px;
-  font-weight:900;
-}
-.section-sub{
-  margin:-5px 0 16px;
-  color:#8291a7;
-  font-size:13px;
+.nav::-webkit-scrollbar{display:none}
+
+.nav button{
+ border:1px solid rgba(255,255,255,.08);
+ background:#0d2233;
+ color:#dce8f2;
+ padding:9px 12px;
+ border-radius:12px;
+ white-space:nowrap;
+ font-size:13px;
 }
 
 /* HERO */
 .hero{
-  margin-top:18px;
-  padding:25px 20px;
-  border-radius:25px;
-  position:relative;
-  overflow:hidden;
-  background:
-    linear-gradient(135deg,rgba(15,118,110,.42),rgba(30,64,175,.35)),
-    rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 18px 50px rgba(0,0,0,.22);
-}
-.hero:before{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  right:-70px;
-  top:-70px;
-  background:rgba(34,211,238,.18);
-  border-radius:50%;
-  filter:blur(5px);
-}
-.hero small{
-  color:#67e8f9;
-  font-weight:800;
-}
-.hero h1{
-  margin:8px 0;
-  font-size:31px;
-  line-height:1.2;
-}
-.hero p{
-  color:#b8c5d6;
-  line-height:1.6;
-  font-size:14px;
-  margin:8px 0 18px;
-}
-.hero-actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
+ margin:18px 14px;
+ padding:30px 22px;
+ border-radius:24px;
+ background:
+ linear-gradient(145deg,#10344a,#092333 55%,#071a27);
+ border:1px solid rgba(32,227,162,.18);
+ box-shadow:0 18px 45px rgba(0,0,0,.25);
 }
 
-/* BUTTONS */
+.badge{
+ display:inline-block;
+ padding:7px 11px;
+ border-radius:20px;
+ background:rgba(32,227,162,.1);
+ color:#20e3a2;
+ font-size:12px;
+ font-weight:bold;
+ margin-bottom:13px;
+}
+
+.hero h1{
+ margin:0 0 12px;
+ font-size:30px;
+ line-height:1.2;
+}
+
+.hero p{
+ margin:0;
+ color:#b9c9d6;
+ line-height:1.7;
+ font-size:14px;
+}
+
+.actions{
+ display:flex;
+ gap:10px;
+ margin-top:22px;
+}
+
 .btn{
-  border:0;
-  border-radius:13px;
-  padding:11px 16px;
-  color:#fff;
-  font-weight:800;
-  transition:.18s;
+ flex:1;
+ border:0;
+ padding:13px;
+ border-radius:13px;
+ font-weight:bold;
+ font-size:14px;
+ cursor:pointer;
 }
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{
-  background:linear-gradient(135deg,#06b6d4,#2563eb);
-  box-shadow:0 8px 25px rgba(6,182,212,.2);
+
+.primary{
+ background:#20e3a2;
+ color:#04140f;
 }
-.btn-purple{
-  background:linear-gradient(135deg,#7c3aed,#2563eb);
-}
-.btn-green{
-  background:linear-gradient(135deg,#059669,#16a34a);
-}
-.btn-danger{
-  background:linear-gradient(135deg,#dc2626,#b91c1c);
-}
-.btn-muted{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.08);
-  color:#cbd5e1;
-}
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-  transform:none;
+
+.secondary{
+ background:#122c3e;
+ color:#fff;
+ border:1px solid rgba(255,255,255,.1);
 }
 
 /* WALLET */
 .wallet{
-  margin-top:15px;
-  padding:19px;
-  border-radius:21px;
-  background:linear-gradient(135deg,#111d31,#0c1727);
-  border:1px solid rgba(255,255,255,.08);
+ margin:15px 14px;
+ padding:22px;
+ border-radius:22px;
+ background:linear-gradient(145deg,#102d40,#0b1e2c);
+ border:1px solid rgba(255,255,255,.08);
 }
-.wallet-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+
+.wallet-title{
+ color:#9fb2c1;
+ font-size:13px;
 }
-.wallet-label{
-  color:#8fa1b8;
-  font-size:12px;
-}
+
 .points{
-  font-size:31px;
-  font-weight:900;
-  margin-top:4px;
+ font-size:38px;
+ font-weight:900;
+ margin:7px 0 3px;
 }
-.bdt{
-  color:#4ade80;
-  font-weight:800;
+
+.cash{
+ color:#20e3a2;
+ font-size:16px;
+ font-weight:bold;
 }
-.wallet-badge{
-  padding:8px 11px;
-  border-radius:12px;
-  background:rgba(34,197,94,.1);
-  color:#86efac;
-  font-size:12px;
-}
+
 .progress{
-  margin-top:15px;
-  height:7px;
-  background:#1e293b;
-  border-radius:20px;
-  overflow:hidden;
+ margin-top:18px;
+ height:8px;
+ background:#172d3c;
+ border-radius:10px;
+ overflow:hidden;
 }
-.progress span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#22d3ee,#8b5cf6);
-  border-radius:20px;
+
+.progress div{
+ width:6%;
+ height:100%;
+ background:#20e3a2;
+ border-radius:10px;
 }
-.wallet-note{
-  margin-top:8px;
-  color:#8493a7;
-  font-size:11px;
+
+.withdraw{
+ margin-top:10px;
+ color:#91a6b6;
+ font-size:12px;
 }
 
 /* STATS */
 .stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:13px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:9px;
+ margin:15px 14px;
 }
+
 .stat{
-  padding:15px 9px;
-  text-align:center;
-  border-radius:17px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
+ background:#0c1e2d;
+ border:1px solid rgba(255,255,255,.07);
+ border-radius:16px;
+ padding:14px 7px;
+ text-align:center;
 }
+
 .stat strong{
-  display:block;
-  font-size:20px;
+ display:block;
+ font-size:21px;
+ margin-bottom:4px;
 }
+
 .stat span{
-  color:#7f8ea3;
-  font-size:11px;
+ color:#8fa4b3;
+ font-size:11px;
+}
+
+/* SECTION */
+.section{
+ margin:25px 14px 14px;
+}
+
+.section-title{
+ font-size:20px;
+ font-weight:800;
+ margin-bottom:14px;
 }
 
 /* HOW */
-.how-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.how{
-  padding:16px;
-  border-radius:18px;
-  background:rgba(255,255,255,.035);
-  border:1px solid rgba(255,255,255,.06);
-}
-.how-icon{font-size:25px}
-.how strong{display:block;margin-top:8px}
-.how p{
-  color:#8190a5;
-  font-size:12px;
-  line-height:1.5;
+.steps{
+ display:grid;
+ gap:10px;
 }
 
-/* GAMES */
-.game-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
-}
-.game-card{
-  min-height:175px;
-  padding:17px;
-  border-radius:20px;
-  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
-  border:1px solid rgba(255,255,255,.08);
-  position:relative;
-  overflow:hidden;
-  transition:.2s;
-}
-.game-card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(34,211,238,.25);
-}
-.game-icon{
-  width:48px;
-  height:48px;
-  display:grid;
-  place-items:center;
-  border-radius:15px;
-  background:rgba(34,211,238,.1);
-  font-size:25px;
-}
-.game-card h3{
-  margin:12px 0 5px;
-  font-size:16px;
-}
-.game-card p{
-  color:#8492a6;
-  font-size:11px;
-  line-height:1.5;
-  min-height:34px;
-}
-.reward-tag{
-  display:inline-block;
-  color:#67e8f9;
-  font-size:10px;
-  margin-bottom:9px;
-}
-.play-btn{
-  width:100%;
-  padding:9px;
-  border:0;
-  border-radius:11px;
-  color:#fff;
-  font-weight:800;
-  background:rgba(34,211,238,.13);
+.step{
+ display:flex;
+ gap:13px;
+ align-items:center;
+ background:#0c1e2d;
+ border:1px solid rgba(255,255,255,.07);
+ border-radius:17px;
+ padding:15px;
 }
 
-/* JOBS */
-.job-card{
-  padding:17px;
-  margin-bottom:11px;
-  border-radius:19px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
-}
-.job-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-.job-card h3{margin:0 0 5px;font-size:16px}
-.job-skill{
-  display:inline-block;
-  font-size:10px;
-  color:#67e8f9;
-  background:rgba(34,211,238,.1);
-  padding:5px 8px;
-  border-radius:8px;
-}
-.job-budget{
-  color:#4ade80;
-  font-weight:900;
-  white-space:nowrap;
-}
-.job-card p{
-  color:#9aa8bb;
-  font-size:12px;
-  line-height:1.55;
-}
-.job-actions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
+.step-icon{
+ width:45px;
+ height:45px;
+ flex-shrink:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:14px;
+ background:#102f3d;
+ font-size:22px;
 }
 
-/* FORMS */
-.form-card{
-  padding:18px;
-  border-radius:20px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
-  margin-top:14px;
-}
-label{
-  display:block;
-  color:#9aa8bb;
-  font-size:12px;
-  margin:12px 0 6px;
-}
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border-radius:11px;
-  border:1px solid rgba(255,255,255,.09);
-  outline:none;
-  color:#fff;
-  background:#0c1727;
-}
-textarea{
-  min-height:90px;
-  resize:vertical;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:#22d3ee;
+.step h3{
+ margin:0 0 4px;
+ font-size:15px;
 }
 
-/* REWARDS */
-.reward-main{
-  padding:22px;
-  border-radius:22px;
-  background:linear-gradient(135deg,rgba(124,58,237,.23),rgba(6,182,212,.14));
-  border:1px solid rgba(255,255,255,.08);
-}
-.reward-main h2{margin:0 0 8px}
-.reward-main p{
-  color:#aebacc;
-  font-size:13px;
-  line-height:1.6;
-}
-.reward-rate{
-  font-size:28px;
-  font-weight:900;
-  margin:15px 0;
-}
-.info-row{
-  display:flex;
-  justify-content:space-between;
-  padding:11px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  font-size:12px;
-}
-.info-row span:first-child{color:#8997aa}
-
-/* HISTORY */
-.history-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.history-item small{color:#8190a4}
-.plus{color:#4ade80;font-weight:900}
-.minus{color:#fb7185;font-weight:900}
-
-/* PROFILE */
-.profile-card{
-  text-align:center;
-  padding:24px 18px;
-  border-radius:22px;
-  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
-  border:1px solid rgba(255,255,255,.08);
-}
-.avatar{
-  width:75px;
-  height:75px;
-  display:grid;
-  place-items:center;
-  margin:auto;
-  border-radius:50%;
-  font-size:32px;
-  background:linear-gradient(135deg,#06b6d4,#7c3aed);
-  box-shadow:0 10px 35px rgba(34,211,238,.18);
-}
-.profile-card h2{margin:12px 0 3px}
-.profile-card p{color:#8290a4;font-size:12px}
-
-/* ADMIN */
-.admin-stat-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.admin-stat{
-  padding:17px;
-  border-radius:17px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
-}
-.admin-stat span{color:#8391a5;font-size:11px}
-.admin-stat strong{
-  display:block;
-  font-size:25px;
-  margin-top:5px;
+.step p{
+ margin:0;
+ color:#91a5b4;
+ font-size:12px;
+ line-height:1.5;
 }
 
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(7px);
-}
-.modal.show{display:flex}
-.modal-box{
-  width:min(520px,100%);
-  max-height:90vh;
-  overflow:auto;
-  padding:20px;
-  border-radius:22px;
-  background:#0b1728;
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 25px 80px rgba(0,0,0,.5);
-}
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.modal-head h2{margin:0}
-.close{
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:10px;
-  background:rgba(255,255,255,.07);
-  color:#fff;
-}
-.modal-actions{
-  display:flex;
-  gap:8px;
-  margin-top:16px;
+/* OPPORTUNITY */
+.opportunity{
+ margin:15px 14px;
+ padding:21px;
+ border-radius:21px;
+ background:linear-gradient(135deg,#102c40,#0b1d2b);
+ border:1px solid rgba(32,227,162,.12);
 }
 
-/* GAME AREA */
-#gameArea{
-  min-height:240px;
-  position:relative;
-}
-.game-center{text-align:center}
-.big-score{
-  font-size:48px;
-  font-weight:900;
-  margin:20px 0;
-}
-.tap-target{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  border:0;
-  background:linear-gradient(135deg,#06b6d4,#7c3aed);
-  color:#fff;
-  font-size:30px;
-  box-shadow:0 12px 35px rgba(34,211,238,.22);
-}
-.match-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:15px;
-}
-.match-card{
-  aspect-ratio:1;
-  border:0;
-  border-radius:11px;
-  background:#17243a;
-  color:#fff;
-  font-size:22px;
-}
-.match-card.open,
-.match-card.matched{
-  background:#12384a;
-}
-.quiz-option{
-  width:100%;
-  margin:6px 0;
-  padding:11px;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:11px;
-  background:#101e31;
-  color:#fff;
-  text-align:left;
+.opportunity h2{
+ margin:0 0 8px;
+ font-size:20px;
 }
 
-/* EMPTY / STATUS */
-.empty{
-  text-align:center;
-  padding:30px 15px;
-  color:#758398;
-  border:1px dashed rgba(255,255,255,.09);
-  border-radius:17px;
+.opportunity p{
+ margin:0;
+ color:#9eb0bd;
+ font-size:13px;
+ line-height:1.6;
 }
-.notice{
-  padding:11px 13px;
-  border-radius:11px;
-  background:rgba(34,211,238,.08);
-  color:#8eeafa;
-  font-size:12px;
-  margin-top:10px;
+
+.skill-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:9px;
+ margin-top:16px;
 }
-.success{
-  color:#86efac;
+
+.skill{
+ background:#0a1926;
+ border:1px solid rgba(255,255,255,.06);
+ padding:13px;
+ border-radius:13px;
+ font-size:13px;
 }
-.error{
-  color:#fda4af;
+
+/* TRUST */
+.trust{
+ margin:15px 14px;
+ padding:18px;
+ border-radius:19px;
+ background:#0c1e2d;
+ border:1px solid rgba(255,255,255,.07);
+}
+
+.trust-row{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ margin:10px 0;
+ color:#b5c5d0;
+ font-size:13px;
+}
+
+/* BOTTOM NAV */
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ z-index:200;
+ background:rgba(5,15,24,.97);
+ border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom-inner{
+ max-width:760px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+}
+
+.bottom button{
+ background:none;
+ border:0;
+ color:#7f95a5;
+ padding:10px 3px 9px;
+ font-size:11px;
+}
+
+.bottom button:first-child{
+ color:#20e3a2;
+}
+
+.bottom-icon{
+ display:block;
+ font-size:19px;
+ margin-bottom:3px;
 }
 
 /* MOBILE */
-@media(max-width:520px){
-  .hero h1{font-size:27px}
-  .game-grid{grid-template-columns:1fr 1fr}
-  .how-grid{grid-template-columns:1fr 1fr}
-  .stats{gap:7px}
-  .stat{padding:13px 5px}
-  .stat strong{font-size:18px}
-}
-@media(max-width:360px){
-  .game-grid,.how-grid{grid-template-columns:1fr}
-  .hero-actions .btn{width:100%}
-}
-
-/* BOTTOM APP BAR */
-.bottom-bar{
-  position:fixed;
-  left:50%;
-  bottom:9px;
-  transform:translateX(-50%);
-  z-index:60;
-  width:min(720px,calc(100% - 18px));
-  display:flex;
-  justify-content:space-around;
-  padding:7px;
-  border-radius:19px;
-  background:rgba(9,20,35,.9);
-  border:1px solid rgba(255,255,255,.09);
-  backdrop-filter:blur(18px);
-  box-shadow:0 15px 45px rgba(0,0,0,.35);
-}
-.bottom-btn{
-  border:0;
-  background:transparent;
-  color:#7e8ca0;
-  padding:6px 9px;
-  border-radius:13px;
-  font-size:10px;
-}
-.bottom-btn b{
-  display:block;
-  font-size:18px;
-  margin-bottom:2px;
-}
-.bottom-btn.active{
-  color:#67e8f9;
-  background:rgba(34,211,238,.08);
+@media(max-width:430px){
+ .hero h1{font-size:25px}
+ .points{font-size:34px}
+ .stats{gap:6px}
+ .stat strong{font-size:19px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">PLAYZONE</div>
-    <div class="user-chip" id="headerUser">Guest</div>
-  </div>
+<div class="wrap">
 
-  <nav class="top-nav">
-    <button class="nav-btn active" onclick="showPage('home',this)">🏠 Home</button>
-    <button class="nav-btn" onclick="showPage('games',this)">🎮 Games</button>
-    <button class="nav-btn" onclick="showPage('jobs',this)">💼 Jobs</button>
-    <button class="nav-btn" onclick="showPage('rewards',this)">💰 Rewards</button>
-    <button class="nav-btn" onclick="showPage('profile',this)">👤 Profile</button>
-    <button class="nav-btn" id="adminNav" style="display:none" onclick="showPage('admin',this)">⚙️ Admin</button>
-  </nav>
+<header>
+ <div class="header-inner">
+   <div class="logo">PLAY<span>ZONE</span></div>
+   <div class="user">👤 Masud Rana</div>
+ </div>
+
+ <div class="nav">
+   <button>🏠 Home</button>
+   <button>🎮 Games</button>
+   <button>💼 Jobs</button>
+   <button>💰 Rewards</button>
+   <button>👤 Profile</button>
+   <button>⚙️ Admin</button>
+ </div>
 </header>
 
-<main class="wrap">
 
-<!-- HOME -->
-<section id="home" class="page active">
+<!-- HERO -->
+<section class="hero">
 
-  <div class="hero">
-    <small>🚀 SKILL & OPPORTUNITY PLATFORM</small>
-    <h1>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h1>
-    <p>
-      গেম খেলুন, পয়েন্ট অর্জন করুন, নিজের দক্ষতা কাজে লাগিয়ে
-      অনলাইন কাজের সুযোগ খুঁজে নিন।
-    </p>
+ <div class="badge">🚀 SKILL & OPPORTUNITY PLATFORM</div>
 
-    <div class="hero-actions">
-      <button class="btn btn-primary" onclick="showPage('games')">🎮 খেলুন</button>
-      <button class="btn btn-purple" onclick="showPage('jobs')">💼 কাজ দেখুন</button>
-    </div>
-  </div>
+ <h1>খেলুন • দক্ষতা দেখান •<br>সুযোগ তৈরি করুন</h1>
 
-  <div class="wallet">
-    <div class="wallet-top">
-      <div>
-        <div class="wallet-label">আপনার বর্তমান Points</div>
-        <div class="points" id="points">1,000</div>
-        <div class="bdt">৳ <span id="bdtValue">100</span> BDT</div>
-      </div>
-      <div class="wallet-badge">💎 PLAYZONE WALLET</div>
-    </div>
+ <p>
+ গেম খেলুন, Points অর্জন করুন এবং নিজের দক্ষতা কাজে লাগিয়ে
+ অনলাইন কাজের সুযোগ খুঁজে নিন।
+ </p>
 
-    <div class="progress">
-      <span id="walletProgress"></span>
-    </div>
+ <div class="actions">
+   <button class="btn primary">🎮 খেলুন</button>
+   <button class="btn secondary">💼 কাজ দেখুন</button>
+ </div>
 
-    <div class="wallet-note" id="walletNote">
-      Withdraw করতে minimum 25,000 Points প্রয়োজন।
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <strong id="gameCount">4</strong>
-      <span>Games</span>
-    </div>
-    <div class="stat">
-      <strong id="jobCount">0</strong>
-      <span>Jobs</span>
-    </div>
-    <div class="stat">
-      <strong id="applicationCount">0</strong>
-      <span>Applications</span>
-    </div>
-  </div>
-
-  <h2 class="section-title">PLAYZONE কীভাবে কাজ করে?</h2>
-
-  <div class="how-grid">
-    <div class="how">
-      <div class="how-icon">🎮</div>
-      <strong>খেলুন</strong>
-      <p>দক্ষতার গেম খেলুন এবং Points অর্জন করুন।</p>
-    </div>
-
-    <div class="how">
-      <div class="how-icon">💼</div>
-      <strong>কাজ করুন</strong>
-      <p>নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।</p>
-    </div>
-
-    <div class="how">
-      <div class="how-icon">⭐</div>
-      <strong>দক্ষতা দেখান</strong>
-      <p>Job-এ Application করে নিজের যোগ্যতা দেখান।</p>
-    </div>
-
-    <div class="how">
-      <div class="how-icon">💰</div>
-      <strong>Reward</strong>
-      <p>Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।</p>
-    </div>
-  </div>
 </section>
 
 
-<!-- GAMES -->
-<section id="games" class="page">
+<!-- WALLET -->
+<section class="wallet">
 
-  <h2 class="section-title">🎮 Skill Games</h2>
-  <p class="section-sub">খেলুন, স্কোর করুন এবং Points সংগ্রহ করুন।</p>
+ <div class="wallet-title">আপনার বর্তমান Points</div>
 
-  <div class="game-grid">
+ <div class="points">1,490</div>
 
-    <div class="game-card">
-      <div class="game-icon">👆</div>
-      <h3>Tap Rush</h3>
-      <span class="reward-tag">⚡ প্রতি Tap = 1 Point</span>
-      <p>৩০ সেকেন্ডে যত বেশি Tap, তত বেশি Score।</p>
-      <button class="play-btn" onclick="openGame('tap')">PLAY NOW</button>
-    </div>
+ <div class="cash">৳ 149 BDT</div>
 
-    <div class="game-card">
-      <div class="game-icon">🧩</div>
-      <h3>Match Seven</h3>
-      <span class="reward-tag">⭐ Match = 10 Points</span>
-      <p>একই জোড়া খুঁজে Match করুন।</p>
-      <button class="play-btn" onclick="openGame('match')">PLAY NOW</button>
-    </div>
+ <div class="wallet-title" style="margin-top:18px">
+   💎 PLAYZONE WALLET
+ </div>
 
-    <div class="game-card">
-      <div class="game-icon">🚀</div>
-      <h3>Fly High</h3>
-      <span class="reward-tag">🏆 Score Reward</span>
-      <p>Obstacle এড়িয়ে যত দূর সম্ভব যান।</p>
-      <button class="play-btn" onclick="openGame('fly')">PLAY NOW</button>
-    </div>
+ <div class="progress">
+   <div></div>
+ </div>
 
-    <div class="game-card">
-      <div class="game-icon">🧠</div>
-      <h3>Brain Box</h3>
-      <span class="reward-tag">💡 Correct = 20 Points</span>
-      <p>প্রশ্নের সঠিক উত্তর দিয়ে Points নিন।</p>
-      <button class="play-btn" onclick="openGame('brain')">PLAY NOW</button>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- JOBS -->
-<section id="jobs" class="page">
-
-  <h2 class="section-title">💼 Skill Jobs</h2>
-  <p class="section-sub">আপনার দক্ষতার সাথে মিল রেখে কাজ খুঁজে নিন।</p>
-
-  <button class="btn btn-muted" onclick="loadJobs()">🔄 Refresh Jobs</button>
-
-  <div id="jobsList" style="margin-top:14px"></div>
-
-  <div class="form-card">
-    <h3 style="margin-top:0">➕ নতুন Job পোস্ট করুন</h3>
-
-    <label>Job Title</label>
-    <input id="jobTitle" placeholder="যেমন: Facebook পোস্ট ডিজাইন">
-
-    <label>Skill</label>
-    <input id="jobSkill" placeholder="যেমন: Graphic Design">
-
-    <label>Description</label>
-    <textarea id="jobDescription" placeholder="কাজের বিস্তারিত লিখুন"></textarea>
-
-    <label>Budget</label>
-    <input id="jobBudget" placeholder="যেমন: 500 BDT">
-
-    <button class="btn btn-primary" style="margin-top:12px" onclick="createJob()">
-      পোস্ট করুন
-    </button>
-
-    <div id="jobMsg"></div>
-  </div>
-</section>
-
-
-<!-- REWARDS -->
-<section id="rewards" class="page">
-
-  <h2 class="section-title">💰 Rewards & Wallet</h2>
-
-  <div class="reward-main">
-    <h2>আপনার Wallet</h2>
-    <p>PLAYZONE-এ আপনার Points জমিয়ে নির্ধারিত সীমায় BDT হিসেবে payout request করতে পারবেন।</p>
-
-    <div class="reward-rate">10 Points = 1 BDT</div>
-
-    <div class="info-row">
-      <span>Current Points</span>
-      <strong id="rewardPoints">1,000</strong>
-    </div>
-
-    <div class="info-row">
-      <span>Current Value</span>
-      <strong>৳ <span id="rewardBdt">100</span></strong>
-    </div>
-
-    <div class="info-row">
-      <span>Minimum Withdrawal</span>
-      <strong>25,000 Points</strong>
-    </div>
-
-    <div class="info-row">
-      <span>Minimum BDT</span>
-      <strong>৳ 2,500</strong>
-    </div>
-
-    <button id="withdrawBtn"
-            class="btn btn-green"
-            style="width:100%;margin-top:16px"
-            onclick="openPayoutModal()">
-      💸 Withdraw
-    </button>
-
-    <div id="withdrawStatus" class="notice">
-      Minimum 25,000 Points হলে Withdraw করা যাবে।
-    </div>
-  </div>
-
-  <h3 class="section-title" style="font-size:17px">📜 Wallet Transactions</h3>
-  <div class="form-card">
-    <div id="walletTransactions">
-      <div class="empty">Login করলে transaction history দেখা যাবে।</div>
-    </div>
-  </div>
-
-  <h3 class="section-title" style="font-size:17px">💸 Payout History</h3>
-  <div class="form-card">
-    <div id="myPayouts">
-      <div class="empty">Payout history এখানে দেখা যাবে।</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- PROFILE -->
-<section id="profile" class="page">
-
-  <h2 class="section-title">👤 My Profile</h2>
-
-  <div class="profile-card">
-    <div class="avatar">👤</div>
-    <h2 id="profileName">Guest</h2>
-    <p>PLAYZONE Member</p>
-
-    <div class="stats">
-      <div class="stat">
-        <strong id="profilePoints">1,000</strong>
-        <span>Points</span>
-      </div>
-      <div class="stat">
-        <strong>৳<span id="profileBdt">100</span></strong>
-        <span>Value</span>
-      </div>
-      <div class="stat">
-        <strong id="profileGames">0</strong>
-        <span>Games</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-card">
-    <h3 style="margin-top:0">⚙️ Skill Profile</h3>
-
-    <label>Username / Name</label>
-    <input id="usernameInput" placeholder="আপনার নাম">
-
-    <label>Your Main Skill</label>
-    <input id="skillInput" placeholder="যেমন: Graphic Design">
-
-    <button class="btn btn-primary" style="margin-top:12px" onclick="saveSkillProfile()">
-      💾 Save Profile
-    </button>
-
-    <div id="profileMsg"></div>
-  </div>
-
-  <div class="form-card" id="authArea"></div>
-</section>
-
-
-<!-- ADMIN -->
-<section id="admin" class="page">
-
-  <h2 class="section-title">⚙️ Admin Dashboard</h2>
-  <p class="section-sub">PLAYZONE management panel</p>
-
-  <div class="admin-stat-grid">
-    <div class="admin-stat">
-      <span>Users</span>
-      <strong id="adminUsers">0</strong>
-    </div>
-
-    <div class="admin-stat">
-      <span>Jobs</span>
-      <strong id="adminJobs">0</strong>
-    </div>
-
-    <div class="admin-stat">
-      <span>Applications</span>
-      <strong id="adminApplications">0</strong>
-    </div>
-
-    <div class="admin-stat">
-      <span>Payouts</span>
-      <strong id="adminPayouts">0</strong>
-    </div>
-
-    <div class="admin-stat">
-      <span>Pending Payouts</span>
-      <strong id="adminPendingPayouts">0</strong>
-    </div>
-  </div>
-
-  <h3 class="section-title" style="font-size:17px">📨 Applications</h3>
-  <div class="form-card">
-    <div id="adminApplicationsList">
-      <div class="empty">Applications loading...</div>
-    </div>
-  </div>
-
-  <h3 class="section-title" style="font-size:17px">💸 Payout Requests</h3>
-  <div class="form-card">
-    <div id="adminPayoutsList">
-      <div class="empty">Payouts loading...</div>
-    </div>
-  </div>
+ <div class="withdraw">
+   23,510 Points আরও প্রয়োজন Withdraw করার জন্য।
+ </div>
 
 </section>
 
-</main>
+
+<!-- STATS -->
+<section class="stats">
+
+ <div class="stat">
+   <strong>4</strong>
+   <span>Games</span>
+ </div>
+
+ <div class="stat">
+   <strong>6</strong>
+   <span>Jobs</span>
+ </div>
+
+ <div class="stat">
+   <strong>0</strong>
+   <span>Applications</span>
+ </div>
+
+ <div class="stat">
+   <strong>1,490</strong>
+   <span>Points</span>
+ </div>
+
+</section>
 
 
-<!-- BOTTOM BAR -->
-<div class="bottom-bar">
-  <button class="bottom-btn active" onclick="showPage('home',this)">
-    <b>🏠</b>Home
-  </button>
-  <button class="bottom-btn" onclick="showPage('games',this)">
-    <b>🎮</b>Games
-  </button>
-  <button class="bottom-btn" onclick="showPage('jobs',this)">
-    <b>💼</b>Jobs
-  </button>
-  <button class="bottom-btn" onclick="showPage('rewards',this)">
-    <b>💰</b>Wallet
-  </button>
-  <button class="bottom-btn" onclick="showPage('profile',this)">
-    <b>👤</b>Profile
-  </button>
+<!-- HOW IT WORKS -->
+<section class="section">
+
+ <div class="section-title">PLAYZONE কীভাবে কাজ করে?</div>
+
+ <div class="steps">
+
+   <div class="step">
+     <div class="step-icon">🎮</div>
+     <div>
+       <h3>খেলুন</h3>
+       <p>দক্ষতার গেম খেলুন এবং Points অর্জন করুন।</p>
+     </div>
+   </div>
+
+   <div class="step">
+     <div class="step-icon">💼</div>
+     <div>
+       <h3>কাজ করুন</h3>
+       <p>নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।</p>
+     </div>
+   </div>
+
+   <div class="step">
+     <div class="step-icon">⭐</div>
+     <div>
+       <h3>দক্ষতা দেখান</h3>
+       <p>Job-এ Application করে নিজের যোগ্যতা দেখান।</p>
+     </div>
+   </div>
+
+   <div class="step">
+     <div class="step-icon">💰</div>
+     <div>
+       <h3>Reward</h3>
+       <p>Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।</p>
+     </div>
+   </div>
+
+ </div>
+
+</section>
+
+
+<!-- OPPORTUNITY -->
+<section class="opportunity">
+
+ <h2>💼 Skill Opportunity</h2>
+
+ <p>
+ আপনার দক্ষতাকে কাজে লাগিয়ে PLAYZONE-এ বিভিন্ন
+ অনলাইন কাজের সুযোগ খুঁজে নিন।
+ </p>
+
+ <div class="skill-grid">
+
+   <div class="skill">🎨 Graphic Design</div>
+   <div class="skill">🎬 Video Editing</div>
+   <div class="skill">⌨️ Data Entry</div>
+   <div class="skill">📱 Digital Marketing</div>
+
+ </div>
+
+</section>
+
+
+<!-- TRUST -->
+<section class="trust">
+
+ <div class="section-title" style="margin-bottom:8px">
+   🔐 কেন PLAYZONE?
+ </div>
+
+ <div class="trust-row">
+   <span>✓</span>
+   <span>Skill-based Gaming ও Job Opportunity</span>
+ </div>
+
+ <div class="trust-row">
+   <span>✓</span>
+   <span>Points Wallet ও Reward System</span>
+ </div>
+
+ <div class="trust-row">
+   <span>✓</span>
+   <span>Job Application ও Skill Showcase</span>
+ </div>
+
+</section>
+
 </div>
 
 
-<!-- AUTH MODAL -->
-<div class="modal" id="authModal">
-  <div class="modal-box">
+<!-- BOTTOM NAV -->
+<div class="bottom">
 
-    <div class="modal-head">
-      <h2>🔐 PLAYZONE Login</h2>
-      <button class="close" onclick="closeModal('authModal')">✕</button>
-    </div>
+ <div class="bottom-inner">
 
-    <label>Email</label>
-    <input id="authEmail" type="email" placeholder="আপনার Email">
+   <button>
+     <span class="bottom-icon">🏠</span>
+     Home
+   </button>
 
-    <label>Password</label>
-    <input id="authPassword" type="password" placeholder="Password">
+   <button>
+     <span class="bottom-icon">🎮</span>
+     Games
+   </button>
 
-    <div class="modal-actions">
-      <button class="btn btn-primary" onclick="signIn()">Login</button>
-      <button class="btn btn-purple" onclick="signUp()">Create Account</button>
-    </div>
+   <button>
+     <span class="bottom-icon">💼</span>
+     Jobs
+   </button>
 
-    <div id="authMsg"></div>
-  </div>
+   <button>
+     <span class="bottom-icon">💰</span>
+     Wallet
+   </button>
+
+   <button>
+     <span class="bottom-icon">👤</span>
+     Profile
+   </button>
+
+ </div>
+
 </div>
-
-
-<!-- PAYOUT MODAL -->
-<div class="modal" id="payoutModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2>💸 Withdraw Request</h2>
-      <button class="close" onclick="closeModal('payoutModal')">✕</button>
-    </div>
-
-    <div class="notice">
-      Minimum withdrawal: <b>৳2,500</b>
-    </div>
-
-    <label>Amount (BDT)</label>
-    <input id="payoutAmount"
-           type="number"
-           min="2500"
-           step="1"
-           placeholder="2500"
-           oninput="updatePayoutCalc()">
-
-    <div class="info-row">
-      <span>Required Points</span>
-      <strong id="requiredPoints">25,000</strong>
-    </div>
-
-    <label>Payment Method</label>
-    <select id="payoutMethod">
-      <option value="bkash">bKash</option>
-      <option value="nagad">Nagad</option>
-    </select>
-
-    <label>Account Number</label>
-    <input id="payoutAccount" placeholder="01XXXXXXXXX">
-
-    <label>Your Name</label>
-    <input id="payoutName" placeholder="আপনার নাম">
-
-    <div class="modal-actions">
-      <button class="btn btn-green" onclick="submitPayout()">Submit Request</button>
-      <button class="btn btn-muted" onclick="closeModal('payoutModal')">Cancel</button>
-    </div>
-
-    <div id="payoutMsg"></div>
-  </div>
-</div>
-
-
-<!-- APPLY MODAL -->
-<div class="modal" id="applyModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2>📨 Apply for Job</h2>
-      <button class="close" onclick="closeModal('applyModal')">✕</button>
-    </div>
-
-    <div id="applyJobInfo"></div>
-
-    <label>Application Message</label>
-    <textarea id="applicationMessage"
-      placeholder="আপনার দক্ষতা ও কেন এই কাজটি করতে চান লিখুন"></textarea>
-
-    <div class="modal-actions">
-      <button class="btn btn-primary" onclick="submitApplication()">
-        Submit Application
-      </button>
-      <button class="btn btn-muted" onclick="closeModal('applyModal')">
-        Cancel
-      </button>
-    </div>
-
-    <div id="applicationMsg"></div>
-  </div>
-</div>
-
-
-<!-- GAME MODAL -->
-<div class="modal" id="gameModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2 id="gameTitle">🎮 Game</h2>
-      <button class="close" onclick="closeGame()">✕</button>
-    </div>
-
-    <div id="gameArea"></div>
-
-  </div>
-</div>
-
-
-<script>
-/* =========================================================
-   PLAYZONE CONFIG
-========================================================= */
-
-const SUPABASE_URL="https://cavrhkprzbbtimlixbqp.supabase.co";
-const SUPABASE_KEY="sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL";
-
-const supabaseClient=supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-const POINTS_PER_BDT=10;
-const MIN_WITHDRAW_POINTS=25000;
-const MIN_WITHDRAW_BDT=2500;
-
-let currentUser=null;
-let currentJobId=null;
-let currentJobTitle="";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-const $=id=>document.getElementById(id);
-
-function esc(v){
-  return String(v??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function fmt(n){
-  return Number(n||0).toLocaleString("en-US");
-}
-
-function showMsg(id,text,type=""){
-  const el=$(id);
-  if(el) el.innerHTML='<div class="'+type+'" style="margin-top:10px;font-size:12px">'+esc(text)+'</div>';
-}
-
-function openModal(id){
-  $(id)?.classList.add("show");
-}
-
-function closeModal(id){
-  $(id)?.classList.remove("show");
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showPage(page,btn){
-
-  document.querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
-
-  const target=$(page);
-  if(target) target.classList.add("active");
-
-  document.querySelectorAll(".nav-btn,.bottom-btn")
-    .forEach(b=>b.classList.remove("active"));
-
-  if(btn) btn.classList.add("active");
-
-  window.scrollTo({top:0,behavior:"smooth"});
-
-  if(page==="jobs") loadJobs();
-  if(page==="rewards"){
-    loadWalletTransactions();
-    loadMyPayouts();
-  }
-  if(page==="admin") loadAdminDashboard();
-}
-
-
-/* =========================================================
-   LOCAL POINTS
-========================================================= */
-
-function getLocalPoints(){
-  return parseInt(localStorage.getItem("pz_points")||"1000",10);
-}
-
-function setLocalPoints(n){
-  localStorage.setItem("pz_points",String(Math.max(0,Number(n)||0)));
-}
-
-function getGamesPlayed(){
-  return parseInt(localStorage.getItem("pz_games_played")||"0",10);
-}
-
-function setGamesPlayed(n){
-  localStorage.setItem("pz_games_played",String(n));
-}
-
-
-/* =========================================================
-   POINT DISPLAY
-========================================================= */
-
-function renderPoints(points){
-  points=Number(points||0);
-
-  $("points").textContent=fmt(points);
-  $("bdtValue").textContent=(points/POINTS_PER_BDT).toFixed(0);
-
-  $("rewardPoints").textContent=fmt(points);
-  $("rewardBdt").textContent=(points/POINTS_PER_BDT).toFixed(0);
-
-  $("profilePoints").textContent=fmt(points);
-  $("profileBdt").textContent=(points/POINTS_PER_BDT).toFixed(0);
-
-  const percent=Math.min(
-    100,
-    (points/MIN_WITHDRAW_POINTS)*100
-  );
-
-  if($("walletProgress"))
-    $("walletProgress").style.width=percent+"%";
-
-  const remaining=Math.max(
-    0,
-    MIN_WITHDRAW_POINTS-points
-  );
-
-  if(points>=MIN_WITHDRAW_POINTS){
-    $("walletNote").textContent="আপনি এখন Withdraw করতে পারবেন।";
-    $("withdrawStatus").innerHTML=
-      "✅ আপনার Wallet Withdraw করার জন্য প্রস্তুত।";
-    $("withdrawStatus").className="notice success";
-
-    if($("withdrawBtn")){
-      $("withdrawBtn").disabled=false;
-    }
-  }else{
-    $("walletNote").textContent=
-      fmt(remaining)+" Points আরও প্রয়োজন Withdraw করার জন্য।";
-
-    $("withdrawStatus").innerHTML=
-      "আরও <b>"+fmt(remaining)+" Points</b> প্রয়োজন।";
-
-    $("withdrawStatus").className="notice";
-
-    if($("withdrawBtn")){
-      $("withdrawBtn").disabled=true;
-    }
-  }
-}
-
-
-/* =========================================================
-   USER
-========================================================= */
-
-function renderUser(user){
-  if(!user){
-    $("headerUser").textContent="Guest";
-    $("profileName").textContent="Guest";
-    return;
-  }
-
-  const name=
-    user.user_metadata?.name ||
-    user.user_metadata?.full_name ||
-    user.email?.split("@")[0] ||
-    "Member";
-
-  $("headerUser").textContent=name;
-  $("profileName").textContent=name;
-  $("usernameInput").value=
-    localStorage.getItem("pz_username")||name;
-
-  $("payoutName").value=
-    localStorage.getItem("pz_username")||name;
-}
-
-function renderGameCount(){
-  $("gameCount").textContent="4";
-  $("profileGames").textContent=getGamesPlayed();
-}
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-function openAuthModal(){
-  openModal("authModal");
-}
-
-async function signUp(){
-
-  const email=$("authEmail").value.trim();
-  const password=$("authPassword").value;
-
-  if(!email||!password){
-    showMsg("authMsg","Email ও Password দিন","error");
-    return;
-  }
-
-  if(password.length<6){
-    showMsg("authMsg","Password কমপক্ষে ৬ অক্ষরের হতে হবে","error");
-    return;
-  }
-
-  const {data,error}=await supabaseClient.auth.signUp({
-    email,
-    password,
-    options:{
-      data:{
-        name:email.split("@")[0]
-      }
-    }
-  });
-
-  if(error){
-    showMsg("authMsg",error.message,"error");
-    return;
-  }
-
-  showMsg(
-    "authMsg",
-    data.session
-      ?"Account তৈরি হয়েছে।"
-      :"Account তৈরি হয়েছে। Email confirmation প্রয়োজন হতে পারে।",
-    "success"
-  );
-
-  if(data.session){
-    await ensureProfile(data.user);
-  }
-}
-
-async function signIn(){
-
-  const email=$("authEmail").value.trim();
-  const password=$("authPassword").value;
-
-  if(!email||!password){
-    showMsg("authMsg","Email ও Password দিন","error");
-    return;
-  }
-
-  const {data,error}=await supabaseClient.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if(error){
-    showMsg("authMsg",error.message,"error");
-    return;
-  }
-
-  currentUser=data.user;
-
-  await ensureProfile(currentUser);
-
-  closeModal("authModal");
-
-  renderAuthArea();
-  await loadSession();
-}
-
-async function signOutUser(){
-
-  await supabaseClient.auth.signOut();
-
-  currentUser=null;
-
-  renderUser(null);
-  renderPoints(getLocalPoints());
-  renderAuthArea();
-
-  showPage("home");
-}
-
-
-/* =========================================================
-   PROFILE DB
-========================================================= */
-
-async function ensureProfile(user){
-
-  if(!user) return;
-
-  const {data,error}=await supabaseClient
-    .from("profiles")
-    .select("id,name,points,role")
-    .eq("id",user.id)
-    .maybeSingle();
-
-  if(data){
-    setLocalPoints(data.points||0);
-
-    renderPoints(data.points||0);
-
-    $("usernameInput").value=
-      data.name ||
-      user.email?.split("@")[0] ||
-      "";
-
-    localStorage.setItem(
-      "pz_username",
-      data.name ||
-      user.email?.split("@")[0] ||
-      ""
-    );
-
-    if(data.role==="admin"){
-      $("adminNav").style.display="";
-    }
-
-    return data;
-  }
-
-  const name=
-    user.user_metadata?.name ||
-    user.email?.split("@")[0] ||
-    "Member";
-
-  const {data:created,error:createError}=await supabaseClient
-    .from("profiles")
-    .insert({
-      id:user.id,
-      name,
-      role:"user"
-    })
-    .select()
-    .single();
-
-  if(createError){
-    console.error(createError);
-    return null;
-  }
-
-  setLocalPoints(created.points||1000);
-  renderPoints(created.points||1000);
-
-  return created;
-}
-
-
-/* =========================================================
-   SESSION
-========================================================= */
-
-async function loadSession(){
-
-  const {data}=await supabaseClient.auth.getSession();
-
-  currentUser=data?.session?.user||null;
-
-  if(currentUser){
-
-    renderUser(currentUser);
-
-    await ensureProfile(currentUser);
-
-    await checkAdmin();
-
-    await loadProfilePoints();
-
-    await loadWalletTransactions();
-
-    await loadMyPayouts();
-
-  }else{
-
-    renderUser(null);
-    renderPoints(getLocalPoints());
-
-  }
-
-  renderAuthArea();
-  renderGameCount();
-}
-
-supabaseClient.auth.onAuthStateChange(
-  async(event,session)=>{
-
-    currentUser=session?.user||null;
-
-    if(currentUser){
-      renderUser(currentUser);
-      await ensureProfile(currentUser);
-      await checkAdmin();
-      await loadProfilePoints();
-    }else{
-      $("adminNav").style.display="none";
-      renderUser(null);
-      renderPoints(getLocalPoints());
-    }
-
-    renderAuthArea();
-  }
-);
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-async function checkAdmin(){
-
-  if(!currentUser){
-    $("adminNav").style.display="none";
-    return false;
-  }
-
-  try{
-
-    const {data,error}=await supabaseClient
-      .rpc("is_current_user_admin");
-
-    if(!error && data===true){
-      $("adminNav").style.display="";
-      return true;
-    }
-
-  }catch(e){
-    console.error(e);
-  }
-
-  $("adminNav").style.display="none";
-  return false;
-}
-
-
-async function loadAdminDashboard(){
-
-  const isAdmin=await checkAdmin();
-
-  if(!isAdmin) return;
-
-  try{
-
-    const {data,error}=await supabaseClient
-      .rpc("admin_dashboard_stats");
-
-    if(!error && data){
-
-      $("adminUsers").textContent=
-        fmt(data.users||0);
-
-      $("adminJobs").textContent=
-        fmt(data.jobs||0);
-
-      $("adminApplications").textContent=
-        fmt(data.applications||0);
-
-      $("adminPayouts").textContent=
-        fmt(data.payouts||0);
-
-      $("adminPendingPayouts").textContent=
-        fmt(data.pending_payouts||0);
-
-    }else{
-
-      const [users,jobs,apps,payouts]=await Promise.all([
-
-        supabaseClient
-          .from("profiles")
-          .select("*",{count:"exact",head:true}),
-
-        supabaseClient
-          .from("jobs")
-          .select("*",{count:"exact",head:true}),
-
-        supabaseClient
-          .from("job_applications")
-          .select("*",{count:"exact",head:true}),
-
-        supabaseClient
-          .from("payouts")
-          .select("*",{count:"exact",head:true})
-
-      ]);
-
-      $("adminUsers").textContent=fmt(users.count||0);
-      $("adminJobs").textContent=fmt(jobs.count||0);
-      $("adminApplications").textContent=fmt(apps.count||0);
-      $("adminPayouts").textContent=fmt(payouts.count||0);
-
-    }
-
-  }catch(e){
-    console.error(e);
-  }
-
-  await adminLoadApplications();
-  await adminLoadPayouts();
-}
-
-
-/* =========================================================
-   WALLET
-========================================================= */
-
-async function addPoints(amount,type="game_reward",note="Game reward"){
-
-  if(!currentUser){
-
-    const newPoints=getLocalPoints()+amount;
-
-    setLocalPoints(newPoints);
-    renderPoints(newPoints);
-
-    return {success:true,local:true};
-
-  }
-
-  const {data,error}=await supabaseClient.rpc(
-    "award_points",
-    {
-      p_points:amount,
-      p_type:type,
-      p_note:note,
-      p_reference_id:null
-    }
-  );
-
-  if(error){
-    console.error(error);
-    return {success:false,error};
-  }
-
-  if(data?.points!==undefined){
-    setLocalPoints(data.points);
-    renderPoints(data.points);
-  }
-
-  return {success:true,data};
-}
-
-
-async function loadProfilePoints(){
-
-  if(!currentUser){
-    renderPoints(getLocalPoints());
-    return;
-  }
-
-  const {data,error}=await supabaseClient
-    .from("profiles")
-    .select("points,name,role")
-    .eq("id",currentUser.id)
-    .single();
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  setLocalPoints(data.points||0);
-  renderPoints(data.points||0);
-
-  if(data.name){
-    $("profileName").textContent=data.name;
-    $("usernameInput").value=data.name;
-    localStorage.setItem("pz_username",data.name);
-  }
-}
-
-
-async function loadWalletTransactions(){
-
-  const box=$("walletTransactions");
-
-  if(!currentUser){
-    box.innerHTML=
-      '<div class="empty">Login করলে transaction history দেখা যাবে।</div>';
-    return;
-  }
-
-  const {data,error}=await supabaseClient
-    .from("wallet_transactions")
-    .select("*")
-    .eq("user_id",currentUser.id)
-    .order("created_at",{ascending:false})
-    .limit(30);
-
-  if(error){
-    box.innerHTML=
-      '<div class="empty">Transaction history load করা যায়নি।</div>';
-    return;
-  }
-
-  if(!data?.length){
-    box.innerHTML=
-      '<div class="empty">এখনও কোনো transaction নেই।</div>';
-    return;
-  }
-
-  box.innerHTML=data.map(x=>{
-
-    const positive=Number(x.points||0)>=0;
-
-    return `
-      <div class="history-item">
-        <div>
-          <strong>${esc(x.type||"transaction")}</strong>
-          <br>
-          <small>${esc(x.note||"")}</small>
-        </div>
-        <div class="${positive?"plus":"minus"}">
-          ${positive?"+":""}${fmt(x.points)}
-        </div>
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-/* =========================================================
-   PAYOUT
-========================================================= */
-
-function updatePayoutCalc(){
-
-  const amount=
-    Number($("payoutAmount").value||0);
-
-  const required=
-    Math.round(amount*POINTS_PER_BDT);
-
-  $("requiredPoints").textContent=
-    fmt(required);
-
-}
-
-
-function openPayoutModal(){
-
-  if(!currentUser){
-    openAuthModal();
-    return;
-  }
-
-  const points=getLocalPoints();
-
-  if(points<MIN_WITHDRAW_POINTS){
-    alert(
-      "Withdraw করতে minimum "+
-      fmt(MIN_WITHDRAW_POINTS)+
-      " Points প্রয়োজন।"
-    );
-    return;
-  }
-
-  $("payoutAmount").value=MIN_WITHDRAW_BDT;
-  updatePayoutCalc();
-
-  openModal("payoutModal");
-}
-
-
-async function submitPayout(){
-
-  if(!currentUser){
-    showMsg("payoutMsg","আগে Login করুন","error");
-    return;
-  }
-
-  const amount=
-    Number($("payoutAmount").value||0);
-
-  const method=
-    $("payoutMethod").value;
-
-  const account=
-    $("payoutAccount").value.trim();
-
-  const name=
-    $("payoutName").value.trim();
-
-  if(amount<MIN_WITHDRAW_BDT){
-    showMsg(
-      "payoutMsg",
-      "Minimum withdrawal ৳2,500",
-      "error"
-    );
-    return;
-  }
-
-  if(!account){
-    showMsg(
-      "payoutMsg",
-      "bKash/Nagad number দিন",
-      "error"
-    );
-    return;
-  }
-
-  const required=
-    Math.round(amount*POINTS_PER_BDT);
-
-  if(getLocalPoints()<required){
-    showMsg(
-      "payoutMsg",
-      "আপনার পর্যাপ্ত Points নেই।",
-      "error"
-    );
-    return;
-  }
-
-  const {data,error}=await supabaseClient.rpc(
-    "request_payout",
-    {
-      p_amount:amount,
-      p_method:method,
-      p_account_number:account,
-      p_user_name:name
-    }
-  );
-
-  if(error){
-    showMsg(
-      "payoutMsg",
-      error.message,
-      "error"
-    );
-    return;
-  }
-
-  if(data?.remaining_points!==undefined){
-    setLocalPoints(data.remaining_points);
-    renderPoints(data.remaining_points);
-  }
-
-  showMsg(
-    "payoutMsg",
-    "Payout request সফলভাবে পাঠানো হয়েছে। Admin review করবেন।",
-    "success"
-  );
-
-  await loadWalletTransactions();
-  await loadMyPayouts();
-
-  setTimeout(()=>{
-    closeModal("payoutModal");
-  },1300);
-}
-
-
-async function loadMyPayouts(){
-
-  const box=$("myPayouts");
-
-  if(!currentUser){
-    box.innerHTML=
-      '<div class="empty">Login করলে payout history দেখা যাবে।</div>';
-    return;
-  }
-
-  const {data,error}=await supabaseClient
-    .from("payouts")
-    .select("*")
-    .eq("user_id",currentUser.id)
-    .order("created_at",{ascending:false})
-    .limit(30);
-
-  if(error){
-    box.innerHTML=
-      '<div class="empty">Payout history load করা যায়নি।</div>';
-    return;
-  }
-
-  if(!data?.length){
-    box.innerHTML=
-      '<div class="empty">এখনও কোনো payout request নেই।</div>';
-    return;
-  }
-
-  box.innerHTML=data.map(x=>`
-
-    <div class="history-item">
-      <div>
-        <strong>৳ ${esc(x.amount)}</strong>
-        <br>
-        <small>
-          ${esc(x.method||"")} •
-          ${esc(x.account_number||"")}
-        </small>
-      </div>
-
-      <div>
-        <span class="job-skill">
-          ${esc(x.status||"pending")}
-        </span>
-      </div>
-    </div>
-
-  `).join("");
-}
-
-
-/* =========================================================
-   ADMIN PAYOUTS
-========================================================= */
-
-async function adminLoadPayouts(){
-
-  const box=$("adminPayoutsList");
-
-  const {data,error}=await supabaseClient
-    .from("payouts")
-    .select("*")
-    .order("created_at",{ascending:false})
-    .limit(100);
-
-  if(error){
-    box.innerHTML=
-      '<div class="empty">Payout load করা যায়নি।</div>';
-    return;
-  }
-
-  if(!data?.length){
-    box.innerHTML=
-      '<div class="empty">কোনো payout request নেই।</div>';
-    return;
-  }
-
-  box.innerHTML=data.map(x=>{
-
-    const status=(x.status||"pending").toLowerCase();
-
-    return `
-      <div class="job-card">
-
-        <div class="job-top">
-          <div>
-            <h3>৳ ${esc(x.amount)}</h3>
-            <span class="job-skill">
-              ${esc(x.method||"")}
-            </span>
-          </div>
-
-          <div class="job-budget">
-            ${esc(status)}
-          </div>
-        </div>
-
-        <p>
-          User: ${esc(x.user_name||"User")}<br>
-          Number: ${esc(x.account_number||"")}<br>
-          Date: ${esc(
-            new Date(x.created_at).toLocaleString()
-          )}
-        </p>
-
-        ${
-          status==="pending"
-          ?`
-            <div class="job-actions">
-              <button
-                class="btn btn-green"
-                onclick="adminUpdatePayoutStatus('${x.id}','approved')">
-                ✓ Approve
-              </button>
-
-              <button
-                class="btn btn-danger"
-                onclick="adminUpdatePayoutStatus('${x.id}','rejected')">
-                ✕ Reject
-              </button>
-            </div>
-          `
-          :""
-        }
-
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-async function adminUpdatePayoutStatus(id,status){
-
-  const note=
-    status==="approved"
-      ?"Payment sent manually by admin."
-      :"Payout rejected; points refunded.";
-
-  const {data,error}=await supabaseClient.rpc(
-    "admin_update_payout",
-    {
-      p_payout_id:id,
-      p_status:status,
-      p_note:note
-    }
-  );
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  alert(
-    status==="approved"
-      ?"Payout Approved."
-      :"Payout Rejected এবং Points refund করা হয়েছে।"
-  );
-
-  await loadAdminDashboard();
-}
-
-
-/* =========================================================
-   JOBS
-========================================================= */
-
-const defaultJobs=[
-  {
-    id:"default1",
-    title:"Facebook পোস্ট ডিজাইন",
-    skill:"Graphic Design",
-    description:"Facebook-এর জন্য সুন্দর পোস্ট ডিজাইন করতে হবে।",
-    budget:"500 BDT"
-  },
-  {
-    id:"default2",
-    title:"Short Video Editing",
-    skill:"Video Editing",
-    description:"Social media-এর জন্য short video edit করতে হবে।",
-    budget:"আলোচনা সাপেক্ষ"
-  },
-  {
-    id:"default3",
-    title:"Data Entry Assistant",
-    skill:"Data Entry",
-    description:"সহজ Data Entry এবং তথ্য সাজানোর কাজ।",
-    budget:"300 BDT"
-  },
-  {
-    id:"default4",
-    title:"Social Media Promotion",
-    skill:"Digital Marketing",
-    description:"Social media promotion-এর জন্য একজন দক্ষ ব্যক্তি প্রয়োজন।",
-    budget:"500 BDT"
-  }
-];
-
-
-async function loadJobs(){
-
-  const box=$("jobsList");
-
-  box.innerHTML=
-    '<div class="empty">Jobs loading...</div>';
-
-  const {data,error}=await supabaseClient
-    .from("jobs")
-    .select("*")
-    .eq("status","open")
-    .order("created_at",{ascending:false});
-
-  if(error || !data?.length){
-
-    renderJobs(defaultJobs);
-
-    $("jobCount").textContent=
-      defaultJobs.length;
-
-    return;
-  }
-
-  renderJobs(data);
-
-  $("jobCount").textContent=
-    data.length;
-}
-
-
-function renderJobs(jobs){
-
-  const box=$("jobsList");
-
-  if(!jobs?.length){
-    box.innerHTML=
-      '<div class="empty">এখন কোনো Job নেই।</div>';
-    return;
-  }
-
-  box.innerHTML=jobs.map(job=>`
-
-    <div class="job-card">
-
-      <div class="job-top">
-
-        <div>
-          <h3>${esc(job.title)}</h3>
-
-          <span class="job-skill">
-            ${esc(job.skill||"Skill")}
-          </span>
-        </div>
-
-        <div class="job-budget">
-          ${esc(job.budget||"আলোচনা সাপেক্ষ")}
-        </div>
-
-      </div>
-
-      <p>${esc(job.description||"")}</p>
-
-      <div class="job-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openApplyModal('${job.id}','${esc(job.title)}')">
-          📨 Apply
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-
-async function createJob(){
-
-  if(!currentUser){
-    openAuthModal();
-    return;
-  }
-
-  const title=$("jobTitle").value.trim();
-  const skill=$("jobSkill").value.trim();
-  const description=$("jobDescription").value.trim();
-  const budget=$("jobBudget").value.trim();
-
-  if(!title||!skill||!description){
-    showMsg(
-      "jobMsg",
-      "Title, Skill ও Description দিন।",
-      "error"
-    );
-    return;
-  }
-
-  const {data,error}=await supabaseClient
-    .from("jobs")
-    .insert({
-      poster_id:currentUser.id,
-      title,
-      skill,
-      description,
-      budget,
-      status:"open"
-    })
-    .select()
-    .single();
-
-  if(error){
-    showMsg(
-      "jobMsg",
-      error.message,
-      "error"
-    );
-    return;
-  }
-
-  showMsg(
-    "jobMsg",
-    "Job সফলভাবে পোস্ট হয়েছে।",
-    "success"
-  );
-
-  $("jobTitle").value="";
-  $("jobSkill").value="";
-  $("jobDescription").value="";
-  $("jobBudget").value="";
-
-  await loadJobs();
-}
-
-
-/* =========================================================
-   APPLICATIONS
-========================================================= */
-
-function openApplyModal(id,title){
-
-  if(!currentUser){
-    openAuthModal();
-    return;
-  }
-
-  currentJobId=id;
-  currentJobTitle=title;
-
-  $("applyJobInfo").innerHTML=
-    `<div class="notice">
-      <b>${esc(title)}</b>-এর জন্য Application পাঠাচ্ছেন।
-    </div>`;
-
-  $("applicationMessage").value="";
-
-  openModal("applyModal");
-}
-
-
-async function submitApplication(){
-
-  if(!currentUser){
-    showMsg(
-      "applicationMsg",
-      "আগে Login করুন।",
-      "error"
-    );
-    return;
-  }
-
-  if(!currentJobId){
-    showMsg(
-      "applicationMsg",
-      "Job নির্বাচন করা হয়নি।",
-      "error"
-    );
-    return;
-  }
-
-  const message=
-    $("applicationMessage").value.trim();
-
-  if(!message){
-    showMsg(
-      "applicationMsg",
-      "Application message লিখুন।",
-      "error"
-    );
-    return;
-  }
-
-  const {error}=await supabaseClient
-    .from("job_applications")
-    .insert({
-      job_id:currentJobId,
-      applicant_id:currentUser.id,
-      message,
-      status:"pending"
-    });
-
-  if(error){
-    showMsg(
-      "applicationMsg",
-      error.message,
-      "error"
-    );
-    return;
-  }
-
-  showMsg(
-    "applicationMsg",
-    "Application সফলভাবে পাঠানো হয়েছে।",
-    "success"
-  );
-
-  $("applicationMessage").value="";
-
-  setTimeout(()=>{
-    closeModal("applyModal");
-  },1200);
-}
-
-
-async function adminLoadApplications(){
-
-  const box=$("adminApplicationsList");
-
-  const {data,error}=await supabaseClient
-    .from("job_applications")
-    .select(`
-      id,
-      message,
-      status,
-      created_at,
-      job_id,
-      applicant_id
-    `)
-    .order("created_at",{ascending:false})
-    .limit(100);
-
-  if(error){
-    box.innerHTML=
-      '<div class="empty">Applications load করা যায়নি।</div>';
-    return;
-  }
-
-  if(!data?.length){
-    box.innerHTML=
-      '<div class="empty">কোনো Application নেই।</div>';
-    return;
-  }
-
-  box.innerHTML=data.map(a=>`
-
-    <div class="job-card">
-
-      <div class="job-top">
-
-        <div>
-          <h3>📨 Job Application</h3>
-
-          <span class="job-skill">
-            ${esc(a.status||"pending")}
-          </span>
-        </div>
-
-      </div>
-
-      <p>
-        Applicant ID:<br>
-        ${esc(a.applicant_id)}
-      </p>
-
-      <p>
-        ${esc(a.message||"")}
-      </p>
-
-      ${
-        (a.status||"pending")==="pending"
-        ?`
-          <div class="job-actions">
-
-            <button
-              class="btn btn-green"
-              onclick="adminUpdateApplication('${a.id}','accepted')">
-              ✓ Accept
-            </button>
-
-            <button
-              class="btn btn-danger"
-              onclick="adminUpdateApplication('${a.id}','rejected')">
-              ✕ Reject
-            </button>
-
-          </div>
-        `
-        :""
-      }
-
-    </div>
-
-  `).join("");
-}
-
-
-async function adminUpdateApplication(id,status){
-
-  const {error}=await supabaseClient
-    .from("job_applications")
-    .update({status})
-    .eq("id",id);
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  alert(
-    status==="accepted"
-      ?"Application Accepted."
-      :"Application Rejected."
-  );
-
-  await loadAdminDashboard();
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-async function saveSkillProfile(){
-
-  const name=$("usernameInput").value.trim();
-  const skill=$("skillInput").value.trim();
-
-  if(!name){
-    showMsg(
-      "profileMsg",
-      "আপনার নাম দিন।",
-      "error"
-    );
-    return;
-  }
-
-  localStorage.setItem("pz_username",name);
-  localStorage.setItem("pz_skill",skill);
-
-  $("profileName").textContent=name;
-  $("headerUser").textContent=name;
-  $("payoutName").value=name;
-
-  if(currentUser){
-
-    const {error}=await supabaseClient
-      .from("profiles")
-      .update({name})
-      .eq("id",currentUser.id);
-
-    if(error){
-      showMsg(
-        "profileMsg",
-        error.message,
-        "error"
-      );
-      return;
-    }
-  }
-
-  showMsg(
-    "profileMsg",
-    "Profile সফলভাবে Save হয়েছে।",
-    "success"
-  );
-}
-
-
-function renderAuthArea(){
-
-  const box=$("authArea");
-
-  if(currentUser){
-
-    box.innerHTML=`
-
-      <h3 style="margin-top:0">🔐 Account</h3>
-
-      <p style="color:#8290a4;font-size:12px">
-        ${esc(currentUser.email||"")}
-      </p>
-
-      <button
-        class="btn btn-danger"
-        onclick="signOutUser()">
-        Logout
-      </button>
-
-    `;
-
-  }else{
-
-    box.innerHTML=`
-
-      <h3 style="margin-top:0">🔐 Account</h3>
-
-      <p style="color:#8290a4;font-size:12px">
-        Login করলে আপনার Points, Jobs, Applications এবং Wallet
-        নিরাপদভাবে Account-এর সাথে যুক্ত থাকবে।
-      </p>
-
-      <button
-        class="btn btn-primary"
-        onclick="openAuthModal()">
-        Login / Create Account
-      </button>
-
-    `;
-  }
-}
-
-
-/* =========================================================
-   GAMES
-========================================================= */
-
-let currentGame=null;
-
-function openGame(game){
-
-  currentGame=game;
-
-  openModal("gameModal");
-
-  if(game==="tap") startTapGame();
-  if(game==="match") startMatchGame();
-  if(game==="fly") startFlyGame();
-  if(game==="brain") startBrainGame();
-}
-
-
-function closeGame(){
-
-  currentGame=null;
-
-  closeModal("gameModal");
-
-  if(window.flyFrame){
-    cancelAnimationFrame(window.flyFrame);
-    window.flyFrame=null;
-  }
-}
-
-
-/* ---------------- TAP RUSH ---------------- */
-
-let tapScore=0;
-let tapTime=30;
-let tapTimer=null;
-
-function startTapGame(){
-
-  clearInterval(tapTimer);
-
-  tapScore=0;
-  tapTime=30;
-
-  $("gameTitle").textContent="👆 Tap Rush";
-
-  $("gameArea").innerHTML=`
-
-    <div class="game-center">
-
-      <div class="notice">
-        ৩০ সেকেন্ডে যত বেশি Tap করবেন তত বেশি Points।
-      </div>
-
-      <div class="big-score" id="tapScore">0</div>
-
-      <button class="tap-target" id="tapButton">
-        👆
-      </button>
-
-      <div style="margin-top:14px;color:#94a3b8">
-        Time: <b id="tapTime">30</b>s
-      </div>
-
-    </div>
-  `;
-
-  $("tapButton").onclick=()=>{
-    tapScore++;
-    $("tapScore").textContent=tapScore;
-  };
-
-  tapTimer=setInterval(async()=>{
-
-    tapTime--;
-
-    if($("tapTime"))
-      $("tapTime").textContent=tapTime;
-
-    if(tapTime<=0){
-
-      clearInterval(tapTimer);
-
-      const result=
-        await addPoints(
-          tapScore,
-          "game_reward",
-          "Tap Rush reward"
-        );
-
-      setGamesPlayed(getGamesPlayed()+1);
-      renderGameCount();
-
-      alert(
-        "Game Over!\nScore: "+
-        tapScore+
-        "\nPoints earned: "+
-        tapScore
-      );
-
-      closeGame();
-    }
-
-  },1000);
-}
-
-
-/* ---------------- MATCH SEVEN ---------------- */
-
-let matchFirst=null;
-let matchLocked=false;
-let matchPairs=0;
-let matchScore=0;
-
-function startMatchGame(){
-
-  matchFirst=null;
-  matchLocked=false;
-  matchPairs=0;
-  matchScore=0;
-
-  $("gameTitle").textContent="🧩 Match Seven";
-
-  const symbols=[
-    "🍎","🍎",
-    "⭐","⭐",
-    "🔥","🔥",
-    "🎯","🎯",
-    "🚀","🚀",
-    "💎","💎",
-    "⚡","⚡"
-  ].sort(()=>Math.random()-.5);
-
-  $("gameArea").innerHTML=`
-
-    <div class="game-center">
-
-      <div class="notice">
-        একই জোড়া Match করুন। প্রতিটি Match = 10 Points
-      </div>
-
-      <div class="big-score">
-        <span id="matchScore">0</span>
-      </div>
-
-      <div class="match-grid" id="matchGrid"></div>
-
-    </div>
-  `;
-
-  const grid=$("matchGrid");
-
-  symbols.forEach((symbol,i)=>{
-
-    const b=document.createElement("button");
-
-    b.className="match-card";
-    b.dataset.symbol=symbol;
-    b.dataset.index=i;
-    b.textContent="❓";
-
-    b.onclick=()=>flipMatchCard(b);
-
-    grid.appendChild(b);
-  });
-}
-
-
-function flipMatchCard(card){
-
-  if(
-    matchLocked ||
-    card.classList.contains("open") ||
-    card.classList.contains("matched")
-  ) return;
-
-  card.textContent=card.dataset.symbol;
-  card.classList.add("open");
-
-  if(!matchFirst){
-    matchFirst=card;
-    return;
-  }
-
-  const second=card;
-
-  if(matchFirst.dataset.symbol===second.dataset.symbol){
-
-    matchFirst.classList.add("matched");
-    second.classList.add("matched");
-
-    matchPairs++;
-    matchScore+=10;
-
-    $("matchScore").textContent=matchScore;
-
-    matchFirst=null;
-
-    if(matchPairs===7){
-
-      addPoints(
-        matchScore,
-        "game_reward",
-        "Match Seven reward"
-      );
-
-      setGamesPlayed(getGamesPlayed()+1);
-      renderGameCount();
-
-      setTimeout(()=>{
-        alert(
-          "সব Match সম্পন্ন!\n"+
-          "Points earned: "+
-          matchScore
-        );
-        closeGame();
-      },300);
-
-    }
-
-  }else{
-
-    matchLocked=true;
-
-    setTimeout(()=>{
-
-      matchFirst.textContent="❓";
-      second.textContent="❓";
-
-      matchFirst.classList.remove("open");
-      second.classList.remove("open");
-
-      matchFirst=null;
-      matchLocked=false;
-
-    },700);
-  }
-}
-
-
-/* ---------------- FLY HIGH ---------------- */
-
-function startFlyGame(){
-
-  $("gameTitle").textContent="🚀 Fly High";
-
-  $("gameArea").innerHTML=`
-
-    <div class="game-center">
-
-      <div class="notice">
-        Space / Tap করে player-কে উপরে তুলুন।
-      </div>
-
-      <canvas
-        id="flyCanvas"
-        width="320"
-        height="300"
-        style="
-          width:100%;
-          max-width:400px;
-          background:#071b2e;
-          border-radius:16px;
-          margin-top:12px;
-        ">
-      </canvas>
-
-      <div style="margin-top:10px">
-        Score:
-        <b id="flyScore">0</b>
-      </div>
-
-    </div>
-  `;
-
-  const canvas=$("flyCanvas");
-  const ctx=canvas.getContext("2d");
-
-  let player={
-    x:55,
-    y:140,
-    vy:0
-  };
-
-  let obstacles=[];
-  let score=0;
-  let running=true;
-  let frame=0;
-
-  function flap(){
-    if(running) player.vy=-5.5;
-  }
-
-  canvas.onclick=flap;
-
-  document.onkeydown=e=>{
-    if(e.code==="Space"){
-      e.preventDefault();
-      flap();
-    }
-  };
-
-  function loop(){
-
-    if(!running)return;
-
-    frame++;
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    player.vy+=.25;
-    player.y+=player.vy;
-
-    if(frame%95===0){
-
-      const gap=105;
-      const top=35+Math.random()*90;
-
-      obstacles.push({
-        x:canvas.width,
-        top,
-        bottom:top+gap,
-        passed:false
-      });
-
-    }
-
-    obstacles.forEach(o=>{
-      o.x-=2.6;
-
-      ctx.fillStyle="#22c55e";
-      ctx.fillRect(o.x,0,42,o.top);
-      ctx.fillRect(
-        o.x,
-        o.bottom,
-        42,
-        canvas.height-o.bottom
-      );
-
-      if(
-        !o.passed &&
-        o.x+42<player.x
-      ){
-        o.passed=true;
-        score++;
-        $("flyScore").textContent=score;
-      }
-
-      if(
-        player.x+22>o.x &&
-        player.x<o.x+42 &&
-        (
-          player.y<o.top ||
-          player.y+22>o.bottom
-        )
-      ){
-        endFly();
-      }
-    });
-
-    obstacles=
-      obstacles.filter(o=>o.x>-60);
-
-    ctx.fillStyle="#38bdf8";
-    ctx.beginPath();
-    ctx.arc(
-      player.x+11,
-      player.y+11,
-      11,
-      0,
-      Math.PI*2
-    );
-    ctx.fill();
-
-    if(
-      player.y<0 ||
-      player.y+22>canvas.height
-    ){
-      endFly();
-    }
-
-    flyFrame=requestAnimationFrame(loop);
-  }
-
-  function endFly(){
-
-    if(!running)return;
-
-    running=false;
-
-    const earned=
-      Math.max(0,score);
-
-    addPoints(
-      earned,
-      "game_reward",
-      "Fly High reward"
-    );
-
-    setGamesPlayed(getGamesPlayed()+1);
-    renderGameCount();
-
-    setTimeout(()=>{
-      alert(
-        "Game Over!\nScore: "+
-        score+
-        "\nPoints earned: "+
-        earned
-      );
-      closeGame();
-    },100);
-  }
-
-  window.flyFrame=requestAnimationFrame(loop);
-}
-
-
-/* ---------------- BRAIN BOX ---------------- */
-
-const brainQuestions=[
-  {
-    q:"বাংলাদেশের রাজধানী কোনটি?",
-    a:["ঢাকা","চট্টগ্রাম","খুলনা","রাজশাহী"],
-    c:0
-  },
-  {
-    q:"2 + 5 = কত?",
-    a:["5","6","7","8"],
-    c:2
-  },
-  {
-    q:"HTML কী কাজে ব্যবহৃত হয়?",
-    a:["Web Page তৈরি","ভিডিও Edit","Photo Print","Audio Record"],
-    c:0
-  },
-  {
-    q:"Supabase কী ধরনের Platform?",
-    a:["Backend Platform","Game Console","Browser","Keyboard"],
-    c:0
-  }
-];
-
-let brainIndex=0;
-let brainScore=0;
-
-function startBrainGame(){
-
-  brainIndex=0;
-  brainScore=0;
-
-  $("gameTitle").textContent="🧠 Brain Box";
-
-  showBrainQuestion();
-}
-
-
-function showBrainQuestion(){
-
-  if(brainIndex>=brainQuestions.length){
-
-    addPoints(
-      brainScore,
-      "game_reward",
-      "Brain Box reward"
-    );
-
-    setGamesPlayed(getGamesPlayed()+1);
-    renderGameCount();
-
-    $("gameArea").innerHTML=`
-
-      <div class="game-center">
-
-        <div style="font-size:45px">🏆</div>
-
-        <h2>Quiz Complete!</h2>
-
-        <div class="big-score">
-          ${brainScore}
-        </div>
-
-        <p style="color:#8d9bb0">
-          Points earned
-        </p>
-
-        <button
-          class="btn btn-primary"
-          onclick="closeGame()">
-          Done
-        </button>
-
-      </div>
-    `;
-
-    return;
-  }
-
-  const item=brainQuestions[brainIndex];
-
-  $("gameArea").innerHTML=`
-
-    <div>
-
-      <div class="notice">
-        Question ${brainIndex+1} / ${brainQuestions.length}
-      </div>
-
-      <h3 style="line-height:1.5">
-        ${esc(item.q)}
-      </h3>
-
-      <div id="brainOptions"></div>
-
-    </div>
-  `;
-
-  const box=$("brainOptions");
-
-  item.a.forEach((answer,i)=>{
-
-    const b=document.createElement("button");
-
-    b.className="quiz-option";
-    b.textContent=answer;
-
-    b.onclick=()=>{
-
-      if(i===item.c){
-        brainScore+=20;
-      }
-
-      brainIndex++;
-      showBrainQuestion();
-
-    };
-
-    box.appendChild(b);
-  });
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-async function init(){
-
-  renderPoints(getLocalPoints());
-  renderGameCount();
-  renderAuthArea();
-
-  const skill=
-    localStorage.getItem("pz_skill")||"";
-
-  $("skillInput").value=skill;
-
-  await loadSession();
-
-  await loadJobs();
-
-}
-
-init();
-
-</script>
 
 </body>
 </html>
+
