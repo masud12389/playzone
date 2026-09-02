@@ -9,9 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -90,6 +88,11 @@ header h2{
   color:#fff;
 }
 
+.btn.info{
+  background:#3182ce;
+  color:#fff;
+}
+
 input,
 textarea,
 select{
@@ -122,7 +125,8 @@ textarea{
 }
 
 .job,
-.application{
+.application,
+.payout{
   background:#102b42;
   padding:15px;
   border-radius:10px;
@@ -141,9 +145,11 @@ textarea{
 
 .badge.pending{
   background:#ffb52e;
+  color:#111;
 }
 
-.badge.accepted{
+.badge.accepted,
+.badge.approved{
   background:#20c878;
   color:#fff;
 }
@@ -156,6 +162,20 @@ textarea{
 .small{
   color:#b8c7d5;
   font-size:13px;
+}
+
+.money{
+  font-size:24px;
+  font-weight:bold;
+  color:#ffd21c;
+}
+
+.payoutHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .hidden{
@@ -177,6 +197,7 @@ textarea{
 <header>
   <h2>👑 PLAYZONE ADMIN</h2>
 </header>
+
 
 <!-- LOGIN -->
 <div id="loginBox" class="panel">
@@ -235,8 +256,18 @@ textarea{
     </div>
 
     <div class="stat">
-      ⏳ Pending
+      ⏳ Pending Applications
       <b id="pendingCount">0</b>
+    </div>
+
+    <div class="stat">
+      💰 Payouts
+      <b id="payoutsCount">0</b>
+    </div>
+
+    <div class="stat">
+      🟡 Pending Payouts
+      <b id="pendingPayoutCount">0</b>
     </div>
 
   </div>
@@ -259,6 +290,11 @@ textarea{
     <button class="btn secondary"
       onclick="showSection('applicationsSection')">
       📨 Applications
+    </button>
+
+    <button class="btn secondary"
+      onclick="showSection('payoutsSection')">
+      💰 Payout Management
     </button>
 
     <button class="btn danger"
@@ -288,6 +324,31 @@ textarea{
 
     <div id="applicationsList">
       লোড হচ্ছে...
+    </div>
+
+  </section>
+
+
+  <!-- PAYOUTS -->
+  <section id="payoutsSection" class="panel">
+
+    <div class="payoutHeader">
+
+      <h3>💰 Payout Management</h3>
+
+      <button class="btn" onclick="loadPayouts()">
+        🔄 Refresh Payouts
+      </button>
+
+    </div>
+
+    <div class="status">
+      ℹ️ Pending payout হলে আগে ব্যবহারকারীর bKash নম্বরে
+      টাকা পাঠিয়ে দিন। এরপর এখানে <b>Approve</b> করুন।
+    </div>
+
+    <div id="payoutsList">
+      Payouts লোড হচ্ছে...
     </div>
 
   </section>
@@ -356,11 +417,9 @@ async function adminLogin(){
 
     if(!data.user){
 
-      throw new Error('User পাওয়া যায়নি।');
+      throw new Error('User পাওয়া যায়নি.');
 
     }
-
-    /* ADMIN ROLE CHECK */
 
     const {data:profile,error:profileError} =
       await supabaseClient
@@ -377,7 +436,7 @@ async function adminLogin(){
       await supabaseClient.auth.signOut();
 
       throw new Error(
-        'এই account-এর Admin permission নেই।'
+        'এই account-এর Admin permission নেই.'
       );
 
     }
@@ -426,7 +485,8 @@ async function loadAll(){
   await Promise.all([
     loadStats(),
     loadJobs(),
-    loadApplications()
+    loadApplications(),
+    loadPayouts()
   ]);
 
 }
@@ -473,6 +533,23 @@ async function loadStats(){
         })
         .eq('status','pending');
 
+    const payouts =
+      await supabaseClient
+        .from('payouts')
+        .select('id',{
+          count:'exact',
+          head:true
+        });
+
+    const pendingPayout =
+      await supabaseClient
+        .from('payouts')
+        .select('id',{
+          count:'exact',
+          head:true
+        })
+        .eq('status','Pending');
+
     document.getElementById('usersCount')
       .textContent =
       users.count || 0;
@@ -488,6 +565,14 @@ async function loadStats(){
     document.getElementById('pendingCount')
       .textContent =
       pending.count || 0;
+
+    document.getElementById('payoutsCount')
+      .textContent =
+      payouts.count || 0;
+
+    document.getElementById('pendingPayoutCount')
+      .textContent =
+      pendingPayout.count || 0;
 
   }catch(error){
 
@@ -744,7 +829,7 @@ async function loadApplications(){
 
 
 /* =========================================
-   ACCEPT / REJECT
+   ACCEPT / REJECT APPLICATION
 ========================================= */
 
 async function updateApplication(
@@ -787,6 +872,302 @@ async function updateApplication(
 
     alert(
       'Error: ' +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD PAYOUTS
+========================================= */
+
+async function loadPayouts(){
+
+  const box =
+    document.getElementById('payoutsList');
+
+  if(!box) return;
+
+  box.innerHTML =
+    '<div class="status">Payouts লোড হচ্ছে...</div>';
+
+  try{
+
+    const {data,error} =
+      await supabaseClient
+        .from('payouts')
+        .select(`
+          id,
+          user_id,
+          user_name,
+          amount,
+          method,
+          account_number,
+          status,
+          note,
+          created_at,
+          updated_at
+        `)
+        .order(
+          'created_at',
+          {ascending:false}
+        );
+
+    if(error) throw error;
+
+    if(!data || !data.length){
+
+      box.innerHTML =
+        '<div class="status">' +
+        'এখনো কোনো Payout Request নেই।' +
+        '</div>';
+
+      return;
+    }
+
+    box.innerHTML =
+      data.map(payout => {
+
+        const status =
+          payout.status || 'Pending';
+
+        const badgeClass =
+          status.toLowerCase();
+
+        return `
+
+          <div class="payout">
+
+            <div class="payoutHeader">
+
+              <span class="badge ${badgeClass}">
+                ${escapeHTML(status)}
+              </span>
+
+              <span class="money">
+                ৳${Number(
+                  payout.amount || 0
+                ).toLocaleString('en-BD')}
+              </span>
+
+            </div>
+
+            <h3>
+              💰 Payout Request
+            </h3>
+
+            <p>
+              👤 User:
+              <b>
+                ${escapeHTML(
+                  payout.user_name || 'Unknown User'
+                )}
+              </b>
+            </p>
+
+            <p>
+              🆔 User ID:
+              <br>
+              <span class="small">
+                ${escapeHTML(
+                  payout.user_id || ''
+                )}
+              </span>
+            </p>
+
+            <p>
+              📱 Method:
+              <b>
+                ${escapeHTML(
+                  payout.method || 'bKash'
+                )}
+              </b>
+            </p>
+
+            <p>
+              📞 bKash Number:
+              <br>
+              <b>
+                ${escapeHTML(
+                  payout.account_number || ''
+                )}
+              </b>
+            </p>
+
+            ${
+              payout.note
+              ?
+              `
+                <p>
+                  📝 User Note:
+                  <br>
+                  ${escapeHTML(payout.note)}
+                </p>
+              `
+              :
+              ''
+            }
+
+            <p class="small">
+              Request ID:
+              ${escapeHTML(payout.id)}
+            </p>
+
+            <p class="small">
+              ${formatDate(payout.created_at)}
+            </p>
+
+            ${
+              status === 'Pending'
+              ?
+              `
+                <button
+                  class="btn success"
+                  onclick="
+                    updatePayout(
+                      '${payout.id}',
+                      'Approved'
+                    )
+                  ">
+                  ✅ Approve
+                </button>
+
+                <button
+                  class="btn danger"
+                  onclick="
+                    updatePayout(
+                      '${payout.id}',
+                      'Rejected'
+                    )
+                  ">
+                  ❌ Reject
+                </button>
+              `
+              :
+              ''
+            }
+
+            ${
+              status === 'Approved'
+              ?
+              `
+                <div class="status successBox">
+                  ✅ এই payout Approved হয়েছে।
+                </div>
+              `
+              :
+              ''
+            }
+
+            ${
+              status === 'Rejected'
+              ?
+              `
+                <div class="status error">
+                  ❌ এই payout Rejected হয়েছে।
+                </div>
+              `
+              :
+              ''
+            }
+
+          </div>
+
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    console.log(error);
+
+    box.innerHTML =
+      '<div class="status error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================================
+   UPDATE PAYOUT
+========================================= */
+
+async function updatePayout(
+  payoutId,
+  newStatus
+){
+
+  let confirmText = '';
+
+  if(newStatus === 'Approved'){
+
+    confirmText =
+      'আপনি কি নিশ্চিত যে টাকা bKash-এ পাঠানো হয়েছে এবং এই Payout Approved করবেন?';
+
+  }else{
+
+    confirmText =
+      'এই Payout Reject করবেন?';
+
+  }
+
+  if(!confirm(confirmText))
+    return;
+
+  let note = '';
+
+  if(newStatus === 'Rejected'){
+
+    note =
+      prompt(
+        'Reject করার কারণ লিখুন:',
+        ''
+      ) || '';
+
+  }
+
+  try{
+
+    const updateData = {
+      status:newStatus,
+      updated_at:new Date().toISOString()
+    };
+
+    if(note){
+      updateData.note = note;
+    }
+
+    const {error} =
+      await supabaseClient
+        .from('payouts')
+        .update(updateData)
+        .eq(
+          'id',
+          payoutId
+        );
+
+    if(error) throw error;
+
+    alert(
+      newStatus === 'Approved'
+      ? '✅ Payout Approved হয়েছে।'
+      : '❌ Payout Rejected হয়েছে।'
+    );
+
+    await loadAll();
+
+  }catch(error){
+
+    console.log(error);
+
+    alert(
+      'Payout Update Error: ' +
       error.message
     );
 
