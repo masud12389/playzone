@@ -1,4 +1,4 @@
-
+```html
 <!doctype html>
 <html lang="bn">
 <head>
@@ -9,40 +9,50 @@
 <style>
 *{box-sizing:border-box}
 
-html{scroll-behavior:smooth}
+html{
+ scroll-behavior:smooth;
+}
 
 body{
  margin:0;
  background:#07131f;
  color:#fff;
  font-family:Arial,"Noto Sans Bengali",sans-serif;
+ font-size:16px;
+ line-height:1.6;
+}
+
+button{
+ font-family:inherit;
+ cursor:pointer;
 }
 
 .wrap{
  max-width:760px;
  margin:auto;
- padding-bottom:90px;
+ padding-bottom:100px;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header{
  position:sticky;
  top:0;
  z-index:100;
- background:rgba(7,19,31,.94);
- backdrop-filter:blur(12px);
- border-bottom:1px solid rgba(255,255,255,.08);
+ background:rgba(7,19,31,.97);
+ backdrop-filter:blur(14px);
+ border-bottom:1px solid rgba(255,255,255,.10);
 }
 
 .header-inner{
  display:flex;
  align-items:center;
  justify-content:space-between;
- padding:14px 16px;
+ padding:16px;
 }
 
 .logo{
- font-size:22px;
+ font-size:25px;
  font-weight:900;
  letter-spacing:.5px;
 }
@@ -52,80 +62,95 @@ header{
 }
 
 .user{
- font-size:14px;
- color:#b9c8d6;
+ font-size:16px;
+ color:#d1dce4;
+ font-weight:600;
 }
 
-/* NAV */
+/* ================= TOP NAV ================= */
+
 .nav{
  display:flex;
- gap:7px;
+ gap:8px;
  overflow-x:auto;
- padding:0 12px 12px;
+ padding:0 12px 14px;
  scrollbar-width:none;
 }
 
-.nav::-webkit-scrollbar{display:none}
-
-.nav button{
- border:1px solid rgba(255,255,255,.08);
- background:#0d2233;
- color:#dce8f2;
- padding:9px 12px;
- border-radius:12px;
- white-space:nowrap;
- font-size:13px;
+.nav::-webkit-scrollbar{
+ display:none;
 }
 
-/* HERO */
+.nav button{
+ border:1px solid rgba(255,255,255,.10);
+ background:#0d2233;
+ color:#e8f1f6;
+ padding:11px 15px;
+ border-radius:13px;
+ white-space:nowrap;
+ font-size:15px;
+ font-weight:600;
+ min-height:46px;
+}
+
+.nav button:active{
+ transform:scale(.97);
+}
+
+/* ================= HERO ================= */
+
 .hero{
- margin:18px 14px;
- padding:30px 22px;
- border-radius:24px;
- background:
- linear-gradient(145deg,#10344a,#092333 55%,#071a27);
- border:1px solid rgba(32,227,162,.18);
- box-shadow:0 18px 45px rgba(0,0,0,.25);
+ margin:20px 14px;
+ padding:32px 23px;
+ border-radius:25px;
+ background:linear-gradient(
+   145deg,
+   #10384d,
+   #092333 55%,
+   #071a27
+ );
+ border:1px solid rgba(32,227,162,.20);
+ box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
 
 .badge{
  display:inline-block;
- padding:7px 11px;
- border-radius:20px;
- background:rgba(32,227,162,.1);
+ padding:9px 13px;
+ border-radius:22px;
+ background:rgba(32,227,162,.12);
  color:#20e3a2;
- font-size:12px;
- font-weight:bold;
- margin-bottom:13px;
+ font-size:14px;
+ font-weight:800;
+ margin-bottom:16px;
 }
 
 .hero h1{
- margin:0 0 12px;
- font-size:30px;
- line-height:1.2;
+ margin:0 0 16px;
+ font-size:32px;
+ line-height:1.35;
 }
 
 .hero p{
  margin:0;
- color:#b9c9d6;
- line-height:1.7;
- font-size:14px;
+ color:#d0dce4;
+ line-height:1.8;
+ font-size:17px;
 }
 
 .actions{
  display:flex;
- gap:10px;
- margin-top:22px;
+ gap:12px;
+ margin-top:25px;
 }
 
 .btn{
  flex:1;
  border:0;
- padding:13px;
- border-radius:13px;
- font-weight:bold;
- font-size:14px;
- cursor:pointer;
+ padding:15px 12px;
+ border-radius:14px;
+ font-weight:800;
+ font-size:17px;
+ min-height:54px;
 }
 
 .primary{
@@ -134,40 +159,54 @@ header{
 }
 
 .secondary{
- background:#122c3e;
+ background:#163247;
  color:#fff;
- border:1px solid rgba(255,255,255,.1);
+ border:1px solid rgba(255,255,255,.12);
 }
 
-/* WALLET */
+.btn:active{
+ transform:scale(.98);
+}
+
+/* ================= WALLET ================= */
+
 .wallet{
- margin:15px 14px;
- padding:22px;
- border-radius:22px;
+ margin:16px 14px;
+ padding:24px;
+ border-radius:23px;
  background:linear-gradient(145deg,#102d40,#0b1e2c);
- border:1px solid rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.09);
 }
 
 .wallet-title{
- color:#9fb2c1;
- font-size:13px;
+ color:#b8c8d3;
+ font-size:16px;
+ font-weight:600;
 }
 
 .points{
- font-size:38px;
+ font-size:43px;
  font-weight:900;
- margin:7px 0 3px;
+ line-height:1.2;
+ margin:8px 0 3px;
 }
 
 .cash{
  color:#20e3a2;
- font-size:16px;
- font-weight:bold;
+ font-size:20px;
+ font-weight:800;
+}
+
+.wallet-label{
+ margin-top:20px;
+ color:#dbe6ec;
+ font-size:17px;
+ font-weight:800;
 }
 
 .progress{
- margin-top:18px;
- height:8px;
+ margin-top:14px;
+ height:11px;
  background:#172d3c;
  border-radius:10px;
  overflow:hidden;
@@ -181,152 +220,229 @@ header{
 }
 
 .withdraw{
- margin-top:10px;
- color:#91a6b6;
- font-size:12px;
+ margin-top:11px;
+ color:#aebec9;
+ font-size:15px;
 }
 
-/* STATS */
+/* ================= STATS ================= */
+
 .stats{
  display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:9px;
- margin:15px 14px;
+ grid-template-columns:repeat(2,1fr);
+ gap:11px;
+ margin:16px 14px;
 }
 
 .stat{
  background:#0c1e2d;
- border:1px solid rgba(255,255,255,.07);
- border-radius:16px;
- padding:14px 7px;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:17px;
+ padding:17px 10px;
  text-align:center;
 }
 
 .stat strong{
  display:block;
- font-size:21px;
+ font-size:26px;
  margin-bottom:4px;
 }
 
 .stat span{
- color:#8fa4b3;
- font-size:11px;
+ color:#b3c2cc;
+ font-size:15px;
+ font-weight:600;
 }
 
-/* SECTION */
+/* ================= SECTIONS ================= */
+
 .section{
- margin:25px 14px 14px;
+ margin:30px 14px 16px;
 }
 
 .section-title{
- font-size:20px;
- font-weight:800;
- margin-bottom:14px;
+ font-size:24px;
+ font-weight:900;
+ margin-bottom:16px;
 }
 
-/* HOW */
+/* ================= HOW IT WORKS ================= */
+
 .steps{
  display:grid;
- gap:10px;
+ gap:12px;
 }
 
 .step{
  display:flex;
- gap:13px;
+ gap:15px;
  align-items:center;
  background:#0c1e2d;
- border:1px solid rgba(255,255,255,.07);
- border-radius:17px;
- padding:15px;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:18px;
+ padding:17px;
 }
 
 .step-icon{
- width:45px;
- height:45px;
+ width:52px;
+ height:52px;
  flex-shrink:0;
  display:flex;
  align-items:center;
  justify-content:center;
- border-radius:14px;
+ border-radius:15px;
  background:#102f3d;
- font-size:22px;
+ font-size:26px;
 }
 
 .step h3{
- margin:0 0 4px;
- font-size:15px;
+ margin:0 0 5px;
+ font-size:19px;
 }
 
 .step p{
  margin:0;
- color:#91a5b4;
- font-size:12px;
- line-height:1.5;
+ color:#b5c5cf;
+ font-size:15px;
+ line-height:1.65;
 }
 
-/* OPPORTUNITY */
+/* ================= OPPORTUNITY ================= */
+
 .opportunity{
- margin:15px 14px;
- padding:21px;
- border-radius:21px;
+ margin:17px 14px;
+ padding:23px;
+ border-radius:22px;
  background:linear-gradient(135deg,#102c40,#0b1d2b);
- border:1px solid rgba(32,227,162,.12);
+ border:1px solid rgba(32,227,162,.14);
 }
 
 .opportunity h2{
- margin:0 0 8px;
- font-size:20px;
+ margin:0 0 9px;
+ font-size:24px;
 }
 
 .opportunity p{
  margin:0;
- color:#9eb0bd;
- font-size:13px;
- line-height:1.6;
+ color:#b9c8d1;
+ font-size:16px;
+ line-height:1.75;
 }
 
 .skill-grid{
  display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:9px;
- margin-top:16px;
+ grid-template-columns:1fr 1fr;
+ gap:11px;
+ margin-top:18px;
 }
 
 .skill{
  background:#0a1926;
- border:1px solid rgba(255,255,255,.06);
- padding:13px;
- border-radius:13px;
- font-size:13px;
+ border:1px solid rgba(255,255,255,.07);
+ padding:16px 12px;
+ border-radius:14px;
+ font-size:16px;
+ font-weight:700;
 }
 
-/* TRUST */
+/* ================= TRUST ================= */
+
 .trust{
- margin:15px 14px;
- padding:18px;
- border-radius:19px;
+ margin:17px 14px;
+ padding:21px;
+ border-radius:20px;
  background:#0c1e2d;
- border:1px solid rgba(255,255,255,.07);
+ border:1px solid rgba(255,255,255,.08);
 }
 
 .trust-row{
  display:flex;
- align-items:center;
- gap:10px;
- margin:10px 0;
- color:#b5c5d0;
- font-size:13px;
+ align-items:flex-start;
+ gap:12px;
+ margin:13px 0;
+ color:#c5d2da;
+ font-size:16px;
+ line-height:1.6;
 }
 
-/* BOTTOM NAV */
+.trust-row span:first-child{
+ color:#20e3a2;
+ font-size:20px;
+ font-weight:bold;
+}
+
+/* ================= DEMO PAGES ================= */
+
+.page{
+ display:none;
+ margin:20px 14px;
+ padding:25px;
+ background:#0c1e2d;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:22px;
+}
+
+.page.active{
+ display:block;
+}
+
+.page h2{
+ margin:0 0 12px;
+ font-size:25px;
+}
+
+.page p{
+ color:#bdcbd4;
+ font-size:16px;
+ line-height:1.7;
+}
+
+.page-card{
+ background:#10283a;
+ padding:17px;
+ border-radius:16px;
+ margin-top:12px;
+ border:1px solid rgba(255,255,255,.07);
+}
+
+.page-card h3{
+ margin:0 0 5px;
+ font-size:18px;
+}
+
+.page-card p{
+ margin:0;
+ font-size:15px;
+}
+
+/* ================= MESSAGE ================= */
+
+#message{
+ position:fixed;
+ left:50%;
+ bottom:85px;
+ transform:translateX(-50%);
+ background:#163247;
+ color:#fff;
+ padding:13px 18px;
+ border-radius:13px;
+ font-size:15px;
+ font-weight:700;
+ z-index:500;
+ display:none;
+ box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ================= BOTTOM NAV ================= */
+
 .bottom{
  position:fixed;
  bottom:0;
  left:0;
  right:0;
  z-index:200;
- background:rgba(5,15,24,.97);
- border-top:1px solid rgba(255,255,255,.08);
+ background:rgba(5,15,24,.98);
+ border-top:1px solid rgba(255,255,255,.10);
 }
 
 .bottom-inner{
@@ -339,9 +455,11 @@ header{
 .bottom button{
  background:none;
  border:0;
- color:#7f95a5;
- padding:10px 3px 9px;
- font-size:11px;
+ color:#9aadb9;
+ padding:11px 3px 10px;
+ font-size:14px;
+ font-weight:600;
+ min-height:66px;
 }
 
 .bottom button:first-child{
@@ -350,16 +468,80 @@ header{
 
 .bottom-icon{
  display:block;
- font-size:19px;
+ font-size:23px;
  margin-bottom:3px;
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
+
 @media(max-width:430px){
- .hero h1{font-size:25px}
- .points{font-size:34px}
- .stats{gap:6px}
- .stat strong{font-size:19px}
+
+ body{
+   font-size:17px;
+ }
+
+ .header-inner{
+   padding:15px 14px;
+ }
+
+ .logo{
+   font-size:24px;
+ }
+
+ .user{
+   font-size:15px;
+ }
+
+ .hero{
+   margin:17px 12px;
+   padding:29px 20px;
+ }
+
+ .hero h1{
+   font-size:28px;
+ }
+
+ .hero p{
+   font-size:17px;
+ }
+
+ .actions{
+   flex-direction:column;
+ }
+
+ .btn{
+   width:100%;
+   font-size:18px;
+   min-height:56px;
+ }
+
+ .points{
+   font-size:41px;
+ }
+
+ .section-title{
+   font-size:23px;
+ }
+
+ .step h3{
+   font-size:19px;
+ }
+
+ .step p{
+   font-size:16px;
+ }
+
+ .skill{
+   font-size:16px;
+ }
+
+ .bottom button{
+   font-size:13px;
+ }
+
+ .bottom-icon{
+   font-size:22px;
+ }
 }
 </style>
 </head>
@@ -368,53 +550,110 @@ header{
 
 <div class="wrap">
 
+<!-- HEADER -->
+
 <header>
+
  <div class="header-inner">
-   <div class="logo">PLAY<span>ZONE</span></div>
-   <div class="user">👤 Masud Rana</div>
+
+   <div class="logo">
+     PLAY<span>ZONE</span>
+   </div>
+
+   <div class="user">
+     👤 Masud Rana
+   </div>
+
  </div>
 
  <div class="nav">
-   <button>🏠 Home</button>
-   <button>🎮 Games</button>
-   <button>💼 Jobs</button>
-   <button>💰 Rewards</button>
-   <button>👤 Profile</button>
-   <button>⚙️ Admin</button>
+
+   <button onclick="showPage('home')">
+     🏠 Home
+   </button>
+
+   <button onclick="showPage('games')">
+     🎮 Games
+   </button>
+
+   <button onclick="showPage('jobs')">
+     💼 Jobs
+   </button>
+
+   <button onclick="showPage('wallet')">
+     💰 Rewards
+   </button>
+
+   <button onclick="showPage('profile')">
+     👤 Profile
+   </button>
+
+   <button onclick="showPage('admin')">
+     ⚙️ Admin
+   </button>
+
  </div>
+
 </header>
 
 
+<!-- ================= HOME ================= -->
+
+<div id="home" class="page active"
+     style="display:block;padding:0;background:none;border:0;margin:0">
+
 <!-- HERO -->
+
 <section class="hero">
 
- <div class="badge">🚀 SKILL & OPPORTUNITY PLATFORM</div>
+ <div class="badge">
+   🚀 SKILL & OPPORTUNITY PLATFORM
+ </div>
 
- <h1>খেলুন • দক্ষতা দেখান •<br>সুযোগ তৈরি করুন</h1>
+ <h1>
+   খেলুন • দক্ষতা দেখান •<br>
+   সুযোগ তৈরি করুন
+ </h1>
 
  <p>
- গেম খেলুন, Points অর্জন করুন এবং নিজের দক্ষতা কাজে লাগিয়ে
- অনলাইন কাজের সুযোগ খুঁজে নিন।
+   গেম খেলুন, Points অর্জন করুন এবং নিজের দক্ষতা কাজে লাগিয়ে
+   অনলাইন কাজের সুযোগ খুঁজে নিন।
  </p>
 
  <div class="actions">
-   <button class="btn primary">🎮 খেলুন</button>
-   <button class="btn secondary">💼 কাজ দেখুন</button>
+
+   <button class="btn primary"
+           onclick="showPage('games')">
+     🎮 খেলুন
+   </button>
+
+   <button class="btn secondary"
+           onclick="showPage('jobs')">
+     💼 কাজ দেখুন
+   </button>
+
  </div>
 
 </section>
 
 
 <!-- WALLET -->
+
 <section class="wallet">
 
- <div class="wallet-title">আপনার বর্তমান Points</div>
+ <div class="wallet-title">
+   আপনার বর্তমান Points
+ </div>
 
- <div class="points">1,490</div>
+ <div class="points">
+   1,490
+ </div>
 
- <div class="cash">৳ 149 BDT</div>
+ <div class="cash">
+   ৳ 149 BDT
+ </div>
 
- <div class="wallet-title" style="margin-top:18px">
+ <div class="wallet-label">
    💎 PLAYZONE WALLET
  </div>
 
@@ -430,68 +669,95 @@ header{
 
 
 <!-- STATS -->
+
 <section class="stats">
 
  <div class="stat">
    <strong>4</strong>
-   <span>Games</span>
+   <span>🎮 Games</span>
  </div>
 
  <div class="stat">
    <strong>6</strong>
-   <span>Jobs</span>
+   <span>💼 Jobs</span>
  </div>
 
  <div class="stat">
    <strong>0</strong>
-   <span>Applications</span>
+   <span>📨 Applications</span>
  </div>
 
  <div class="stat">
    <strong>1,490</strong>
-   <span>Points</span>
+   <span>💎 Points</span>
  </div>
 
 </section>
 
 
 <!-- HOW IT WORKS -->
+
 <section class="section">
 
- <div class="section-title">PLAYZONE কীভাবে কাজ করে?</div>
+ <div class="section-title">
+   PLAYZONE কীভাবে কাজ করে?
+ </div>
 
  <div class="steps">
 
    <div class="step">
+
      <div class="step-icon">🎮</div>
+
      <div>
        <h3>খেলুন</h3>
-       <p>দক্ষতার গেম খেলুন এবং Points অর্জন করুন।</p>
+       <p>
+         দক্ষতার গেম খেলুন এবং Points অর্জন করুন।
+       </p>
      </div>
+
    </div>
 
+
    <div class="step">
+
      <div class="step-icon">💼</div>
+
      <div>
        <h3>কাজ করুন</h3>
-       <p>নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।</p>
+       <p>
+         নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।
+       </p>
      </div>
+
    </div>
 
+
    <div class="step">
+
      <div class="step-icon">⭐</div>
+
      <div>
        <h3>দক্ষতা দেখান</h3>
-       <p>Job-এ Application করে নিজের যোগ্যতা দেখান।</p>
+       <p>
+         Job-এ Application করে নিজের যোগ্যতা দেখান।
+       </p>
      </div>
+
    </div>
 
+
    <div class="step">
+
      <div class="step-icon">💰</div>
+
      <div>
        <h3>Reward</h3>
-       <p>Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।</p>
+       <p>
+         Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।
+       </p>
      </div>
+
    </div>
 
  </div>
@@ -499,22 +765,36 @@ header{
 </section>
 
 
-<!-- OPPORTUNITY -->
+<!-- SKILL OPPORTUNITY -->
+
 <section class="opportunity">
 
- <h2>💼 Skill Opportunity</h2>
+ <h2>
+   💼 Skill Opportunity
+ </h2>
 
  <p>
- আপনার দক্ষতাকে কাজে লাগিয়ে PLAYZONE-এ বিভিন্ন
- অনলাইন কাজের সুযোগ খুঁজে নিন।
+   আপনার দক্ষতাকে কাজে লাগিয়ে PLAYZONE-এ বিভিন্ন
+   অনলাইন কাজের সুযোগ খুঁজে নিন।
  </p>
 
  <div class="skill-grid">
 
-   <div class="skill">🎨 Graphic Design</div>
-   <div class="skill">🎬 Video Editing</div>
-   <div class="skill">⌨️ Data Entry</div>
-   <div class="skill">📱 Digital Marketing</div>
+   <div class="skill">
+     🎨 Graphic Design
+   </div>
+
+   <div class="skill">
+     🎬 Video Editing
+   </div>
+
+   <div class="skill">
+     ⌨️ Data Entry
+   </div>
+
+   <div class="skill">
+     📱 Digital Marketing
+   </div>
 
  </div>
 
@@ -522,9 +802,10 @@ header{
 
 
 <!-- TRUST -->
+
 <section class="trust">
 
- <div class="section-title" style="margin-bottom:8px">
+ <div class="section-title">
    🔐 কেন PLAYZONE?
  </div>
 
@@ -548,32 +829,199 @@ header{
 </div>
 
 
-<!-- BOTTOM NAV -->
+<!-- ================= GAMES ================= -->
+
+<div id="games" class="page">
+
+ <h2>🎮 PLAYZONE Games</h2>
+
+ <p>
+   দক্ষতার গেম খেলুন এবং Points অর্জন করুন।
+ </p>
+
+ <div class="page-card">
+   <h3>🎯 Tap Rush</h3>
+   <p>দ্রুত Tap করে Score এবং Points অর্জন করুন।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🧩 Match Seven</h3>
+   <p>Matching Game খেলুন এবং Points অর্জন করুন।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🪽 Fly High</h3>
+   <p>Obstacle এড়িয়ে Score করুন।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🧠 Brain Box</h3>
+   <p>Quiz খেলুন এবং আপনার দক্ষতা পরীক্ষা করুন।</p>
+ </div>
+
+</div>
+
+
+<!-- ================= JOBS ================= -->
+
+<div id="jobs" class="page">
+
+ <h2>💼 Available Jobs</h2>
+
+ <p>
+   আপনার দক্ষতার সাথে মিল রেখে কাজ খুঁজে নিন।
+ </p>
+
+ <div class="page-card">
+   <h3>🎨 Graphic Design</h3>
+   <p>Social Media পোস্ট ও ডিজাইন তৈরি করুন।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🎬 Video Editing</h3>
+   <p>Short Video এবং Reels Editing কাজ।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>⌨️ Data Entry</h3>
+   <p>Online Data Entry কাজের সুযোগ।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>📱 Digital Marketing</h3>
+   <p>Social Media Promotion ও Marketing কাজ।</p>
+ </div>
+
+</div>
+
+
+<!-- ================= WALLET ================= -->
+
+<div id="wallet" class="page">
+
+ <h2>💰 PLAYZONE Wallet</h2>
+
+ <p>
+   আপনার Points এবং Reward এখানে দেখুন।
+ </p>
+
+ <div class="page-card">
+   <h3>💎 Current Points</h3>
+   <p style="font-size:28px;color:#20e3a2;font-weight:900">
+     1,490 Points
+   </p>
+ </div>
+
+ <div class="page-card">
+   <h3>💵 Current Value</h3>
+   <p>৳ 149 BDT</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🔒 Withdraw Status</h3>
+   <p>Withdraw করতে আরও 23,510 Points প্রয়োজন।</p>
+ </div>
+
+</div>
+
+
+<!-- ================= PROFILE ================= -->
+
+<div id="profile" class="page">
+
+ <h2>👤 My Profile</h2>
+
+ <div class="page-card">
+   <h3>👤 Name</h3>
+   <p>Masud Rana</p>
+ </div>
+
+ <div class="page-card">
+   <h3>💎 Points</h3>
+   <p>1,490 Points</p>
+ </div>
+
+ <div class="page-card">
+   <h3>🎮 Games Played</h3>
+   <p>4 Games</p>
+ </div>
+
+ <div class="page-card">
+   <h3>📨 Applications</h3>
+   <p>0 Applications</p>
+ </div>
+
+</div>
+
+
+<!-- ================= ADMIN ================= -->
+
+<div id="admin" class="page">
+
+ <h2>⚙️ Admin Dashboard</h2>
+
+ <p>
+   Admin panel-এ প্রবেশ করতে Admin account দিয়ে
+   authentication প্রয়োজন।
+ </p>
+
+ <div class="page-card">
+   <h3>👥 Users</h3>
+   <p>Admin থেকে User Management করা যাবে।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>💼 Jobs</h3>
+   <p>Job Create, Edit এবং Manage করা যাবে।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>📨 Applications</h3>
+   <p>Application Review ও Status Update করা যাবে।</p>
+ </div>
+
+ <div class="page-card">
+   <h3>💰 Payouts</h3>
+   <p>Pending, Approved এবং Rejected Payout Manage করা যাবে।</p>
+ </div>
+
+</div>
+
+</div>
+
+
+<!-- ================= MESSAGE ================= -->
+
+<div id="message"></div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
 <div class="bottom">
 
  <div class="bottom-inner">
 
-   <button>
+   <button onclick="showPage('home')">
      <span class="bottom-icon">🏠</span>
      Home
    </button>
 
-   <button>
+   <button onclick="showPage('games')">
      <span class="bottom-icon">🎮</span>
      Games
    </button>
 
-   <button>
+   <button onclick="showPage('jobs')">
      <span class="bottom-icon">💼</span>
      Jobs
    </button>
 
-   <button>
+   <button onclick="showPage('wallet')">
      <span class="bottom-icon">💰</span>
      Wallet
    </button>
 
-   <button>
+   <button onclick="showPage('profile')">
      <span class="bottom-icon">👤</span>
      Profile
    </button>
@@ -582,6 +1030,56 @@ header{
 
 </div>
 
+
+<script>
+
+/* ================= PAGE NAVIGATION ================= */
+
+function showPage(page){
+
+ const pages = document.querySelectorAll('.page');
+
+ pages.forEach(function(item){
+   item.classList.remove('active');
+   item.style.display='none';
+ });
+
+ const target = document.getElementById(page);
+
+ if(target){
+
+   target.classList.add('active');
+   target.style.display='block';
+
+   window.scrollTo({
+     top:0,
+     behavior:'smooth'
+   });
+
+ }
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+function showMessage(text){
+
+ const box=document.getElementById('message');
+
+ box.innerText=text;
+ box.style.display='block';
+
+ setTimeout(function(){
+
+   box.style.display='none';
+
+ },2200);
+
+}
+
+</script>
+
 </body>
 </html>
-
+```
