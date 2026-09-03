@@ -3371,4 +3371,52 @@ async function adminLoadJobs(){
 
 /* AUTH STATE */
 
-supabaseClient.auth
+/* AUTH STATE */
+
+supabaseClient.auth.onAuthStateChange(async (event, session) => {
+
+  currentUser = session?.user || null;
+
+  if(currentUser){
+
+    await ensureProfile();
+
+  }else{
+
+    currentProfile = null;
+
+  }
+
+  await refreshUserUI();
+
+});
+
+/* INITIAL LOAD */
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+  updateLocalStats();
+
+  await loadCurrentUser();
+
+  await loadJobsFromSupabase();
+
+});
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+document.querySelectorAll(".modal").forEach(modal => {
+
+  modal.addEventListener("click", event => {
+
+    if(event.target === modal){
+      modal.classList.remove("show");
+    }
+
+  });
+
+});
+
+/* INITIAL UI */
+
+updateLocalStats();
