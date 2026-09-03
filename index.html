@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="bn">
 <head>
@@ -11,421 +10,537 @@
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+
 body{
  margin:0;
  background:#081522;
  color:#fff;
  font-family:Arial,"Noto Sans Bengali",sans-serif;
+ line-height:1.55;
 }
-.wrap{max-width:900px;margin:auto;padding-bottom:80px}
+
+button,input,textarea,select{
+ font:inherit;
+}
+
+button{
+ cursor:pointer;
+}
+
+.wrap{
+ max-width:1000px;
+ margin:auto;
+ padding:0 14px 80px;
+}
+
 header{
  position:sticky;
  top:0;
- z-index:50;
- background:#091a29;
- border-bottom:1px solid #193b50;
- padding:14px 16px;
+ z-index:100;
+ background:rgba(8,21,34,.97);
+ border-bottom:1px solid #17354b;
+ padding:14px;
+ backdrop-filter:blur(10px);
 }
-.brand{font-size:25px;font-weight:900;color:#21e6a8}
-.tagline{font-size:12px;color:#9db1c0;margin-top:3px}
-nav{display:flex;gap:7px;overflow:auto;margin-top:12px}
+
+.brand{
+ font-size:27px;
+ font-weight:900;
+ color:#21e6a8;
+ letter-spacing:1px;
+}
+
+.tagline{
+ color:#a9c0d0;
+ font-size:13px;
+ margin-top:2px;
+}
+
+nav{
+ display:flex;
+ gap:7px;
+ overflow-x:auto;
+ margin-top:12px;
+ padding-bottom:2px;
+}
+
 nav button{
- border:1px solid #21465d;
- background:#10283a;
- color:#d9e8ef;
+ white-space:nowrap;
+ border:1px solid #23445a;
+ background:#0c2031;
+ color:#dcecf5;
  border-radius:10px;
  padding:9px 12px;
- cursor:pointer;
- white-space:nowrap;
 }
-nav button.active,nav button:hover{
+
+nav button:hover,
+nav button.active{
  background:#21e6a8;
- color:#06131d;
+ color:#06150f;
  border-color:#21e6a8;
+ font-weight:bold;
 }
-.section{padding:18px 14px}
-.hidden{display:none!important}
+
+.section{
+ margin-top:18px;
+}
+
+.hidden{
+ display:none!important;
+}
+
 .hero{
- background:linear-gradient(135deg,#102d42,#0b1d2d);
- border:1px solid #1b465d;
+ background:linear-gradient(135deg,#102b40,#0b1e2d);
+ border:1px solid #1d4057;
  border-radius:18px;
- padding:24px;
- margin-bottom:16px;
+ padding:22px;
+ box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
-.hero h1,.hero h2{margin-top:0}
+
+.hero h1,
+.hero h2,
+.hero h3{
+ margin-top:0;
+}
+
+.hero h1{
+ font-size:30px;
+}
+
 .card{
- background:#0d2132;
- border:1px solid #1b4055;
+ background:#0d2233;
+ border:1px solid #1b3b51;
  border-radius:16px;
  padding:17px;
 }
+
 .grid{
  display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:14px;
+ margin-top:15px;
 }
-.grid3{
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:12px;
-}
-.game-grid{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px;
-}
-.game-card{
- background:#102a3d;
- border:1px solid #1c4a61;
- border-radius:15px;
- padding:16px;
-}
-.game-card h3{margin:0 0 7px}
+
 .stat{
- font-size:26px;
+ font-size:27px;
  font-weight:900;
  color:#21e6a8;
 }
-.muted{color:#9db1c0;font-size:13px}
-.small{font-size:12px}
-.row{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
+
+.muted{
+ color:#91aabb;
+ font-size:13px;
 }
+
+.small{
+ font-size:12px;
+ color:#91aabb;
+}
+
 .actions{
  display:flex;
  flex-wrap:wrap;
- gap:9px;
- margin-top:14px;
+ gap:8px;
+ margin-top:15px;
 }
+
 .btn{
  border:0;
  border-radius:10px;
- padding:11px 15px;
+ padding:10px 14px;
  font-weight:700;
- cursor:pointer;
 }
-.btn-primary{background:#21e6a8;color:#06131d}
-.btn-secondary{background:#173449;color:#fff;border:1px solid #28556d}
-.btn-danger{background:#c83b4b;color:#fff}
-.btn-warning{background:#e9a52b;color:#111}
-input,textarea,select{
- width:100%;
- background:#081a28;
- border:1px solid #28536a;
+
+.btn-primary{
+ background:#21e6a8;
+ color:#06150f;
+}
+
+.btn-secondary{
+ background:#18364a;
  color:#fff;
- border-radius:10px;
- padding:11px;
- outline:none;
- margin-top:6px;
+ border:1px solid #2a536c;
 }
-textarea{min-height:100px;resize:vertical}
+
+.btn-danger{
+ background:#dc3545;
+ color:#fff;
+}
+
+.btn-warning{
+ background:#ffc107;
+ color:#111;
+}
+
+.btn-success{
+ background:#21e6a8;
+ color:#06150f;
+}
+
+.btn-info{
+ background:#2495d0;
+ color:#fff;
+}
+
+.btn:disabled{
+ opacity:.5;
+ cursor:not-allowed;
+}
+
+.form-group{
+ margin-bottom:13px;
+}
+
 label{
  display:block;
- color:#b9cad4;
- font-size:13px;
- margin-top:12px;
+ margin-bottom:6px;
+ color:#cfe2ed;
+ font-size:14px;
+ font-weight:700;
 }
-hr{border:0;border-top:1px solid #193b50}
-.notice{
- padding:12px;
+
+input,
+textarea,
+select{
+ width:100%;
+ padding:11px 12px;
  border-radius:10px;
+ border:1px solid #2b4d63;
+ background:#071724;
+ color:#fff;
+ outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+ border-color:#21e6a8;
+ box-shadow:0 0 0 2px rgba(33,230,168,.08);
+}
+
+textarea{
+ min-height:110px;
+ resize:vertical;
+}
+
+.notice{
+ border-radius:12px;
+ padding:12px 14px;
  margin-top:12px;
  font-size:13px;
 }
-.notice.info{background:#12334a;border:1px solid #285a76}
-.notice.success{background:#103c31;border:1px solid #24775e}
-.notice.warning{background:#493816;border:1px solid #87672a}
-.notice.danger{background:#421d25;border:1px solid #79333f}
+
+.notice.info{
+ background:#102f45;
+ border:1px solid #21516d;
+}
+
+.notice.success{
+ background:#0d3026;
+ border:1px solid #1e765d;
+}
+
+.notice.warning{
+ background:#3a2e0d;
+ border:1px solid #80651b;
+}
+
+.notice.danger{
+ background:#3b151b;
+ border:1px solid #78303b;
+}
+
+.job-card{
+ position:relative;
+ overflow:hidden;
+}
+
+.job-top{
+ display:flex;
+ justify-content:space-between;
+ gap:12px;
+ align-items:flex-start;
+}
+
+.job-title{
+ font-size:19px;
+ font-weight:800;
+ color:#fff;
+}
+
+.skill-tag{
+ display:inline-block;
+ background:#163c52;
+ color:#7feec8;
+ padding:4px 9px;
+ border-radius:999px;
+ font-size:12px;
+ margin-top:6px;
+}
+
+.budget{
+ font-size:18px;
+ font-weight:900;
+ color:#21e6a8;
+ white-space:nowrap;
+}
+
 .status{
  display:inline-block;
- padding:5px 9px;
- border-radius:20px;
- font-size:11px;
- font-weight:800;
+ padding:4px 9px;
+ border-radius:999px;
+ font-size:12px;
+ font-weight:bold;
 }
-.status.pending{background:#554515;color:#ffd96a}
-.status.accepted{background:#104f3b;color:#6ff0c2}
-.status.rejected{background:#521f28;color:#ff9da8}
-.status.open{background:#104f3b;color:#6ff0c2}
-.status.assigned{background:#24445a;color:#a9d9ff}
-.status.completed{background:#28502c;color:#9effa5}
-.job{
- margin-bottom:12px;
- background:#0d2132;
- border:1px solid #1b4055;
- border-radius:15px;
- padding:16px;
+
+.status-pending{
+ background:#4a390d;
+ color:#ffd85c;
 }
-.job h3{margin:0 0 6px}
-.job-meta{
- display:flex;
- flex-wrap:wrap;
- gap:7px;
- margin:10px 0;
+
+.status-accepted,
+.status-open{
+ background:#0c3a2b;
+ color:#54efb7;
 }
-.badge{
- background:#173449;
- border:1px solid #28556d;
- padding:5px 8px;
- border-radius:8px;
- font-size:11px;
- color:#cfe0e8;
+
+.status-rejected,
+.status-cancelled{
+ background:#45171d;
+ color:#ff8d9a;
 }
-.dashboard-card{text-align:center}
-.accepted-job{
- border:1px solid #287d61;
- background:#0d3027;
- border-radius:14px;
- padding:15px;
- margin-bottom:10px;
+
+.status-assigned{
+ background:#113d59;
+ color:#72caff;
 }
+
+.status-completed{
+ background:#253b26;
+ color:#a7e8a4;
+}
+
 .application-card{
- border:1px solid #23475c;
- background:#0c1e2d;
- border-radius:14px;
+ margin-top:12px;
+ background:#091b29;
+ border:1px solid #1b3d52;
+ border-radius:13px;
  padding:14px;
- margin-bottom:10px;
 }
+
+.application-header{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ flex-wrap:wrap;
+}
+
+.id-box{
+ background:#07131e;
+ border:1px solid #1d3444;
+ padding:7px 9px;
+ border-radius:8px;
+ font-family:monospace;
+ font-size:11px;
+ color:#a8c1d0;
+ word-break:break-all;
+}
+
+hr{
+ border:0;
+ border-top:1px solid #1a394d;
+ margin:17px 0;
+}
+
 .empty{
  text-align:center;
- padding:25px;
- color:#8fa6b5;
+ padding:25px 12px;
+ color:#8fa8b9;
+ border:1px dashed #29475a;
+ border-radius:12px;
 }
+
+.profile-box{
+ display:flex;
+ gap:15px;
+ align-items:center;
+}
+
+.avatar{
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ background:#173c51;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:27px;
+}
+
 .modal{
  position:fixed;
  inset:0;
- z-index:100;
+ z-index:500;
  background:rgba(0,0,0,.72);
- display:flex;
+ display:none;
  align-items:center;
  justify-content:center;
  padding:15px;
 }
+
+.modal.show{
+ display:flex;
+}
+
 .modal-box{
- width:min(560px,100%);
+ width:min(500px,100%);
  max-height:90vh;
  overflow:auto;
- background:#0b1d2d;
- border:1px solid #28536a;
- border-radius:17px;
- padding:18px;
+ background:#0d2233;
+ border:1px solid #2a5067;
+ border-radius:18px;
+ padding:20px;
+ box-shadow:0 20px 70px rgba(0,0,0,.5);
 }
+
 .modal-head{
  display:flex;
- align-items:center;
  justify-content:space-between;
+ align-items:center;
  gap:10px;
 }
-.modal-head h2{margin:0}
+
 .close{
  border:0;
  background:#173449;
  color:#fff;
- font-size:24px;
- width:38px;
- height:38px;
- border-radius:10px;
- cursor:pointer;
+ width:36px;
+ height:36px;
+ border-radius:50%;
+ font-size:20px;
 }
-.admin-stat{
- background:#102a3d;
- border:1px solid #1e4b62;
- border-radius:14px;
- padding:15px;
-}
+
 footer{
  text-align:center;
- color:#708896;
+ color:#6f899a;
  font-size:12px;
- padding:30px 15px;
+ padding:25px 10px;
 }
+
+.hidden-mobile{
+ display:block;
+}
+
 @media(max-width:600px){
- .grid,.grid3,.game-grid{grid-template-columns:1fr}
- .hero{padding:18px}
- .row{align-items:flex-start}
+ .hero h1{font-size:25px}
+ .job-top{flex-direction:column}
+ .budget{align-self:flex-start}
+ .hidden-mobile{display:none}
 }
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
 <header>
  <div class="brand">PLAYZONE</div>
  <div class="tagline">খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</div>
- <nav>
+
+ <nav id="mainNav">
   <button class="active" onclick="showPage('home',this)">🏠 Home</button>
   <button onclick="showPage('tournament',this)">🏆 Tournament</button>
   <button onclick="showPage('rewards',this)">🎁 Rewards</button>
   <button onclick="showPage('profile',this)">👤 Profile</button>
+  <button onclick="openUserDashboard()">📊 My Dashboard</button>
+  <button onclick="openPosterDashboard()">🧑‍💼 Posted Jobs</button>
   <button id="adminNavBtn" class="hidden" onclick="showPage('admin',this)">⚙️ Admin</button>
  </nav>
 </header>
+
 
 <!-- HOME -->
 <section id="home" class="section">
 
  <div class="hero">
-  <h1>🎮 PLAYZONE</h1>
-  <h3>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h3>
-  <p class="muted">
-   Skill Game খেলুন, Points সংগ্রহ করুন এবং আপনার দক্ষতা দিয়ে
-   বাস্তব কাজের সুযোগ খুঁজে নিন।
+  <h1>PLAYZONE 🚀</h1>
+
+  <p>
+   Skill দেখান, কাজ খুঁজুন, কাজ পোস্ট করুন এবং
+   নিজের Opportunity তৈরি করুন।
   </p>
 
   <div class="actions">
-   <button class="btn btn-primary" onclick="openModal('login')">🔐 Login</button>
-   <button class="btn btn-secondary" onclick="openModal('signup')">📝 Sign Up</button>
-   <button class="btn btn-secondary" onclick="openUserDashboard()">📊 My Dashboard</button>
-   <button class="btn btn-secondary" onclick="showPage('profile')">👤 My Profile</button>
+   <button class="btn btn-primary" onclick="scrollToJobs()">
+    🔎 Available Jobs
+   </button>
+
+   <button class="btn btn-secondary" onclick="openCreateJob()">
+    ➕ Post a Job
+   </button>
+
+   <button class="btn btn-secondary" onclick="openUserDashboard()">
+    📊 My Dashboard
+   </button>
   </div>
  </div>
 
  <div class="grid">
+
   <div class="card">
-   <div class="muted">Virtual Points</div>
-   <div id="homePoints" class="stat">0</div>
+   <div class="muted">💰 Virtual Points</div>
+   <div id="homePoints" class="stat">1000</div>
   </div>
+
   <div class="card">
-   <div class="muted">Games Played</div>
+   <div class="muted">🎮 Games Played</div>
    <div id="homeGames" class="stat">0</div>
   </div>
- </div>
 
- <div class="card" style="margin-top:16px">
-  <h2>🎮 Skill Games</h2>
-
-  <div class="game-grid">
-
-   <div class="game-card">
-    <h3>⚡ Tap Rush</h3>
-    <p class="muted">৩০ সেকেন্ডে যত বেশি Tap, তত বেশি Points.</p>
-    <button class="btn btn-primary" onclick="openGame('tap')">Play</button>
-   </div>
-
-   <div class="game-card">
-    <h3>🧩 Match Seven</h3>
-    <p class="muted">Matching pairs খুঁজে Points সংগ্রহ করুন।</p>
-    <button class="btn btn-primary" onclick="openGame('match')">Play</button>
-   </div>
-
-   <div class="game-card">
-    <h3>🚀 Fly High</h3>
-    <p class="muted">Obstacle এড়িয়ে যতদূর পারবেন যান।</p>
-    <button class="btn btn-primary" onclick="openGame('fly')">Play</button>
-   </div>
-
-   <div class="game-card">
-    <h3>🧠 Brain Box</h3>
-    <p class="muted">Quiz-এর সঠিক উত্তর দিয়ে Points পান।</p>
-    <button class="btn btn-primary" onclick="openGame('brain')">Play</button>
-   </div>
-
-  </div>
- </div>
-
- <div class="card" style="margin-top:16px">
-  <h2>💼 Skill & Job Hub</h2>
-  <p class="muted">
-   আপনার Skill অনুযায়ী কাজ খুঁজুন এবং Apply করুন।
-  </p>
-
-  <div class="job-meta">
-   <span class="badge">🎨 Graphic Design</span>
-   <span class="badge">🎬 Video Editing</span>
-   <span class="badge">⌨️ Data Entry</span>
-   <span class="badge">📱 Digital Marketing</span>
+  <div class="card">
+   <div class="muted">💼 Available Jobs</div>
+   <div id="homeJobCount" class="stat">0</div>
   </div>
 
-  <div class="actions">
-   <button class="btn btn-primary" onclick="openModal('createJob')">➕ Post a Job</button>
-   <button class="btn btn-secondary" onclick="loadJobsFromSupabase(true)">🔄 Refresh Jobs</button>
-  </div>
  </div>
 
- <div style="margin-top:16px">
-  <h2>📋 Available Jobs</h2>
-  <div id="jobsList"></div>
+
+ <!-- JOB HUB -->
+ <div id="jobsSection" class="section">
+
+  <div class="hero">
+   <h2>💼 Skill & Job Hub</h2>
+
+   <p>
+    নিজের দক্ষতার কাজ খুঁজুন অথবা নতুন কাজ পোস্ট করুন।
+   </p>
+
+   <div class="actions">
+    <button class="btn btn-primary" onclick="loadJobs()">
+     🔄 Refresh Jobs
+    </button>
+
+    <button class="btn btn-secondary" onclick="openCreateJob()">
+     ➕ Post New Job
+    </button>
+   </div>
+  </div>
+
+  <div id="jobsList" class="grid"></div>
+
  </div>
 
 </section>
 
-<!-- TOURNAMENT -->
-<section id="tournament" class="section hidden">
- <div class="hero">
-  <h2>🏆 Tournament</h2>
-  <p>
-   Tournament system খুব শিগগিরই চালু হবে।
-   এখানে Skill Game competition এবং leaderboard যুক্ত করা হবে।
-  </p>
-  <div class="notice info">
-   🚀 PLAYZONE-এর Tournament feature development চলছে।
-  </div>
- </div>
-</section>
-
-<!-- REWARDS -->
-<section id="rewards" class="section hidden">
- <div class="hero">
-  <h2>🎁 Rewards</h2>
-  <p class="muted">আপনার অর্জিত Virtual Points দেখুন।</p>
-  <div id="rewardPoints" class="stat">0</div>
-  <p class="muted">Virtual Points</p>
- </div>
-
- <div class="card">
-  <h3>💰 Future Reward System</h3>
-  <p class="muted">
-   PLAYZONE-এর Reward/Payout system ধাপে ধাপে উন্নত করা হচ্ছে।
-   বর্তমানে Payout Request Admin manual review করবেন।
-  </p>
-  <button class="btn btn-primary" onclick="openModal('payout')">
-   💰 Payout Request
-  </button>
- </div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile" class="section hidden">
- <div class="card">
-  <h2>👤 My Profile</h2>
-
-  <div class="row">
-   <span class="muted">Username</span>
-   <strong id="profileName">Guest</strong>
-  </div>
-
-  <hr style="margin:15px 0">
-
-  <div class="grid">
-   <div class="card">
-    <div class="muted">Points</div>
-    <div id="profilePoints" class="stat">0</div>
-   </div>
-
-   <div class="card">
-    <div class="muted">Games</div>
-    <div id="profileGames" class="stat">0</div>
-   </div>
-  </div>
-
-  <div class="actions">
-   <button class="btn btn-primary" onclick="openUserDashboard()">📊 My Dashboard</button>
-   <button class="btn btn-secondary" onclick="openModal('profileEdit')">Edit Profile</button>
-   <button class="btn btn-secondary" onclick="openModal('payout')">💰 Payout Request</button>
-   <button class="btn btn-danger" onclick="logout()">Logout</button>
-  </div>
- </div>
-</section>
 
 <!-- USER DASHBOARD -->
 <section id="userDashboard" class="section hidden">
 
  <div class="hero">
+
   <h2>📊 My Dashboard</h2>
+
   <p>
    আপনার Job Application, Accepted Jobs,
    Pending/Rejected Status এবং সম্ভাব্য Earnings
@@ -433,136 +548,378 @@ footer{
   </p>
 
   <div class="actions">
-   <button class="btn btn-primary" onclick="loadMyDashboard()">🔄 Dashboard Refresh</button>
-   <button class="btn btn-secondary" onclick="showPage('home')">🏠 Available Jobs</button>
-   <button class="btn btn-secondary" onclick="showPage('profile')">👤 My Profile</button>
+
+   <button class="btn btn-primary"
+           onclick="loadMyDashboard()">
+    🔄 Dashboard Refresh
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="showPage('home')">
+    🏠 Available Jobs
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="showPage('profile')">
+    👤 My Profile
+   </button>
+
   </div>
+
  </div>
+
 
  <div class="grid">
 
-  <div class="card dashboard-card">
+  <div class="card">
    <div class="muted">Total Applications</div>
    <div id="myTotalApplications" class="stat">0</div>
   </div>
 
-  <div class="card dashboard-card">
+  <div class="card">
    <div class="muted">🟡 Pending</div>
    <div id="myPendingApplications" class="stat">0</div>
   </div>
 
-  <div class="card dashboard-card">
+  <div class="card">
    <div class="muted">🟢 Accepted Jobs</div>
    <div id="myAcceptedJobs" class="stat">0</div>
   </div>
 
-  <div class="card dashboard-card">
+  <div class="card">
    <div class="muted">🔴 Rejected</div>
    <div id="myRejectedApplications" class="stat">0</div>
   </div>
 
  </div>
 
+
  <div class="card" style="margin-top:16px">
 
   <div class="row">
-   <div>
-    <h3>💰 Estimated Earnings</h3>
-    <div class="muted">
-     Accepted Jobs-এর Budget অনুযায়ী সম্ভাব্য হিসাব।
-    </div>
-   </div>
+   <h3>💰 Estimated Earnings</h3>
 
-   <strong id="myEstimatedEarnings" class="stat">0 BDT</strong>
+   <strong id="myEstimatedEarnings"
+           class="stat">
+    0 BDT
+   </strong>
   </div>
 
   <div class="notice warning">
-   ⚠️ এটি Estimated Earnings। Job-এর Budget যদি
-   নির্দিষ্ট সংখ্যায় দেওয়া থাকে, সেই সংখ্যা হিসাব করা হবে।
-   “আলোচনা সাপেক্ষ” হলে সেটি Earnings-এ যোগ হবে না।
+   ⚠️ এটি Estimated Earnings।
+   Job-এর Budget যদি নির্দিষ্ট সংখ্যায় দেওয়া থাকে,
+   সেই সংখ্যা হিসাব করা হবে।
+   “আলোচনা সাপেক্ষ” হলে Earnings-এ যোগ হবে না।
   </div>
 
  </div>
 
- <div id="myAcceptedJobsList" style="margin-top:16px"></div>
- <div id="myApplicationsList" style="margin-top:16px"></div>
+
+ <div id="myAcceptedJobsList"
+      style="margin-top:16px"></div>
+
+ <div id="myApplicationsList"
+      style="margin-top:16px"></div>
 
 </section>
+
+
+<!-- POSTER DASHBOARD -->
+<section id="posterDashboard" class="section hidden">
+
+ <div class="hero">
+
+  <h2>🧑‍💼 Job Poster Dashboard</h2>
+
+  <p>
+   আপনি যেসব Job পোস্ট করেছেন সেগুলো,
+   Applicant এবং Application Status এখান থেকে
+   পরিচালনা করুন।
+  </p>
+
+  <div class="actions">
+
+   <button class="btn btn-primary"
+           onclick="loadPosterDashboard()">
+    🔄 Refresh
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="openCreateJob()">
+    ➕ Post New Job
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="showPage('home')">
+    🏠 Jobs
+   </button>
+
+  </div>
+
+ </div>
+
+
+ <div class="grid">
+
+  <div class="card">
+   <div class="muted">📋 My Posted Jobs</div>
+   <div id="posterJobCount" class="stat">0</div>
+  </div>
+
+  <div class="card">
+   <div class="muted">📨 Total Applicants</div>
+   <div id="posterApplicantCount" class="stat">0</div>
+  </div>
+
+  <div class="card">
+   <div class="muted">🟡 Pending Applications</div>
+   <div id="posterPendingCount" class="stat">0</div>
+  </div>
+
+  <div class="card">
+   <div class="muted">🟢 Accepted Applications</div>
+   <div id="posterAcceptedCount" class="stat">0</div>
+  </div>
+
+ </div>
+
+
+ <div id="myPostedJobsList"
+      style="margin-top:16px"></div>
+
+ <div id="posterApplicantsList"
+      style="margin-top:16px"></div>
+
+</section>
+
+
+<!-- TOURNAMENT -->
+<section id="tournament" class="section hidden">
+
+ <div class="hero">
+
+  <h2>🏆 Tournament</h2>
+
+  <p>
+   Tournament system প্রস্তুত করা হচ্ছে।
+  </p>
+
+  <div class="notice info">
+   🚀 শিগগিরই Skill-based Tournament,
+   Leaderboard এবং Rewards যুক্ত হবে।
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- REWARDS -->
+<section id="rewards" class="section hidden">
+
+ <div class="hero">
+
+  <h2>🎁 Rewards</h2>
+
+  <p>
+   Game এবং Skill Activity থেকে অর্জিত
+   Points ভবিষ্যতের Reward System-এ ব্যবহার করা যাবে।
+  </p>
+
+  <div class="card">
+   <div class="muted">Your Points</div>
+   <div id="rewardPoints" class="stat">1000</div>
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="section hidden">
+
+ <div class="hero">
+
+  <h2>👤 My Profile</h2>
+
+  <div class="profile-box">
+
+   <div class="avatar">👤</div>
+
+   <div>
+    <strong id="profileName">Guest User</strong>
+    <div id="profileEmail" class="muted">
+     Not logged in
+    </div>
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <div class="card" style="margin-top:15px">
+
+  <h3>✏️ Profile Settings</h3>
+
+  <div class="form-group">
+   <label>আপনার নাম</label>
+   <input id="profileNameInput"
+          placeholder="আপনার নাম">
+  </div>
+
+  <div class="form-group">
+   <label>আপনার Skill</label>
+
+   <select id="profileSkill">
+    <option value="">Skill নির্বাচন করুন</option>
+    <option value="Graphic Design">Graphic Design</option>
+    <option value="Video Editing">Video Editing</option>
+    <option value="Data Entry">Data Entry</option>
+    <option value="Digital Marketing">Digital Marketing</option>
+    <option value="Web Development">Web Development</option>
+   </select>
+
+  </div>
+
+  <div class="actions">
+
+   <button class="btn btn-primary"
+           onclick="saveProfile()">
+    💾 Save Profile
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="openAuth('login')">
+    🔐 Login
+   </button>
+
+   <button class="btn btn-secondary"
+           onclick="openAuth('signup')">
+    📝 Sign Up
+   </button>
+
+   <button id="logoutBtn"
+           class="btn btn-danger hidden"
+           onclick="logout()">
+    🚪 Logout
+   </button>
+
+  </div>
+
+ </div>
+
+
+ <div class="grid">
+
+  <div class="card">
+   <div class="muted">💰 Points</div>
+   <div id="profilePoints" class="stat">1000</div>
+  </div>
+
+  <div class="card">
+   <div class="muted">🎮 Games Played</div>
+   <div id="profileGames" class="stat">0</div>
+  </div>
+
+ </div>
+
+</section>
+
 
 <!-- ADMIN -->
 <section id="admin" class="section hidden">
 
  <div class="hero">
+
   <h2>⚙️ Admin Dashboard</h2>
-  <p class="muted">
-   PLAYZONE-এর Users, Jobs, Applications, Sponsors এবং Payout management।
+
+  <p>
+   PLAYZONE Administration
   </p>
 
-  <div class="actions">
-   <button class="btn btn-primary" onclick="loadAdminDashboard()">🔄 Refresh Dashboard</button>
-   <button class="btn btn-secondary" onclick="adminLoadApplications()">📨 Applications</button>
-   <button class="btn btn-secondary" onclick="adminLoadPayouts()">💰 Payouts</button>
-   <button class="btn btn-secondary" onclick="adminLoadSponsors()">🤝 Sponsors</button>
-  </div>
+  <button class="btn btn-primary"
+          onclick="loadAdminDashboard()">
+   🔄 Refresh Admin
+  </button>
+
  </div>
 
- <div id="adminStats" class="grid3">
 
-  <div class="admin-stat">
+ <div class="grid">
+
+  <div class="card">
    <div class="muted">Users</div>
    <div id="adminUsers" class="stat">0</div>
   </div>
 
-  <div class="admin-stat">
+  <div class="card">
    <div class="muted">Jobs</div>
    <div id="adminJobs" class="stat">0</div>
   </div>
 
-  <div class="admin-stat">
+  <div class="card">
    <div class="muted">Applications</div>
    <div id="adminApplications" class="stat">0</div>
   </div>
 
-  <div class="admin-stat">
-   <div class="muted">Sponsors</div>
-   <div id="adminSponsors" class="stat">0</div>
-  </div>
-
-  <div class="admin-stat">
-   <div class="muted">Payouts</div>
-   <div id="adminPayouts" class="stat">0</div>
-  </div>
-
-  <div class="admin-stat">
-   <div class="muted">Pending Payouts</div>
-   <div id="adminPendingPayouts" class="stat">0</div>
-  </div>
-
-  <div class="admin-stat">
-   <div class="muted">Open Jobs</div>
-   <div id="adminOpenJobs" class="stat">0</div>
-  </div>
-
-  <div class="admin-stat">
+  <div class="card">
    <div class="muted">Pending Applications</div>
    <div id="adminPendingApplications" class="stat">0</div>
   </div>
 
-  <div class="admin-stat">
-   <div class="muted">Pending Sponsors</div>
-   <div id="adminPendingSponsors" class="stat">0</div>
+  <div class="card">
+   <div class="muted">Sponsors</div>
+   <div id="adminSponsors" class="stat">0</div>
   </div>
 
-  <div class="admin-stat">
+  <div class="card">
+   <div class="muted">Payouts</div>
+   <div id="adminPayouts" class="stat">0</div>
+  </div>
+
+  <div class="card">
+   <div class="muted">Pending Payouts</div>
+   <div id="adminPendingPayouts" class="stat">0</div>
+  </div>
+
+  <div class="card">
    <div class="muted">Total Points</div>
    <div id="adminTotalPoints" class="stat">0</div>
   </div>
 
  </div>
 
- <div id="adminContent" style="margin-top:16px"></div>
+
+ <div class="card" style="margin-top:16px">
+
+  <h3>📨 Applications Management</h3>
+
+  <div id="adminApplicationList"></div>
+
+ </div>
+
+
+ <div class="card" style="margin-top:16px">
+
+  <h3>💸 Payout Management</h3>
+
+  <div id="adminPayoutList"></div>
+
+ </div>
+
+
+ <div class="card" style="margin-top:16px">
+
+  <h3>🤝 Sponsor Requests</h3>
+
+  <div id="adminSponsorList"></div>
+
+ </div>
 
 </section>
+
 
 <footer>
  PLAYZONE © 2026 — Skill & Opportunity Platform
@@ -570,26 +927,210 @@ footer{
 
 </div>
 
-<!-- MODAL -->
-<div id="modal" class="modal hidden"
- onclick="if(event.target===this)closeModal()">
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal">
 
  <div class="modal-box">
 
   <div class="modal-head">
-   <h2 id="modalTitle">PLAYZONE</h2>
-   <button class="close" onclick="closeModal()">×</button>
+
+   <h2 id="authTitle">Login</h2>
+
+   <button class="close"
+           onclick="closeModal('authModal')">
+    ×
+   </button>
+
   </div>
 
-  <div id="modalBody"></div>
+  <div id="signupNameGroup"
+       class="form-group hidden">
+
+   <label>আপনার নাম</label>
+
+   <input id="authName"
+          placeholder="নাম">
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Email</label>
+
+   <input id="authEmail"
+          type="email"
+          placeholder="আপনার Email">
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Password</label>
+
+   <input id="authPassword"
+          type="password"
+          placeholder="Password">
+
+  </div>
+
+
+  <button id="authSubmitBtn"
+          class="btn btn-primary"
+          style="width:100%"
+          onclick="submitAuth()">
+   Login
+  </button>
+
+
+  <div class="notice info">
+   নতুন account তৈরি করলে Email confirmation
+   প্রয়োজন হতে পারে।
+  </div>
 
  </div>
+
 </div>
 
+
+<!-- CREATE JOB MODAL -->
+<div id="jobModal" class="modal">
+
+ <div class="modal-box">
+
+  <div class="modal-head">
+
+   <h2>➕ Post a Job</h2>
+
+   <button class="close"
+           onclick="closeModal('jobModal')">
+    ×
+   </button>
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Job Title</label>
+
+   <input id="jobTitle"
+          placeholder="যেমন: Facebook পোস্ট ডিজাইন">
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Skill</label>
+
+   <select id="jobSkill">
+
+    <option value="">Skill নির্বাচন করুন</option>
+
+    <option value="Graphic Design">
+     Graphic Design
+    </option>
+
+    <option value="Video Editing">
+     Video Editing
+    </option>
+
+    <option value="Data Entry">
+     Data Entry
+    </option>
+
+    <option value="Digital Marketing">
+     Digital Marketing
+    </option>
+
+    <option value="Web Development">
+     Web Development
+    </option>
+
+   </select>
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Description</label>
+
+   <textarea id="jobDescription"
+             placeholder="কাজের বিস্তারিত লিখুন"></textarea>
+
+  </div>
+
+
+  <div class="form-group">
+
+   <label>Budget</label>
+
+   <input id="jobBudget"
+          placeholder="যেমন: 500 BDT অথবা আলোচনা সাপেক্ষ">
+
+  </div>
+
+
+  <button class="btn btn-primary"
+          style="width:100%"
+          onclick="createJob()">
+   🚀 Publish Job
+  </button>
+
+ </div>
+
+</div>
+
+
+<!-- APPLICATION MODAL -->
+<div id="applicationModal" class="modal">
+
+ <div class="modal-box">
+
+  <div class="modal-head">
+
+   <h2>📨 Apply for Job</h2>
+
+   <button class="close"
+           onclick="closeModal('applicationModal')">
+    ×
+   </button>
+
+  </div>
+
+  <div id="applicationJobInfo"
+       class="notice info">
+  </div>
+
+  <div class="form-group">
+
+   <label>আপনার Message</label>
+
+   <textarea id="applicationMessage"
+             placeholder="কেন আপনি এই কাজের জন্য উপযুক্ত তা লিখুন"></textarea>
+
+  </div>
+
+  <button class="btn btn-primary"
+          style="width:100%"
+          onclick="submitApplication()">
+   📤 Submit Application
+  </button>
+
+ </div>
+
+</div>
+
+
 <script>
-/* =========================
-   SUPABASE CONFIG
-========================= */
+
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
 'https://cavrhkprzbbtimlixbqp.supabase.co';
@@ -604,588 +1145,672 @@ window.supabase.createClient(
 );
 
 
-/* =========================
+/* =========================================================
    LOCAL STATE
-========================= */
+========================================================= */
 
-let currentUser=null;
+let currentUser = null;
 
-let points=
- Number(localStorage.getItem('pz_points')||1000);
+let points =
+ Number(localStorage.getItem('pz_points') || 1000);
 
-let gamesPlayed=
- Number(localStorage.getItem('pz_games_played')||0);
+let gamesPlayed =
+ Number(localStorage.getItem('pz_games_played') || 0);
 
-let username=
- localStorage.getItem('pz_username')||'Guest';
+let username =
+ localStorage.getItem('pz_username') || 'Guest';
 
-let jobs=
- JSON.parse(localStorage.getItem('pz_jobs')||'[]');
+let skill =
+ localStorage.getItem('pz_skill') || '';
 
-let skill=
- localStorage.getItem('pz_skill')||'';
+let jobs = [];
 
-let myApplications=[];
+let myApplications = [];
+
+let selectedJobId = null;
 
 
-/* =========================
+/* =========================================================
    DEFAULT JOBS
-========================= */
+========================================================= */
 
-const defaultJobs=[
+const defaultJobs = [
+
  {
-  id:'default-1',
+  id:'local-1',
   title:'Facebook পোস্ট ডিজাইন',
   skill:'Graphic Design',
-  description:'একটি সুন্দর Facebook পোস্ট ডিজাইন করতে হবে।',
+  description:'Facebook-এর জন্য আকর্ষণীয় পোস্ট ডিজাইন তৈরি করতে হবে।',
   budget:'আলোচনা সাপেক্ষ',
-  status:'open'
+  status:'open',
+  local:true
  },
+
  {
-  id:'default-2',
+  id:'local-2',
   title:'Short Video Editing',
   skill:'Video Editing',
-  description:'Social Media-এর জন্য Short Video Edit করতে হবে।',
+  description:'Short/Reels ভিডিও এডিট করার জন্য দক্ষ ব্যক্তি প্রয়োজন।',
   budget:'আলোচনা সাপেক্ষ',
-  status:'open'
+  status:'open',
+  local:true
  },
+
  {
-  id:'default-3',
+  id:'local-3',
   title:'Data Entry Assistant',
   skill:'Data Entry',
   description:'সহজ Data Entry কাজের জন্য একজন দক্ষ ব্যক্তি প্রয়োজন।',
   budget:'আলোচনা সাপেক্ষ',
-  status:'open'
+  status:'open',
+  local:true
  },
+
  {
-  id:'default-4',
+  id:'local-4',
   title:'Social Media Promotion',
   skill:'Digital Marketing',
-  description:'Facebook এবং অন্যান্য Social Media-তে Promotion করতে হবে।',
+  description:'Social Media Promotion-এর জন্য দক্ষ ব্যক্তি প্রয়োজন।',
   budget:'আলোচনা সাপেক্ষ',
-  status:'open'
+  status:'open',
+  local:true
  }
+
 ];
 
 
-/* =========================
+/* =========================================================
    HELPERS
-========================= */
+========================================================= */
 
 function esc(value){
- return String(value??'')
+
+ return String(value ?? '')
   .replace(/&/g,'&amp;')
   .replace(/</g,'&lt;')
   .replace(/>/g,'&gt;')
   .replace(/"/g,'&quot;')
   .replace(/'/g,'&#039;');
+
 }
 
-function saveLocal(){
- localStorage.setItem('pz_points',String(points));
- localStorage.setItem('pz_games_played',String(gamesPlayed));
- localStorage.setItem('pz_username',username);
- localStorage.setItem('pz_jobs',JSON.stringify(jobs));
- localStorage.setItem('pz_skill',skill);
+
+function formatDate(date){
+
+ if(!date) return '';
+
+ try{
+
+  return new Date(date).toLocaleString(
+   'bn-BD',
+   {
+    year:'numeric',
+    month:'short',
+    day:'numeric',
+    hour:'numeric',
+    minute:'2-digit'
+   }
+  );
+
+ }catch(e){
+
+  return date;
+
+ }
+
 }
 
-function formatStatus(status){
- const s=String(status||'pending').toLowerCase();
 
- if(s==='accepted')
-  return '<span class="status accepted">ACCEPTED</span>';
+function statusText(status){
 
- if(s==='rejected')
-  return '<span class="status rejected">REJECTED</span>';
+ const map={
 
- if(s==='assigned')
-  return '<span class="status assigned">ASSIGNED</span>';
+  pending:'🟡 Pending',
 
- if(s==='completed')
-  return '<span class="status completed">COMPLETED</span>';
+  accepted:'🟢 Accepted',
 
- if(s==='withdrawn')
-  return '<span class="status rejected">WITHDRAWN</span>';
+  rejected:'🔴 Rejected',
 
- return '<span class="status pending">PENDING</span>';
+  withdrawn:'⚪ Withdrawn',
+
+  open:'🟢 Open',
+
+  assigned:'🔵 Assigned',
+
+  completed:'✅ Completed',
+
+  cancelled:'🔴 Cancelled'
+
+ };
+
+ return map[status] || status || 'Unknown';
+
 }
 
-function getBudgetNumber(value){
- const text=String(value||'')
+
+function statusClass(status){
+
+ return 'status status-' +
+  String(status || 'pending').toLowerCase();
+
+}
+
+
+function parseBudget(value){
+
+ if(!value) return 0;
+
+ const text=String(value)
   .replace(/,/g,'');
 
- const match=text.match(/\d+(?:\.\d+)?/);
+ const match=text.match(/(\d+(?:\.\d+)?)/);
 
- return match ? Number(match[0]) : 0;
+ if(!match) return 0;
+
+ return Number(match[1]) || 0;
+
 }
 
 
-/* =========================
-   RENDER
-========================= */
+function saveLocal(){
 
-function render(){
+ localStorage.setItem(
+  'pz_points',
+  String(points)
+ );
 
- const hp=document.getElementById('homePoints');
- const rp=document.getElementById('rewardPoints');
- const pp=document.getElementById('profilePoints');
- const hg=document.getElementById('homeGames');
- const pg=document.getElementById('profileGames');
- const pn=document.getElementById('profileName');
+ localStorage.setItem(
+  'pz_games_played',
+  String(gamesPlayed)
+ );
 
- if(hp)hp.textContent=points.toLocaleString();
- if(rp)rp.textContent=points.toLocaleString();
- if(pp)pp.textContent=points.toLocaleString();
- if(hg)hg.textContent=gamesPlayed;
- if(pg)pg.textContent=gamesPlayed;
- if(pn)pn.textContent=username||'Guest';
+ localStorage.setItem(
+  'pz_username',
+  username
+ );
 
- renderJobs();
+ localStorage.setItem(
+  'pz_skill',
+  skill
+ );
+
 }
 
 
-/* =========================
+function updateStats(){
+
+ document.getElementById('homePoints').textContent =
+  points.toLocaleString();
+
+ document.getElementById('homeGames').textContent =
+  gamesPlayed;
+
+ document.getElementById('rewardPoints').textContent =
+  points.toLocaleString();
+
+ document.getElementById('profilePoints').textContent =
+  points.toLocaleString();
+
+ document.getElementById('profileGames').textContent =
+  gamesPlayed;
+
+}
+
+
+/* =========================================================
    PAGE NAVIGATION
-========================= */
+========================================================= */
 
-async function showPage(id,btn){
+function showPage(page,button){
 
- if(id==='admin'){
+ if(page==='admin'){
 
-  const ok=await isCurrentUserAdmin();
+  isCurrentUserAdmin().then(function(ok){
 
-  if(!ok){
-   alert('Admin access denied.');
-   showPage('home');
-   return;
-  }
+   if(!ok){
+
+    alert('Admin access denied.');
+
+    return;
+
+   }
+
+   showPageInternal(page,button);
+
+  });
+
+  return;
+
  }
+
+ showPageInternal(page,button);
+
+}
+
+
+function showPageInternal(page,button){
 
  document.querySelectorAll('.section')
-  .forEach(s=>s.classList.add('hidden'));
+  .forEach(function(section){
 
- const target=document.getElementById(id);
+   section.classList.add('hidden');
 
- if(target)
+  });
+
+
+ const target=document.getElementById(page);
+
+ if(target){
+
   target.classList.remove('hidden');
 
+ }
+
+
  document.querySelectorAll('nav button')
-  .forEach(b=>b.classList.remove('active'));
+  .forEach(function(btn){
 
- if(btn)
-  btn.classList.add('active');
+   btn.classList.remove('active');
 
- if(id==='userDashboard')
+  });
+
+
+ if(button){
+
+  button.classList.add('active');
+
+ }
+
+
+ if(page==='home'){
+
+  loadJobs();
+
+ }
+
+ if(page==='profile'){
+
+  updateProfileUI();
+
+ }
+
+ if(page==='userDashboard'){
+
   loadMyDashboard();
 
- if(id==='admin')
+ }
+
+ if(page==='posterDashboard'){
+
+  loadPosterDashboard();
+
+ }
+
+ if(page==='admin'){
+
   loadAdminDashboard();
 
- window.scrollTo({top:0,behavior:'smooth'});
+ }
+
+ window.scrollTo({
+  top:0,
+  behavior:'smooth'
+ });
+
 }
 
 
-/* =========================
-   MODAL
-========================= */
-
-function openModal(type,data={}){
-
- const modal=document.getElementById('modal');
- const title=document.getElementById('modalTitle');
- const body=document.getElementById('modalBody');
-
- modal.classList.remove('hidden');
-
- if(type==='login'){
-
-  title.textContent='🔐 Login';
-
-  body.innerHTML=`
-   <label>Email</label>
-   <input id="loginEmail" type="email" placeholder="আপনার Email">
-
-   <label>Password</label>
-   <input id="loginPassword" type="password" placeholder="Password">
-
-   <div class="actions">
-    <button class="btn btn-primary" onclick="signIn()">Login</button>
-    <button class="btn btn-secondary" onclick="openModal('signup')">
-     Sign Up
-    </button>
-   </div>
-  `;
-
-  return;
- }
-
- if(type==='signup'){
-
-  title.textContent='📝 Create Account';
-
-  body.innerHTML=`
-   <label>Name</label>
-   <input id="signupName" placeholder="আপনার নাম">
-
-   <label>Email</label>
-   <input id="signupEmail" type="email" placeholder="Email">
-
-   <label>Password</label>
-   <input id="signupPassword" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
-
-   <div class="actions">
-    <button class="btn btn-primary" onclick="signUp()">Create Account</button>
-    <button class="btn btn-secondary" onclick="openModal('login')">
-     Login
-    </button>
-   </div>
-
-   <div class="notice info">
-    ℹ️ Email confirmation চালু থাকলে Account তৈরি করার পর
-    আপনার Email verify করতে হবে।
-   </div>
-  `;
-
-  return;
- }
-
- if(type==='profileEdit'){
-
-  title.textContent='✏️ Edit Profile';
-
-  body.innerHTML=`
-   <label>Username</label>
-   <input id="editUsername" value="${esc(username)}">
-
-   <label>Skill</label>
-   <select id="editSkill">
-    <option value="">Skill নির্বাচন করুন</option>
-    <option value="Graphic Design">Graphic Design</option>
-    <option value="Video Editing">Video Editing</option>
-    <option value="Data Entry">Data Entry</option>
-    <option value="Digital Marketing">Digital Marketing</option>
-   </select>
-
-   <div class="actions">
-    <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
-   </div>
-  `;
-
-  setTimeout(()=>{
-   const s=document.getElementById('editSkill');
-   if(s)s.value=skill;
-  },0);
-
-  return;
- }
-
- if(type==='payout'){
-
-  title.textContent='💰 Payout Request';
-
-  if(!currentUser){
-
-   body.innerHTML=`
-    <div class="notice warning">
-     ⚠️ Payout Request করতে আগে Login করুন।
-    </div>
-
-    <button class="btn btn-primary" onclick="openModal('login')">
-     Login
-    </button>
-   `;
-
-   return;
-  }
-
-  body.innerHTML=`
-   <label>Amount (BDT)</label>
-   <input id="payoutAmount" type="number" min="1" placeholder="যেমন 500">
-
-   <label>Payment Method</label>
-   <select id="payoutMethod">
-    <option value="bKash">bKash</option>
-    <option value="Nagad">Nagad</option>
-    <option value="Rocket">Rocket</option>
-    <option value="Bank">Bank</option>
-   </select>
-
-   <label>Account Name</label>
-   <input id="payoutAccountName" placeholder="Account Name">
-
-   <label>Account Number</label>
-   <input id="payoutAccountNumber" placeholder="Mobile/Bank Account">
-
-   <div class="notice warning">
-    ⚠️ বর্তমানে Payout manual review-এর মাধ্যমে করা হবে।
-   </div>
-
-   <div class="actions">
-    <button class="btn btn-primary" onclick="submitPayout()">
-     Submit Request
-    </button>
-   </div>
-  `;
-
-  return;
- }
-
- if(type==='createJob'){
-
-  title.textContent='➕ Post a Job';
-
-  if(!currentUser){
-
-   body.innerHTML=`
-    <div class="notice warning">
-     ⚠️ Job Post করতে আগে Login করুন।
-    </div>
-
-    <button class="btn btn-primary" onclick="openModal('login')">
-     Login
-    </button>
-   `;
-
-   return;
-  }
-
-  body.innerHTML=`
-   <label>Job Title</label>
-   <input id="jobTitle" placeholder="যেমন Facebook পোস্ট ডিজাইন">
-
-   <label>Skill</label>
-   <select id="jobSkill">
-    <option value="Graphic Design">Graphic Design</option>
-    <option value="Video Editing">Video Editing</option>
-    <option value="Data Entry">Data Entry</option>
-    <option value="Digital Marketing">Digital Marketing</option>
-   </select>
-
-   <label>Description</label>
-   <textarea id="jobDescription"
-    placeholder="কাজের বিস্তারিত লিখুন"></textarea>
-
-   <label>Budget</label>
-   <input id="jobBudget"
-    placeholder="যেমন 500 BDT অথবা আলোচনা সাপেক্ষ">
-
-   <div class="actions">
-    <button class="btn btn-primary" onclick="createJob()">
-     Publish Job
-    </button>
-   </div>
-  `;
-
-  return;
- }
-
- if(type==='apply'){
-
-  title.textContent='📝 Apply for Job';
-
-  if(!currentUser){
-
-   body.innerHTML=`
-    <div class="notice warning">
-     ⚠️ Job Apply করতে আগে Login করুন।
-    </div>
-
-    <button class="btn btn-primary" onclick="openModal('login')">
-     Login
-    </button>
-   `;
-
-   return;
-  }
-
-  title.textContent='📝 Apply — '+esc(data.title||'Job');
-
-  body.innerHTML=`
-   <div class="job-meta">
-    <span class="badge">Skill: ${esc(data.skill||'')}</span>
-    <span class="badge">Budget: ${esc(data.budget||'আলোচনা সাপেক্ষ')}</span>
-   </div>
-
-   <p class="muted">${esc(data.description||'')}</p>
-
-   <label>Application Message</label>
-   <textarea id="applicationMessage"
-    placeholder="আপনি কেন এই কাজের জন্য উপযুক্ত তা লিখুন"></textarea>
-
-   <div class="actions">
-    <button class="btn btn-primary"
-     onclick="applyJob('${esc(data.id)}')">
-     🚀 Submit Application
-    </button>
-   </div>
-
-   <div class="notice info">
-    ℹ️ Application Submit করার পর Job Poster আপনার Application
-    review করে Accept বা Reject করতে পারবেন।
-   </div>
-  `;
-
-  return;
- }
-
- if(type==='game'){
-
-  title.textContent=data.title||'Game';
-
-  body.innerHTML=data.html||'';
-
-  if(data.init)
-   setTimeout(data.init,50);
-
-  return;
- }
-
- title.textContent='PLAYZONE';
- body.innerHTML='';
-}
-
-function closeModal(){
- document.getElementById('modal').classList.add('hidden');
- document.getElementById('modalBody').innerHTML='';
-}
-
-
-/* =========================
-   AUTH
-========================= */
-
-async function signUp(){
-
- const name=
-  document.getElementById('signupName')?.value.trim();
-
- const email=
-  document.getElementById('signupEmail')?.value.trim();
-
- const password=
-  document.getElementById('signupPassword')?.value;
-
- if(!name||!email||!password){
-  alert('সব তথ্য পূরণ করুন।');
-  return;
- }
-
- if(password.length<6){
-  alert('Password কমপক্ষে ৬ অক্ষরের হতে হবে।');
-  return;
- }
-
- const {data,error}=
-  await supabaseClient.auth.signUp({
-   email,
-   password,
-   options:{
-    data:{name:name}
-   }
-  });
-
- if(error){
-  alert(error.message);
-  return;
- }
-
- username=name;
- saveLocal();
-
- if(data.session){
-  currentUser=data.session.user;
-
-  await saveProfile();
-
-  closeModal();
-  render();
-
-  alert('Account সফলভাবে তৈরি হয়েছে।');
- }else{
-  closeModal();
-
-  alert(
-   'Account তৈরি হয়েছে। আপনার Email verify করুন, তারপর Login করুন।'
-  );
- }
-}
-
-
-async function signIn(){
-
- const email=
-  document.getElementById('loginEmail')?.value.trim();
-
- const password=
-  document.getElementById('loginPassword')?.value;
-
- if(!email||!password){
-  alert('Email এবং Password দিন।');
-  return;
- }
-
- const {data,error}=
-  await supabaseClient.auth.signInWithPassword({
-   email,
-   password
-  });
-
- if(error){
-  alert(error.message);
-  return;
- }
-
- currentUser=data.user;
-
- await loadProfileFromSupabase();
- await updateUserUI();
-
- closeModal();
- render();
-
- alert('Login successful.');
-}
-
-
-async function logout(){
-
- await supabaseClient.auth.signOut();
-
- currentUser=null;
- myApplications=[];
-
- await updateUserUI();
-
- render();
+function scrollToJobs(){
 
  showPage('home');
 
- alert('Logout successful.');
+ setTimeout(function(){
+
+  document.getElementById('jobsSection')
+   .scrollIntoView({
+    behavior:'smooth'
+   });
+
+ },100);
+
 }
 
 
-async function loadSupabaseUser(){
+/* =========================================================
+   MODALS
+========================================================= */
 
- const {data}=await supabaseClient.auth.getSession();
+function openModal(id){
 
- currentUser=data.session?.user||null;
+ document.getElementById(id)
+  .classList.add('show');
 
- if(currentUser)
-  await loadProfileFromSupabase();
-
- await updateUserUI();
-
- render();
 }
 
 
-/* =========================
+function closeModal(id){
+
+ document.getElementById(id)
+  .classList.remove('show');
+
+}
+
+
+function openCreateJob(){
+
+ if(!currentUser){
+
+  openAuth('login');
+
+  alert('Job পোস্ট করতে আগে Login করুন।');
+
+  return;
+
+ }
+
+ document.getElementById('jobTitle').value='';
+ document.getElementById('jobSkill').value='';
+ document.getElementById('jobDescription').value='';
+ document.getElementById('jobBudget').value='';
+
+ openModal('jobModal');
+
+}
+
+
+function openAuth(type){
+
+ document.getElementById('authName').value='';
+ document.getElementById('authEmail').value='';
+ document.getElementById('authPassword').value='';
+
+ if(type==='signup'){
+
+  document.getElementById('authTitle')
+   .textContent='📝 Create Account';
+
+  document.getElementById('signupNameGroup')
+   .classList.remove('hidden');
+
+  document.getElementById('authSubmitBtn')
+   .textContent='Create Account';
+
+  document.getElementById('authSubmitBtn')
+   .dataset.mode='signup';
+
+ }else{
+
+  document.getElementById('authTitle')
+   .textContent='🔐 Login';
+
+  document.getElementById('signupNameGroup')
+   .classList.add('hidden');
+
+  document.getElementById('authSubmitBtn')
+   .textContent='Login';
+
+  document.getElementById('authSubmitBtn')
+   .dataset.mode='login';
+
+ }
+
+ openModal('authModal');
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function submitAuth(){
+
+ const mode=
+  document.getElementById('authSubmitBtn')
+   .dataset.mode || 'login';
+
+ const email=
+  document.getElementById('authEmail')
+   .value.trim();
+
+ const password=
+  document.getElementById('authPassword')
+   .value;
+
+ if(!email || !password){
+
+  alert('Email এবং Password দিন।');
+
+  return;
+
+ }
+
+
+ if(mode==='signup'){
+
+  const name=
+   document.getElementById('authName')
+    .value.trim();
+
+  if(!name){
+
+   alert('আপনার নাম দিন।');
+
+   return;
+
+  }
+
+
+  const {data,error}=
+   await supabaseClient.auth.signUp({
+
+    email:email,
+
+    password:password,
+
+    options:{
+     data:{
+      name:name
+     }
+    }
+
+   });
+
+
+  if(error){
+
+   alert(error.message);
+
+   return;
+
+  }
+
+
+  if(data.user){
+
+   username=name;
+
+   saveLocal();
+
+   alert(
+    'Account তৈরি হয়েছে। Email confirmation প্রয়োজন হতে পারে।'
+   );
+
+  }
+
+ }else{
+
+
+  const {data,error}=
+   await supabaseClient.auth.signInWithPassword({
+
+    email:email,
+
+    password:password
+
+   });
+
+
+  if(error){
+
+   alert(error.message);
+
+   return;
+
+  }
+
+
+  currentUser=data.user;
+
+  username=
+   data.user.user_metadata?.name ||
+   data.user.email?.split('@')[0] ||
+   'User';
+
+  saveLocal();
+
+  await loadProfile();
+
+  alert('Login সফল হয়েছে।');
+
+ }
+
+
+ closeModal('authModal');
+
+ updateAuthUI();
+
+ updateProfileUI();
+
+ loadJobs();
+
+}
+
+
+/* =========================================================
+   AUTH SESSION
+========================================================= */
+
+async function initAuth(){
+
+ const {data}=
+  await supabaseClient.auth.getSession();
+
+ currentUser=
+  data?.session?.user || null;
+
+
+ if(currentUser){
+
+  username=
+   currentUser.user_metadata?.name ||
+   currentUser.email?.split('@')[0] ||
+   username;
+
+  await loadProfile();
+
+ }
+
+
+ updateAuthUI();
+
+ updateProfileUI();
+
+ loadJobs();
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+ async function(event,session){
+
+  currentUser=
+   session?.user || null;
+
+  if(currentUser){
+
+   username=
+    currentUser.user_metadata?.name ||
+    currentUser.email?.split('@')[0] ||
+    username;
+
+   saveLocal();
+
+   setTimeout(function(){
+
+    loadProfile();
+    updateAuthUI();
+    updateProfileUI();
+
+   },0);
+
+  }else{
+
+   updateAuthUI();
+   updateProfileUI();
+
+  }
+
+ }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+ const {error}=
+  await supabaseClient.auth.signOut();
+
+ if(error){
+
+  alert(error.message);
+
+  return;
+
+ }
+
+ currentUser=null;
+
+ alert('Logout হয়েছে।');
+
+ updateAuthUI();
+
+ updateProfileUI();
+
+ showPage('home');
+
+}
+
+
+function updateAuthUI(){
+
+ const logoutBtn=
+  document.getElementById('logoutBtn');
+
+ if(currentUser){
+
+  logoutBtn.classList.remove('hidden');
+
+ }else{
+
+  logoutBtn.classList.add('hidden');
+
+ }
+
+}
+
+
+/* =========================================================
    PROFILE
-========================= */
+========================================================= */
 
-async function loadProfileFromSupabase(){
+async function loadProfile(){
 
- if(!currentUser)return;
+ if(!currentUser) return;
+
 
  try{
 
@@ -1196,27 +1821,65 @@ async function loadProfileFromSupabase(){
     .eq('id',currentUser.id)
     .maybeSingle();
 
-  if(error){
-   console.error(error);
-   return;
-  }
 
-  if(data){
+  if(!error && data){
 
    if(data.name){
+
     username=data.name;
+
    }
 
-   if(typeof data.points==='number'){
-    points=data.points;
+   if(data.points !== null &&
+      data.points !== undefined){
+
+    points=Number(data.points);
+
    }
 
-   saveLocal();
   }
 
- }catch(error){
-  console.error(error);
- }
+ }catch(e){}
+
+
+ saveLocal();
+
+ updateStats();
+
+ updateProfileUI();
+
+}
+
+
+function updateProfileUI(){
+
+ document.getElementById('profileName')
+  .textContent=
+   currentUser
+    ? username
+    : 'Guest User';
+
+
+ document.getElementById('profileEmail')
+  .textContent=
+   currentUser
+    ? currentUser.email
+    : 'Not logged in';
+
+
+ document.getElementById('profileNameInput')
+  .value=
+   username==='Guest'
+    ? ''
+    : username;
+
+
+ document.getElementById('profileSkill')
+  .value=skill || '';
+
+
+ updateStats();
+
 }
 
 
@@ -1224,109 +1887,82 @@ async function saveProfile(){
 
  if(!currentUser){
 
-  alert('Profile save করতে Login করুন.');
+  openAuth('login');
+
   return;
+
  }
 
- const newName=
-  document.getElementById('editUsername')?.value.trim();
 
- const newSkill=
-  document.getElementById('editSkill')?.value||skill;
+ const name=
+  document.getElementById('profileNameInput')
+   .value.trim();
 
- if(newName)
-  username=newName;
+ const selectedSkill=
+  document.getElementById('profileSkill')
+   .value;
 
- skill=newSkill;
+
+ if(!name){
+
+  alert('নাম দিন।');
+
+  return;
+
+ }
+
+
+ username=name;
+
+ skill=selectedSkill;
+
+ saveLocal();
+
 
  const {error}=
   await supabaseClient
    .from('profiles')
    .upsert({
+
     id:currentUser.id,
-    name:username,
+
+    name:name,
+
     points:points
+
    });
 
+
  if(error){
-  alert('Profile save failed: '+error.message);
-  return;
+
+  alert(
+   'Profile localভাবে saved হয়েছে, তবে Supabase save হয়নি: ' +
+   error.message
+  );
+
+ }else{
+
+  alert('Profile successfully saved.');
+
  }
 
- saveLocal();
- closeModal();
- render();
+ updateProfileUI();
 
- alert('Profile updated successfully.');
 }
 
 
-/* =========================
+/* =========================================================
    JOBS
-========================= */
+========================================================= */
 
-function renderJobs(){
+async function loadJobs(){
 
- const box=document.getElementById('jobsList');
+ const list=
+  document.getElementById('jobsList');
 
- if(!box)return;
+ list.innerHTML=
+  '<div class="card">⏳ Jobs loading...</div>';
 
- if(!jobs.length){
-  box.innerHTML=`
-   <div class="card empty">
-    এখনো কোনো Job পাওয়া যায়নি।
-   </div>
-  `;
-  return;
- }
-
- box.innerHTML=jobs.map(job=>`
-
-  <div class="job">
-
-   <div class="row">
-    <div>
-     <h3>${esc(job.title)}</h3>
-     <div class="job-meta">
-      <span class="badge">${esc(job.skill||'General')}</span>
-      <span class="badge">💰 ${esc(job.budget||'আলোচনা সাপেক্ষ')}</span>
-     </div>
-    </div>
-
-    ${job.status
-     ? `<span class="status ${esc(job.status)}">${esc(job.status).toUpperCase()}</span>`
-     : ''}
-   </div>
-
-   <p class="muted">
-    ${esc(job.description||'কোনো description নেই।')}
-   </p>
-
-   <div class="actions">
-
-    ${
-     job.id && !String(job.id).startsWith('default-')
-     ?
-     `<button class="btn btn-primary"
-       onclick='openApplyJob(${JSON.stringify(job).replace(/</g,"\\u003c")})'>
-       📝 Apply Now
-      </button>`
-     :
-     `<button class="btn btn-primary"
-       onclick='openApplyJob(${JSON.stringify(job).replace(/</g,"\\u003c")})'>
-       📝 Apply Now
-      </button>`
-    }
-
-   </div>
-
-  </div>
-
- `).join('');
-}
-
-
-async function loadJobsFromSupabase(showMessage=false){
 
  try{
 
@@ -1335,602 +1971,1217 @@ async function loadJobsFromSupabase(showMessage=false){
     .from('jobs')
     .select('*')
     .eq('status','open')
-    .order('created_at',{ascending:false});
+    .order('created_at',{
+     ascending:false
+    });
+
 
   if(!error && data && data.length){
 
    jobs=data;
 
-   saveLocal();
-   render();
+  }else{
 
-   if(showMessage)
-    alert(data.length+'টি Open Job পাওয়া গেছে।');
+   jobs=defaultJobs.slice();
 
-   return;
   }
 
- }catch(error){
-  console.error(error);
+ }catch(e){
+
+  jobs=defaultJobs.slice();
+
  }
 
- jobs=defaultJobs;
- saveLocal();
- render();
 
- if(showMessage)
-  alert('বর্তমানে Demo/Open Jobs দেখানো হচ্ছে।');
+ document.getElementById('homeJobCount')
+  .textContent=jobs.length;
+
+
+ renderJobs();
+
 }
 
 
-function openApplyJob(job){
- openModal('apply',job);
+function renderJobs(){
+
+ const list=
+  document.getElementById('jobsList');
+
+ if(!jobs.length){
+
+  list.innerHTML=
+   '<div class="empty">এখন কোনো Job পাওয়া যায়নি।</div>';
+
+  return;
+
+ }
+
+
+ list.innerHTML=
+  jobs.map(function(job){
+
+   const isOwner=
+    currentUser &&
+    job.poster_id===currentUser.id;
+
+
+   return `
+    <div class="card job-card">
+
+     <div class="job-top">
+
+      <div>
+
+       <div class="job-title">
+        ${esc(job.title)}
+       </div>
+
+       <span class="skill-tag">
+        ${esc(job.skill || 'General')}
+       </span>
+
+      </div>
+
+      <div class="budget">
+       ${esc(job.budget || 'আলোচনা সাপেক্ষ')}
+      </div>
+
+     </div>
+
+
+     <p class="muted">
+      ${esc(job.description || 'কোনো description দেওয়া হয়নি।')}
+     </p>
+
+
+     <div class="small">
+      Status:
+      <span class="${statusClass(job.status)}">
+       ${statusText(job.status)}
+      </span>
+     </div>
+
+
+     <div class="actions">
+
+      ${
+       isOwner
+       ?
+       `<button class="btn btn-info"
+          onclick="openPosterDashboard()">
+          🧑‍💼 Manage Applicants
+        </button>`
+       :
+       `<button class="btn btn-primary"
+          onclick="openApplication('${esc(job.id)}')">
+          📨 Apply Now
+        </button>`
+      }
+
+     </div>
+
+    </div>
+   `;
+
+  }).join('');
+
 }
 
+
+/* =========================================================
+   CREATE JOB
+========================================================= */
 
 async function createJob(){
 
  if(!currentUser){
-  openModal('login');
+
+  openAuth('login');
+
   return;
+
  }
+
 
  const title=
-  document.getElementById('jobTitle')?.value.trim();
+  document.getElementById('jobTitle')
+   .value.trim();
 
  const jobSkill=
-  document.getElementById('jobSkill')?.value;
+  document.getElementById('jobSkill')
+   .value;
 
  const description=
-  document.getElementById('jobDescription')?.value.trim();
+  document.getElementById('jobDescription')
+   .value.trim();
 
  const budget=
-  document.getElementById('jobBudget')?.value.trim();
+  document.getElementById('jobBudget')
+   .value.trim();
 
- if(!title||!jobSkill||!description||!budget){
-  alert('সব Job তথ্য পূরণ করুন।');
+
+ if(!title || !jobSkill || !description || !budget){
+
+  alert('সব তথ্য পূরণ করুন।');
+
   return;
+
  }
+
 
  const {data,error}=
   await supabaseClient
    .from('jobs')
    .insert({
+
     poster_id:currentUser.id,
-    title,
+
+    title:title,
+
     skill:jobSkill,
-    description,
-    budget,
+
+    description:description,
+
+    budget:budget,
+
     status:'open'
+
    })
    .select()
    .single();
 
+
  if(error){
-  alert('Job publish failed: '+error.message);
+
+  alert(
+   'Job publish হয়নি: ' +
+   error.message
+  );
+
   return;
+
  }
 
- if(data)
-  jobs.unshift(data);
 
- saveLocal();
- render();
- closeModal();
+ closeModal('jobModal');
 
- alert('Job সফলভাবে Post হয়েছে।');
+ alert('🎉 Job successfully posted!');
+
+ await loadJobs();
+
+ await loadPosterDashboard();
+
 }
 
 
-async function applyJob(jobId){
+/* =========================================================
+   APPLICATION
+========================================================= */
+
+function openApplication(jobId){
 
  if(!currentUser){
-  openModal('login');
+
+  openAuth('login');
+
   return;
+
  }
 
- if(String(jobId).startsWith('default-')){
-  alert(
-   'এই Demo Job-টি বর্তমানে শুধু Preview হিসেবে আছে।\n\n' +
-   'Supabase-এ Post করা Open Job-এ Apply করুন।'
-  );
+
+ const job=
+  jobs.find(function(j){
+
+   return String(j.id)===String(jobId);
+
+  });
+
+
+ if(!job){
+
+  alert('Job পাওয়া যায়নি।');
+
   return;
+
  }
 
- const message=
-  document.getElementById('applicationMessage')?.value.trim();
 
- if(!message){
-  alert('Application Message লিখুন।');
-  return;
- }
+ selectedJobId=jobId;
 
- try{
 
-  const {data:existing,error:checkError}=
-   await supabaseClient
-    .from('job_applications')
-    .select('id,status')
-    .eq('job_id',jobId)
-    .eq('applicant_id',currentUser.id)
-    .maybeSingle();
+ document.getElementById('applicationJobInfo')
+  .innerHTML=
+   `<strong>${esc(job.title)}</strong>
+    <br>
+    Skill: ${esc(job.skill)}
+    <br>
+    Budget: ${esc(job.budget || 'আলোচনা সাপেক্ষ')}`;
 
-  if(checkError){
-   console.error(checkError);
-  }
 
-  if(existing){
-   alert(
-    'আপনি এই Job-এ আগে থেকেই Apply করেছেন।\nStatus: '+
-    String(existing.status||'pending').toUpperCase()
-   );
-   return;
-  }
+ document.getElementById('applicationMessage')
+  .value='';
 
-  const {error}=
-   await supabaseClient
-    .from('job_applications')
-    .insert({
-     job_id:jobId,
-     applicant_id:currentUser.id,
-     message,
-     status:'pending'
-    });
 
-  if(error){
-   alert('Application failed: '+error.message);
-   return;
-  }
+ openModal('applicationModal');
 
-  closeModal();
-
-  alert(
-   'Application সফলভাবে Submit হয়েছে।\n\n' +
-   'আপনার Dashboard থেকে Status দেখতে পারবেন।'
-  );
-
-  await loadMyDashboard();
-
- }catch(error){
-
-  console.error(error);
-  alert('Application submit করতে সমস্যা হয়েছে।');
- }
 }
 
 
-/* =========================
+async function submitApplication(){
+
+ if(!currentUser){
+
+  alert('আগে Login করুন।');
+
+  return;
+
+ }
+
+
+ if(!selectedJobId){
+
+  alert('Job নির্বাচন করা হয়নি।');
+
+  return;
+
+ }
+
+
+ const message=
+  document.getElementById('applicationMessage')
+   .value.trim();
+
+
+ if(!message){
+
+  alert('আপনার Message লিখুন।');
+
+  return;
+
+ }
+
+
+ const {data:existing,error:checkError}=
+  await supabaseClient
+   .from('job_applications')
+   .select('id,status')
+   .eq('job_id',selectedJobId)
+   .eq('applicant_id',currentUser.id)
+   .maybeSingle();
+
+
+ if(!checkError && existing){
+
+  alert(
+   'আপনি এই Job-এ আগে Apply করেছেন। Current status: ' +
+   statusText(existing.status)
+  );
+
+  return;
+
+ }
+
+
+ const {error}=
+  await supabaseClient
+   .from('job_applications')
+   .insert({
+
+    job_id:selectedJobId,
+
+    applicant_id:currentUser.id,
+
+    message:message,
+
+    status:'pending'
+
+   });
+
+
+ if(error){
+
+  alert(
+   'Application submit হয়নি: ' +
+   error.message
+  );
+
+  return;
+
+ }
+
+
+ closeModal('applicationModal');
+
+ alert('✅ Application successfully submitted!');
+
+ await loadMyDashboard();
+
+}
+
+
+/* =========================================================
    USER DASHBOARD
-========================= */
+========================================================= */
 
 function openUserDashboard(){
 
  if(!currentUser){
-  openModal('login');
+
+  openAuth('login');
+
   return;
+
  }
 
- showPage('userDashboard');
+ showPageInternal('userDashboard');
+
 }
 
 
 async function loadMyDashboard(){
 
- if(!currentUser)
+ if(!currentUser){
+
+  openAuth('login');
+
   return;
 
- const totalEl=document.getElementById('myTotalApplications');
- const pendingEl=document.getElementById('myPendingApplications');
- const acceptedEl=document.getElementById('myAcceptedJobs');
- const rejectedEl=document.getElementById('myRejectedApplications');
- const earningEl=document.getElementById('myEstimatedEarnings');
+ }
 
- if(totalEl)totalEl.textContent='...';
- if(pendingEl)pendingEl.textContent='...';
- if(acceptedEl)acceptedEl.textContent='...';
- if(rejectedEl)rejectedEl.textContent='...';
- if(earningEl)earningEl.textContent='...';
 
- try{
+ const applicationsBox=
+  document.getElementById('myApplicationsList');
 
-  const {data:apps,error:appError}=
+ applicationsBox.innerHTML=
+  '<div class="card">⏳ Dashboard loading...</div>';
+
+
+ const {
+  data:apps,
+  error
+ }=
+  await supabaseClient
+   .from('job_applications')
+   .select(`
+    id,
+    job_id,
+    applicant_id,
+    message,
+    status,
+    created_at
+   `)
+   .eq('applicant_id',currentUser.id)
+   .order('created_at',{
+    ascending:false
+   });
+
+
+ if(error){
+
+  applicationsBox.innerHTML=
+   `<div class="notice danger">
+    ${esc(error.message)}
+   </div>`;
+
+  return;
+
+ }
+
+
+ myApplications=apps || [];
+
+
+ const jobIds=
+  [...new Set(
+   myApplications
+    .map(function(a){return a.job_id})
+    .filter(Boolean)
+  )];
+
+
+ let jobMap={};
+
+
+ if(jobIds.length){
+
+  const {data:jobData}=
+
    await supabaseClient
-    .from('job_applications')
+    .from('jobs')
     .select(`
      id,
-     job_id,
-     applicant_id,
-     message,
-     status,
-     created_at
+     title,
+     skill,
+     description,
+     budget,
+     status
     `)
-    .eq('applicant_id',currentUser.id)
-    .order('created_at',{ascending:false});
+    .in('id',jobIds);
 
-  if(appError)
-   throw appError;
 
-  myApplications=apps||[];
+  (jobData || []).forEach(function(job){
 
-  const jobIds=[
-   ...new Set(
-    myApplications
-     .map(a=>a.job_id)
-     .filter(Boolean)
-   )
-  ];
+   jobMap[String(job.id)]=job;
 
-  let jobMap={};
+  });
 
-  if(jobIds.length){
+ }
 
-   const {data:jobRows,error:jobError}=
-    await supabaseClient
-     .from('jobs')
-     .select(`
-      id,
-      title,
-      skill,
-      description,
-      budget,
-      status
-     `)
-     .in('id',jobIds);
 
-   if(!jobError && jobRows){
+ const total=myApplications.length;
 
-    jobRows.forEach(j=>{
-     jobMap[j.id]=j;
-    });
+ const pending=
+  myApplications.filter(function(a){
+   return a.status==='pending';
+  }).length;
 
-   }
-  }
+ const accepted=
+  myApplications.filter(function(a){
+   return a.status==='accepted';
+  }).length;
 
-  const total=myApplications.length;
+ const rejected=
+  myApplications.filter(function(a){
+   return a.status==='rejected';
+  }).length;
 
-  const pending=
-   myApplications.filter(
-    a=>String(a.status).toLowerCase()==='pending'
-   ).length;
 
-  const accepted=
-   myApplications.filter(
-    a=>String(a.status).toLowerCase()==='accepted'
-   ).length;
+ let earnings=0;
 
-  const rejected=
-   myApplications.filter(
-    a=>String(a.status).toLowerCase()==='rejected'
-   ).length;
+ myApplications
+  .filter(function(a){
+   return a.status==='accepted';
+  })
+  .forEach(function(a){
 
-  let estimated=0;
+   const job=
+    jobMap[String(a.job_id)];
 
-  myApplications.forEach(app=>{
+   if(job){
 
-   if(String(app.status).toLowerCase()==='accepted'){
+    earnings += parseBudget(job.budget);
 
-    const job=jobMap[app.job_id];
-
-    if(job)
-     estimated+=getBudgetNumber(job.budget);
    }
 
   });
 
-  if(totalEl)totalEl.textContent=total;
-  if(pendingEl)pendingEl.textContent=pending;
-  if(acceptedEl)acceptedEl.textContent=accepted;
-  if(rejectedEl)rejectedEl.textContent=rejected;
 
-  if(earningEl)
-   earningEl.textContent=
-    estimated.toLocaleString()+' BDT';
+ document.getElementById('myTotalApplications')
+  .textContent=total;
 
-  renderAcceptedJobs(myApplications,jobMap);
-  renderMyApplications(myApplications,jobMap);
+ document.getElementById('myPendingApplications')
+  .textContent=pending;
 
- }catch(error){
+ document.getElementById('myAcceptedJobs')
+  .textContent=accepted;
 
-  console.error(error);
+ document.getElementById('myRejectedApplications')
+  .textContent=rejected;
 
-  if(totalEl)totalEl.textContent='0';
-  if(pendingEl)pendingEl.textContent='0';
-  if(acceptedEl)acceptedEl.textContent='0';
-  if(rejectedEl)rejectedEl.textContent='0';
-  if(earningEl)earningEl.textContent='0 BDT';
-
-  const box=document.getElementById('myApplicationsList');
-
-  if(box){
-   box.innerHTML=`
-    <div class="notice danger">
-     Dashboard data load করতে সমস্যা হয়েছে:
-     ${esc(error.message||'Unknown error')}
-    </div>
-   `;
-  }
- }
-}
+ document.getElementById('myEstimatedEarnings')
+  .textContent=
+   earnings.toLocaleString() + ' BDT';
 
 
-function renderAcceptedJobs(apps,jobMap){
+ const acceptedBox=
+  document.getElementById('myAcceptedJobsList');
 
- const box=document.getElementById('myAcceptedJobsList');
 
- if(!box)return;
+ const acceptedApps=
+  myApplications.filter(function(a){
 
- const accepted=
-  apps.filter(
-   a=>String(a.status).toLowerCase()==='accepted'
-  );
+   return a.status==='accepted';
 
- if(!accepted.length){
+  });
 
-  box.innerHTML=`
-   <div class="card">
-    <h3>🟢 Accepted Jobs</h3>
-    <div class="empty">
-     এখনো কোনো Job Accepted হয়নি।
-    </div>
-   </div>
-  `;
 
-  return;
- }
+ if(!acceptedApps.length){
 
- box.innerHTML=`
-  <div class="card">
-   <h3>🟢 Accepted Jobs</h3>
-   <p class="muted">
-    আপনার Accepted Job-এর বিস্তারিত নির্দেশনা এখানে থাকবে।
-   </p>
+  acceptedBox.innerHTML=
+   `<div class="card">
+     <h3>🟢 Accepted Jobs</h3>
+     <div class="empty">
+      এখনো কোনো Application Accepted হয়নি।
+     </div>
+    </div>`;
 
-   ${accepted.map(app=>{
+ }else{
 
-    const job=jobMap[app.job_id]||{};
+  acceptedBox.innerHTML=
+   `<div class="card">
+     <h3>🟢 Accepted Jobs</h3>
+     ${
+      acceptedApps.map(function(a){
 
-    const budget=
-     job.budget||'Budget unavailable';
+       const job=
+        jobMap[String(a.job_id)];
 
-    return`
-     <div class="accepted-job">
+       return `
+        <div class="application-card">
 
-      <div class="row">
-       <div>
-        <h3>${esc(job.title||'Accepted Job')}</h3>
-        <div class="job-meta">
-         <span class="badge">
-          ${esc(job.skill||'Skill')}
+         <strong>
+          ${esc(job?.title || 'Job #' + a.job_id)}
+         </strong>
+
+         <p class="muted">
+          Skill:
+          ${esc(job?.skill || 'N/A')}
+         </p>
+
+         <p>
+          Budget:
+          <strong>
+           ${esc(job?.budget || 'আলোচনা সাপেক্ষ')}
+          </strong>
+         </p>
+
+         <span class="${statusClass(a.status)}">
+          ${statusText(a.status)}
          </span>
 
-         <span class="badge">
-          💰 ${esc(budget)}
-         </span>
         </div>
-       </div>
+       `;
 
-       ${formatStatus(app.status)}
-      </div>
+      }).join('')
+     }
+    </div>`;
 
-      <p>
-       ${esc(
-        job.description||
-        'Job-এর বিস্তারিত তথ্য এখনো পাওয়া যায়নি।'
-       )}
-      </p>
-
-      <div class="notice success">
-       ✅ এই Job-এর Application Accepted হয়েছে।
-       কাজটি সম্পন্ন করার জন্য Job Poster-এর নির্দেশনা অনুসরণ করুন।
-      </div>
-
-     </div>
-    `;
-   }).join('')}
-
-  </div>
- `;
-}
-
-
-function renderMyApplications(apps,jobMap){
-
- const box=document.getElementById('myApplicationsList');
-
- if(!box)return;
-
- if(!apps.length){
-
-  box.innerHTML=`
-   <div class="card">
-    <h3>📨 My Applications</h3>
-    <div class="empty">
-     আপনি এখনো কোনো Job-এ Apply করেননি।
-     <div class="actions" style="justify-content:center">
-      <button class="btn btn-primary"
-       onclick="showPage('home')">
-       🔎 Available Jobs দেখুন
-      </button>
-     </div>
-    </div>
-   </div>
-  `;
-
-  return;
  }
 
- box.innerHTML=`
-  <div class="card">
+
+ if(!myApplications.length){
+
+  applicationsBox.innerHTML=
+   `<div class="card">
+     <h3>📨 My Applications</h3>
+     <div class="empty">
+      আপনি এখনো কোনো Job-এ Apply করেননি।
+     </div>
+    </div>`;
+
+  return;
+
+ }
+
+
+ applicationsBox.innerHTML=
+  `<div class="card">
 
    <h3>📨 My Applications</h3>
 
-   ${apps.map(app=>{
+   ${
+    myApplications.map(function(a){
 
-    const job=jobMap[app.job_id]||{};
+     const job=
+      jobMap[String(a.job_id)];
 
-    const st=
-     String(app.status||'pending').toLowerCase();
+     return `
+      <div class="application-card">
 
-    let notice='';
+       <div class="application-header">
 
-    if(st==='accepted'){
-     notice=`
-      <div class="notice success">
-       🎉 অভিনন্দন! আপনার Application Accepted হয়েছে।
-       Dashboard-এর Accepted Jobs অংশে কাজের তথ্য দেখুন।
-      </div>
-     `;
-    }else if(st==='rejected'){
-     notice=`
-      <div class="notice danger">
-       ❌ এই Applicationটি Reject করা হয়েছে।
-       আপনি অন্য Available Job-এ Apply করতে পারেন।
-      </div>
-     `;
-    }else if(st==='pending'){
-     notice=`
-      <div class="notice warning">
-       ⏳ আপনার Application এখনো Review-এর অপেক্ষায় আছে।
-      </div>
-     `;
-    }else if(st==='withdrawn'){
-     notice=`
-      <div class="notice danger">
-       Application Withdrawn হয়েছে।
-      </div>
-     `;
-    }
+        <strong>
+         ${esc(job?.title || 'Job #' + a.job_id)}
+        </strong>
 
-    return`
-     <div class="application-card">
+        <span class="${statusClass(a.status)}">
+         ${statusText(a.status)}
+        </span>
 
-      <div class="row">
-       <div>
-        <h3>${esc(job.title||'Job #'+app.job_id)}</h3>
-
-        <div class="job-meta">
-         ${
-          job.skill
-          ? `<span class="badge">${esc(job.skill)}</span>`
-          : ''
-         }
-
-         ${
-          job.budget
-          ? `<span class="badge">💰 ${esc(job.budget)}</span>`
-          : ''
-         }
-        </div>
        </div>
 
-       ${formatStatus(st)}
+       <div class="small">
+        Skill:
+        ${esc(job?.skill || 'N/A')}
+       </div>
+
+       <p>
+        <strong>Your Message:</strong><br>
+        ${esc(a.message || '')}
+       </p>
+
+       <div class="small">
+        Applied:
+        ${formatDate(a.created_at)}
+       </div>
+
       </div>
+     `;
 
-      <p class="muted">
-       আপনার Message:
-      </p>
+    }).join('')
+   }
 
-      <p>${esc(app.message||'')}</p>
+  </div>`;
 
-      <div class="small muted">
-       Applied:
-       ${app.created_at
-        ? new Date(app.created_at).toLocaleString()
-        : '—'}
-      </div>
-
-      ${notice}
-
-     </div>
-    `;
-
-   }).join('')}
-
-  </div>
- `;
 }
 
 
-/* =========================
-   PAYOUT
-========================= */
+/* =========================================================
+   JOB POSTER DASHBOARD
+========================================================= */
 
-async function submitPayout(){
+function openPosterDashboard(){
 
  if(!currentUser){
-  openModal('login');
+
+  openAuth('login');
+
   return;
+
  }
 
- const amount=
-  Number(document.getElementById('payoutAmount')?.value);
+ showPageInternal('posterDashboard');
 
- const method=
-  document.getElementById('payoutMethod')?.value;
-
- const accountName=
-  document.getElementById('payoutAccountName')?.value.trim();
-
- const accountNumber=
-  document.getElementById('payoutAccountNumber')?.value.trim();
-
- if(!amount||amount<=0){
-  alert('Valid Amount দিন।');
-  return;
- }
-
- if(!accountName||!accountNumber){
-  alert('Account Name এবং Account Number দিন।');
-  return;
- }
-
- const {error}=
-  await supabaseClient
-   .from('payout_requests')
-   .insert({
-    user_id:currentUser.id,
-    amount,
-    currency:'BDT',
-    method,
-    account_name:accountName,
-    account_number:accountNumber,
-    status:'pending'
-   });
-
- if(error){
-  alert('Payout request failed: '+error.message);
-  return;
- }
-
- localStorage.setItem(
-  'pz_payout_request',
-  JSON.stringify({
-   amount,
-   method,
-   accountName,
-   accountNumber,
-   status:'pending',
-   createdAt:new Date().toISOString()
-  })
- );
-
- closeModal();
-
- alert(
-  'Payout Request সফলভাবে Submit হয়েছে।\n\n' +
-  'Admin manual review করবেন।'
- );
 }
 
 
-/* =========================
+async function loadPosterDashboard(){
+
+ if(!currentUser){
+
+  openAuth('login');
+
+  return;
+
+ }
+
+
+ const jobsBox=
+  document.getElementById('myPostedJobsList');
+
+ jobsBox.innerHTML=
+  '<div class="card">⏳ আপনার Posted Jobs loading...</div>';
+
+
+ const {data:postedJobs,error}=
+  await supabaseClient
+   .from('jobs')
+   .select('*')
+   .eq('poster_id',currentUser.id)
+   .order('created_at',{
+    ascending:false
+   });
+
+
+ if(error){
+
+  jobsBox.innerHTML=
+   `<div class="notice danger">
+    ${esc(error.message)}
+   </div>`;
+
+  return;
+
+ }
+
+
+ const list=postedJobs || [];
+
+ document.getElementById('posterJobCount')
+  .textContent=list.length;
+
+
+ if(!list.length){
+
+  jobsBox.innerHTML=
+   `<div class="card">
+    <h3>🧑‍💼 My Posted Jobs</h3>
+    <div class="empty">
+     আপনি এখনো কোনো Job পোস্ট করেননি।
+     <br><br>
+     <button class="btn btn-primary"
+       onclick="openCreateJob()">
+       ➕ প্রথম Job পোস্ট করুন
+     </button>
+    </div>
+   </div>`;
+
+  document.getElementById('posterApplicantCount')
+   .textContent='0';
+
+  document.getElementById('posterPendingCount')
+   .textContent='0';
+
+  document.getElementById('posterAcceptedCount')
+   .textContent='0';
+
+  return;
+
+ }
+
+
+ const jobIds=
+  list.map(function(j){return j.id});
+
+
+ const {
+  data:applications
+ }=
+  await supabaseClient
+   .from('job_applications')
+   .select(`
+    id,
+    job_id,
+    applicant_id,
+    message,
+    status,
+    created_at
+   `)
+   .in('job_id',jobIds);
+
+
+ const apps=applications || [];
+
+
+ document.getElementById('posterApplicantCount')
+  .textContent=apps.length;
+
+ document.getElementById('posterPendingCount')
+  .textContent=
+   apps.filter(function(a){
+    return a.status==='pending';
+   }).length;
+
+ document.getElementById('posterAcceptedCount')
+  .textContent=
+   apps.filter(function(a){
+    return a.status==='accepted';
+   }).length;
+
+
+ jobsBox.innerHTML=
+  `<div class="card">
+
+   <h3>📋 My Posted Jobs</h3>
+
+   ${
+    list.map(function(job){
+
+     const jobApps=
+      apps.filter(function(a){
+
+       return String(a.job_id)===String(job.id);
+
+      });
+
+
+     return `
+      <div class="application-card">
+
+       <div class="job-top">
+
+        <div>
+
+         <div class="job-title">
+          ${esc(job.title)}
+         </div>
+
+         <span class="skill-tag">
+          ${esc(job.skill || 'General')}
+         </span>
+
+        </div>
+
+        <div class="budget">
+         ${esc(job.budget || 'আলোচনা সাপেক্ষ')}
+        </div>
+
+       </div>
+
+
+       <p class="muted">
+        ${esc(job.description || '')}
+       </p>
+
+
+       <div>
+        Status:
+        <span class="${statusClass(job.status)}">
+         ${statusText(job.status)}
+        </span>
+       </div>
+
+
+       <div class="notice info">
+
+        📨 Applications:
+        <strong>${jobApps.length}</strong>
+
+       </div>
+
+
+       <div class="actions">
+
+        <button class="btn btn-primary"
+          onclick="loadJobApplicants('${esc(job.id)}','${esc(job.title)}')">
+          📨 Applicants (${jobApps.length})
+        </button>
+
+        ${
+         job.status==='open'
+         ?
+         `<button class="btn btn-secondary"
+            onclick="scrollToApplicants()">
+            👥 Manage
+          </button>`
+         :
+         ''
+        }
+
+       </div>
+
+      </div>
+     `;
+
+    }).join('')
+   }
+
+  </div>`;
+
+
+ /* Store currently loaded applications */
+ window.posterApplications=apps;
+ window.posterJobs=list;
+
+}
+
+
+/* =========================================================
+   LOAD APPLICANTS FOR A JOB
+========================================================= */
+
+async function loadJobApplicants(jobId,jobTitle){
+
+ if(!currentUser){
+
+  openAuth('login');
+
+  return;
+
+ }
+
+
+ const box=
+  document.getElementById('posterApplicantsList');
+
+
+ box.innerHTML=
+  '<div class="card">⏳ Applicants loading...</div>';
+
+
+ const {data:job,error:jobError}=
+  await supabaseClient
+   .from('jobs')
+   .select('*')
+   .eq('id',jobId)
+   .eq('poster_id',currentUser.id)
+   .maybeSingle();
+
+
+ if(jobError || !job){
+
+  box.innerHTML=
+   `<div class="notice danger">
+    Job access পাওয়া যায়নি।
+   </div>`;
+
+  return;
+
+ }
+
+
+ const {data:apps,error}=
+  await supabaseClient
+   .from('job_applications')
+   .select(`
+    id,
+    job_id,
+    applicant_id,
+    message,
+    status,
+    created_at
+   `)
+   .eq('job_id',jobId)
+   .order('created_at',{
+    ascending:false
+   });
+
+
+ if(error){
+
+  box.innerHTML=
+   `<div class="notice danger">
+    ${esc(error.message)}
+   </div>`;
+
+  return;
+
+ }
+
+
+ const applications=apps || [];
+
+
+ if(!applications.length){
+
+  box.innerHTML=
+   `<div class="card">
+
+    <h3>
+     📨 Applicants —
+     ${esc(jobTitle)}
+    </h3>
+
+    <div class="empty">
+     এই Job-এ এখনো কোনো Application নেই।
+    </div>
+
+   </div>`;
+
+  scrollToApplicants();
+
+  return;
+
+ }
+
+
+ box.innerHTML=
+  `<div class="card">
+
+   <h3>
+    📨 Applicants —
+    ${esc(jobTitle)}
+   </h3>
+
+   <div class="notice info">
+
+    মোট Application:
+    <strong>${applications.length}</strong>
+
+   </div>
+
+
+   ${
+    applications.map(function(app){
+
+     const canManage=
+      app.status==='pending';
+
+
+     return `
+      <div class="application-card">
+
+       <div class="application-header">
+
+        <strong>👤 Applicant</strong>
+
+        <span class="${statusClass(app.status)}">
+         ${statusText(app.status)}
+        </span>
+
+       </div>
+
+
+       <div class="id-box">
+        Applicant ID:
+        ${esc(app.applicant_id)}
+       </div>
+
+
+       <p>
+        <strong>💬 Applicant Message:</strong><br>
+        ${esc(app.message || 'কোনো message নেই।')}
+       </p>
+
+
+       <div class="small">
+        Applied:
+        ${formatDate(app.created_at)}
+       </div>
+
+
+       ${
+        canManage
+        ?
+        `<div class="actions">
+
+          <button
+           class="btn btn-success"
+           onclick="posterUpdateApplication('${esc(app.id)}','accepted','${esc(jobId)}')">
+           ✅ Accept
+          </button>
+
+          <button
+           class="btn btn-danger"
+           onclick="posterUpdateApplication('${esc(app.id)}','rejected','${esc(jobId)}')">
+           ❌ Reject
+          </button>
+
+         </div>`
+        :
+        `<div class="notice ${
+         app.status==='accepted'
+          ? 'success'
+          : 'danger'
+        }">
+         এই Application-এর সিদ্ধান্ত:
+         <strong>${statusText(app.status)}</strong>
+        </div>`
+       }
+
+      </div>
+     `;
+
+    }).join('')
+   }
+
+  </div>`;
+
+
+ scrollToApplicants();
+
+}
+
+
+/* =========================================================
+   ACCEPT / REJECT APPLICATION
+========================================================= */
+
+async function posterUpdateApplication(
+ applicationId,
+ status,
+ jobId
+){
+
+ if(!currentUser){
+
+  alert('Login করুন।');
+
+  return;
+
+ }
+
+
+ const actionText=
+  status==='accepted'
+   ? 'Accept'
+   : 'Reject';
+
+
+ const ok=
+  confirm(
+   'আপনি কি এই Application ' +
+   actionText +
+   ' করতে চান?'
+  );
+
+
+ if(!ok) return;
+
+
+ const {data:updated,error}=
+  await supabaseClient
+   .from('job_applications')
+   .update({
+    status:status
+   })
+   .eq('id',applicationId)
+   .select()
+   .single();
+
+
+ if(error){
+
+  alert(
+   'Application status update হয়নি: ' +
+   error.message
+  );
+
+  return;
+
+ }
+
+
+ if(!updated){
+
+  alert('Application update করা যায়নি।');
+
+  return;
+
+ }
+
+
+ /*
+  IMPORTANT:
+  এখানে Job status পরিবর্তন করা হচ্ছে না।
+  কারণ বর্তমান RLS-এ applicant-এর জন্য
+  open Job read policy আছে।
+  আগে application accepted করা হচ্ছে।
+  পরবর্তী ধাপে assigned/completed flow ও RLS
+  নিরাপদভাবে যোগ করা যাবে।
+ */
+
+
+ alert(
+  status==='accepted'
+   ? '✅ Applicant Accepted হয়েছে!'
+   : '❌ Applicant Rejected হয়েছে!'
+ );
+
+
+ await loadPosterDashboard();
+
+ await loadJobApplicants(
+  jobId,
+  findPostedJobTitle(jobId)
+ );
+
+ await loadMyDashboard();
+
+}
+
+
+function findPostedJobTitle(jobId){
+
+ const job=
+  (window.posterJobs || [])
+   .find(function(j){
+
+    return String(j.id)===String(jobId);
+
+   });
+
+
+ return job
+  ? job.title
+  : 'Job';
+
+}
+
+
+function scrollToApplicants(){
+
+ setTimeout(function(){
+
+  document.getElementById('posterApplicantsList')
+   .scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+   });
+
+ },100);
+
+}
+
+
+/* =========================================================
    ADMIN SECURITY
-========================= */
+========================================================= */
 
 async function isCurrentUserAdmin(){
 
- if(!currentUser)
-  return false;
+ if(!currentUser) return false;
+
 
  try{
 
@@ -1938,56 +3189,37 @@ async function isCurrentUserAdmin(){
    await supabaseClient
     .rpc('is_current_user_admin');
 
-  if(error){
-   console.error('Admin check failed:',error);
-   return false;
-  }
+
+  if(error) return false;
 
   return data===true;
 
- }catch(error){
-
-  console.error(
-   'Admin verification error:',
-   error
-  );
+ }catch(e){
 
   return false;
+
  }
+
 }
 
 
-async function updateUserUI(){
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
 
- const adminBtn=
-  document.getElementById('adminNavBtn');
-
- if(!adminBtn)return;
-
- adminBtn.classList.add('hidden');
-
- if(!currentUser)return;
+async function loadAdminDashboard(){
 
  const ok=
   await isCurrentUserAdmin();
 
- if(ok)
-  adminBtn.classList.remove('hidden');
-}
-
-
-/* =========================
-   ADMIN DASHBOARD
-========================= */
-
-async function loadAdminDashboard(){
-
- const ok=await isCurrentUserAdmin();
-
  if(!ok){
+
   alert('Admin access denied.');
+
   return;
+
  }
+
 
  try{
 
@@ -1995,67 +3227,67 @@ async function loadAdminDashboard(){
    await supabaseClient
     .rpc('admin_dashboard_stats');
 
-  if(error)
-   throw error;
 
-  const d=data||{};
+  if(error){
 
-  setText('adminUsers',d.users||0);
-  setText('adminJobs',d.jobs||0);
-  setText('adminApplications',d.applications||0);
-  setText('adminSponsors',d.sponsors||0);
-  setText('adminPayouts',d.payouts||0);
-  setText('adminPendingPayouts',d.pending_payouts||0);
-  setText('adminOpenJobs',d.open_jobs||0);
-  setText('adminPendingApplications',d.pending_applications||0);
-  setText('adminPendingSponsors',d.pending_sponsors||0);
-  setText('adminTotalPoints',d.total_points||0);
+   alert(error.message);
 
- }catch(error){
+   return;
 
-  console.error(error);
+  }
 
-  document.getElementById('adminContent').innerHTML=`
-   <div class="notice danger">
-    Admin Dashboard load failed:
-    ${esc(error.message||'Unknown error')}
-   </div>
-  `;
- }
+
+  const stats=data || {};
+
+
+  document.getElementById('adminUsers')
+   .textContent=stats.users ?? 0;
+
+  document.getElementById('adminJobs')
+   .textContent=stats.jobs ?? 0;
+
+  document.getElementById('adminApplications')
+   .textContent=stats.applications ?? 0;
+
+  document.getElementById('adminPendingApplications')
+   .textContent=stats.pending_applications ?? 0;
+
+  document.getElementById('adminSponsors')
+   .textContent=stats.sponsors ?? 0;
+
+  document.getElementById('adminPayouts')
+   .textContent=stats.payouts ?? 0;
+
+  document.getElementById('adminPendingPayouts')
+   .textContent=stats.pending_payouts ?? 0;
+
+  document.getElementById('adminTotalPoints')
+   .textContent=
+    Number(stats.total_points || 0)
+     .toLocaleString();
+
+
+ }catch(e){}
+
+
+ await adminLoadApplications();
+
+ await adminLoadPayouts();
+
+ await adminLoadSponsors();
+
 }
 
 
-function setText(id,value){
-
- const el=document.getElementById(id);
-
- if(el)
-  el.textContent=
-   Number(value||0).toLocaleString();
-}
-
-
-/* =========================
+/* =========================================================
    ADMIN APPLICATIONS
-========================= */
+========================================================= */
 
 async function adminLoadApplications(){
 
- const ok=await isCurrentUserAdmin();
+ const box=
+  document.getElementById('adminApplicationList');
 
- if(!ok){
-  alert('Admin access denied.');
-  return;
- }
-
- const box=document.getElementById('adminContent');
-
- box.innerHTML=`
-  <div class="card">
-   <h3>📨 All Applications</h3>
-   <div class="empty">Loading...</div>
-  </div>
- `;
 
  const {data,error}=
   await supabaseClient
@@ -2068,993 +3300,414 @@ async function adminLoadApplications(){
     status,
     created_at
    `)
-   .order('created_at',{ascending:false});
+   .order('created_at',{
+    ascending:false
+   });
+
 
  if(error){
 
-  box.innerHTML=`
-   <div class="notice danger">
+  box.innerHTML=
+   `<div class="notice danger">
     ${esc(error.message)}
-   </div>
-  `;
+   </div>`;
 
   return;
+
  }
 
- if(!data||!data.length){
 
-  box.innerHTML=`
-   <div class="card">
-    <h3>📨 All Applications</h3>
-    <div class="empty">
-     কোনো Application পাওয়া যায়নি।
-    </div>
-   </div>
-  `;
+ if(!data || !data.length){
+
+  box.innerHTML=
+   '<div class="empty">কোনো Application নেই।</div>';
 
   return;
+
  }
 
- box.innerHTML=`
-  <div class="card">
 
-   <h3>📨 All Applications</h3>
+ box.innerHTML=
+  data.map(function(app){
 
-   ${data.map(app=>`
-
+   return `
     <div class="application-card">
 
-     <div class="row">
-      <div>
-       <strong>Job ID</strong>
-       <div class="small muted">
-        ${esc(app.job_id)}
-       </div>
-      </div>
+     <div class="application-header">
 
-      ${formatStatus(app.status)}
-     </div>
+      <strong>
+       Job ID:
+       ${esc(app.job_id)}
+      </strong>
 
-     <div class="small muted" style="margin-top:8px">
-      Applicant ID: ${esc(app.applicant_id)}
-     </div>
-
-     <p>${esc(app.message||'')}</p>
-
-     <div class="actions">
-
-      <button class="btn btn-primary"
-       onclick="adminUpdateApplication('${esc(app.id)}','accepted')">
-       ✅ Accept
-      </button>
-
-      <button class="btn btn-danger"
-       onclick="adminUpdateApplication('${esc(app.id)}','rejected')">
-       ❌ Reject
-      </button>
+      <span class="${statusClass(app.status)}">
+       ${statusText(app.status)}
+      </span>
 
      </div>
+
+     <div class="id-box">
+      Applicant ID:
+      ${esc(app.applicant_id)}
+     </div>
+
+     <p>
+      ${esc(app.message || '')}
+     </p>
+
+     <div class="small">
+      ${formatDate(app.created_at)}
+     </div>
+
+     ${
+      app.status==='pending'
+      ?
+      `<div class="actions">
+
+       <button class="btn btn-success"
+        onclick="adminUpdateApplication('${esc(app.id)}','accepted')">
+        ✅ Accept
+       </button>
+
+       <button class="btn btn-danger"
+        onclick="adminUpdateApplication('${esc(app.id)}','rejected')">
+        ❌ Reject
+       </button>
+
+      </div>`
+      :
+      ''
+     }
 
     </div>
+   `;
 
-   `).join('')}
+  }).join('');
 
-  </div>
- `;
 }
 
 
-async function adminUpdateApplication(id,status){
+async function adminUpdateApplication(
+ id,
+ status
+){
 
- const ok=await isCurrentUserAdmin();
+ const ok=
+  confirm(
+   'Application status ' +
+   status +
+   ' করতে চান?'
+  );
 
- if(!ok){
-  alert('Admin access denied.');
-  return;
- }
+ if(!ok) return;
+
 
  const {error}=
   await supabaseClient
    .from('job_applications')
-   .update({status})
+   .update({
+    status:status
+   })
    .eq('id',id);
 
+
  if(error){
-  alert('Update failed: '+error.message);
+
+  alert(error.message);
+
   return;
+
  }
 
- alert(
-  status==='accepted'
-   ? 'Application Accepted.'
-   : 'Application Rejected.'
- );
+
+ alert('Application updated.');
 
  await adminLoadApplications();
+
  await loadAdminDashboard();
+
 }
 
 
-/* =========================
-   ADMIN PAYOUTS
-========================= */
+/* =========================================================
+   ADMIN PAYOUT
+========================================================= */
 
 async function adminLoadPayouts(){
 
- const ok=await isCurrentUserAdmin();
+ const box=
+  document.getElementById('adminPayoutList');
 
- if(!ok){
-  alert('Admin access denied.');
-  return;
- }
-
- const box=document.getElementById('adminContent');
-
- box.innerHTML=`
-  <div class="card">
-   <h3>💰 Payout Management</h3>
-   <div class="empty">Loading...</div>
-  </div>
- `;
 
  const {data,error}=
   await supabaseClient
    .from('payout_requests')
    .select('*')
-   .order('created_at',{ascending:false});
+   .order('created_at',{
+    ascending:false
+   });
+
 
  if(error){
 
-  box.innerHTML=`
-   <div class="notice danger">
+  box.innerHTML=
+   `<div class="notice danger">
     ${esc(error.message)}
-   </div>
-  `;
+   </div>`;
 
   return;
+
  }
 
- if(!data||!data.length){
 
-  box.innerHTML=`
-   <div class="card">
-    <h3>💰 Payout Management</h3>
-    <div class="empty">
-     কোনো Payout Request নেই।
-    </div>
-   </div>
-  `;
+ if(!data || !data.length){
+
+  box.innerHTML=
+   '<div class="empty">কোনো Payout Request নেই।</div>';
 
   return;
+
  }
 
- box.innerHTML=`
-  <div class="card">
 
-   <h3>💰 Payout Management</h3>
+ box.innerHTML=
+  data.map(function(p){
 
-   <p class="muted">
-    Admin payout request review করে Pending,
-    Approved অথবা Rejected করতে পারবেন।
-   </p>
-
-   ${data.map(p=>`
-
+   return `
     <div class="application-card">
 
-     <div class="row">
-      <div>
-       <strong>${esc(p.amount)} ${esc(p.currency||'BDT')}</strong>
-       <div class="small muted">
-        User ID: ${esc(p.user_id)}
-       </div>
-      </div>
+     <div class="application-header">
 
-      <span class="badge">
-       ${esc(p.status||'pending')}
+      <strong>
+       💰 ${esc(p.amount)} ${esc(p.currency || 'BDT')}
+      </strong>
+
+      <span class="${statusClass(p.status)}">
+       ${statusText(p.status)}
       </span>
+
      </div>
 
-     <p class="small">
-      Method: ${esc(p.method||'—')}<br>
-      Account Name: ${esc(p.account_name||'—')}<br>
-      Account: ${esc(p.account_number||'—')}
+     <div class="id-box">
+      User ID:
+      ${esc(p.user_id)}
+     </div>
+
+     <p>
+      Method:
+      <strong>${esc(p.method || '')}</strong>
+      <br>
+      Account:
+      ${esc(p.account_number || '')}
      </p>
 
-     <select
-      onchange="adminUpdatePayoutStatus('${esc(p.id)}',this.value)">
-      <option value="">Status Change</option>
-      <option value="pending">Pending</option>
-      <option value="approved">Approved</option>
-      <option value="rejected">Rejected</option>
-      <option value="paid">Paid</option>
-     </select>
+     ${
+      p.status==='pending'
+      ?
+      `<div class="actions">
+
+       <button class="btn btn-success"
+        onclick="adminUpdatePayout('${esc(p.id)}','approved')">
+        ✅ Approve
+       </button>
+
+       <button class="btn btn-danger"
+        onclick="adminUpdatePayout('${esc(p.id)}','rejected')">
+        ❌ Reject
+       </button>
+
+      </div>`
+      :
+      ''
+     }
 
     </div>
+   `;
 
-   `).join('')}
+  }).join('');
 
-  </div>
- `;
 }
 
 
-async function adminUpdatePayoutStatus(id,status){
+async function adminUpdatePayout(
+ id,
+ status
+){
 
- if(!status)return;
+ const ok=
+  confirm(
+   'Payout status ' +
+   status +
+   ' করতে চান?'
+  );
 
- const ok=await isCurrentUserAdmin();
+ if(!ok) return;
 
- if(!ok){
-  alert('Admin access denied.');
-  return;
+
+ const update={
+  status:status
+ };
+
+
+ if(status==='paid'){
+
+  update.paid_at=
+   new Date().toISOString();
+
  }
 
- const payload={status};
-
- if(status==='paid')
-  payload.paid_at=new Date().toISOString();
 
  const {error}=
   await supabaseClient
    .from('payout_requests')
-   .update(payload)
+   .update(update)
    .eq('id',id);
 
+
  if(error){
-  alert('Payout update failed: '+error.message);
+
+  alert(error.message);
+
   return;
+
  }
 
- alert('Payout status updated.');
+
+ alert('Payout updated.');
 
  await adminLoadPayouts();
- await loadAdminDashboard();
+
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN SPONSORS
-========================= */
+========================================================= */
 
 async function adminLoadSponsors(){
 
- const ok=await isCurrentUserAdmin();
+ const box=
+  document.getElementById('adminSponsorList');
 
- if(!ok){
-  alert('Admin access denied.');
-  return;
- }
-
- const box=document.getElementById('adminContent');
-
- box.innerHTML=`
-  <div class="card">
-   <h3>🤝 Sponsor Requests</h3>
-   <div class="empty">Loading...</div>
-  </div>
- `;
 
  const {data,error}=
   await supabaseClient
    .from('sponsor_requests')
    .select('*')
-   .order('created_at',{ascending:false});
+   .order('created_at',{
+    ascending:false
+   });
+
 
  if(error){
 
-  box.innerHTML=`
-   <div class="notice danger">
+  box.innerHTML=
+   `<div class="notice danger">
     ${esc(error.message)}
-   </div>
-  `;
+   </div>`;
 
   return;
+
  }
 
- if(!data||!data.length){
 
-  box.innerHTML=`
-   <div class="card">
-    <h3>🤝 Sponsor Requests</h3>
-    <div class="empty">
-     কোনো Sponsor Request নেই।
-    </div>
-   </div>
-  `;
+ if(!data || !data.length){
+
+  box.innerHTML=
+   '<div class="empty">কোনো Sponsor Request নেই।</div>';
 
   return;
+
  }
 
- box.innerHTML=`
-  <div class="card">
 
-   <h3>🤝 Sponsor Requests</h3>
+ box.innerHTML=
+  data.map(function(s){
 
-   ${data.map(s=>`
-
+   return `
     <div class="application-card">
 
-     <div class="row">
-      <div>
-       <strong>Sponsor Request</strong>
-       <div class="small muted">
-        User ID: ${esc(s.user_id||'—')}
-       </div>
-      </div>
+     <div class="application-header">
 
-      <span class="badge">
-       ${esc(s.status||'pending')}
+      <strong>
+       ${esc(s.name || s.company_name || 'Sponsor')}
+      </strong>
+
+      <span class="${statusClass(s.status)}">
+       ${statusText(s.status)}
       </span>
+
      </div>
 
-     <select
-      onchange="adminUpdateSponsor('${esc(s.id)}',this.value)">
-      <option value="">Status Change</option>
-      <option value="pending">Pending</option>
-      <option value="approved">Approved</option>
-      <option value="rejected">Rejected</option>
-     </select>
+     <div class="id-box">
+      ID: ${esc(s.id)}
+     </div>
+
+     ${
+      s.status==='pending'
+      ?
+      `<div class="actions">
+
+       <button class="btn btn-success"
+        onclick="adminUpdateSponsor('${esc(s.id)}','approved')">
+        ✅ Approve
+       </button>
+
+       <button class="btn btn-danger"
+        onclick="adminUpdateSponsor('${esc(s.id)}','rejected')">
+        ❌ Reject
+       </button>
+
+      </div>`
+      :
+      ''
+     }
 
     </div>
+   `;
 
-   `).join('')}
+  }).join('');
 
-  </div>
- `;
 }
 
 
-async function adminUpdateSponsor(id,status){
-
- if(!status)return;
-
- const ok=await isCurrentUserAdmin();
-
- if(!ok){
-  alert('Admin access denied.');
-  return;
- }
+async function adminUpdateSponsor(
+ id,
+ status
+){
 
  const {error}=
   await supabaseClient
    .from('sponsor_requests')
-   .update({status})
+   .update({
+    status:status
+   })
    .eq('id',id);
 
+
  if(error){
-  alert('Sponsor update failed: '+error.message);
+
+  alert(error.message);
+
   return;
+
  }
 
- alert('Sponsor status updated.');
+
+ alert('Sponsor request updated.');
 
  await adminLoadSponsors();
- await loadAdminDashboard();
+
 }
 
 
-/* =========================
-   GAMES
-========================= */
+/* =========================================================
+   INIT
+========================================================= */
 
-let tapScore=0;
-let tapTime=30;
-let tapTimer=null;
+updateStats();
 
-function openGame(type){
-
- if(type==='tap'){
-
-  openModal('game',{
-   title:'⚡ Tap Rush',
-   html:`
-    <div style="text-align:center">
-
-     <div class="grid">
-      <div class="card">
-       <div class="muted">Time</div>
-       <div id="tapTime" class="stat">30</div>
-      </div>
-
-      <div class="card">
-       <div class="muted">Score</div>
-       <div id="tapScore" class="stat">0</div>
-      </div>
-     </div>
-
-     <button class="btn btn-primary"
-      style="width:100%;height:150px;font-size:35px;margin-top:15px"
-      onclick="tapRushTap()">
-      TAP!
-     </button>
-
-     <div class="notice info">
-      ৩০ সেকেন্ডে যত বেশি Tap করতে পারবেন, Score তত বেশি।
-     </div>
-
-    </div>
-   `,
-   init:startTapRush
-  });
-
-  return;
- }
-
- if(type==='match'){
-
-  openModal('game',{
-   title:'🧩 Match Seven',
-   html:`
-    <div id="matchGame"></div>
-   `,
-   init:startMatchSeven
-  });
-
-  return;
- }
-
- if(type==='brain'){
-
-  openModal('game',{
-   title:'🧠 Brain Box',
-   html:`
-    <div id="brainGame"></div>
-   `,
-   init:startBrainBox
-  });
-
-  return;
- }
-
- if(type==='fly'){
-
-  openModal('game',{
-   title:'🚀 Fly High',
-   html:`
-    <div style="text-align:center">
-     <canvas id="flyCanvas"
-      width="320"
-      height="430"
-      style="max-width:100%;background:#081a28;border:1px solid #28536a;border-radius:12px">
-     </canvas>
-
-     <div class="notice info">
-      Screen-এ Tap করে Player-কে উপরে তুলুন।
-     </div>
-    </div>
-   `,
-   init:startFlyHigh
-  });
-
- }
-}
-
-
-/* =========================
-   TAP RUSH
-========================= */
-
-function startTapRush(){
-
- tapScore=0;
- tapTime=30;
-
- const scoreEl=document.getElementById('tapScore');
- const timeEl=document.getElementById('tapTime');
-
- if(scoreEl)scoreEl.textContent='0';
- if(timeEl)timeEl.textContent='30';
-
- clearInterval(tapTimer);
-
- tapTimer=setInterval(()=>{
-
-  tapTime--;
-
-  if(timeEl)
-   timeEl.textContent=tapTime;
-
-  if(tapTime<=0){
-
-   clearInterval(tapTimer);
-
-   points+=tapScore;
-   gamesPlayed++;
-
-   saveLocal();
-   render();
-
-   alert(
-    'Tap Rush শেষ!\nScore: '+tapScore+
-    '\n+'+tapScore+' Points'
-   );
-
-   closeModal();
-  }
-
- },1000);
-}
-
-
-function tapRushTap(){
-
- if(tapTime<=0)return;
-
- tapScore++;
-
- const el=document.getElementById('tapScore');
-
- if(el)
-  el.textContent=tapScore;
-}
-
-
-/* =========================
-   MATCH SEVEN
-========================= */
-
-let matchCards=[];
-let matchFirst=null;
-let matchLocked=false;
-let matchScore=0;
-
-function startMatchSeven(){
-
- const values=['🍎','🍎','🚀','🚀','⭐','⭐','🎯','🎯'];
-
- matchCards=
-  values
-   .sort(()=>Math.random()-.5)
-   .map((v,i)=>({
-    id:i,
-    value:v,
-    open:false,
-    matched:false
-   }));
-
- matchFirst=null;
- matchLocked=false;
- matchScore=0;
-
- renderMatchGame();
-}
-
-
-function renderMatchGame(){
-
- const box=document.getElementById('matchGame');
-
- if(!box)return;
-
- box.innerHTML=`
-  <div class="grid">
-   ${matchCards.map(card=>`
-
-    <button
-     class="btn btn-secondary"
-     style="height:80px;font-size:28px"
-     onclick="matchClick(${card.id})">
-     ${
-      card.open||card.matched
-       ? card.value
-       : '❓'
-     }
-    </button>
-
-   `).join('')}
-  </div>
-
-  <div class="notice info">
-   Score: ${matchScore}
-  </div>
- `;
-}
-
-
-function matchClick(id){
-
- if(matchLocked)return;
-
- const card=matchCards.find(c=>c.id===id);
-
- if(!card||card.open||card.matched)return;
-
- card.open=true;
-
- if(!matchFirst){
-
-  matchFirst=card;
-  renderMatchGame();
-  return;
- }
-
- renderMatchGame();
-
- const second=card;
-
- matchLocked=true;
-
- setTimeout(()=>{
-
-  if(matchFirst.value===second.value){
-
-   matchFirst.matched=true;
-   second.matched=true;
-
-   matchScore+=10;
-
-  }else{
-
-   matchFirst.open=false;
-   second.open=false;
-
-  }
-
-  matchFirst=null;
-  matchLocked=false;
-
-  renderMatchGame();
-
-  if(matchCards.every(c=>c.matched)){
-
-   points+=matchScore;
-   gamesPlayed++;
-
-   saveLocal();
-   render();
-
-   setTimeout(()=>{
-
-    alert(
-     'Match Seven Complete!\nScore: '+
-     matchScore+
-     '\n+'+matchScore+' Points'
-    );
-
-    closeModal();
-
-   },100);
-  }
-
- },600);
-}
-
-
-/* =========================
-   BRAIN BOX
-========================= */
-
-const brainQuestions=[
- {
-  q:'বাংলাদেশের রাজধানী কোনটি?',
-  a:['ঢাকা','চট্টগ্রাম','খুলনা','রাজশাহী'],
-  correct:0
- },
- {
-  q:'2 + 2 = কত?',
-  a:['3','4','5','6'],
-  correct:1
- },
- {
-  q:'HTML কী তৈরি করতে ব্যবহৃত হয়?',
-  a:['Web Page','Database','Operating System','Antivirus'],
-  correct:0
- },
- {
-  q:'Supabase কোন ধরনের platform?',
-  a:['Backend Platform','Game Console','Browser','Keyboard'],
-  correct:0
- }
-];
-
-let brainIndex=0;
-let brainScore=0;
-
-function startBrainBox(){
-
- brainIndex=0;
- brainScore=0;
-
- renderBrainQuestion();
-}
-
-
-function renderBrainQuestion(){
-
- const box=document.getElementById('brainGame');
-
- if(!box)return;
-
- if(brainIndex>=brainQuestions.length){
-
-  points+=brainScore;
-  gamesPlayed++;
-
-  saveLocal();
-  render();
-
-  box.innerHTML=`
-   <div class="card" style="text-align:center">
-    <h2>🎉 Complete!</h2>
-    <div class="stat">+${brainScore}</div>
-    <p>Points যোগ হয়েছে।</p>
-
-    <button class="btn btn-primary"
-     onclick="closeModal()">
-     Close
-    </button>
-   </div>
-  `;
-
-  return;
- }
-
- const item=brainQuestions[brainIndex];
-
- box.innerHTML=`
-  <div class="notice info">
-   Question ${brainIndex+1} / ${brainQuestions.length}
-  </div>
-
-  <h3>${esc(item.q)}</h3>
-
-  <div style="display:grid;gap:9px">
-
-   ${item.a.map((answer,i)=>`
-
-    <button class="btn btn-secondary"
-     onclick="brainAnswer(${i})">
-     ${esc(answer)}
-    </button>
-
-   `).join('')}
-
-  </div>
-
-  <div class="notice info">
-   Score: ${brainScore}
-  </div>
- `;
-}
-
-
-function brainAnswer(index){
-
- const item=brainQuestions[brainIndex];
-
- if(index===item.correct)
-  brainScore+=10;
-
- brainIndex++;
-
- renderBrainQuestion();
-}
-
-
-/* =========================
-   FLY HIGH
-========================= */
-
-let flyCanvas=null;
-let flyCtx=null;
-let flyFrame=null;
-let flyScore=0;
-let flyPlayer={x:55,y:200,vy:0};
-let flyObstacles=[];
-let flyRunning=false;
-let flyLast=0;
-
-function startFlyHigh(){
-
- flyCanvas=document.getElementById('flyCanvas');
-
- if(!flyCanvas)return;
-
- flyCtx=flyCanvas.getContext('2d');
-
- flyScore=0;
-
- flyPlayer={
-  x:55,
-  y:200,
-  vy:0
- };
-
- flyObstacles=[];
-
- flyRunning=true;
- flyLast=performance.now();
-
- flyCanvas.onclick=flyJump;
-
- requestAnimationFrame(flyLoop);
-}
-
-
-function flyJump(){
-
- if(!flyRunning)return;
-
- flyPlayer.vy=-6.5;
-}
-
-
-function flyLoop(time){
-
- if(!flyRunning)return;
-
- const dt=Math.min(32,time-flyLast);
-
- flyLast=time;
-
- flyPlayer.vy+=0.35*(dt/16);
- flyPlayer.y+=flyPlayer.vy*(dt/16);
-
- if(
-  flyObstacles.length===0 ||
-  flyObstacles[flyObstacles.length-1].x<180
- ){
-
-  const gap=145;
-  const top=50+Math.random()*180;
-
-  flyObstacles.push({
-   x:320,
-   top,
-   bottom:top+gap,
-   passed:false
-  });
- }
-
- flyObstacles.forEach(o=>{
-  o.x-=3*(dt/16);
-
-  if(!o.passed && o.x<flyPlayer.x){
-
-   o.passed=true;
-   flyScore++;
-  }
- });
-
- flyObstacles=
-  flyObstacles.filter(o=>o.x>-70);
-
- drawFly();
-
- const hitWall=
-  flyPlayer.y<0||
-  flyPlayer.y>400;
-
- let hit=false;
-
- flyObstacles.forEach(o=>{
-
-  const px=flyPlayer.x;
-  const py=flyPlayer.y;
-
-  if(
-   px+16>o.x &&
-   px-16<o.x+48 &&
-   (py-16<o.top || py+16>o.bottom)
-  ){
-   hit=true;
-  }
-
- });
-
- if(hit||hitWall){
-
-  flyRunning=false;
-
-  points+=flyScore;
-  gamesPlayed++;
-
-  saveLocal();
-  render();
-
-  setTimeout(()=>{
-
-   alert(
-    'Fly High Game Over!\nScore: '+
-    flyScore+
-    '\n+'+flyScore+' Points'
-   );
-
-   closeModal();
-
-  },100);
-
-  return;
- }
-
- flyFrame=requestAnimationFrame(flyLoop);
-}
-
-
-function drawFly(){
-
- const c=flyCanvas;
- const ctx=flyCtx;
-
- if(!c||!ctx)return;
-
- ctx.clearRect(0,0,c.width,c.height);
-
- ctx.fillStyle='#0d3045';
- ctx.fillRect(0,0,c.width,c.height);
-
- ctx.fillStyle='#21e6a8';
-
- ctx.beginPath();
- ctx.arc(
-  flyPlayer.x,
-  flyPlayer.y,
-  15,
-  0,
-  Math.PI*2
- );
-
- ctx.fill();
-
- ctx.fillStyle='#4b8bb0';
-
- flyObstacles.forEach(o=>{
-
-  ctx.fillRect(
-   o.x,
-   0,
-   48,
-   o.top
-  );
-
-  ctx.fillRect(
-   o.x,
-   o.bottom,
-   48,
-   c.height-o.bottom
-  );
-
- });
-
- ctx.fillStyle='#fff';
- ctx.font='18px Arial';
-
- ctx.fillText(
-  'Score: '+flyScore,
-  12,
-  25
- );
-}
-
-
-/* =========================
-   STARTUP
-========================= */
-
-render();
-loadSupabaseUser();
-loadJobsFromSupabase();
-
-supabaseClient.auth.onAuthStateChange(
- async(event,session)=>{
-
-  currentUser=session?.user||null;
-
-  if(currentUser){
-
-   await loadProfileFromSupabase();
-
-  }else{
-
-   myApplications=[];
-  }
-
-  await updateUserUI();
-
-  render();
- }
-);
+initAuth();
 
 </script>
 
