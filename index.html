@@ -3371,8 +3371,6 @@ async function adminLoadJobs(){
 
 /* AUTH STATE */
 
-/* AUTH STATE */
-
 supabaseClient.auth.onAuthStateChange(async (event, session) => {
 
   currentUser = session?.user || null;
