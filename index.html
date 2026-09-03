@@ -112,6 +112,9 @@ button,.btn{
  background:#14a6df;
  color:#fff;
 }
+button:hover,.btn:hover{
+ opacity:.9;
+}
 .btn.secondary{
  background:#1a384d;
 }
@@ -360,6 +363,14 @@ label{
  color:#91a8b7;
 }
 
+.danger{
+ background:#692731!important;
+}
+
+.success{
+ background:#145b3e!important;
+}
+
 @media(max-width:520px){
  h1{font-size:25px}
  .steps,.skills,.grid{
@@ -585,6 +596,7 @@ Skill-based gaming-এর মাধ্যমে Points অর্জন করু
 <input id="jobTitle" placeholder="যেমন: Facebook পোস্ট ডিজাইন">
 
 <label>Skill</label>
+
 <select id="jobSkill">
 <option value="Graphic Design">Graphic Design</option>
 <option value="Video Editing">Video Editing</option>
@@ -596,7 +608,11 @@ Skill-based gaming-এর মাধ্যমে Points অর্জন করু
 <input id="jobBudget" placeholder="যেমন: ৳500–৳1,500">
 
 <label>Description</label>
-<textarea id="jobDescription" placeholder="কাজের বিস্তারিত লিখুন..."></textarea>
+
+<textarea
+ id="jobDescription"
+ placeholder="কাজের বিস্তারিত লিখুন..."
+></textarea>
 
 <div class="jobBtns">
 
@@ -657,12 +673,15 @@ Guest হিসেবে আছেন। Login করলে আপনার Prof
 </div>
 
 <div class="btns">
+
 <button onclick="openLogin()">
 🔐 Login
 </button>
+
 <button class="btn secondary" onclick="openRegister()">
 📝 Register
 </button>
+
 </div>
 
 </div>
@@ -689,6 +708,10 @@ Guest হিসেবে আছেন। Login করলে আপনার Prof
 
 <div class="check">
 ✓ Job Application ও Skill Showcase
+</div>
+
+<div class="check">
+✓ Secure Account & Application System
 </div>
 
 </div>
@@ -746,12 +769,25 @@ Profile
 <h2>🔐 Login</h2>
 
 <label>Email</label>
-<input id="loginEmail" type="email" placeholder="আপনার Email">
+
+<input
+ id="loginEmail"
+ type="email"
+ placeholder="আপনার Email"
+>
 
 <label>Password</label>
-<input id="loginPassword" type="password" placeholder="Password">
 
-<button onclick="loginUser()" style="width:100%;margin-top:10px">
+<input
+ id="loginPassword"
+ type="password"
+ placeholder="Password"
+>
+
+<button
+ onclick="loginUser()"
+ style="width:100%;margin-top:10px"
+>
 Login
 </button>
 
@@ -777,15 +813,32 @@ Account না থাকলে Register করুন।
 <h2>📝 Register</h2>
 
 <label>Name</label>
-<input id="registerName" placeholder="আপনার নাম">
+
+<input
+ id="registerName"
+ placeholder="আপনার নাম"
+>
 
 <label>Email</label>
-<input id="registerEmail" type="email" placeholder="আপনার Email">
+
+<input
+ id="registerEmail"
+ type="email"
+ placeholder="আপনার Email"
+>
 
 <label>Password</label>
-<input id="registerPassword" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
 
-<button onclick="registerUser()" style="width:100%;margin-top:10px">
+<input
+ id="registerPassword"
+ type="password"
+ placeholder="কমপক্ষে ৬ অক্ষর"
+>
+
+<button
+ onclick="registerUser()"
+ style="width:100%;margin-top:10px"
+>
 Create Account
 </button>
 
@@ -808,12 +861,19 @@ Create Account
 
 <div id="applyJobTitle" class="notice"></div>
 
-<label>আপনার Message</label>
+<label>
+আপনার Message
+</label>
 
-<textarea id="applicationMessage"
-placeholder="আপনার দক্ষতা, অভিজ্ঞতা এবং কেন আপনি এই কাজটি করতে পারবেন লিখুন..."></textarea>
+<textarea
+ id="applicationMessage"
+ placeholder="আপনার দক্ষতা, অভিজ্ঞতা এবং কেন আপনি এই কাজটি করতে পারবেন লিখুন..."
+></textarea>
 
-<button onclick="submitApplication()" style="width:100%;margin-top:8px">
+<button
+ onclick="submitApplication()"
+ style="width:100%;margin-top:8px"
+>
 🚀 Application Submit
 </button>
 
@@ -822,7 +882,7 @@ placeholder="আপনার দক্ষতা, অভিজ্ঞতা এব
 </div>
 
 
-<!-- APPLICATIONS MODAL -->
+<!-- OWNER APPLICATIONS MODAL -->
 
 <div class="modal" id="ownerApplicationsModal">
 
@@ -847,9 +907,9 @@ Loading...
 
 <script>
 
-/* ===============================
-   SUPABASE
-================================ */
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
 
 const SUPABASE_URL =
 'https://cavrhkprzbbtimlixbqp.supabase.co';
@@ -859,17 +919,19 @@ const SUPABASE_KEY =
 
 const supabaseClient =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+ SUPABASE_URL,
+ SUPABASE_KEY
 );
 
 
-/* ===============================
+/* =====================================================
    STATE
-================================ */
+===================================================== */
 
 let currentUser = null;
+
 let selectedJobId = null;
+
 let selectedJobTitle = '';
 
 let points =
@@ -879,81 +941,149 @@ let gamesPlayed =
 Number(localStorage.getItem('pz_games_played') || 0);
 
 
-/* ===============================
-   BASIC UI
-================================ */
+/* =====================================================
+   LOCAL STATS
+===================================================== */
 
 function updateLocalStats(){
 
- document.getElementById('points').textContent =
- points.toLocaleString();
+ const pointsElement =
+ document.getElementById('points');
 
- document.getElementById('playedCount').textContent =
- gamesPlayed;
+ const playedElement =
+ document.getElementById('playedCount');
+
+ if(pointsElement){
+   pointsElement.textContent =
+   points.toLocaleString();
+ }
+
+ if(playedElement){
+   playedElement.textContent =
+   gamesPlayed;
+ }
 
  localStorage.setItem(
- 'pz_points',
- points
+   'pz_points',
+   points
  );
 
  localStorage.setItem(
- 'pz_games_played',
- gamesPlayed
+   'pz_games_played',
+   gamesPlayed
+);
+
 }
 
 updateLocalStats();
 
 
+/* =====================================================
+   MODAL
+===================================================== */
+
 function openModal(id){
- document.getElementById(id).style.display='block';
+
+ const modal =
+ document.getElementById(id);
+
+ if(modal){
+   modal.style.display='block';
+ }
+
 }
+
 
 function closeModal(id){
- document.getElementById(id).style.display='none';
+
+ const modal =
+ document.getElementById(id);
+
+ if(modal){
+   modal.style.display='none';
+ }
+
 }
+
 
 function openLogin(){
+
+ closeModal('registerModal');
+
  openModal('loginModal');
+
 }
+
 
 function openRegister(){
+
+ closeModal('loginModal');
+
  openModal('registerModal');
+
 }
+
 
 function openProfile(){
- document.getElementById('profile').scrollIntoView();
+
+ document
+ .getElementById('profile')
+ .scrollIntoView({
+   behavior:'smooth'
+ });
+
 }
 
 
-/* ===============================
-   AUTH
-================================ */
+/* =====================================================
+   AUTH — REGISTER
+===================================================== */
 
 async function registerUser(){
 
  const name =
- document.getElementById('registerName').value.trim();
+ document
+ .getElementById('registerName')
+ .value
+ .trim();
 
  const email =
- document.getElementById('registerEmail').value.trim();
+ document
+ .getElementById('registerEmail')
+ .value
+ .trim();
 
  const password =
- document.getElementById('registerPassword').value;
+ document
+ .getElementById('registerPassword')
+ .value;
 
  if(!name || !email || !password){
-   alert('সব তথ্য পূরণ করুন।');
+
+   alert(
+   'সব তথ্য পূরণ করুন।'
+   );
+
    return;
  }
 
  if(password.length < 6){
-   alert('Password কমপক্ষে ৬ অক্ষরের হতে হবে।');
+
+   alert(
+   'Password কমপক্ষে ৬ অক্ষরের হতে হবে।'
+   );
+
    return;
  }
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient.auth.signUp({
 
    email:email,
+
    password:password,
 
    options:{
@@ -966,59 +1096,123 @@ async function registerUser(){
  });
 
  if(error){
-   alert('Registration Error: '+error.message);
+
+   console.error(error);
+
+   alert(
+   'Registration Error: '+
+   error.message
+   );
+
    return;
  }
 
  closeModal('registerModal');
 
+ document.getElementById(
+   'registerName'
+ ).value='';
+
+ document.getElementById(
+   'registerEmail'
+ ).value='';
+
+ document.getElementById(
+   'registerPassword'
+ ).value='';
+
  alert(
- 'Registration সফল হয়েছে। Email verification প্রয়োজন হলে আপনার Email check করুন।'
+ '🎉 Registration সফল হয়েছে। Email verification প্রয়োজন হলে আপনার Email check করুন।'
  );
 
 }
 
 
+/* =====================================================
+   AUTH — LOGIN
+===================================================== */
+
 async function loginUser(){
 
  const email =
- document.getElementById('loginEmail').value.trim();
+ document
+ .getElementById('loginEmail')
+ .value
+ .trim();
 
  const password =
- document.getElementById('loginPassword').value;
+ document
+ .getElementById('loginPassword')
+ .value;
 
  if(!email || !password){
-   alert('Email এবং Password দিন।');
+
+   alert(
+   'Email এবং Password দিন।'
+   );
+
    return;
  }
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient.auth.signInWithPassword({
+
    email:email,
+
    password:password
+
  });
 
  if(error){
-   alert('Login Error: '+error.message);
+
+   console.error(error);
+
+   alert(
+   'Login Error: '+
+   error.message
+   );
+
    return;
  }
 
  closeModal('loginModal');
 
- alert('Login সফল হয়েছে।');
+ document.getElementById(
+   'loginPassword'
+ ).value='';
 
- loadSupabaseUser();
+ alert(
+ '🎉 Login সফল হয়েছে।'
+ );
+
+ await loadSupabaseUser();
 
 }
 
 
+/* =====================================================
+   AUTH — LOGOUT
+===================================================== */
+
 async function logoutUser(){
 
- const {error} =
+ const {
+   error
+ } =
  await supabaseClient.auth.signOut();
 
  if(error){
-   alert(error.message);
+
+   console.error(error);
+
+   alert(
+   'Logout Error: '+
+   error.message
+   );
+
    return;
  }
 
@@ -1026,10 +1220,22 @@ async function logoutUser(){
 
  updateUserUI();
 
- alert('Logout সফল হয়েছে।');
+ loadJobs();
+
+ document.getElementById(
+   'myApplications'
+ ).innerHTML='';
+
+ alert(
+ 'আপনি সফলভাবে Logout করেছেন।'
+ );
 
 }
 
+
+/* =====================================================
+   USER UI
+===================================================== */
 
 function updateUserUI(){
 
@@ -1039,6 +1245,11 @@ function updateUserUI(){
  const profile =
  document.getElementById('profileContent');
 
+ const applicationsSection =
+ document.getElementById(
+   'applicationsSection'
+ );
+
  if(currentUser){
 
    const name =
@@ -1047,13 +1258,16 @@ function updateUserUI(){
    currentUser.email?.split('@')[0] ||
    'User';
 
-   badge.textContent='👤 '+name;
+   badge.textContent =
+   '👤 '+name;
 
    profile.innerHTML=`
 
    <div class="notice">
 
-   <b>${escapeHTML(name)}</b><br>
+   <b>${escapeHTML(name)}</b>
+
+   <br>
 
    Email:
    ${escapeHTML(currentUser.email || '')}
@@ -1074,25 +1288,30 @@ function updateUserUI(){
 
    <div class="btns">
 
-   <button onclick="logoutUser">
+   <button onclick="logoutUser()">
    🚪 Logout
    </button>
 
    </div>
+
    `;
 
-   document.getElementById(
-   'applicationsSection'
-   ).style.display='block';
+   applicationsSection.style.display='block';
 
  }else{
 
-   badge.textContent='👤 Guest';
+   badge.textContent =
+   '👤 Guest';
 
    profile.innerHTML=`
 
    <div class="notice">
-   Guest হিসেবে আছেন। Login করলে আপনার Profile, Applications এবং Job management ব্যবহার করতে পারবেন।
+
+   Guest হিসেবে আছেন।
+   Login করলে আপনার Profile,
+   Applications এবং Job management
+   ব্যবহার করতে পারবেন।
+
    </div>
 
    <div class="btns">
@@ -1101,29 +1320,43 @@ function updateUserUI(){
    🔐 Login
    </button>
 
-   <button class="btn secondary"
-   onclick="openRegister()">
+   <button
+   class="btn secondary"
+   onclick="openRegister()"
+   >
    📝 Register
    </button>
 
    </div>
+
    `;
 
-   document.getElementById(
-   'applicationsSection'
-   ).style.display='none';
+   applicationsSection.style.display='none';
+
  }
 
 }
 
 
+/* =====================================================
+   LOAD CURRENT USER
+===================================================== */
+
 async function loadSupabaseUser(){
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient.auth.getUser();
 
  if(error){
-   console.log(error);
+
+   console.log(
+   'User check:',
+   error.message
+   );
+
  }
 
  currentUser =
@@ -1131,41 +1364,55 @@ async function loadSupabaseUser(){
 
  updateUserUI();
 
- loadJobs();
+ await loadJobs();
 
  if(currentUser){
-   loadMyApplications();
+
+   await loadMyApplications();
+
  }
 
 }
 
 
+/* =====================================================
+   AUTH STATE LISTENER
+===================================================== */
+
 supabaseClient.auth.onAuthStateChange(
-(event,session)=>{
+ async(event,session)=>{
 
- currentUser =
- session?.user || null;
+   currentUser =
+   session?.user || null;
 
- updateUserUI();
+   updateUserUI();
 
- loadJobs();
+   await loadJobs();
 
- if(currentUser){
-   loadMyApplications();
+   if(currentUser){
+
+     await loadMyApplications();
+
+   }
+
  }
+);
 
-});
 
-
-/* ===============================
-   JOB SYSTEM
-================================ */
+/* =====================================================
+   JOB FORM
+===================================================== */
 
 function showJobForm(){
 
  if(!currentUser){
-   alert('Job Post করতে Login করুন।');
+
+   alert(
+   'Job Post করতে Login করুন।'
+   );
+
    openLogin();
+
    return;
  }
 
@@ -1185,40 +1432,78 @@ function hideJobForm(){
 }
 
 
+/* =====================================================
+   ADD JOB
+===================================================== */
+
 async function addJob(){
 
  if(!currentUser){
-   alert('Job Post করতে Login করুন।');
+
+   alert(
+   'Job Post করতে Login করুন।'
+   );
+
+   openLogin();
+
    return;
  }
 
  const title =
- document.getElementById('jobTitle').value.trim();
+ document
+ .getElementById('jobTitle')
+ .value
+ .trim();
 
  const skill =
- document.getElementById('jobSkill').value;
+ document
+ .getElementById('jobSkill')
+ .value;
 
  const budget =
- document.getElementById('jobBudget').value.trim();
+ document
+ .getElementById('jobBudget')
+ .value
+ .trim();
 
  const description =
- document.getElementById('jobDescription').value.trim();
+ document
+ .getElementById('jobDescription')
+ .value
+ .trim();
 
- if(!title || !skill || !budget || !description){
-   alert('সব তথ্য পূরণ করুন।');
+ if(
+   !title ||
+   !skill ||
+   !budget ||
+   !description
+ ){
+
+   alert(
+   'সব তথ্য পূরণ করুন।'
+   );
+
    return;
  }
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient
  .from('jobs')
  .insert({
 
    title:title,
+
    skill:skill,
+
    budget:budget,
+
    description:description,
+
    poster_id:currentUser.id,
+
    status:'open'
 
  })
@@ -1237,41 +1522,64 @@ async function addJob(){
    return;
  }
 
- document.getElementById('jobTitle').value='';
- document.getElementById('jobBudget').value='';
- document.getElementById('jobDescription').value='';
+ document.getElementById(
+ 'jobTitle'
+ ).value='';
+
+ document.getElementById(
+ 'jobBudget'
+ ).value='';
+
+ document.getElementById(
+ 'jobDescription'
+ ).value='';
 
  hideJobForm();
 
- alert('🎉 Job সফলভাবে Publish হয়েছে!');
+ alert(
+ '🎉 Job সফলভাবে Publish হয়েছে!'
+ );
 
- loadJobs();
+ await loadJobs();
 
 }
 
 
-/* ===============================
+/* =====================================================
    LOAD JOBS
-================================ */
+===================================================== */
 
 async function loadJobs(){
 
  const list =
  document.getElementById('jobsList');
 
+ if(!list){
+   return;
+ }
+
  list.innerHTML=
  '<div class="loading">Jobs loading...</div>';
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient
  .from('jobs')
  .select(
- 'id,title,skill,budget,description,status,poster_id,created_at'
+   'id,title,skill,budget,description,status,poster_id,created_at'
  )
- .eq('status','open')
- .order('created_at',{
-   ascending:false
- });
+ .eq(
+   'status',
+   'open'
+ )
+ .order(
+   'created_at',
+   {
+     ascending:false
+   }
+ );
 
  if(error){
 
@@ -1283,11 +1591,13 @@ async function loadJobs(){
    return;
  }
 
- const jobs=data || [];
+ const jobs =
+ data || [];
 
  document.getElementById(
- 'jobCount'
- ).textContent=jobs.length;
+   'jobCount'
+ ).textContent =
+ jobs.length;
 
  if(!jobs.length){
 
@@ -1308,7 +1618,7 @@ async function loadJobs(){
 
    const owner =
    currentUser &&
-   currentUser.id===job.poster_id;
+   currentUser.id === job.poster_id;
 
    div.innerHTML=`
 
@@ -1319,11 +1629,17 @@ async function loadJobs(){
    <div class="jobInfo">
 
    🎯 Skill:
-   <b>${escapeHTML(job.skill || '')}</b>
+   <b>
+   ${escapeHTML(job.skill || '')}
+   </b>
+
    <br>
 
    💰 Budget:
-   <b>${escapeHTML(job.budget || '')}</b>
+   <b>
+   ${escapeHTML(job.budget || '')}
+   </b>
+
    <br>
 
    📝 ${escapeHTML(job.description || '')}
@@ -1334,19 +1650,38 @@ async function loadJobs(){
 
    ${
      owner
+
      ?
-     `<button class="smallBtn"
-       onclick="viewApplications('${job.id}','${escapeJS(job.title)}')">
-       📨 Applications দেখুন
-      </button>`
+
+     `
+     <button
+     class="smallBtn"
+     onclick="viewApplications(
+       '${escapeJS(job.id)}',
+       '${escapeJS(job.title)}'
+     )"
+     >
+     📨 Applications দেখুন
+     </button>
+     `
+
      :
-     `<button class="smallBtn"
-       onclick="applyJob('${job.id}','${escapeJS(job.title)}')">
-       🚀 Apply Job
-      </button>`
+
+     `
+     <button
+     class="smallBtn"
+     onclick="applyJob(
+       '${escapeJS(job.id)}',
+       '${escapeJS(job.title)}'
+     )"
+     >
+     🚀 Apply Job
+     </button>
+     `
    }
 
    </div>
+
    `;
 
    list.appendChild(div);
@@ -1356,11 +1691,14 @@ async function loadJobs(){
 }
 
 
-/* ===============================
-   APPLY
-================================ */
+/* =====================================================
+   APPLY JOB
+===================================================== */
 
-function applyJob(jobId,title){
+function applyJob(
+ jobId,
+ title
+){
 
  if(!currentUser){
 
@@ -1373,12 +1711,15 @@ function applyJob(jobId,title){
    return;
  }
 
- selectedJobId=jobId;
- selectedJobTitle=title;
+ selectedJobId =
+ jobId;
+
+ selectedJobTitle =
+ title;
 
  document.getElementById(
  'applyJobTitle'
- ).textContent=
+ ).textContent =
  '💼 '+title;
 
  document.getElementById(
@@ -1390,26 +1731,37 @@ function applyJob(jobId,title){
 }
 
 
+/* =====================================================
+   SUBMIT APPLICATION
+===================================================== */
+
 async function submitApplication(){
 
  if(!currentUser){
 
-   alert('Login করুন।');
-   return;
+   alert(
+   'Login করুন।'
+   );
 
+   return;
  }
 
  if(!selectedJobId){
 
-   alert('Job নির্বাচন করা হয়নি।');
-   return;
+   alert(
+   'Job নির্বাচন করা হয়নি।'
+   );
 
+   return;
  }
 
  const message =
- document.getElementById(
- 'applicationMessage'
- ).value.trim();
+ document
+ .getElementById(
+   'applicationMessage'
+ )
+ .value
+ .trim();
 
  if(!message){
 
@@ -1420,14 +1772,20 @@ async function submitApplication(){
    return;
  }
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient
  .from('applications')
  .insert({
 
    job_id:selectedJobId,
+
    applicant_id:currentUser.id,
+
    message:message,
+
    status:'pending'
 
  })
@@ -1438,7 +1796,7 @@ async function submitApplication(){
 
    console.error(error);
 
-   if(error.code==='23505'){
+   if(error.code === '23505'){
 
      alert(
      'আপনি এই Job-এ ইতিমধ্যে Apply করেছেন।'
@@ -1458,40 +1816,61 @@ async function submitApplication(){
 
  closeModal('applyModal');
 
+ document.getElementById(
+   'applicationMessage'
+ ).value='';
+
  alert(
  '🎉 Application সফলভাবে Submit হয়েছে।'
  );
 
- loadMyApplications();
+ await loadMyApplications();
 
 }
 
 
+/* =====================================================
+   MY APPLICATIONS
+===================================================== */
+
 async function loadMyApplications(){
 
  if(!currentUser){
+
    return;
  }
 
  const box =
- document.getElementById('myApplications');
+ document.getElementById(
+   'myApplications'
+ );
+
+ if(!box){
+
+   return;
+ }
 
  box.innerHTML=
  '<div class="loading">Applications loading...</div>';
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient
  .from('applications')
  .select(
- 'id,job_id,message,status,created_at'
+   'id,job_id,message,status,created_at'
  )
  .eq(
- 'applicant_id',
- currentUser.id
+   'applicant_id',
+   currentUser.id
  )
  .order(
- 'created_at',
- {ascending:false}
+   'created_at',
+   {
+     ascending:false
+   }
  );
 
  if(error){
@@ -1504,11 +1883,13 @@ async function loadMyApplications(){
    return;
  }
 
- const apps=data || [];
+ const apps =
+ data || [];
 
  document.getElementById(
- 'applicationCount'
- ).textContent=apps.length;
+   'applicationCount'
+ ).textContent =
+ apps.length;
 
  if(!apps.length){
 
@@ -1520,7 +1901,9 @@ async function loadMyApplications(){
 
  box.innerHTML='';
 
- for(const app of apps){
+ for(
+   const app of apps
+ ){
 
    const div =
    document.createElement('div');
@@ -1532,29 +1915,48 @@ async function loadMyApplications(){
    const jobResult =
    await supabaseClient
    .from('jobs')
-   .select('title,skill,budget')
-   .eq('id',app.job_id)
+   .select(
+     'title,skill,budget'
+   )
+   .eq(
+     'id',
+     app.job_id
+   )
    .maybeSingle();
 
    if(jobResult.data){
-     title=jobResult.data.title;
+
+     title =
+     jobResult.data.title;
+
    }
+
+   const safeStatus =
+   getStatusClass(
+     app.status
+   );
 
    div.innerHTML=`
 
-   <h3>💼 ${escapeHTML(title)}</h3>
+   <h3>
+   💼 ${escapeHTML(title)}
+   </h3>
 
    <div class="jobInfo">
 
    Status:
 
-   <span class="status ${escapeHTML(app.status)}">
-   ${escapeHTML(app.status)}
+   <span class="status ${safeStatus}">
+   ${escapeHTML(
+     formatStatus(app.status)
+   )}
    </span>
 
    <br><br>
 
-   📝 ${escapeHTML(app.message || '')}
+   📝 ${escapeHTML(
+     app.message || ''
+   )}
 
    </div>
 
@@ -1567,41 +1969,57 @@ async function loadMyApplications(){
 }
 
 
-/* ===============================
+/* =====================================================
    OWNER APPLICATIONS
-================================ */
+===================================================== */
 
-async function viewApplications(jobId,title){
+async function viewApplications(
+ jobId,
+ title
+){
 
  if(!currentUser){
 
-   alert('Login করুন।');
-   return;
+   alert(
+   'Login করুন।'
+   );
 
+   return;
  }
 
- selectedJobId=jobId;
+ selectedJobId =
+ jobId;
+
+ selectedJobTitle =
+ title;
 
  document.getElementById(
- 'ownerApplications'
+   'ownerApplications'
  ).innerHTML=
  '<div class="loading">Applications loading...</div>';
 
- openModal('ownerApplicationsModal');
+ openModal(
+   'ownerApplicationsModal'
+ );
 
- const {data,error} =
+ const {
+   data,
+   error
+ } =
  await supabaseClient
  .from('applications')
  .select(
- 'id,job_id,applicant_id,message,status,created_at'
+   'id,job_id,applicant_id,message,status,created_at'
  )
  .eq(
- 'job_id',
- jobId
+   'job_id',
+   jobId
  )
  .order(
- 'created_at',
- {ascending:false}
+   'created_at',
+   {
+     ascending:false
+   }
  );
 
  if(error){
@@ -1609,19 +2027,20 @@ async function viewApplications(jobId,title){
    console.error(error);
 
    document.getElementById(
-   'ownerApplications'
+     'ownerApplications'
    ).innerHTML=
    '<div class="empty">Applications access করা যায়নি।</div>';
 
    return;
  }
 
- const apps=data || [];
+ const apps =
+ data || [];
 
  if(!apps.length){
 
    document.getElementById(
-   'ownerApplications'
+     'ownerApplications'
    ).innerHTML=
    '<div class="empty">এই Job-এ এখনো কোনো Application নেই।</div>';
 
@@ -1630,7 +2049,7 @@ async function viewApplications(jobId,title){
 
  const box =
  document.getElementById(
- 'ownerApplications'
+   'ownerApplications'
  );
 
  box.innerHTML='';
@@ -1642,6 +2061,11 @@ async function viewApplications(jobId,title){
 
    div.className='job';
 
+   const safeStatus =
+   getStatusClass(
+     app.status
+   );
+
    div.innerHTML=`
 
    <h3>
@@ -1652,21 +2076,30 @@ async function viewApplications(jobId,title){
 
    Applicant ID:
    <br>
+
    <small>
-   ${escapeHTML(app.applicant_id)}
+   ${escapeHTML(
+     app.applicant_id
+   )}
    </small>
 
    <br><br>
 
    📝 Message:
    <br>
-   ${escapeHTML(app.message || '')}
+
+   ${escapeHTML(
+     app.message || ''
+   )}
 
    <br><br>
 
    Status:
-   <span class="status ${escapeHTML(app.status)}">
-   ${escapeHTML(app.status)}
+
+   <span class="status ${safeStatus}">
+   ${escapeHTML(
+     formatStatus(app.status)
+   )}
    </span>
 
    </div>
@@ -1674,24 +2107,35 @@ async function viewApplications(jobId,title){
    <div class="jobBtns">
 
    ${
-    app.status==='pending'
-    ?
-    `
-    <button
-    class="smallBtn"
-    onclick="updateApplication('${app.id}','accepted')">
-    ✅ Accept
-    </button>
+     app.status === 'pending'
 
-    <button
-    class="smallBtn"
-    style="background:#692731"
-    onclick="updateApplication('${app.id}','rejected')">
-    ❌ Reject
-    </button>
-    `
-    :
-    ''
+     ?
+
+     `
+     <button
+     class="smallBtn success"
+     onclick="updateApplication(
+       '${escapeJS(app.id)}',
+       'accepted'
+     )"
+     >
+     ✅ Accept
+     </button>
+
+     <button
+     class="smallBtn danger"
+     onclick="updateApplication(
+       '${escapeJS(app.id)}',
+       'rejected'
+     )"
+     >
+     ❌ Reject
+     </button>
+     `
+
+     :
+
+     ''
    }
 
    </div>
@@ -1705,19 +2149,27 @@ async function viewApplications(jobId,title){
 }
 
 
+/* =====================================================
+   UPDATE APPLICATION STATUS
+===================================================== */
+
 async function updateApplication(
-applicationId,
-newStatus
+ applicationId,
+ newStatus
 ){
 
  if(!currentUser){
 
-   alert('Login করুন।');
-   return;
+   alert(
+   'Login করুন।'
+   );
 
+   return;
  }
 
- const {error} =
+ const {
+   error
+ } =
  await supabaseClient
  .from('applications')
  .update({
@@ -1741,59 +2193,167 @@ newStatus
  }
 
  alert(
- newStatus==='accepted'
- ? 'Application Accepted হয়েছে।'
- : 'Application Rejected হয়েছে।'
+   newStatus === 'accepted'
+   ?
+   '✅ Application Accepted হয়েছে।'
+   :
+   '❌ Application Rejected হয়েছে।'
  );
 
- viewApplications(
- selectedJobId,
- selectedJobTitle
+ await viewApplications(
+   selectedJobId,
+   selectedJobTitle
  );
 
- loadMyApplications();
+ await loadMyApplications();
 
 }
 
 
-/* ===============================
-   HELPERS
-================================ */
+/* =====================================================
+   STATUS HELPERS
+===================================================== */
+
+function getStatusClass(status){
+
+ if(status === 'accepted'){
+   return 'accepted';
+ }
+
+ if(status === 'rejected'){
+   return 'rejected';
+ }
+
+ return 'pending';
+
+}
+
+
+function formatStatus(status){
+
+ if(status === 'accepted'){
+   return 'Accepted';
+ }
+
+ if(status === 'rejected'){
+   return 'Rejected';
+ }
+
+ return 'Pending';
+
+}
+
+
+/* =====================================================
+   SECURITY HELPERS
+===================================================== */
 
 function escapeHTML(value){
 
- if(value===null ||
-    value===undefined){
+ if(
+   value === null ||
+   value === undefined
+ ){
+
    return '';
+
  }
 
  return String(value)
- .replace(/&/g,'&amp;')
- .replace(/</g,'&lt;')
- .replace(/>/g,'&gt;')
- .replace(/"/g,'&quot;')
- .replace(/'/g,'&#039;');
+
+ .replace(
+   /&/g,
+   '&amp;'
+ )
+
+ .replace(
+   /</g,
+   '&lt;'
+ )
+
+ .replace(
+   />/g,
+   '&gt;'
+ )
+
+ .replace(
+   /"/g,
+   '&quot;'
+ )
+
+ .replace(
+   /'/g,
+   '&#039;'
+ );
 
 }
 
 
 function escapeJS(value){
 
- return String(value || '')
- .replace(/\\/g,'\\\\')
- .replace(/'/g,"\\'")
- .replace(/\n/g,'\\n')
- .replace(/\r/g,'\\r');
+ return String(
+   value || ''
+ )
+
+ .replace(
+   /\\/g,
+   '\\\\'
+ )
+
+ .replace(
+   /'/g,
+   "\\'"
+ )
+
+ .replace(
+   /\n/g,
+   '\\n'
+ )
+
+ .replace(
+   /\r/g,
+   '\\r'
+ );
 
 }
 
 
-/* ===============================
-   START
-================================ */
+/* =====================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+===================================================== */
+
+window.addEventListener(
+ 'click',
+ function(event){
+
+   const modals =
+   document.querySelectorAll(
+     '.modal'
+   );
+
+   modals.forEach(modal=>{
+
+     if(event.target === modal){
+
+       modal.style.display='none';
+
+     }
+
+   });
+
+ }
+);
+
+
+/* =====================================================
+   START PLAYZONE
+===================================================== */
+
+updateLocalStats();
+
+updateUserUI();
 
 loadSupabaseUser();
-loadJobs();
 
 </script>
 
