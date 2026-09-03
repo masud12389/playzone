@@ -703,14 +703,11 @@ Virtual Points বর্তমানে cash balance নয়।
    SUPABASE
 ===================================================== */
 
-const SUPABASE_URL =
-'https://cavrhkprzbbtimlixbqp.supabase.co';
+const SUPABASE_URL='https://cavrhkprzbbtimlixbqp.supabase.co';
 
-const SUPABASE_KEY =
-'sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
+const SUPABASE_KEY='sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
 
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient=window.supabase.createClient(
  SUPABASE_URL,
  SUPABASE_KEY
 );
@@ -722,17 +719,15 @@ window.supabase.createClient(
 
 let currentUser=null;
 
-let points=
- Number(localStorage.getItem('pz_points')||1000);
+let points=Number(localStorage.getItem('pz_points')||1000);
 
-let gamesPlayed=
- Number(localStorage.getItem('pz_games_played')||0);
+let gamesPlayed=Number(
+ localStorage.getItem('pz_games_played')||0
+);
 
-let username=
- localStorage.getItem('pz_username')||'Guest';
+let username=localStorage.getItem('pz_username')||'Guest';
 
-let skill=
- localStorage.getItem('pz_skill')||'';
+let skill=localStorage.getItem('pz_skill')||'';
 
 let jobs=[];
 let myApplications=[];
@@ -744,43 +739,38 @@ let selectedJobId=null;
 ===================================================== */
 
 const defaultJobs=[
-
-{
- id:'default-1',
- title:'Facebook পোস্ট ডিজাইন',
- skill:'Graphic Design',
- description:'Facebook পোস্ট ও social media design তৈরি করতে হবে।',
- budget:'আলোচনা সাপেক্ষ',
- status:'open'
-},
-
-{
- id:'default-2',
- title:'Short Video Editing',
- skill:'Video Editing',
- description:'Short video / reels editing করতে হবে।',
- budget:'আলোচনা সাপেক্ষ',
- status:'open'
-},
-
-{
- id:'default-3',
- title:'Data Entry Assistant',
- skill:'Data Entry',
- description:'অনলাইন data entry কাজ।',
- budget:'আলোচনা সাপেক্ষ',
- status:'open'
-},
-
-{
- id:'default-4',
- title:'Social Media Promotion',
- skill:'Digital Marketing',
- description:'Social media promotion ও marketing কাজ।',
- budget:'আলোচনা সাপেক্ষ',
- status:'open'
-}
-
+ {
+  id:'default-1',
+  title:'Facebook পোস্ট ডিজাইন',
+  skill:'Graphic Design',
+  description:'Facebook পোস্ট ও social media design তৈরি করতে হবে।',
+  budget:'আলোচনা সাপেক্ষ',
+  status:'open'
+ },
+ {
+  id:'default-2',
+  title:'Short Video Editing',
+  skill:'Video Editing',
+  description:'Short video / reels editing করতে হবে।',
+  budget:'আলোচনা সাপেক্ষ',
+  status:'open'
+ },
+ {
+  id:'default-3',
+  title:'Data Entry Assistant',
+  skill:'Data Entry',
+  description:'অনলাইন data entry কাজ।',
+  budget:'আলোচনা সাপেক্ষ',
+  status:'open'
+ },
+ {
+  id:'default-4',
+  title:'Social Media Promotion',
+  skill:'Digital Marketing',
+  description:'Social media promotion ও marketing কাজ।',
+  budget:'আলোচনা সাপেক্ষ',
+  status:'open'
+ }
 ];
 
 
@@ -798,11 +788,11 @@ function money(value){
 
 function escapeHtml(value){
  return String(value??'')
- .replace(/&/g,'&amp;')
- .replace(/</g,'&lt;')
- .replace(/>/g,'&gt;')
- .replace(/"/g,'&quot;')
- .replace(/'/g,'&#039;');
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
 }
 
 function statusText(status){
@@ -834,6 +824,14 @@ function statusBadge(status){
  `;
 }
 
+function setStatus(id,message,type=''){
+ const el=$(id);
+ if(!el)return;
+
+ el.className='status'+(type?' '+type:'');
+ el.innerHTML=message||'';
+}
+
 
 /* =====================================================
    LOCAL POINTS
@@ -843,25 +841,20 @@ function updatePoints(){
 
  points=Number(points||0);
 
- localStorage.setItem(
-  'pz_points',
-  String(points)
- );
+ localStorage.setItem('pz_points',String(points));
 
  const box=$('points');
-
- if(box)
-  box.textContent=points.toLocaleString();
+ if(box)box.textContent=points.toLocaleString();
 
  const reward=$('rewardPoints');
-
- if(reward)
-  reward.textContent=points.toLocaleString();
+ if(reward)reward.textContent=points.toLocaleString();
 }
 
 function addPoints(amount){
 
  amount=Number(amount||0);
+
+ if(!Number.isFinite(amount))return;
 
  points+=amount;
 
@@ -886,11 +879,9 @@ function openModal(name){
 
  const modal=$(map[name]);
 
- if(modal)
-  modal.style.display='flex';
+ if(modal)modal.style.display='flex';
 
- if(name==='rewards')
-  updatePoints();
+ if(name==='rewards')updatePoints();
 }
 
 function closeModal(name){
@@ -906,10 +897,9 @@ function closeModal(name){
 
  const modal=$(map[name]);
 
- if(modal)
-  modal.style.display='none';
+ if(modal)modal.style.display='none';
 
- stopAllGames();
+ if(name==='game')stopAllGames();
 }
 
 
@@ -933,16 +923,14 @@ function showPage(page,button){
 
  const target=$(page);
 
- if(target)
-  target.classList.remove('hidden');
+ if(target)target.classList.remove('hidden');
 
  document.querySelectorAll('nav button')
  .forEach(function(btn){
   btn.classList.remove('active');
  });
 
- if(button)
-  button.classList.add('active');
+ if(button)button.classList.add('active');
 
  if(page==='jobs')
   loadJobsFromSupabase();
@@ -974,47 +962,44 @@ async function registerUser(){
  const name=$('authName')?.value.trim();
 
  if(!email||!password){
-
-  $('authStatus').textContent=
-   'Email এবং password দিন।';
-
+  setStatus('authStatus','Email এবং password দিন。');
   return;
  }
 
  if(password.length<6){
-
-  $('authStatus').textContent=
-   'Password কমপক্ষে 6 characters হতে হবে।';
-
+  setStatus(
+   'authStatus',
+   'Password কমপক্ষে 6 characters হতে হবে।'
+  );
   return;
  }
 
- const {data,error}=
-  await supabaseClient.auth.signUp({
-   email,
-   password,
-   options:{
-    data:{
-     name:name||'PLAYZONE User'
-    }
+ setStatus('authStatus','Registration হচ্ছে...');
+
+ const {data,error}=await supabaseClient.auth.signUp({
+  email,
+  password,
+  options:{
+   data:{
+    name:name||'PLAYZONE User'
    }
-  });
+  }
+ });
 
  if(error){
-
-  $('authStatus').textContent=
-   error.message;
-
+  setStatus('authStatus',escapeHtml(error.message),'error');
   return;
  }
 
- $('authStatus').textContent=
+ setStatus(
+  'authStatus',
   data.session
    ?'Registration successful!'
-   :'Registration successful. Email verify করুন।';
+   :'Registration successful. Email verify করুন।',
+  'success'
+ );
 
- if(data.session)
-  await loadSupabaseUser();
+ if(data.session)await loadSupabaseUser();
 }
 
 
@@ -1024,24 +1009,19 @@ async function loginUser(){
  const password=$('authPassword')?.value;
 
  if(!email||!password){
-
-  $('authStatus').textContent=
-   'Email এবং password দিন।';
-
+  setStatus('authStatus','Email এবং password দিন।');
   return;
  }
 
- const {data,error}=
-  await supabaseClient.auth.signInWithPassword({
-   email,
-   password
-  });
+ setStatus('authStatus','Login হচ্ছে...');
+
+ const {error}=await supabaseClient.auth.signInWithPassword({
+  email,
+  password
+ });
 
  if(error){
-
-  $('authStatus').textContent=
-   error.message;
-
+  setStatus('authStatus',escapeHtml(error.message),'error');
   return;
  }
 
@@ -1058,15 +1038,13 @@ async function logoutUser(){
  currentUser=null;
  username='Guest';
 
- localStorage.setItem(
-  'pz_username',
-  username
- );
+ localStorage.setItem('pz_username',username);
 
  updateUserUI();
  updateAdminUI();
  renderProfile();
  renderJobs();
+ loadMyApplications();
 }
 
 
@@ -1083,26 +1061,19 @@ async function loadSupabaseUser(){
    currentUser.email?.split('@')[0]||
    'User';
 
-  localStorage.setItem(
-   'pz_username',
-   username
-  );
+  localStorage.setItem('pz_username',username);
 
  }else{
-
   username='Guest';
-
  }
 
  updateUserUI();
  await updateAdminUI();
 
  if(currentUser){
-
   await loadMyApplications();
   await loadEarningsDashboard();
   await loadMyPostedJobs();
-
  }
 
  renderProfile();
@@ -1117,17 +1088,12 @@ function updateUserUI(){
  if(!btn)return;
 
  if(currentUser){
-
   btn.textContent='👤 '+username;
   btn.classList.add('logged');
-
  }else{
-
   btn.textContent='👤 Login';
   btn.classList.remove('logged');
-
  }
-
 }
 
 
@@ -1150,30 +1116,45 @@ function renderProfile(){
  }
 
  box.innerHTML=`
-
  <h3>${escapeHtml(username)}</h3>
-
  <p>
- Email:
- ${escapeHtml(currentUser.email||'')}
+  Email:
+  ${escapeHtml(currentUser.email||'')}
  </p>
-
  <p>
- Points:
- <strong>${points.toLocaleString()}</strong>
+  Points:
+  <strong>${points.toLocaleString()}</strong>
  </p>
-
  <button class="btn danger" onclick="logoutUser()">
   Logout
  </button>
-
  `;
 }
 
 
 /* =====================================================
-   ADMIN
+   ADMIN SECURITY
 ===================================================== */
+
+async function isCurrentUserAdmin(){
+
+ if(!currentUser)return false;
+
+ try{
+
+  const {data,error}=await supabaseClient.rpc(
+   'is_current_user_admin'
+  );
+
+  return !error&&data===true;
+
+ }catch(error){
+
+  console.log(error);
+  return false;
+ }
+}
+
 
 async function updateAdminUI(){
 
@@ -1181,34 +1162,12 @@ async function updateAdminUI(){
 
  if(!nav)return;
 
- if(!currentUser){
+ const admin=await isCurrentUserAdmin();
 
+ if(admin)
+  nav.classList.add('adminVisible');
+ else
   nav.classList.remove('adminVisible');
-  return;
- }
-
- try{
-
-  const {data,error}=
-   await supabaseClient.rpc(
-    'is_current_user_admin'
-   );
-
-  if(!error&&data){
-
-   nav.classList.add('adminVisible');
-
-  }else{
-
-   nav.classList.remove('adminVisible');
-
-  }
-
- }catch(error){
-
-  nav.classList.remove('adminVisible');
-
- }
 }
 
 
@@ -1222,8 +1181,7 @@ async function loadJobsFromSupabase(){
 
  try{
 
-  const {data,error}=
-   await supabaseClient
+  const {data,error}=await supabaseClient
    .from('jobs')
    .select(`
     id,
@@ -1244,9 +1202,7 @@ async function loadJobsFromSupabase(){
    remoteJobs=data;
 
  }catch(error){
-
   console.log(error);
-
  }
 
  jobs=[...remoteJobs];
@@ -1266,38 +1222,31 @@ function renderJobs(){
  if(!box)return;
 
  if(!jobs.length){
-
   box.innerHTML=
    '<div class="empty">কোনো কাজ পাওয়া যায়নি।</div>';
-
   return;
  }
 
- const openJobs=
-  jobs.filter(function(job){
-   return job.status!=='closed';
-  });
+ const openJobs=jobs.filter(function(job){
+  return job.status!=='closed';
+ });
 
  if(!openJobs.length){
-
   box.innerHTML=
    '<div class="empty">বর্তমানে কোনো Open Job নেই।</div>';
-
   return;
  }
 
- box.innerHTML=
- openJobs.map(function(job){
+ box.innerHTML=openJobs.map(function(job){
 
   const isMine=
-   currentUser &&
+   currentUser&&
    job.poster_id===currentUser.id;
 
   const isDemo=
    String(job.id).startsWith('default-');
 
   return `
-
   <div class="listItem">
 
    <div class="row">
@@ -1332,23 +1281,22 @@ function renderJobs(){
      </button>
      `
     :
-     isDemo
-     ?`
-      <button class="btn secondary"
-       onclick="alert('এটি Demo Job। নতুন Database Job-এ Apply করুন।')">
-       Demo Job
-      </button>
-      `
-     :`
-      <button class="btn"
-       onclick="openApplication('${job.id}')">
-       Apply Now
-      </button>
-      `
+    isDemo
+    ?`
+     <button class="btn secondary"
+      onclick="alert('এটি Demo Job। নতুন Database Job-এ Apply করুন।')">
+      Demo Job
+     </button>
+     `
+    :`
+     <button class="btn"
+      onclick="openApplication('${job.id}')">
+      Apply Now
+     </button>
+     `
    }
 
   </div>
-
   `;
 
  }).join('');
@@ -1358,7 +1306,6 @@ function renderJobs(){
 async function addJob(){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
@@ -1369,18 +1316,16 @@ async function addJob(){
  const budget=$('jobBudget')?.value.trim();
 
  if(!title||!skillValue||!desc){
-
-  $('jobStatus').textContent=
-   'Title, Skill এবং Description দিন।';
-
+  setStatus(
+   'jobStatus',
+   'Title, Skill এবং Description দিন.'
+  );
   return;
  }
 
- $('jobStatus').textContent=
-  'কাজ পোস্ট করা হচ্ছে...';
+ setStatus('jobStatus','কাজ পোস্ট করা হচ্ছে...');
 
- const {data,error}=
-  await supabaseClient
+ const {error}=await supabaseClient
   .from('jobs')
   .insert({
    poster_id:currentUser.id,
@@ -1389,20 +1334,18 @@ async function addJob(){
    description:desc,
    budget:budget||null,
    status:'open'
-  })
-  .select()
-  .single();
+  });
 
  if(error){
-
-  $('jobStatus').textContent=
-   error.message;
-
+  setStatus('jobStatus',escapeHtml(error.message),'error');
   return;
  }
 
- $('jobStatus').innerHTML=
-  '<div class="success">✅ কাজ সফলভাবে পোস্ট হয়েছে।</div>';
+ setStatus(
+  'jobStatus',
+  '✅ কাজ সফলভাবে পোস্ট হয়েছে।',
+  'success'
+ );
 
  $('jobTitle').value='';
  $('jobSkill').value='';
@@ -1431,41 +1374,37 @@ async function addJob(){
 function openApplication(jobId){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
 
- const job=
-  jobs.find(function(item){
-   return item.id===jobId;
-  });
+ const job=jobs.find(function(item){
+  return item.id===jobId;
+ });
 
  if(!job){
-
   alert('Job পাওয়া যায়নি।');
   return;
  }
 
  if(job.poster_id===currentUser.id){
-
   alert('নিজের পোস্ট করা কাজে Apply করা যাবে না।');
   return;
  }
 
  if(String(jobId).startsWith('default-')){
+  alert('এটি Demo Job। Database-এর নতুন Job-এ Apply করুন।');
+  return;
+ }
 
-  alert(
-   'এটি Demo Job। Database-এর নতুন Job-এ Apply করুন।'
-  );
-
+ if(job.status!=='open'){
+  alert('এই Job বর্তমানে Open নেই।');
   return;
  }
 
  selectedJobId=jobId;
 
  $('applicationJobInfo').innerHTML=`
-
  <div class="listItem">
 
   <h3>${escapeHtml(job.title)}</h3>
@@ -1483,11 +1422,10 @@ function openApplication(jobId){
   </p>
 
  </div>
-
  `;
 
  $('applicationMessage').value='';
- $('applicationStatus').textContent='';
+ setStatus('applicationStatus','');
 
  openModal('application');
 }
@@ -1496,94 +1434,89 @@ function openApplication(jobId){
 async function submitJobApplication(){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
 
  if(!selectedJobId){
-
-  $('applicationStatus').textContent=
-   'Job নির্বাচন করুন।';
-
+  setStatus('applicationStatus','Job নির্বাচন করুন।');
   return;
  }
 
- const job=
-  jobs.find(function(j){
-   return j.id===selectedJobId;
-  });
+ const job=jobs.find(function(j){
+  return j.id===selectedJobId;
+ });
 
  if(!job){
-
-  $('applicationStatus').textContent=
-   'Job পাওয়া যায়নি।';
-
+  setStatus('applicationStatus','Job পাওয়া যায়নি।');
   return;
  }
 
  if(job.poster_id===currentUser.id){
-
-  $('applicationStatus').textContent=
-   'নিজের পোস্ট করা কাজে Apply করা যাবে না।';
-
+  setStatus(
+   'applicationStatus',
+   'নিজের পোস্ট করা কাজে Apply করা যাবে না.'
+  );
   return;
  }
 
  if(String(selectedJobId).startsWith('default-')){
-
-  $('applicationStatus').textContent=
-   'Demo Job-এ Application করা যাবে না।';
-
+  setStatus(
+   'applicationStatus',
+   'Demo Job-এ Application করা যাবে না.'
+  );
   return;
  }
 
  if(job.status!=='open'){
-
-  $('applicationStatus').textContent=
-   'এই Job বর্তমানে Open নেই।';
-
+  setStatus(
+   'applicationStatus',
+   'এই Job বর্তমানে Open নেই.'
+  );
   return;
  }
 
- const message=
-  $('applicationMessage')?.value.trim();
+ const message=$('applicationMessage')?.value.trim();
 
- $('applicationStatus').textContent=
-  'Application পাঠানো হচ্ছে...';
+ setStatus(
+  'applicationStatus',
+  'Application পাঠানো হচ্ছে...'
+ );
 
  try{
 
-  const {data,error}=
-   await supabaseClient
+  const {error}=await supabaseClient
    .from('job_applications')
    .insert({
     job_id:selectedJobId,
     applicant_id:currentUser.id,
     message:message||null,
     status:'pending'
-   })
-   .select()
-   .single();
+   });
 
   if(error){
 
    if(error.code==='23505'){
-
-    $('applicationStatus').textContent=
-     'আপনি এই কাজে ইতোমধ্যে Apply করেছেন।';
-
+    setStatus(
+     'applicationStatus',
+     'আপনি এই কাজে ইতোমধ্যে Apply করেছেন।'
+    );
     return;
    }
 
-   $('applicationStatus').textContent=
-    error.message;
-
+   setStatus(
+    'applicationStatus',
+    escapeHtml(error.message),
+    'error'
+   );
    return;
   }
 
-  $('applicationStatus').innerHTML=
-   '<div class="success">✅ Application সফলভাবে পাঠানো হয়েছে।</div>';
+  setStatus(
+   'applicationStatus',
+   '✅ Application সফলভাবে পাঠানো হয়েছে।',
+   'success'
+  );
 
   $('applicationMessage').value='';
 
@@ -1595,10 +1528,11 @@ async function submitJobApplication(){
 
  }catch(error){
 
-  $('applicationStatus').textContent=
-   error.message||
-   'Application failed';
-
+  setStatus(
+   'applicationStatus',
+   escapeHtml(error.message||'Application failed'),
+   'error'
+  );
  }
 }
 
@@ -1614,8 +1548,7 @@ async function loadMyApplications(){
   return;
  }
 
- const {data,error}=
-  await supabaseClient
+ const {data,error}=await supabaseClient
   .from('job_applications')
   .select(`
    id,
@@ -1639,7 +1572,6 @@ async function loadMyApplications(){
   .order('created_at',{ascending:false});
 
  if(error){
-
   console.log(error);
   return;
  }
@@ -1659,28 +1591,22 @@ function renderMyApplications(){
  if(!box)return;
 
  if(!currentUser){
-
   box.innerHTML=
    '<div class="empty">Login করলে Applications দেখা যাবে।</div>';
-
   return;
  }
 
  if(!myApplications.length){
-
   box.innerHTML=
    '<div class="empty">আপনি এখনো কোনো কাজে Apply করেননি।</div>';
-
   return;
  }
 
- box.innerHTML=
- myApplications.map(function(app){
+ box.innerHTML=myApplications.map(function(app){
 
   const job=app.jobs||{};
 
   return `
-
   <div class="application">
 
    <h4>${escapeHtml(job.title||'Job')}</h4>
@@ -1709,7 +1635,6 @@ function renderMyApplications(){
    }
 
   </div>
-
   `;
 
  }).join('');
@@ -1718,6 +1643,7 @@ function renderMyApplications(){
 
 /* =====================================================
    ASSIGNED WORK
+   FIXED: শুধুমাত্র current user's accepted/assigned work
 ===================================================== */
 
 function renderMyWork(){
@@ -1727,41 +1653,39 @@ function renderMyWork(){
  if(!box)return;
 
  if(!currentUser){
-
   box.innerHTML=
    '<div class="empty">Login করুন।</div>';
-
   return;
  }
 
- const work=
-  myApplications.filter(function(app){
-
-   const job=app.jobs||{};
-
-   return(
-    app.status==='accepted'||
-    job.assigned_to===currentUser.id||
-    job.status==='assigned'||
-    job.status==='in_progress'||
-    job.status==='completed'
-   );
-
-  });
-
- if(!work.length){
-
-  box.innerHTML=
-   '<div class="empty">এখনো কোনো Assigned Work নেই।</div>';
-
-  return;
- }
-
- box.innerHTML=
- work.map(function(app){
+ const work=myApplications.filter(function(app){
 
   const job=app.jobs||{};
 
+  return(
+   app.applicant_id===currentUser.id &&
+   (
+    app.status==='accepted' ||
+    job.assigned_to===currentUser.id
+   ) &&
+   [
+    'assigned',
+    'in_progress',
+    'completed'
+   ].includes(job.status)
+  );
+
+ });
+
+ if(!work.length){
+  box.innerHTML=
+   '<div class="empty">এখনো কোনো Assigned Work নেই।</div>';
+  return;
+ }
+
+ box.innerHTML=work.map(function(app){
+
+  const job=app.jobs||{};
   let action='';
 
   if(
@@ -1796,11 +1720,9 @@ function renderMyWork(){
      Earnings account-এ যোগ হয়েছে।
     </div>
    `;
-
   }
 
   return `
-
   <div class="listItem">
 
    <h3>${escapeHtml(job.title||'Assigned Job')}</h3>
@@ -1817,7 +1739,6 @@ function renderMyWork(){
    ${action}
 
   </div>
-
   `;
 
  }).join('');
@@ -1834,16 +1755,14 @@ async function startAssignedJob(jobId){
 
  try{
 
-  const {data,error}=
-   await supabaseClient.rpc(
-    'start_job',
-    {
-     p_job_id:jobId
-    }
-   );
+  const {error}=await supabaseClient.rpc(
+   'start_job',
+   {
+    p_job_id:jobId
+   }
+  );
 
   if(error){
-
    alert(error.message);
    return;
   }
@@ -1855,11 +1774,7 @@ async function startAssignedJob(jobId){
 
  }catch(error){
 
-  alert(
-   error.message||
-   'Start work failed'
-  );
-
+  alert(error.message||'Start work failed');
  }
 }
 
@@ -1874,16 +1789,14 @@ async function completeAssignedJob(jobId){
 
  try{
 
-  const {data,error}=
-   await supabaseClient.rpc(
-    'complete_job',
-    {
-     p_job_id:jobId
-    }
-   );
+  const {error}=await supabaseClient.rpc(
+   'complete_job',
+   {
+    p_job_id:jobId
+   }
+  );
 
   if(error){
-
    alert(error.message);
    return;
   }
@@ -1898,11 +1811,7 @@ async function completeAssignedJob(jobId){
 
  }catch(error){
 
-  alert(
-   error.message||
-   'Complete work failed'
-  );
-
+  alert(error.message||'Complete work failed');
  }
 }
 
@@ -1925,8 +1834,7 @@ async function loadMyPostedJobs(){
   return;
  }
 
- const {data,error}=
-  await supabaseClient
+ const {data,error}=await supabaseClient
   .from('jobs')
   .select(`
    id,
@@ -1961,11 +1869,9 @@ async function loadMyPostedJobs(){
   return;
  }
 
- box.innerHTML=
- data.map(function(job){
+ box.innerHTML=data.map(function(job){
 
   return `
-
   <div class="listItem">
 
    <h3>${escapeHtml(job.title)}</h3>
@@ -1985,7 +1891,6 @@ async function loadMyPostedJobs(){
    </button>
 
   </div>
-
   `;
 
  }).join('');
@@ -1999,13 +1904,11 @@ async function loadMyPostedJobs(){
 async function viewJobApplications(jobId){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
 
- const {data,error}=
-  await supabaseClient
+ const {data,error}=await supabaseClient
   .from('job_applications')
   .select(`
    id,
@@ -2018,13 +1921,11 @@ async function viewJobApplications(jobId){
   .order('created_at',{ascending:false});
 
  if(error){
-
   alert(error.message);
   return;
  }
 
  let html=`
-
  <div class="modal" style="display:flex">
 
   <div class="box">
@@ -2035,7 +1936,6 @@ async function viewJobApplications(jobId){
    </button>
 
    <h2>📨 Applications</h2>
-
  `;
 
  if(!data?.length){
@@ -2051,7 +1951,6 @@ async function viewJobApplications(jobId){
   html+=data.map(function(app){
 
    return `
-
    <div class="application">
 
     <h4>Applicant</h4>
@@ -2098,23 +1997,17 @@ async function viewJobApplications(jobId){
     }
 
    </div>
-
    `;
 
   }).join('');
-
  }
 
  html+=`
-
   </div>
  </div>
  `;
 
- document.body.insertAdjacentHTML(
-  'beforeend',
-  html
- );
+ document.body.insertAdjacentHTML('beforeend',html);
 }
 
 
@@ -2125,7 +2018,6 @@ async function viewJobApplications(jobId){
 async function adminUpdateApplicationStatus(id,newStatus){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
@@ -2140,32 +2032,28 @@ async function adminUpdateApplicationStatus(id,newStatus){
 
   if(newStatus==='accepted'){
 
-   const result=
-    await supabaseClient.rpc(
-     'accept_job_application',
-     {
-      p_application_id:id
-     }
-    );
+   const result=await supabaseClient.rpc(
+    'accept_job_application',
+    {
+     p_application_id:id
+    }
+   );
 
    error=result.error;
 
   }else{
 
-   const result=
-    await supabaseClient.rpc(
-     'reject_job_application',
-     {
-      p_application_id:id
-     }
-    );
+   const result=await supabaseClient.rpc(
+    'reject_job_application',
+    {
+     p_application_id:id
+    }
+   );
 
    error=result.error;
-
   }
 
   if(error){
-
    alert(error.message);
    return;
   }
@@ -2187,7 +2075,6 @@ async function adminUpdateApplicationStatus(id,newStatus){
    error.message||
    'Application status update failed'
   );
-
  }
 }
 
@@ -2198,18 +2085,15 @@ async function adminUpdateApplicationStatus(id,newStatus){
 
 async function getAvailableEarnings(){
 
- if(!currentUser)
-  return 0;
+ if(!currentUser)return 0;
 
- const {data,error}=
-  await supabaseClient
+ const {data,error}=await supabaseClient
   .from('earnings')
   .select('amount,status')
   .eq('user_id',currentUser.id)
   .eq('status','available');
 
  if(error){
-
   console.log(error);
   return 0;
  }
@@ -2217,7 +2101,8 @@ async function getAvailableEarnings(){
  return(data||[]).reduce(
   function(total,item){
    return total+Number(item.amount||0);
-  },0);
+  },0
+ );
 }
 
 
@@ -2231,26 +2116,21 @@ async function loadEarningsDashboard(){
   return;
  }
 
- const amount=
-  await getAvailableEarnings();
+ const amount=await getAvailableEarnings();
 
  if($('dashEarnings'))
-  $('dashEarnings').textContent=
-   money(amount);
+  $('dashEarnings').textContent=money(amount);
 
  const summary=$('earningsSummary');
 
  if(summary){
 
   summary.innerHTML=`
-
    <div class="status success">
     Available Earnings:
     <strong>${money(amount)}</strong>
    </div>
-
   `;
-
  }
 
  await loadMyPayouts();
@@ -2264,18 +2144,15 @@ function updateDashboardStats(){
   $('dashApplications').textContent=
    myApplications.length;
 
- const completed=
-  myApplications.filter(function(app){
-   return app.jobs?.status==='completed';
-  }).length;
+ const completed=myApplications.filter(function(app){
+  return app.jobs?.status==='completed';
+ }).length;
 
  if($('dashCompleted'))
-  $('dashCompleted').textContent=
-   completed;
+  $('dashCompleted').textContent=completed;
 
  if($('dashGames'))
-  $('dashGames').textContent=
-   gamesPlayed;
+  $('dashGames').textContent=gamesPlayed;
 }
 
 
@@ -2286,29 +2163,20 @@ function updateDashboardStats(){
 async function submitPayout(){
 
  if(!currentUser){
-
   openModal('login');
   return;
  }
 
- const accountName=
-  $('payoutName')?.value.trim();
+ const accountName=$('payoutName')?.value.trim();
+ const accountNumber=$('payoutPhone')?.value.trim();
 
- const accountNumber=
-  $('payoutPhone')?.value.trim();
+ const method=($('payoutMethod')?.value||'').toLowerCase();
 
- const method=
-  ($('payoutMethod')?.value||'')
-  .toLowerCase();
-
- const amount=
-  Number($('payoutAmount')?.value||0);
+ const amount=Number($('payoutAmount')?.value||0);
 
  const status=$('payoutStatus');
 
- if(!accountName||
-   !accountNumber||
-   !amount){
+ if(!accountName||!accountNumber||!amount){
 
   if(status)
    status.textContent=
@@ -2320,18 +2188,12 @@ async function submitPayout(){
  if(amount<=0){
 
   if(status)
-   status.textContent=
-    'সঠিক amount দিন।';
+   status.textContent='সঠিক amount দিন।';
 
   return;
  }
 
- if(![
-  'bkash',
-  'nagad',
-  'rocket',
-  'bank'
- ].includes(method)){
+ if(!['bkash','nagad','rocket','bank'].includes(method)){
 
   if(status)
    status.textContent=
@@ -2346,22 +2208,20 @@ async function submitPayout(){
 
  try{
 
-  const {data,error}=
-   await supabaseClient.rpc(
-    'request_job_payout',
-    {
-     p_amount:amount,
-     p_method:method,
-     p_account_name:accountName,
-     p_account_number:accountNumber
-    }
-   );
+  const {error}=await supabaseClient.rpc(
+   'request_job_payout',
+   {
+    p_amount:amount,
+    p_method:method,
+    p_account_name:accountName,
+    p_account_number:accountNumber
+   }
+  );
 
   if(error){
 
    if(status)
-    status.textContent=
-     error.message;
+    status.textContent=error.message;
 
    return;
   }
@@ -2379,9 +2239,7 @@ async function submitPayout(){
 
   if(status)
    status.textContent=
-    error.message||
-    'Payout request failed';
-
+    error.message||'Payout request failed';
  }
 }
 
@@ -2392,8 +2250,7 @@ async function loadMyPayouts(){
 
  if(!box||!currentUser)return;
 
- const {data,error}=
-  await supabaseClient
+ const {data,error}=await supabaseClient
   .from('payout_requests')
   .select(`
    id,
@@ -2428,11 +2285,9 @@ async function loadMyPayouts(){
   return;
  }
 
- box.innerHTML=
- data.map(function(item){
+ box.innerHTML=data.map(function(item){
 
   return `
-
   <div class="listItem">
 
    <h3>${money(item.amount)}</h3>
@@ -2475,7 +2330,6 @@ async function loadMyPayouts(){
    }
 
   </div>
-
   `;
 
  }).join('');
@@ -2484,31 +2338,46 @@ async function loadMyPayouts(){
 
 /* =====================================================
    ADMIN DASHBOARD
+   SECURITY: প্রথমে admin RPC verify
 ===================================================== */
 
 async function loadAdminDashboard(){
 
  if(!currentUser)return;
 
+ const admin=await isCurrentUserAdmin();
+
  const stats=$('adminStats');
+
+ if(!admin){
+
+  if(stats){
+   stats.innerHTML=
+    '<div class="status error">⛔ Admin access denied.</div>';
+  }
+
+  return;
+ }
+
+ if(stats)
+  stats.innerHTML=
+   '<div class="status">Admin dashboard loading...</div>';
+
+ let statsLoaded=false;
 
  try{
 
-  const {data,error}=
-   await supabaseClient.rpc(
-    'admin_dashboard_stats'
-   );
+  const {data,error}=await supabaseClient.rpc(
+   'admin_dashboard_stats'
+  );
 
   if(!error&&data){
 
-   const s=Array.isArray(data)
-    ?data[0]
-    :data;
+   const s=Array.isArray(data)?data[0]:data;
 
    if(stats){
 
     stats.innerHTML=`
-
     <div class="statGrid">
 
      <div class="stat">
@@ -2532,17 +2401,88 @@ async function loadAdminDashboard(){
      </div>
 
     </div>
-
     `;
 
    }
 
+   statsLoaded=true;
   }
 
  }catch(error){
+  console.log('admin_dashboard_stats:',error);
+ }
 
-  console.log(error);
+ /* Secure fallback:
+    RLS-protected admin SELECT ব্যবহার করা হবে */
+ if(!statsLoaded){
 
+  try{
+
+   const [
+    usersResult,
+    jobsResult,
+    appsResult,
+    payoutResult
+   ]=await Promise.all([
+
+    supabaseClient
+     .from('jobs')
+     .select('poster_id',{count:'exact',head:true}),
+
+    supabaseClient
+     .from('jobs')
+     .select('id',{count:'exact',head:true}),
+
+    supabaseClient
+     .from('job_applications')
+     .select('id',{count:'exact',head:true}),
+
+    supabaseClient
+     .from('payout_requests')
+     .select('id',{count:'exact',head:true})
+     .eq('status','pending')
+
+   ]);
+
+   if(stats){
+
+    stats.innerHTML=`
+    <div class="statGrid">
+
+     <div class="stat">
+      Users
+      <b>—</b>
+     </div>
+
+     <div class="stat">
+      Jobs
+      <b>${Number(jobsResult.count||0)}</b>
+     </div>
+
+     <div class="stat">
+      Applications
+      <b>${Number(appsResult.count||0)}</b>
+     </div>
+
+     <div class="stat">
+      Pending Payouts
+      <b>${Number(payoutResult.count||0)}</b>
+     </div>
+
+    </div>
+
+    <p class="notice">
+     Users count-এর জন্য admin_dashboard_stats RPC প্রয়োজন।
+    </p>
+    `;
+   }
+
+  }catch(error){
+
+   if(stats)
+    stats.innerHTML=
+     '<div class="status warning">Stats load করা যায়নি। নিচের Admin data দেখা যাবে।</div>';
+  }
  }
 
  await loadAdminApplications();
@@ -2557,8 +2497,15 @@ async function loadAdminApplications(){
 
  if(!box)return;
 
- const {data,error}=
-  await supabaseClient
+ if(!(await isCurrentUserAdmin())){
+
+  box.innerHTML=
+   '<div class="status error">⛔ Admin access denied.</div>';
+
+  return;
+ }
+
+ const {data,error}=await supabaseClient
   .from('job_applications')
   .select(`
    id,
@@ -2594,13 +2541,11 @@ async function loadAdminApplications(){
   return;
  }
 
- box.innerHTML=
- data.map(function(app){
+ box.innerHTML=data.map(function(app){
 
   const job=app.jobs||{};
 
   return `
-
   <div class="application">
 
    <h4>${escapeHtml(job.title||'Job')}</h4>
@@ -2646,7 +2591,6 @@ async function loadAdminApplications(){
    }
 
   </div>
-
   `;
 
  }).join('');
@@ -2663,8 +2607,15 @@ async function loadAdminPayouts(){
 
  if(!box)return;
 
- const {data,error}=
-  await supabaseClient
+ if(!(await isCurrentUserAdmin())){
+
+  box.innerHTML=
+   '<div class="status error">⛔ Admin access denied.</div>';
+
+  return;
+ }
+
+ const {data,error}=await supabaseClient
   .from('payout_requests')
   .select(`
    id,
@@ -2699,11 +2650,9 @@ async function loadAdminPayouts(){
   return;
  }
 
- box.innerHTML=
- data.map(function(item){
+ box.innerHTML=data.map(function(item){
 
   return `
-
   <div class="application">
 
    <h4>${money(item.amount)}</h4>
@@ -2787,18 +2736,28 @@ async function loadAdminPayouts(){
    </div>
 
   </div>
-
   `;
 
  }).join('');
 }
 
 
+/* =====================================================
+   ADMIN PAYOUT UPDATE
+   FIXED: Paid হলে Transaction ID নেওয়া হবে
+===================================================== */
+
 async function adminUpdatePayout(id,status){
 
  if(!currentUser){
 
   openModal('login');
+  return;
+ }
+
+ if(!(await isCurrentUserAdmin())){
+
+  alert('⛔ Admin access denied.');
   return;
  }
 
@@ -2817,6 +2776,7 @@ async function adminUpdatePayout(id,status){
  }
 
  let note=null;
+ let transactionId=null;
 
  if(status==='rejected'){
 
@@ -2826,6 +2786,8 @@ async function adminUpdatePayout(id,status){
   );
 
   if(note===null)return;
+
+  note=note.trim()||null;
  }
 
  if(status==='paid'){
@@ -2834,19 +2796,33 @@ async function adminUpdatePayout(id,status){
    'এই payout সত্যিই Paid হয়েছে কি?'
   ))return;
 
+  transactionId=prompt(
+   'Payment Transaction ID লিখুন:',
+   ''
+  );
+
+  if(transactionId===null)return;
+
+  transactionId=transactionId.trim();
+
+  if(!transactionId){
+
+   alert('Paid করার আগে Transaction ID দিতে হবে।');
+   return;
+  }
  }
 
  try{
 
-  const {data,error}=
-   await supabaseClient.rpc(
-    'admin_update_payout',
-    {
-     p_payout_id:id,
-     p_status:status,
-     p_admin_note:note
-    }
-   );
+  const {error}=await supabaseClient.rpc(
+   'admin_update_payout',
+   {
+    p_payout_id:id,
+    p_status:status,
+    p_admin_note:note,
+    p_transaction_id:transactionId
+   }
+  );
 
   if(error){
 
@@ -2867,7 +2843,6 @@ async function adminUpdatePayout(id,status){
    error.message||
    'Payout update failed'
   );
-
  }
 }
 
@@ -2884,30 +2859,28 @@ async function submitSponsorRequest(){
   return;
  }
 
- const name=
-  $('sponsorName')?.value.trim();
-
- const phone=
-  $('sponsorPhone')?.value.trim();
-
- const message=
-  $('sponsorMessage')?.value.trim();
+ const name=$('sponsorName')?.value.trim();
+ const phone=$('sponsorPhone')?.value.trim();
+ const message=$('sponsorMessage')?.value.trim();
 
  if(!name||!phone){
 
-  $('sponsorStatus').textContent=
-   'Business Name এবং Contact Number দিন।';
+  setStatus(
+   'sponsorStatus',
+   'Business Name এবং Contact Number দিন।'
+  );
 
   return;
  }
 
- $('sponsorStatus').textContent=
-  'Sponsor request পাঠানো হচ্ছে...';
+ setStatus(
+  'sponsorStatus',
+  'Sponsor request পাঠানো হচ্ছে...'
+ );
 
  try{
 
-  const {data,error}=
-   await supabaseClient
+  const {error}=await supabaseClient
    .from('sponsor_requests')
    .insert({
     user_id:currentUser.id,
@@ -2915,20 +2888,24 @@ async function submitSponsorRequest(){
     phone:phone,
     message:message||null,
     status:'pending'
-   })
-   .select()
-   .single();
+   });
 
   if(error){
 
-   $('sponsorStatus').textContent=
-    error.message;
+   setStatus(
+    'sponsorStatus',
+    escapeHtml(error.message),
+    'error'
+   );
 
    return;
   }
 
-  $('sponsorStatus').innerHTML=
-   '<div class="success">✅ Sponsor request পাঠানো হয়েছে।</div>';
+  setStatus(
+   'sponsorStatus',
+   '✅ Sponsor request পাঠানো হয়েছে।',
+   'success'
+  );
 
   $('sponsorName').value='';
   $('sponsorPhone').value='';
@@ -2936,10 +2913,11 @@ async function submitSponsorRequest(){
 
  }catch(error){
 
-  $('sponsorStatus').textContent=
-   error.message||
-   'Sponsor request failed';
-
+  setStatus(
+   'sponsorStatus',
+   escapeHtml(error.message||'Sponsor request failed'),
+   'error'
+  );
  }
 }
 
@@ -2950,8 +2928,15 @@ async function loadAdminSponsors(){
 
  if(!box)return;
 
- const {data,error}=
-  await supabaseClient
+ if(!(await isCurrentUserAdmin())){
+
+  box.innerHTML=
+   '<div class="status error">⛔ Admin access denied.</div>';
+
+  return;
+ }
+
+ const {data,error}=await supabaseClient
   .from('sponsor_requests')
   .select('*')
   .order('created_at',{ascending:false});
@@ -2974,26 +2959,18 @@ async function loadAdminSponsors(){
   return;
  }
 
- box.innerHTML=
- data.map(function(item){
+ box.innerHTML=data.map(function(item){
 
   return `
-
   <div class="application">
 
    <h4>
-    ${escapeHtml(
-     item.business_name||
-     'Sponsor'
-    )}
+    ${escapeHtml(item.business_name||'Sponsor')}
    </h4>
 
    <p>
     Contact:
-    ${escapeHtml(
-     item.phone||
-     ''
-    )}
+    ${escapeHtml(item.phone||'')}
    </p>
 
    <p>
@@ -3006,7 +2983,6 @@ async function loadAdminSponsors(){
    </p>
 
   </div>
-
   `;
 
  }).join('');
@@ -3036,21 +3012,16 @@ function openGame(game){
 
  openModal('game');
 
- if(game==='tap')
-  startTapGame();
-
- if(game==='match')
-  startMatchGame();
-
- if(game==='fly')
-  startFlyGame();
-
- if(game==='brain')
-  startBrainGame();
+ if(game==='tap')startTapGame();
+ if(game==='match')startMatchGame();
+ if(game==='fly')startFlyGame();
+ if(game==='brain')startBrainGame();
 }
 
 
-/* TAP RUSH */
+/* =====================================================
+   TAP RUSH
+===================================================== */
 
 let tapScore=0;
 let tapTime=30;
@@ -3110,28 +3081,20 @@ function createTarget(){
 
  if(!area)return;
 
- const old=
-  area.querySelector('.target');
+ const old=area.querySelector('.target');
 
  if(old)old.remove();
 
- const target=
-  document.createElement('div');
+ const target=document.createElement('div');
 
  target.className='target';
  target.textContent='⚡';
 
- const maxX=
-  Math.max(0,area.clientWidth-58);
+ const maxX=Math.max(0,area.clientWidth-58);
+ const maxY=Math.max(0,area.clientHeight-58);
 
- const maxY=
-  Math.max(0,area.clientHeight-58);
-
- target.style.left=
-  Math.random()*maxX+'px';
-
- target.style.top=
-  Math.random()*maxY+'px';
+ target.style.left=Math.random()*maxX+'px';
+ target.style.top=Math.random()*maxY+'px';
 
  target.onclick=function(){
 
@@ -3143,7 +3106,6 @@ function createTarget(){
    $('tapScore').textContent=tapScore;
 
   createTarget();
-
  };
 
  area.appendChild(target);
@@ -3160,7 +3122,6 @@ function endTapGame(){
 
   clearInterval(gameTimer);
   gameTimer=null;
-
  }
 
  gameFinished();
@@ -3196,13 +3157,13 @@ function endTapGame(){
 
   </div>
   `;
-
  }
-
 }
 
 
-/* MATCH SEVEN */
+/* =====================================================
+   MATCH SEVEN
+===================================================== */
 
 let matchFirst=null;
 let matchLocked=false;
@@ -3223,9 +3184,7 @@ function startMatchGame(){
   1,2,3,4,5,6
  ];
 
- numbers.sort(
-  ()=>Math.random()-0.5
- );
+ numbers.sort(()=>Math.random()-0.5);
 
  $('modalContent').innerHTML=`
 
@@ -3256,8 +3215,7 @@ function startMatchGame(){
 
  numbers.forEach(function(number){
 
-  const button=
-   document.createElement('button');
+  const button=document.createElement('button');
 
   button.className='matchCard';
   button.textContent='?';
@@ -3268,7 +3226,6 @@ function startMatchGame(){
   };
 
   grid.appendChild(button);
-
  });
 }
 
@@ -3281,24 +3238,18 @@ function selectMatch(button){
   button===matchFirst
  )return;
 
- button.textContent=
-  button.dataset.value;
-
+ button.textContent=button.dataset.value;
  button.classList.add('selected');
 
  if(!matchFirst){
 
   matchFirst=button;
   return;
-
  }
 
  matchLocked=true;
 
- if(
-  matchFirst.dataset.value===
-  button.dataset.value
- ){
+ if(matchFirst.dataset.value===button.dataset.value){
 
   const first=matchFirst;
   const second=button;
@@ -3320,7 +3271,6 @@ function selectMatch(button){
    if(matchPairs>=6){
 
     gameFinished();
-
     addPoints(matchScore);
 
     $('modalContent').innerHTML=`
@@ -3341,9 +3291,7 @@ function selectMatch(button){
      onclick="startMatchGame()">
      আবার খেলুন
     </button>
-
     `;
-
    }
 
   },350);
@@ -3364,13 +3312,13 @@ function selectMatch(button){
    matchLocked=false;
 
   },650);
-
  }
-
 }
 
 
-/* FLY HIGH */
+/* =====================================================
+   FLY HIGH
+===================================================== */
 
 let flyCanvas=null;
 let flyCtx=null;
@@ -3435,7 +3383,6 @@ function drawFlyStart(){
   220,
   195
  );
-
 }
 
 
@@ -3460,21 +3407,17 @@ function runFlyGame(){
 
   if(flyRunning)
    flyPlayer.velocity=-6;
-
  };
 
- flyCanvas.ontouchstart=
-  function(event){
+ flyCanvas.ontouchstart=function(event){
 
-   event.preventDefault();
+  event.preventDefault();
 
-   if(flyRunning)
-    flyPlayer.velocity=-6;
+  if(flyRunning)
+   flyPlayer.velocity=-6;
+ };
 
-  };
-
- flyFrame=
-  requestAnimationFrame(flyLoop);
+ flyFrame=requestAnimationFrame(flyLoop);
 }
 
 
@@ -3494,8 +3437,7 @@ function flyLoop(){
  if(Math.random()<0.025){
 
   const gap=125;
-  const top=45+
-   Math.random()*165;
+  const top=45+Math.random()*165;
 
   flyObstacles.push({
    x:440,
@@ -3503,7 +3445,6 @@ function flyLoop(){
    bottom:top+gap,
    passed:false
   });
-
  }
 
  flyObstacles.forEach(function(obstacle){
@@ -3526,27 +3467,19 @@ function flyLoop(){
    390-obstacle.bottom
   );
 
-  if(
-   !obstacle.passed&&
-   obstacle.x<70
-  ){
+  if(!obstacle.passed&&obstacle.x<70){
 
    obstacle.passed=true;
    flyScore++;
 
    if($('flyScore'))
     $('flyScore').textContent=flyScore;
-
   }
-
  });
 
- flyObstacles=
-  flyObstacles.filter(function(obstacle){
-
-   return obstacle.x>-50;
-
-  });
+ flyObstacles=flyObstacles.filter(function(obstacle){
+  return obstacle.x>-50;
+ });
 
  flyCtx.fillStyle='#ffd21a';
 
@@ -3562,19 +3495,17 @@ function flyLoop(){
 
  flyCtx.fill();
 
- const hitObstacle=
-  flyObstacles.some(function(obstacle){
+ const hitObstacle=flyObstacles.some(function(obstacle){
 
-   return(
-    flyPlayer.x+18>obstacle.x&&
-    flyPlayer.x-18<obstacle.x+42&&
-    (
-     flyPlayer.y-18<obstacle.top||
-     flyPlayer.y+18>obstacle.bottom
-    )
-   );
-
-  });
+  return(
+   flyPlayer.x+18>obstacle.x&&
+   flyPlayer.x-18<obstacle.x+42&&
+   (
+    flyPlayer.y-18<obstacle.top||
+    flyPlayer.y+18>obstacle.bottom
+   )
+  );
+ });
 
  if(
   flyPlayer.y<20||
@@ -3586,8 +3517,7 @@ function flyLoop(){
   return;
  }
 
- flyFrame=
-  requestAnimationFrame(flyLoop);
+ flyFrame=requestAnimationFrame(flyLoop);
 }
 
 
@@ -3625,13 +3555,13 @@ function endFlyGame(){
   onclick="startFlyGame()">
   আবার খেলুন
  </button>
-
  `;
-
 }
 
 
-/* BRAIN BOX */
+/* =====================================================
+   BRAIN BOX
+===================================================== */
 
 let brainQuestion=0;
 let brainScore=0;
@@ -3676,7 +3606,6 @@ function nextBrainQuestion(){
  if(brainQuestion>10){
 
   gameFinished();
-
   addPoints(brainScore);
 
   $('brainContent').innerHTML=`
@@ -3701,37 +3630,23 @@ function nextBrainQuestion(){
    </button>
 
   </div>
-
   `;
 
   return;
  }
 
- const a=
-  Math.floor(Math.random()*10)+1;
+ const a=Math.floor(Math.random()*10)+1;
+ const b=Math.floor(Math.random()*10)+1;
 
- const b=
-  Math.floor(Math.random()*10)+1;
+ const operations=['+','-','×'];
 
- const operations=[
-  '+','-','×'
+ const op=operations[
+  Math.floor(Math.random()*operations.length)
  ];
 
- const op=
-  operations[
-   Math.floor(
-    Math.random()*operations.length
-   )
-  ];
-
- if(op==='+')
-  brainAnswer=a+b;
-
- if(op==='-')
-  brainAnswer=a-b;
-
- if(op==='×')
-  brainAnswer=a*b;
+ if(op==='+')brainAnswer=a+b;
+ if(op==='-')brainAnswer=a-b;
+ if(op==='×')brainAnswer=a*b;
 
  let answers=[
   brainAnswer,
@@ -3740,12 +3655,9 @@ function nextBrainQuestion(){
   brainAnswer+3
  ];
 
- answers.sort(
-  ()=>Math.random()-0.5
- );
+ answers.sort(()=>Math.random()-0.5);
 
- $('brainCount').textContent=
-  brainQuestion;
+ $('brainCount').textContent=brainQuestion;
 
  $('brainContent').innerHTML=`
 
@@ -3770,7 +3682,6 @@ function nextBrainQuestion(){
   </div>
 
  </div>
-
  `;
 }
 
@@ -3781,8 +3692,7 @@ function answerBrain(answer){
 
   brainScore+=10;
 
-  $('brainScore').textContent=
-   brainScore;
+  $('brainScore').textContent=brainScore;
  }
 
  nextBrainQuestion();
@@ -3820,7 +3730,7 @@ function stopAllGames(){
 supabaseClient.auth.onAuthStateChange(
  function(event,session){
 
-  setTimeout(function(){
+  setTimeout(async function(){
 
    currentUser=session?.user||null;
 
@@ -3839,11 +3749,10 @@ supabaseClient.auth.onAuthStateChange(
    }else{
 
     username='Guest';
-
    }
 
    updateUserUI();
-   updateAdminUI();
+   await updateAdminUI();
    renderProfile();
 
   },0);
