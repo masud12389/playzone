@@ -245,9 +245,18 @@ th{color:#9de4ce}
 .status.completed{color:#55e7a9}
 .status.rejected,
 .status.cancelled{color:#ff7777}
+.status.withdrawn{color:#b9cad6}
 .admin-card{
  border:1px solid #24516a;
  background:#0c2131;
+}
+.dashboard-card{
+ background:linear-gradient(145deg,#0d2a3b,#0b1d2d);
+ border:1px solid #24516a;
+}
+.accepted-job{
+ border:1px solid #21e6a8;
+ background:#0c2930;
 }
 footer{
  text-align:center;
@@ -302,6 +311,10 @@ footer{
 
    <button class="btn btn-secondary" onclick="showPage('profile')">
     My Profile
+   </button>
+
+   <button class="btn btn-secondary" onclick="openUserDashboard()">
+    📊 My Dashboard
    </button>
   </div>
  </div>
@@ -488,6 +501,11 @@ footer{
   <div class="actions">
 
    <button class="btn btn-primary"
+    onclick="openUserDashboard()">
+    📊 My Dashboard
+   </button>
+
+   <button class="btn btn-secondary"
     onclick="openModal('profileEdit')">
     Edit Profile
    </button>
@@ -505,6 +523,102 @@ footer{
   </div>
 
  </div>
+
+</section>
+
+
+<!-- USER DASHBOARD -->
+<section id="userDashboard" class="section hidden">
+
+ <div class="hero">
+
+  <h2>📊 My Dashboard</h2>
+
+  <p>
+   আপনার Job Application, Accepted Jobs,
+   Pending/Rejected Status এবং সম্ভাব্য Earnings
+   এখানে দেখতে পারবেন।
+  </p>
+
+  <div class="actions">
+
+   <button class="btn btn-primary"
+    onclick="loadMyDashboard()">
+    🔄 Dashboard Refresh
+   </button>
+
+   <button class="btn btn-secondary"
+    onclick="showPage('home')">
+    🏠 Available Jobs
+   </button>
+
+   <button class="btn btn-secondary"
+    onclick="showPage('profile')">
+    👤 My Profile
+   </button>
+
+  </div>
+
+ </div>
+
+
+ <div class="grid">
+
+  <div class="card dashboard-card">
+   <div class="muted">Total Applications</div>
+   <div id="myTotalApplications" class="stat">0</div>
+  </div>
+
+  <div class="card dashboard-card">
+   <div class="muted">🟡 Pending</div>
+   <div id="myPendingApplications" class="stat">0</div>
+  </div>
+
+  <div class="card dashboard-card">
+   <div class="muted">🟢 Accepted Jobs</div>
+   <div id="myAcceptedJobs" class="stat">0</div>
+  </div>
+
+  <div class="card dashboard-card">
+   <div class="muted">🔴 Rejected</div>
+   <div id="myRejectedApplications" class="stat">0</div>
+  </div>
+
+ </div>
+
+
+ <div class="card" style="margin-top:16px">
+
+  <div class="row">
+
+   <div>
+    <h3>💰 Estimated Earnings</h3>
+    <div class="muted">
+     Accepted Jobs-এর Budget অনুযায়ী সম্ভাব্য হিসাব।
+    </div>
+   </div>
+
+   <strong id="myEstimatedEarnings" class="stat">
+    0 BDT
+   </strong>
+
+  </div>
+
+  <div class="notice warning">
+   ⚠️ এটি Estimated Earnings। Job-এর Budget যদি
+   নির্দিষ্ট সংখ্যায় দেওয়া থাকে, সেই সংখ্যা হিসাব করা হবে।
+   “আলোচনা সাপেক্ষ” হলে সেটি Earnings-এ যোগ হবে না।
+  </div>
+
+ </div>
+
+
+ <!-- ACCEPTED JOBS -->
+ <div id="myAcceptedJobsList" style="margin-top:16px"></div>
+
+
+ <!-- ALL APPLICATIONS -->
+ <div id="myApplicationsList" style="margin-top:16px"></div>
 
 </section>
 
@@ -673,6 +787,8 @@ let jobs=
 let skill=
  localStorage.getItem('pz_skill')||'';
 
+let myApplications=[];
+
 
 /* =========================
    DEFAULT JOBS
@@ -794,11 +910,6 @@ function render(){
    ADMIN UI SECURITY
 ========================= */
 
-/*
-  গুরুত্বপূর্ণ:
-  Login করলেই Admin button দেখাবে না।
-  Supabase server-side RPC দিয়ে Admin role যাচাই হবে।
-*/
 async function updateUserUI(){
 
  const adminBtn=
@@ -806,10 +917,8 @@ async function updateUserUI(){
 
  if(!adminBtn) return;
 
- /* প্রতিবার শুরুতেই Admin লুকানো */
  adminBtn.classList.add('hidden');
 
- /* User login না করলে Admin দেখাবে না */
  if(!currentUser) return;
 
  try{
@@ -830,9 +939,6 @@ async function updateUserUI(){
    return;
   }
 
-  /*
-    RPC থেকে true শুধুমাত্র Admin হলে আসবে।
-  */
   if(data===true){
 
    adminBtn.classList.remove('hidden');
@@ -863,10 +969,6 @@ async function updateUserUI(){
 
 async function showPage(id,btn){
 
- /*
-   Admin page-এ ঢোকার আগে প্রতিবার
-   server-side verification করা হবে।
- */
  if(id==='admin'){
 
   if(!currentUser){
@@ -923,6 +1025,16 @@ async function showPage(id,btn){
 
  }
 
+
+ if(id==='userDashboard' && !currentUser){
+
+  openModal('login');
+
+  return;
+
+ }
+
+
  document.querySelectorAll('.section')
   .forEach(x=>
    x.classList.add('hidden')
@@ -942,11 +1054,38 @@ async function showPage(id,btn){
  if(btn)
   btn.classList.add('active');
 
+
  if(id==='admin'){
 
   await loadAdminDashboard();
 
  }
+
+
+ if(id==='userDashboard'){
+
+  await loadMyDashboard();
+
+ }
+
+}
+
+
+/* =========================
+   USER DASHBOARD NAVIGATION
+========================= */
+
+async function openUserDashboard(){
+
+ if(!currentUser){
+
+  openModal('login');
+
+  return;
+
+ }
+
+ showPage('userDashboard');
 
 }
 
@@ -1036,21 +1175,25 @@ function openModal(type,data=null){
     </option>
 
     <option
+     value="Graphic Design"
      ${skill==='Graphic Design'?'selected':''}>
      Graphic Design
     </option>
 
     <option
+     value="Video Editing"
      ${skill==='Video Editing'?'selected':''}>
      Video Editing
     </option>
 
     <option
+     value="Data Entry"
      ${skill==='Data Entry'?'selected':''}>
      Data Entry
     </option>
 
     <option
+     value="Digital Marketing"
      ${skill==='Digital Marketing'?'selected':''}>
      Digital Marketing
     </option>
@@ -1341,10 +1484,6 @@ async function signUp(){
 
  }
 
- /*
-   Email confirmation enabled থাকলে
-   data.session null হতে পারে।
- */
  if(data.session && data.user){
 
   currentUser=data.user;
@@ -1439,6 +1578,8 @@ async function logout(){
 
  currentUser=null;
 
+ myApplications=[];
+
  await updateUserUI();
 
  showPage(
@@ -1471,9 +1612,6 @@ async function loadSupabaseUser(){
 
  }
 
- /*
-   Session পাওয়ার পর Admin verification।
- */
  await updateUserUI();
 
  render();
@@ -1847,6 +1985,697 @@ async function applyJob(jobId){
  closeModal();
 
  alert('Application সফলভাবে পাঠানো হয়েছে।');
+
+ /* Application পাঠানোর পর Dashboard refresh */
+ if(
+  document
+   .getElementById('userDashboard')
+   ?.classList.contains('hidden')===false
+ ){
+
+  await loadMyDashboard();
+
+ }
+
+}
+
+
+/* =========================
+   USER DASHBOARD
+========================= */
+
+async function loadMyDashboard(){
+
+ if(!currentUser){
+
+  alert('প্রথমে Login করুন।');
+
+  openModal('login');
+
+  return;
+
+ }
+
+
+ const applicationContainer=
+  document.getElementById(
+   'myApplicationsList'
+  );
+
+ const acceptedContainer=
+  document.getElementById(
+   'myAcceptedJobsList'
+  );
+
+
+ if(applicationContainer){
+
+  applicationContainer.innerHTML=
+   '<div class="notice">📊 Dashboard loading...</div>';
+
+ }
+
+ if(acceptedContainer){
+
+  acceptedContainer.innerHTML='';
+
+ }
+
+
+ const {data,error}=
+  await supabaseClient
+   .from('job_applications')
+   .select(`
+    id,
+    job_id,
+    applicant_id,
+    message,
+    status,
+    created_at
+   `)
+   .eq(
+    'applicant_id',
+    currentUser.id
+   )
+   .order(
+    'created_at',
+    {ascending:false}
+   );
+
+
+ if(error){
+
+  if(applicationContainer){
+
+   applicationContainer.innerHTML=
+    '<div class="notice error">'+
+    esc(error.message)+
+    '</div>';
+
+  }
+
+  return;
+
+ }
+
+
+ myApplications=data||[];
+
+
+ /* =========================
+    LOAD RELATED JOBS
+ ========================= */
+
+ const jobIds=
+  [...new Set(
+   myApplications
+    .map(x=>x.job_id)
+    .filter(Boolean)
+  )];
+
+
+ let jobMap={};
+
+
+ if(jobIds.length){
+
+  const {data:jobData,error:jobError}=
+   await supabaseClient
+    .from('jobs')
+    .select(`
+     id,
+     title,
+     skill,
+     description,
+     budget,
+     status
+    `)
+    .in(
+     'id',
+     jobIds
+    );
+
+
+  if(!jobError){
+
+   (jobData||[])
+    .forEach(job=>{
+
+     jobMap[job.id]=job;
+
+    });
+
+  }
+
+ }
+
+
+ /* =========================
+    CALCULATE STATS
+ ========================= */
+
+ const total=
+  myApplications.length;
+
+ const pending=
+  myApplications.filter(
+   x=>x.status==='pending'
+  ).length;
+
+ const accepted=
+  myApplications.filter(
+   x=>x.status==='accepted'
+  ).length;
+
+ const rejected=
+  myApplications.filter(
+   x=>x.status==='rejected'
+  ).length;
+
+
+ /* =========================
+    ESTIMATED EARNINGS
+ ========================= */
+
+ let estimated=0;
+
+
+ myApplications
+  .filter(
+   x=>x.status==='accepted'
+  )
+  .forEach(app=>{
+
+   const job=
+    jobMap[app.job_id];
+
+   if(!job)
+    return;
+
+   const raw=
+    String(
+     job.budget||''
+    );
+
+   /*
+     Budget থেকে প্রথম numeric amount
+     নেওয়া হচ্ছে।
+     যেমন:
+     500 BDT -> 500
+     1,000 BDT -> 1000
+     500-1000 BDT -> 500
+   */
+
+   const numbers=
+    raw
+     .replace(/,/g,'')
+     .match(/\d+(?:\.\d+)?/g);
+
+
+   if(
+    numbers &&
+    numbers.length
+   ){
+
+    const amount=
+     Number(numbers[0]);
+
+    if(
+     Number.isFinite(amount)
+    ){
+
+     estimated+=amount;
+
+    }
+
+   }
+
+  });
+
+
+ /* =========================
+    UPDATE DASHBOARD STATS
+ ========================= */
+
+ const setText=
+  (id,value)=>{
+
+   const el=
+    document.getElementById(id);
+
+   if(el)
+    el.textContent=value;
+
+  };
+
+
+ setText(
+  'myTotalApplications',
+  total
+ );
+
+ setText(
+  'myPendingApplications',
+  pending
+ );
+
+ setText(
+  'myAcceptedJobs',
+  accepted
+ );
+
+ setText(
+  'myRejectedApplications',
+  rejected
+ );
+
+ setText(
+  'myEstimatedEarnings',
+  estimated.toLocaleString('en-BD')+
+  ' BDT'
+ );
+
+
+ /* =========================
+    NO APPLICATION
+ ========================= */
+
+ if(!myApplications.length){
+
+  if(acceptedContainer){
+
+   acceptedContainer.innerHTML=`
+
+    <div class="card">
+
+     <h3>💼 Accepted Jobs</h3>
+
+     <div class="notice">
+      এখনো কোনো Accepted Job নেই।
+     </div>
+
+    </div>
+
+   `;
+
+  }
+
+
+  if(applicationContainer){
+
+   applicationContainer.innerHTML=`
+
+    <div class="card">
+
+     <h3>📋 My Applications</h3>
+
+     <div class="notice">
+      আপনি এখনো কোনো Job-এ Application করেননি।
+     </div>
+
+     <button
+      class="btn btn-primary"
+      onclick="showPage('home')">
+      💼 Available Jobs দেখুন
+     </button>
+
+    </div>
+
+   `;
+
+  }
+
+  return;
+
+ }
+
+
+ /* =========================
+    ACCEPTED JOBS LIST
+ ========================= */
+
+ const acceptedApps=
+  myApplications.filter(
+   x=>x.status==='accepted'
+  );
+
+
+ if(acceptedContainer){
+
+  if(!acceptedApps.length){
+
+   acceptedContainer.innerHTML=`
+
+    <div class="card">
+
+     <h3>💼 Accepted Jobs</h3>
+
+     <div class="notice">
+      এখনো কোনো Application Accepted হয়নি।
+     </div>
+
+    </div>
+
+   `;
+
+  }else{
+
+   let acceptedHtml=`
+
+    <div class="card">
+
+     <div class="row">
+
+      <h3>💼 Accepted Jobs</h3>
+
+      <span class="badge">
+       ${acceptedApps.length} Accepted
+      </span>
+
+     </div>
+
+   `;
+
+
+   acceptedApps.forEach(
+    app=>{
+
+     const job=
+      jobMap[app.job_id];
+
+     const title=
+      job?.title||
+      'Job #'+
+      String(app.job_id)
+       .slice(0,8);
+
+     const jobSkill=
+      job?.skill||
+      '-';
+
+     const budget=
+      job?.budget||
+      'আলোচনা সাপেক্ষ';
+
+     const description=
+      job?.description||
+      '';
+
+
+     acceptedHtml+=`
+
+      <div
+       class="card accepted-job"
+       style="margin-top:12px">
+
+       <div class="row">
+
+        <div>
+
+         <span class="badge">
+          ${esc(jobSkill)}
+         </span>
+
+         <h3 style="margin-top:8px">
+          ${esc(title)}
+         </h3>
+
+        </div>
+
+        <span class="status accepted">
+         Accepted
+        </span>
+
+       </div>
+
+       <p class="muted">
+        ${esc(description)}
+       </p>
+
+       <div class="row">
+
+        <span class="muted">
+         Budget
+        </span>
+
+        <strong style="color:#21e6a8">
+         ${esc(budget)}
+        </strong>
+
+       </div>
+
+       <div class="notice success">
+        🎉 অভিনন্দন! এই Job-এর জন্য আপনার
+        Application Accepted হয়েছে।
+        <br>
+        কাজটি সম্পন্ন করার জন্য Job Poster-এর
+        নির্দেশনা অনুসরণ করুন।
+       </div>
+
+       <div class="muted">
+        Applied:
+        ${
+         app.created_at
+          ?new Date(
+            app.created_at
+           ).toLocaleString('bn-BD')
+          :'-'
+        }
+       </div>
+
+      </div>
+
+     `;
+
+    }
+   );
+
+
+   acceptedHtml+=`
+
+    </div>
+
+   `;
+
+   acceptedContainer.innerHTML=
+    acceptedHtml;
+
+  }
+
+ }
+
+
+ /* =========================
+    ALL APPLICATIONS
+ ========================= */
+
+ if(applicationContainer){
+
+  let html=`
+
+   <div class="card">
+
+    <div class="row">
+
+     <h3>📋 My Applications</h3>
+
+     <span class="badge">
+      ${total} Application
+     </span>
+
+    </div>
+
+  `;
+
+
+  myApplications.forEach(
+   app=>{
+
+    const job=
+     jobMap[app.job_id];
+
+    const title=
+     job?.title||
+     'Job #'+
+     String(app.job_id)
+      .slice(0,8);
+
+    const jobSkill=
+     job?.skill||
+     '-';
+
+    const budget=
+     job?.budget||
+     'আলোচনা সাপেক্ষ';
+
+    const status=
+     app.status||
+     'pending';
+
+
+    let statusText=
+     'Pending';
+
+    if(status==='accepted')
+     statusText='Accepted';
+
+    if(status==='rejected')
+     statusText='Rejected';
+
+    if(status==='withdrawn')
+     statusText='Withdrawn';
+
+
+    html+=`
+
+     <div
+      class="card"
+      style="margin-top:12px">
+
+      <div class="row">
+
+       <div>
+
+        <span class="badge">
+         ${esc(jobSkill)}
+        </span>
+
+        <h3 style="margin-top:8px">
+         ${esc(title)}
+        </h3>
+
+       </div>
+
+       <span class="status ${esc(status)}">
+        ${esc(statusText)}
+       </span>
+
+      </div>
+
+      <div class="muted">
+
+       Budget:
+
+       <strong>
+        ${esc(budget)}
+       </strong>
+
+      </div>
+
+      ${
+       app.message
+       ?`
+        <p class="muted">
+         Message:
+         ${esc(app.message)}
+        </p>
+       `
+       :''
+      }
+
+      <div class="muted">
+
+       Applied:
+       ${
+        app.created_at
+         ?new Date(
+           app.created_at
+          ).toLocaleString('bn-BD')
+         :'-'
+       }
+
+      </div>
+
+
+      ${
+       status==='accepted'
+       ?`
+
+        <div class="notice success">
+
+         🎉 অভিনন্দন!
+
+         আপনার Application
+         <strong>Accepted</strong>
+         হয়েছে।
+
+         <br>
+
+         💼 Accepted Jobs section-এ
+         কাজটির বিস্তারিত দেখতে পারবেন।
+
+        </div>
+
+       `
+       :''
+      }
+
+
+      ${
+       status==='rejected'
+       ?`
+
+        <div class="notice error">
+
+         ❌ এই Application টি
+         বর্তমানে Rejected।
+
+        </div>
+
+       `
+       :''
+      }
+
+
+      ${
+       status==='pending'
+       ?`
+
+        <div class="notice warning">
+
+         ⏳ আপনার Application এখনো
+         review-এর অপেক্ষায় আছে।
+
+        </div>
+
+       `
+       :''
+      }
+
+
+      ${
+       status==='withdrawn'
+       ?`
+
+        <div class="notice">
+
+         Application Withdrawn।
+
+        </div>
+
+       `
+       :''
+      }
+
+
+     </div>
+
+    `;
+
+   }
+  );
+
+
+  html+=`
+
+   </div>
+
+  `;
+
+  applicationContainer.innerHTML=
+   html;
+
+ }
 
 }
 
@@ -3428,12 +4257,6 @@ function startBrainBox(){
 
 render();
 
-/*
-  Startup sequence:
-  প্রথমে session load হবে।
-  তারপর server-side Admin check হবে।
-  Admin button default-এ hidden।
-*/
 loadSupabaseUser();
 
 loadJobsFromSupabase();
@@ -3453,12 +4276,12 @@ supabaseClient.auth.onAuthStateChange(
 
    await loadProfileFromSupabase();
 
+  }else{
+
+   myApplications=[];
+
   }
 
-  /*
-    প্রতিটি login/logout/session change-এর পর
-    Admin permission নতুন করে যাচাই হবে।
-  */
   await updateUserUI();
 
   render();
