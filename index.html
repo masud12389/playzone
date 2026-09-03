@@ -276,7 +276,7 @@ footer{
   <button onclick="showPage('rewards',this)">🎁 Rewards</button>
   <button onclick="showPage('profile',this)">👤 Profile</button>
 
-  <!-- শুধু Admin হলে JavaScript এই button দেখাবে -->
+  <!-- শুধুমাত্র Supabase verified Admin হলে JavaScript এই button দেখাবে -->
   <button id="adminNavBtn" class="hidden" onclick="showPage('admin',this)">
    ⚙️ Admin
   </button>
@@ -794,6 +794,11 @@ function render(){
    ADMIN UI SECURITY
 ========================= */
 
+/*
+  গুরুত্বপূর্ণ:
+  Login করলেই Admin button দেখাবে না।
+  Supabase server-side RPC দিয়ে Admin role যাচাই হবে।
+*/
 async function updateUserUI(){
 
  const adminBtn=
@@ -801,34 +806,51 @@ async function updateUserUI(){
 
  if(!adminBtn) return;
 
- /* প্রথমে সবসময় Admin লুকানো থাকবে */
+ /* প্রতিবার শুরুতেই Admin লুকানো */
  adminBtn.classList.add('hidden');
 
- /* Login না থাকলে Admin দেখাবে না */
+ /* User login না করলে Admin দেখাবে না */
  if(!currentUser) return;
 
- /*
-   Supabase-এর server-side RPC দিয়ে
-   সত্যিকারের Admin কিনা যাচাই করা হচ্ছে।
- */
- const {data,error}=
-  await supabaseClient
-   .rpc('is_current_user_admin');
+ try{
 
- if(error){
+  const {data,error}=
+   await supabaseClient
+    .rpc('is_current_user_admin');
+
+  if(error){
+
+   console.error(
+    'Admin check failed:',
+    error
+   );
+
+   adminBtn.classList.add('hidden');
+
+   return;
+  }
+
+  /*
+    RPC থেকে true শুধুমাত্র Admin হলে আসবে।
+  */
+  if(data===true){
+
+   adminBtn.classList.remove('hidden');
+
+  }else{
+
+   adminBtn.classList.add('hidden');
+
+  }
+
+ }catch(error){
 
   console.error(
-   'Admin check failed:',
+   'Admin verification error:',
    error
   );
 
-  return;
- }
-
- /* শুধু সত্যিকারের Admin হলে button দেখাবে */
- if(data===true){
-
-  adminBtn.classList.remove('hidden');
+  adminBtn.classList.add('hidden');
 
  }
 
@@ -841,7 +863,10 @@ async function updateUserUI(){
 
 async function showPage(id,btn){
 
- /* Admin page-এর জন্য login check */
+ /*
+   Admin page-এ ঢোকার আগে প্রতিবার
+   server-side verification করা হবে।
+ */
  if(id==='admin'){
 
   if(!currentUser){
@@ -856,11 +881,40 @@ async function showPage(id,btn){
    return;
   }
 
-  /* Server-side Admin verification */
   const allowed=
    await isCurrentUserAdmin();
 
   if(!allowed){
+
+   document
+    .getElementById('adminNavBtn')
+    ?.classList.add('hidden');
+
+   document
+    .querySelectorAll('.section')
+    .forEach(x=>
+     x.classList.add('hidden')
+    );
+
+   const home=
+    document.getElementById('home');
+
+   if(home)
+    home.classList.remove('hidden');
+
+   document
+    .querySelectorAll('nav button')
+    .forEach(x=>
+     x.classList.remove('active')
+    );
+
+   const homeBtn=
+    document.querySelector(
+     'nav button[onclick^="showPage(\'home\'"]'
+    );
+
+   if(homeBtn)
+    homeBtn.classList.add('active');
 
    alert('Admin access denied.');
 
@@ -1417,6 +1471,9 @@ async function loadSupabaseUser(){
 
  }
 
+ /*
+   Session পাওয়ার পর Admin verification।
+ */
  await updateUserUI();
 
  render();
@@ -1914,22 +1971,35 @@ async function isCurrentUserAdmin(){
  if(!currentUser)
   return false;
 
- const {data,error}=
-  await supabaseClient
-   .rpc('is_current_user_admin');
+ try{
 
- if(error){
+  const {data,error}=
+   await supabaseClient
+    .rpc('is_current_user_admin');
+
+  if(error){
+
+   console.error(
+    'Admin RPC error:',
+    error
+   );
+
+   return false;
+
+  }
+
+  return data===true;
+
+ }catch(error){
 
   console.error(
-   'Admin RPC error:',
+   'Admin verification error:',
    error
   );
 
   return false;
 
  }
-
- return data===true;
 
 }
 
@@ -1948,10 +2018,21 @@ async function loadAdminDashboard(){
 
  if(!allowed){
 
-  document
-   .getElementById('adminContent')
-   .innerHTML=
-   '<div class="notice error">Admin access denied.</div>';
+  const adminBtn=
+   document.getElementById('adminNavBtn');
+
+  if(adminBtn)
+   adminBtn.classList.add('hidden');
+
+  const content=
+   document.getElementById('adminContent');
+
+  if(content){
+
+   content.innerHTML=
+    '<div class="notice error">Admin access denied.</div>';
+
+  }
 
   return;
 
@@ -2046,6 +2127,10 @@ async function adminLoadApplications(){
   await isCurrentUserAdmin();
 
  if(!allowed){
+
+  document
+   .getElementById('adminNavBtn')
+   ?.classList.add('hidden');
 
   alert('Admin access denied.');
 
@@ -3344,8 +3429,10 @@ function startBrainBox(){
 render();
 
 /*
-  প্রথমে current session load হবে।
-  তারপর server-side admin check হবে।
+  Startup sequence:
+  প্রথমে session load হবে।
+  তারপর server-side Admin check হবে।
+  Admin button default-এ hidden।
 */
 loadSupabaseUser();
 
@@ -3368,6 +3455,10 @@ supabaseClient.auth.onAuthStateChange(
 
   }
 
+  /*
+    প্রতিটি login/logout/session change-এর পর
+    Admin permission নতুন করে যাচাই হবে।
+  */
   await updateUserUI();
 
   render();
