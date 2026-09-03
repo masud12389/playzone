@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="bn">
 <head>
@@ -6,541 +5,371 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PLAYZONE — Skill & Opportunity Platform</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
-
-html{
- scroll-behavior:smooth;
-}
-
+html{scroll-behavior:smooth}
 body{
  margin:0;
- background:#07131f;
+ background:#081522;
  color:#fff;
  font-family:Arial,"Noto Sans Bengali",sans-serif;
- font-size:16px;
- line-height:1.6;
 }
-
-button{
- font-family:inherit;
- cursor:pointer;
-}
-
-.wrap{
- max-width:760px;
- margin:auto;
- padding-bottom:100px;
-}
-
-/* ================= HEADER ================= */
+.wrap{max-width:760px;margin:auto;padding-bottom:90px}
 
 header{
  position:sticky;
  top:0;
- z-index:100;
- background:rgba(7,19,31,.97);
- backdrop-filter:blur(14px);
- border-bottom:1px solid rgba(255,255,255,.10);
-}
-
-.header-inner{
+ z-index:50;
+ background:#0b1b2aee;
+ backdrop-filter:blur(12px);
+ padding:15px 17px;
+ border-bottom:1px solid #19364b;
  display:flex;
  align-items:center;
  justify-content:space-between;
- padding:16px;
 }
-
 .logo{
- font-size:25px;
- font-weight:900;
- letter-spacing:.5px;
-}
-
-.logo span{
- color:#20e3a2;
-}
-
-.user{
- font-size:16px;
- color:#d1dce4;
- font-weight:600;
-}
-
-/* ================= TOP NAV ================= */
-
-.nav{
- display:flex;
- gap:8px;
- overflow-x:auto;
- padding:0 12px 14px;
- scrollbar-width:none;
-}
-
-.nav::-webkit-scrollbar{
- display:none;
-}
-
-.nav button{
- border:1px solid rgba(255,255,255,.10);
- background:#0d2233;
- color:#e8f1f6;
- padding:11px 15px;
- border-radius:13px;
- white-space:nowrap;
- font-size:15px;
- font-weight:600;
- min-height:46px;
-}
-
-.nav button:active{
- transform:scale(.97);
-}
-
-/* ================= HERO ================= */
-
-.hero{
- margin:20px 14px;
- padding:32px 23px;
- border-radius:25px;
- background:linear-gradient(
-   145deg,
-   #10384d,
-   #092333 55%,
-   #071a27
- );
- border:1px solid rgba(32,227,162,.20);
- box-shadow:0 18px 45px rgba(0,0,0,.28);
-}
-
-.badge{
- display:inline-block;
- padding:9px 13px;
- border-radius:22px;
- background:rgba(32,227,162,.12);
- color:#20e3a2;
- font-size:14px;
- font-weight:800;
- margin-bottom:16px;
-}
-
-.hero h1{
- margin:0 0 16px;
- font-size:32px;
- line-height:1.35;
-}
-
-.hero p{
- margin:0;
- color:#d0dce4;
- line-height:1.8;
- font-size:17px;
-}
-
-.actions{
- display:flex;
- gap:12px;
- margin-top:25px;
-}
-
-.btn{
- flex:1;
- border:0;
- padding:15px 12px;
- border-radius:14px;
- font-weight:800;
- font-size:17px;
- min-height:54px;
-}
-
-.primary{
- background:#20e3a2;
- color:#04140f;
-}
-
-.secondary{
- background:#163247;
- color:#fff;
- border:1px solid rgba(255,255,255,.12);
-}
-
-.btn:active{
- transform:scale(.98);
-}
-
-/* ================= WALLET ================= */
-
-.wallet{
- margin:16px 14px;
- padding:24px;
- border-radius:23px;
- background:linear-gradient(145deg,#102d40,#0b1e2c);
- border:1px solid rgba(255,255,255,.09);
-}
-
-.wallet-title{
- color:#b8c8d3;
- font-size:16px;
- font-weight:600;
-}
-
-.points{
- font-size:43px;
- font-weight:900;
- line-height:1.2;
- margin:8px 0 3px;
-}
-
-.cash{
- color:#20e3a2;
- font-size:20px;
- font-weight:800;
-}
-
-.wallet-label{
- margin-top:20px;
- color:#dbe6ec;
- font-size:17px;
- font-weight:800;
-}
-
-.progress{
- margin-top:14px;
- height:11px;
- background:#172d3c;
- border-radius:10px;
- overflow:hidden;
-}
-
-.progress div{
- width:6%;
- height:100%;
- background:#20e3a2;
- border-radius:10px;
-}
-
-.withdraw{
- margin-top:11px;
- color:#aebec9;
- font-size:15px;
-}
-
-/* ================= STATS ================= */
-
-.stats{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:11px;
- margin:16px 14px;
-}
-
-.stat{
- background:#0c1e2d;
- border:1px solid rgba(255,255,255,.08);
- border-radius:17px;
- padding:17px 10px;
- text-align:center;
-}
-
-.stat strong{
- display:block;
- font-size:26px;
- margin-bottom:4px;
-}
-
-.stat span{
- color:#b3c2cc;
- font-size:15px;
- font-weight:600;
-}
-
-/* ================= SECTIONS ================= */
-
-.section{
- margin:30px 14px 16px;
-}
-
-.section-title{
  font-size:24px;
  font-weight:900;
- margin-bottom:16px;
+ letter-spacing:1px;
+}
+.userBadge{
+ background:#132b3e;
+ border:1px solid #28506a;
+ padding:8px 12px;
+ border-radius:20px;
+ font-size:13px;
+ cursor:pointer;
 }
 
-/* ================= HOW IT WORKS ================= */
-
-.steps{
- display:grid;
- gap:12px;
-}
-
-.step{
+.topnav{
  display:flex;
- gap:15px;
- align-items:center;
- background:#0c1e2d;
- border:1px solid rgba(255,255,255,.08);
- border-radius:18px;
- padding:17px;
+ gap:5px;
+ overflow-x:auto;
+ background:#091927;
+ border-bottom:1px solid #173247;
+ padding:9px;
+}
+.topnav a{
+ color:#b7c8d4;
+ text-decoration:none;
+ white-space:nowrap;
+ padding:9px 11px;
+ border-radius:10px;
+ font-size:13px;
+}
+.topnav a:hover{
+ background:#17364d;
+ color:#fff;
 }
 
-.step-icon{
- width:52px;
- height:52px;
- flex-shrink:0;
- display:flex;
- align-items:center;
- justify-content:center;
- border-radius:15px;
- background:#102f3d;
- font-size:26px;
-}
+main{padding:17px}
 
-.step h3{
- margin:0 0 5px;
- font-size:19px;
+.hero{
+ background:linear-gradient(145deg,#103b5c,#0b2236);
+ border:1px solid #24526d;
+ border-radius:23px;
+ padding:28px 19px;
+ text-align:center;
+ box-shadow:0 15px 40px #0005;
 }
-
-.step p{
+.badge{
+ display:inline-block;
+ background:#12405c;
+ color:#74ddff;
+ padding:7px 12px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:800;
+}
+h1{
+ font-size:29px;
+ line-height:1.3;
+ margin:15px 0 10px;
+}
+.hero p{
+ color:#c6d5df;
+ line-height:1.75;
  margin:0;
- color:#b5c5cf;
- font-size:15px;
+}
+.btns{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-top:20px;
+}
+button,.btn{
+ border:0;
+ border-radius:12px;
+ padding:12px 17px;
+ font-weight:800;
+ cursor:pointer;
+ text-decoration:none;
+ display:inline-block;
+ background:#14a6df;
+ color:#fff;
+}
+.btn.secondary{
+ background:#1a384d;
+}
+
+section{margin-top:19px}
+
+.card{
+ background:#0d1f2f;
+ border:1px solid #1c3d53;
+ border-radius:18px;
+ padding:18px;
+}
+.title{
+ margin:0 0 10px;
+ font-size:21px;
+}
+.muted{
+ color:#9fb2c0;
+ font-size:13px;
  line-height:1.65;
 }
 
-/* ================= OPPORTUNITY ================= */
-
-.opportunity{
- margin:17px 14px;
- padding:23px;
- border-radius:22px;
- background:linear-gradient(135deg,#102c40,#0b1d2b);
- border:1px solid rgba(32,227,162,.14);
+.wallet{
+ text-align:center;
 }
-
-.opportunity h2{
- margin:0 0 9px;
- font-size:24px;
+.points{
+ font-size:42px;
+ font-weight:900;
+ margin:7px 0;
 }
-
-.opportunity p{
- margin:0;
- color:#b9c8d1;
- font-size:16px;
- line-height:1.75;
-}
-
-.skill-grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:11px;
- margin-top:18px;
-}
-
-.skill{
- background:#0a1926;
- border:1px solid rgba(255,255,255,.07);
- padding:16px 12px;
- border-radius:14px;
- font-size:16px;
- font-weight:700;
-}
-
-/* ================= TRUST ================= */
-
-.trust{
- margin:17px 14px;
- padding:21px;
- border-radius:20px;
- background:#0c1e2d;
- border:1px solid rgba(255,255,255,.08);
-}
-
-.trust-row{
- display:flex;
- align-items:flex-start;
- gap:12px;
- margin:13px 0;
- color:#c5d2da;
- font-size:16px;
- line-height:1.6;
-}
-
-.trust-row span:first-child{
- color:#20e3a2;
+.bdt{
  font-size:20px;
- font-weight:bold;
+ font-weight:800;
+}
+.wallet h3{
+ margin:13px 0 5px;
 }
 
-/* ================= DEMO PAGES ================= */
-
-.page{
- display:none;
- margin:20px 14px;
- padding:25px;
- background:#0c1e2d;
- border:1px solid rgba(255,255,255,.08);
- border-radius:22px;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:11px;
 }
-
-.page.active{
+.stat{
+ text-align:center;
+ background:#0d1f2f;
+ border:1px solid #1c3d53;
+ border-radius:15px;
+ padding:16px 8px;
+}
+.stat b{
  display:block;
+ font-size:23px;
+ margin-bottom:5px;
+}
+.stat span{
+ color:#9fb2c0;
+ font-size:12px;
 }
 
-.page h2{
- margin:0 0 12px;
- font-size:25px;
+.steps{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:11px;
+}
+.step{
+ background:#0e2435;
+ border:1px solid #21465d;
+ border-radius:15px;
+ padding:16px;
+}
+.step .icon{
+ font-size:28px;
+}
+.step h3{
+ margin:8px 0 5px;
 }
 
-.page p{
- color:#bdcbd4;
- font-size:16px;
+.skills{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:11px;
+}
+.skill{
+ background:#102a3d;
+ border:1px solid #24506a;
+ border-radius:15px;
+ padding:18px;
+ font-weight:800;
+}
+
+.check{
+ margin:11px 0;
+ color:#d8e5ed;
+}
+
+.job{
+ background:#102638;
+ border:1px solid #25516b;
+ border-radius:16px;
+ padding:16px;
+ margin-top:12px;
+}
+.job h3{
+ margin:0 0 8px;
+}
+.jobInfo{
+ color:#a9bdc9;
+ font-size:13px;
  line-height:1.7;
 }
-
-.page-card{
- background:#10283a;
- padding:17px;
- border-radius:16px;
+.jobBtns{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
  margin-top:12px;
- border:1px solid rgba(255,255,255,.07);
+}
+.smallBtn{
+ padding:9px 12px;
+ border-radius:10px;
+ font-size:12px;
 }
 
-.page-card h3{
- margin:0 0 5px;
- font-size:18px;
-}
-
-.page-card p{
- margin:0;
- font-size:15px;
-}
-
-/* ================= MESSAGE ================= */
-
-#message{
- position:fixed;
- left:50%;
- bottom:85px;
- transform:translateX(-50%);
- background:#163247;
+input,textarea,select{
+ width:100%;
+ background:#091a28;
  color:#fff;
- padding:13px 18px;
- border-radius:13px;
- font-size:15px;
+ border:1px solid #29495e;
+ border-radius:11px;
+ padding:12px;
+ margin:7px 0;
+ outline:none;
+}
+textarea{
+ min-height:100px;
+ resize:vertical;
+}
+label{
+ display:block;
+ margin-top:8px;
+ color:#bfd0da;
+ font-size:13px;
  font-weight:700;
- z-index:500;
- display:none;
- box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-/* ================= BOTTOM NAV ================= */
+.formBox{
+ display:none;
+ margin-top:14px;
+ padding:15px;
+ background:#091a28;
+ border:1px solid #23475d;
+ border-radius:15px;
+}
+
+.status{
+ padding:8px 11px;
+ border-radius:9px;
+ display:inline-block;
+ font-size:12px;
+ font-weight:800;
+}
+.pending{
+ background:#5a4613;
+ color:#ffd66b;
+}
+.accepted{
+ background:#124e35;
+ color:#73efaf;
+}
+.rejected{
+ background:#5a2027;
+ color:#ff9ba5;
+}
+
+.notice{
+ padding:12px;
+ background:#102b3d;
+ border:1px solid #234b63;
+ border-radius:12px;
+ color:#bfd0da;
+ font-size:13px;
+ line-height:1.6;
+}
 
 .bottom{
  position:fixed;
  bottom:0;
  left:0;
  right:0;
- z-index:200;
- background:rgba(5,15,24,.98);
- border-top:1px solid rgba(255,255,255,.10);
+ z-index:100;
+ background:#091827ee;
+ backdrop-filter:blur(12px);
+ border-top:1px solid #183247;
 }
-
-.bottom-inner{
+.bottomInner{
  max-width:760px;
  margin:auto;
- display:grid;
- grid-template-columns:repeat(5,1fr);
+ display:flex;
+ justify-content:space-around;
 }
-
-.bottom button{
- background:none;
- border:0;
- color:#9aadb9;
- padding:11px 3px 10px;
- font-size:14px;
- font-weight:600;
- min-height:66px;
+.bottom a{
+ color:#aebfcc;
+ text-decoration:none;
+ text-align:center;
+ padding:9px 5px;
+ font-size:11px;
 }
-
-.bottom button:first-child{
- color:#20e3a2;
-}
-
-.bottom-icon{
+.bottom a b{
  display:block;
- font-size:23px;
+ font-size:18px;
  margin-bottom:3px;
 }
 
-/* ================= MOBILE ================= */
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:200;
+ background:#0009;
+ padding:20px;
+ overflow:auto;
+}
+.modalBox{
+ max-width:520px;
+ margin:50px auto;
+ background:#0d1f2f;
+ border:1px solid #28516a;
+ border-radius:20px;
+ padding:20px;
+}
+.close{
+ float:right;
+ background:#172f41;
+ padding:7px 10px;
+}
 
-@media(max-width:430px){
+.loading{
+ text-align:center;
+ color:#9fb2c0;
+ padding:20px;
+}
 
- body{
-   font-size:17px;
+.empty{
+ text-align:center;
+ padding:20px;
+ color:#91a8b7;
+}
+
+@media(max-width:520px){
+ h1{font-size:25px}
+ .steps,.skills,.grid{
+  grid-template-columns:1fr 1fr;
  }
+}
 
- .header-inner{
-   padding:15px 14px;
- }
-
- .logo{
-   font-size:24px;
- }
-
- .user{
-   font-size:15px;
- }
-
- .hero{
-   margin:17px 12px;
-   padding:29px 20px;
- }
-
- .hero h1{
-   font-size:28px;
- }
-
- .hero p{
-   font-size:17px;
- }
-
- .actions{
-   flex-direction:column;
- }
-
- .btn{
-   width:100%;
-   font-size:18px;
-   min-height:56px;
- }
-
- .points{
-   font-size:41px;
- }
-
- .section-title{
-   font-size:23px;
- }
-
- .step h3{
-   font-size:19px;
- }
-
- .step p{
-   font-size:16px;
- }
-
- .skill{
-   font-size:16px;
- }
-
- .bottom button{
-   font-size:13px;
- }
-
- .bottom-icon{
-   font-size:22px;
+@media(max-width:390px){
+ .steps,.skills,.grid{
+  grid-template-columns:1fr;
  }
 }
 </style>
@@ -550,536 +379,1423 @@ header{
 
 <div class="wrap">
 
-<!-- HEADER -->
-
 <header>
-
- <div class="header-inner">
-
-   <div class="logo">
-     PLAY<span>ZONE</span>
-   </div>
-
-   <div class="user">
-     👤 Masud Rana
-   </div>
-
- </div>
-
- <div class="nav">
-
-   <button onclick="showPage('home')">
-     🏠 Home
-   </button>
-
-   <button onclick="showPage('games')">
-     🎮 Games
-   </button>
-
-   <button onclick="showPage('jobs')">
-     💼 Jobs
-   </button>
-
-   <button onclick="showPage('wallet')">
-     💰 Rewards
-   </button>
-
-   <button onclick="showPage('profile')">
-     👤 Profile
-   </button>
-
-   <button onclick="showPage('admin')">
-     ⚙️ Admin
-   </button>
-
- </div>
-
+ <div class="logo">PLAYZONE</div>
+ <div class="userBadge" id="userBadge" onclick="openProfile()">👤 Guest</div>
 </header>
 
+<nav class="topnav">
+ <a href="#home">🏠 Home</a>
+ <a href="#games">🎮 Games</a>
+ <a href="#jobs">💼 Jobs</a>
+ <a href="#rewards">💰 Rewards</a>
+ <a href="#profile">👤 Profile</a>
+</nav>
 
-<!-- ================= HOME ================= -->
+<main>
 
-<div id="home" class="page active"
-     style="display:block;padding:0;background:none;border:0;margin:0">
+<section id="home">
 
-<!-- HERO -->
+<div class="hero">
 
-<section class="hero">
+<span class="badge">🚀 SKILL & OPPORTUNITY PLATFORM</span>
 
- <div class="badge">
-   🚀 SKILL & OPPORTUNITY PLATFORM
- </div>
+<h1>
+ খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন
+</h1>
 
- <h1>
-   খেলুন • দক্ষতা দেখান •<br>
-   সুযোগ তৈরি করুন
- </h1>
+<p>
+গেম খেলুন, Points অর্জন করুন এবং নিজের দক্ষতা কাজে লাগিয়ে অনলাইন কাজের সুযোগ খুঁজে নিন।
+</p>
 
- <p>
-   গেম খেলুন, Points অর্জন করুন এবং নিজের দক্ষতা কাজে লাগিয়ে
-   অনলাইন কাজের সুযোগ খুঁজে নিন।
- </p>
+<div class="btns">
+<a class="btn" href="#games">🎮 খেলুন</a>
+<a class="btn secondary" href="#jobs">💼 কাজ দেখুন</a>
+</div>
 
- <div class="actions">
-
-   <button class="btn primary"
-           onclick="showPage('games')">
-     🎮 খেলুন
-   </button>
-
-   <button class="btn secondary"
-           onclick="showPage('jobs')">
-     💼 কাজ দেখুন
-   </button>
-
- </div>
+</div>
 
 </section>
 
+<section id="rewards">
 
-<!-- WALLET -->
+<div class="card wallet">
 
-<section class="wallet">
+<div class="muted">
+আপনার বর্তমান Points
+</div>
 
- <div class="wallet-title">
-   আপনার বর্তমান Points
- </div>
+<div class="points" id="points">
+1,000
+</div>
 
- <div class="points">
-   1,490
- </div>
+<div class="bdt">
+৳ 100 BDT
+</div>
 
- <div class="cash">
-   ৳ 149 BDT
- </div>
+<h3>💎 PLAYZONE WALLET</h3>
 
- <div class="wallet-label">
-   💎 PLAYZONE WALLET
- </div>
+<p class="muted">
+Withdraw-এর জন্য আরও 24,000 Points প্রয়োজন।
+</p>
 
- <div class="progress">
-   <div></div>
- </div>
-
- <div class="withdraw">
-   23,510 Points আরও প্রয়োজন Withdraw করার জন্য।
- </div>
+</div>
 
 </section>
 
+<section>
 
-<!-- STATS -->
+<div class="grid">
 
-<section class="stats">
+<div class="stat">
+<b id="gameCount">4</b>
+<span>🎮 Games</span>
+</div>
 
- <div class="stat">
-   <strong>4</strong>
-   <span>🎮 Games</span>
- </div>
+<div class="stat">
+<b id="jobCount">0</b>
+<span>💼 Jobs</span>
+</div>
 
- <div class="stat">
-   <strong>6</strong>
-   <span>💼 Jobs</span>
- </div>
+<div class="stat">
+<b id="applicationCount">0</b>
+<span>📨 Applications</span>
+</div>
 
- <div class="stat">
-   <strong>0</strong>
-   <span>📨 Applications</span>
- </div>
+<div class="stat">
+<b id="playedCount">0</b>
+<span>🎯 Played</span>
+</div>
 
- <div class="stat">
-   <strong>1,490</strong>
-   <span>💎 Points</span>
- </div>
+</div>
 
 </section>
 
+<section>
 
-<!-- HOW IT WORKS -->
+<div class="card">
 
-<section class="section">
+<h2 class="title">
+PLAYZONE কীভাবে কাজ করে?
+</h2>
 
- <div class="section-title">
-   PLAYZONE কীভাবে কাজ করে?
- </div>
+<div class="steps">
 
- <div class="steps">
+<div class="step">
+<div class="icon">🎮</div>
+<h3>খেলুন</h3>
+<div class="muted">
+দক্ষতার গেম খেলুন এবং Points অর্জন করুন।
+</div>
+</div>
 
-   <div class="step">
+<div class="step">
+<div class="icon">💼</div>
+<h3>কাজ করুন</h3>
+<div class="muted">
+নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।
+</div>
+</div>
 
-     <div class="step-icon">🎮</div>
+<div class="step">
+<div class="icon">⭐</div>
+<h3>দক্ষতা দেখান</h3>
+<div class="muted">
+Job-এ Application করে নিজের যোগ্যতা দেখান।
+</div>
+</div>
 
-     <div>
-       <h3>খেলুন</h3>
-       <p>
-         দক্ষতার গেম খেলুন এবং Points অর্জন করুন।
-       </p>
-     </div>
+<div class="step">
+<div class="icon">💰</div>
+<h3>Reward</h3>
+<div class="muted">
+Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।
+</div>
+</div>
 
-   </div>
+</div>
 
-
-   <div class="step">
-
-     <div class="step-icon">💼</div>
-
-     <div>
-       <h3>কাজ করুন</h3>
-       <p>
-         নিজের দক্ষতার সাথে মিল রেখে Job খুঁজুন।
-       </p>
-     </div>
-
-   </div>
-
-
-   <div class="step">
-
-     <div class="step-icon">⭐</div>
-
-     <div>
-       <h3>দক্ষতা দেখান</h3>
-       <p>
-         Job-এ Application করে নিজের যোগ্যতা দেখান।
-       </p>
-     </div>
-
-   </div>
-
-
-   <div class="step">
-
-     <div class="step-icon">💰</div>
-
-     <div>
-       <h3>Reward</h3>
-       <p>
-         Points জমিয়ে নির্ধারিত সীমায় Cashout করুন।
-       </p>
-     </div>
-
-   </div>
-
- </div>
+</div>
 
 </section>
 
+<section id="games">
 
-<!-- SKILL OPPORTUNITY -->
+<div class="card">
 
-<section class="opportunity">
+<h2 class="title">
+🎮 Skill Games
+</h2>
 
- <h2>
-   💼 Skill Opportunity
- </h2>
+<div class="skills">
 
- <p>
-   আপনার দক্ষতাকে কাজে লাগিয়ে PLAYZONE-এ বিভিন্ন
-   অনলাইন কাজের সুযোগ খুঁজে নিন।
- </p>
+<div class="skill">🎯 Tap Rush</div>
+<div class="skill">🧩 Match Seven</div>
+<div class="skill">🚀 Fly High</div>
+<div class="skill">🧠 Brain Box</div>
 
- <div class="skill-grid">
+</div>
 
-   <div class="skill">
-     🎨 Graphic Design
-   </div>
+<p class="muted" style="margin-top:13px">
+Skill-based gaming-এর মাধ্যমে Points অর্জন করুন এবং আপনার performance বাড়ান।
+</p>
 
-   <div class="skill">
-     🎬 Video Editing
-   </div>
-
-   <div class="skill">
-     ⌨️ Data Entry
-   </div>
-
-   <div class="skill">
-     📱 Digital Marketing
-   </div>
-
- </div>
+</div>
 
 </section>
 
+<section id="jobs">
 
-<!-- TRUST -->
+<div class="card">
 
-<section class="trust">
+<h2 class="title">
+💼 Skill Opportunity
+</h2>
 
- <div class="section-title">
-   🔐 কেন PLAYZONE?
- </div>
+<p class="muted">
+আপনার দক্ষতাকে কাজে লাগিয়ে PLAYZONE-এ বিভিন্ন অনলাইন কাজের সুযোগ খুঁজে নিন।
+</p>
 
- <div class="trust-row">
-   <span>✓</span>
-   <span>Skill-based Gaming ও Job Opportunity</span>
- </div>
+<div class="skills">
 
- <div class="trust-row">
-   <span>✓</span>
-   <span>Points Wallet ও Reward System</span>
- </div>
+<div class="skill">🎨 Graphic Design</div>
+<div class="skill">🎬 Video Editing</div>
+<div class="skill">⌨️ Data Entry</div>
+<div class="skill">📱 Digital Marketing</div>
 
- <div class="trust-row">
-   <span>✓</span>
-   <span>Job Application ও Skill Showcase</span>
- </div>
+</div>
+
+<div style="margin-top:16px">
+
+<button onclick="showJobForm()">
+➕ Job Post করুন
+</button>
+
+<button class="btn secondary" onclick="loadJobs()" style="margin-left:6px">
+🔄 Refresh
+</button>
+
+</div>
+
+<div id="jobForm" class="formBox">
+
+<h3>📝 নতুন Job Post</h3>
+
+<label>Job Title</label>
+<input id="jobTitle" placeholder="যেমন: Facebook পোস্ট ডিজাইন">
+
+<label>Skill</label>
+<select id="jobSkill">
+<option value="Graphic Design">Graphic Design</option>
+<option value="Video Editing">Video Editing</option>
+<option value="Data Entry">Data Entry</option>
+<option value="Digital Marketing">Digital Marketing</option>
+</select>
+
+<label>Budget</label>
+<input id="jobBudget" placeholder="যেমন: ৳500–৳1,500">
+
+<label>Description</label>
+<textarea id="jobDescription" placeholder="কাজের বিস্তারিত লিখুন..."></textarea>
+
+<div class="jobBtns">
+
+<button onclick="addJob()">
+✅ Job Publish
+</button>
+
+<button class="btn secondary" onclick="hideJobForm()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+<div id="jobsList">
+
+<div class="loading">
+Jobs loading...
+</div>
+
+</div>
+
+</div>
 
 </section>
 
+<section id="applicationsSection" style="display:none">
+
+<div class="card">
+
+<h2 class="title">
+📨 My Applications
+</h2>
+
+<div id="myApplications">
+<div class="loading">
+Applications loading...
 </div>
-
-
-<!-- ================= GAMES ================= -->
-
-<div id="games" class="page">
-
- <h2>🎮 PLAYZONE Games</h2>
-
- <p>
-   দক্ষতার গেম খেলুন এবং Points অর্জন করুন।
- </p>
-
- <div class="page-card">
-   <h3>🎯 Tap Rush</h3>
-   <p>দ্রুত Tap করে Score এবং Points অর্জন করুন।</p>
- </div>
-
- <div class="page-card">
-   <h3>🧩 Match Seven</h3>
-   <p>Matching Game খেলুন এবং Points অর্জন করুন।</p>
- </div>
-
- <div class="page-card">
-   <h3>🪽 Fly High</h3>
-   <p>Obstacle এড়িয়ে Score করুন।</p>
- </div>
-
- <div class="page-card">
-   <h3>🧠 Brain Box</h3>
-   <p>Quiz খেলুন এবং আপনার দক্ষতা পরীক্ষা করুন।</p>
- </div>
+</div>
 
 </div>
 
+</section>
 
-<!-- ================= JOBS ================= -->
+<section id="profile">
 
-<div id="jobs" class="page">
+<div class="card">
 
- <h2>💼 Available Jobs</h2>
+<h2 class="title">
+👤 Profile
+</h2>
 
- <p>
-   আপনার দক্ষতার সাথে মিল রেখে কাজ খুঁজে নিন।
- </p>
+<div id="profileContent">
 
- <div class="page-card">
-   <h3>🎨 Graphic Design</h3>
-   <p>Social Media পোস্ট ও ডিজাইন তৈরি করুন।</p>
- </div>
-
- <div class="page-card">
-   <h3>🎬 Video Editing</h3>
-   <p>Short Video এবং Reels Editing কাজ।</p>
- </div>
-
- <div class="page-card">
-   <h3>⌨️ Data Entry</h3>
-   <p>Online Data Entry কাজের সুযোগ।</p>
- </div>
-
- <div class="page-card">
-   <h3>📱 Digital Marketing</h3>
-   <p>Social Media Promotion ও Marketing কাজ।</p>
- </div>
-
+<div class="notice">
+Guest হিসেবে আছেন। Login করলে আপনার Profile, Applications এবং Job management ব্যবহার করতে পারবেন।
 </div>
 
-
-<!-- ================= WALLET ================= -->
-
-<div id="wallet" class="page">
-
- <h2>💰 PLAYZONE Wallet</h2>
-
- <p>
-   আপনার Points এবং Reward এখানে দেখুন।
- </p>
-
- <div class="page-card">
-   <h3>💎 Current Points</h3>
-   <p style="font-size:28px;color:#20e3a2;font-weight:900">
-     1,490 Points
-   </p>
- </div>
-
- <div class="page-card">
-   <h3>💵 Current Value</h3>
-   <p>৳ 149 BDT</p>
- </div>
-
- <div class="page-card">
-   <h3>🔒 Withdraw Status</h3>
-   <p>Withdraw করতে আরও 23,510 Points প্রয়োজন।</p>
- </div>
-
+<div class="btns">
+<button onclick="openLogin()">
+🔐 Login
+</button>
+<button class="btn secondary" onclick="openRegister()">
+📝 Register
+</button>
 </div>
-
-
-<!-- ================= PROFILE ================= -->
-
-<div id="profile" class="page">
-
- <h2>👤 My Profile</h2>
-
- <div class="page-card">
-   <h3>👤 Name</h3>
-   <p>Masud Rana</p>
- </div>
-
- <div class="page-card">
-   <h3>💎 Points</h3>
-   <p>1,490 Points</p>
- </div>
-
- <div class="page-card">
-   <h3>🎮 Games Played</h3>
-   <p>4 Games</p>
- </div>
-
- <div class="page-card">
-   <h3>📨 Applications</h3>
-   <p>0 Applications</p>
- </div>
-
-</div>
-
-
-<!-- ================= ADMIN ================= -->
-
-<div id="admin" class="page">
-
- <h2>⚙️ Admin Dashboard</h2>
-
- <p>
-   Admin panel-এ প্রবেশ করতে Admin account দিয়ে
-   authentication প্রয়োজন।
- </p>
-
- <div class="page-card">
-   <h3>👥 Users</h3>
-   <p>Admin থেকে User Management করা যাবে।</p>
- </div>
-
- <div class="page-card">
-   <h3>💼 Jobs</h3>
-   <p>Job Create, Edit এবং Manage করা যাবে।</p>
- </div>
-
- <div class="page-card">
-   <h3>📨 Applications</h3>
-   <p>Application Review ও Status Update করা যাবে।</p>
- </div>
-
- <div class="page-card">
-   <h3>💰 Payouts</h3>
-   <p>Pending, Approved এবং Rejected Payout Manage করা যাবে।</p>
- </div>
 
 </div>
 
 </div>
 
+</section>
 
-<!-- ================= MESSAGE ================= -->
+<section>
 
-<div id="message"></div>
+<div class="card">
 
+<h2 class="title">
+🔐 কেন PLAYZONE?
+</h2>
 
-<!-- ================= BOTTOM NAV ================= -->
+<div class="check">
+✓ Skill-based Gaming ও Job Opportunity
+</div>
+
+<div class="check">
+✓ Points Wallet ও Reward System
+</div>
+
+<div class="check">
+✓ Job Application ও Skill Showcase
+</div>
+
+</div>
+
+</section>
+
+</main>
 
 <div class="bottom">
 
- <div class="bottom-inner">
+<div class="bottomInner">
 
-   <button onclick="showPage('home')">
-     <span class="bottom-icon">🏠</span>
-     Home
-   </button>
+<a href="#home">
+<b>🏠</b>
+Home
+</a>
 
-   <button onclick="showPage('games')">
-     <span class="bottom-icon">🎮</span>
-     Games
-   </button>
+<a href="#games">
+<b>🎮</b>
+Games
+</a>
 
-   <button onclick="showPage('jobs')">
-     <span class="bottom-icon">💼</span>
-     Jobs
-   </button>
+<a href="#jobs">
+<b>💼</b>
+Jobs
+</a>
 
-   <button onclick="showPage('wallet')">
-     <span class="bottom-icon">💰</span>
-     Wallet
-   </button>
+<a href="#rewards">
+<b>💰</b>
+Wallet
+</a>
 
-   <button onclick="showPage('profile')">
-     <span class="bottom-icon">👤</span>
-     Profile
-   </button>
+<a href="#profile">
+<b>👤</b>
+Profile
+</a>
 
- </div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('loginModal')">
+✕
+</button>
+
+<h2>🔐 Login</h2>
+
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="আপনার Email">
+
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button onclick="loginUser()" style="width:100%;margin-top:10px">
+Login
+</button>
+
+<p class="muted">
+Account না থাকলে Register করুন।
+</p>
+
+</div>
+
+</div>
+
+
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('registerModal')">
+✕
+</button>
+
+<h2>📝 Register</h2>
+
+<label>Name</label>
+<input id="registerName" placeholder="আপনার নাম">
+
+<label>Email</label>
+<input id="registerEmail" type="email" placeholder="আপনার Email">
+
+<label>Password</label>
+<input id="registerPassword" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
+
+<button onclick="registerUser()" style="width:100%;margin-top:10px">
+Create Account
+</button>
+
+</div>
+
+</div>
+
+
+<!-- APPLY MODAL -->
+
+<div class="modal" id="applyModal">
+
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('applyModal')">
+✕
+</button>
+
+<h2>📨 Apply Job</h2>
+
+<div id="applyJobTitle" class="notice"></div>
+
+<label>আপনার Message</label>
+
+<textarea id="applicationMessage"
+placeholder="আপনার দক্ষতা, অভিজ্ঞতা এবং কেন আপনি এই কাজটি করতে পারবেন লিখুন..."></textarea>
+
+<button onclick="submitApplication()" style="width:100%;margin-top:8px">
+🚀 Application Submit
+</button>
+
+</div>
+
+</div>
+
+
+<!-- APPLICATIONS MODAL -->
+
+<div class="modal" id="ownerApplicationsModal">
+
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('ownerApplicationsModal')">
+✕
+</button>
+
+<h2>📨 Job Applications</h2>
+
+<div id="ownerApplications">
+<div class="loading">
+Loading...
+</div>
+</div>
+
+</div>
 
 </div>
 
 
 <script>
 
-/* ================= PAGE NAVIGATION ================= */
+/* ===============================
+   SUPABASE
+================================ */
 
-function showPage(page){
+const SUPABASE_URL =
+'https://cavrhkprzbbtimlixbqp.supabase.co';
 
- const pages = document.querySelectorAll('.page');
+const SUPABASE_KEY =
+'sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL';
 
- pages.forEach(function(item){
-   item.classList.remove('active');
-   item.style.display='none';
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* ===============================
+   STATE
+================================ */
+
+let currentUser = null;
+let selectedJobId = null;
+let selectedJobTitle = '';
+
+let points =
+Number(localStorage.getItem('pz_points') || 1000);
+
+let gamesPlayed =
+Number(localStorage.getItem('pz_games_played') || 0);
+
+
+/* ===============================
+   BASIC UI
+================================ */
+
+function updateLocalStats(){
+
+ document.getElementById('points').textContent =
+ points.toLocaleString();
+
+ document.getElementById('playedCount').textContent =
+ gamesPlayed;
+
+ localStorage.setItem(
+ 'pz_points',
+ points
+ );
+
+ localStorage.setItem(
+ 'pz_games_played',
+ gamesPlayed
+}
+
+updateLocalStats();
+
+
+function openModal(id){
+ document.getElementById(id).style.display='block';
+}
+
+function closeModal(id){
+ document.getElementById(id).style.display='none';
+}
+
+function openLogin(){
+ openModal('loginModal');
+}
+
+function openRegister(){
+ openModal('registerModal');
+}
+
+function openProfile(){
+ document.getElementById('profile').scrollIntoView();
+}
+
+
+/* ===============================
+   AUTH
+================================ */
+
+async function registerUser(){
+
+ const name =
+ document.getElementById('registerName').value.trim();
+
+ const email =
+ document.getElementById('registerEmail').value.trim();
+
+ const password =
+ document.getElementById('registerPassword').value;
+
+ if(!name || !email || !password){
+   alert('সব তথ্য পূরণ করুন।');
+   return;
+ }
+
+ if(password.length < 6){
+   alert('Password কমপক্ষে ৬ অক্ষরের হতে হবে।');
+   return;
+ }
+
+ const {data,error} =
+ await supabaseClient.auth.signUp({
+
+   email:email,
+   password:password,
+
+   options:{
+     data:{
+       name:name,
+       full_name:name
+     }
+   }
+
  });
 
- const target = document.getElementById(page);
+ if(error){
+   alert('Registration Error: '+error.message);
+   return;
+ }
 
- if(target){
+ closeModal('registerModal');
 
-   target.classList.add('active');
-   target.style.display='block';
+ alert(
+ 'Registration সফল হয়েছে। Email verification প্রয়োজন হলে আপনার Email check করুন।'
+ );
 
-   window.scrollTo({
-     top:0,
-     behavior:'smooth'
-   });
+}
+
+
+async function loginUser(){
+
+ const email =
+ document.getElementById('loginEmail').value.trim();
+
+ const password =
+ document.getElementById('loginPassword').value;
+
+ if(!email || !password){
+   alert('Email এবং Password দিন।');
+   return;
+ }
+
+ const {data,error} =
+ await supabaseClient.auth.signInWithPassword({
+   email:email,
+   password:password
+ });
+
+ if(error){
+   alert('Login Error: '+error.message);
+   return;
+ }
+
+ closeModal('loginModal');
+
+ alert('Login সফল হয়েছে।');
+
+ loadSupabaseUser();
+
+}
+
+
+async function logoutUser(){
+
+ const {error} =
+ await supabaseClient.auth.signOut();
+
+ if(error){
+   alert(error.message);
+   return;
+ }
+
+ currentUser=null;
+
+ updateUserUI();
+
+ alert('Logout সফল হয়েছে।');
+
+}
+
+
+function updateUserUI(){
+
+ const badge =
+ document.getElementById('userBadge');
+
+ const profile =
+ document.getElementById('profileContent');
+
+ if(currentUser){
+
+   const name =
+   currentUser.user_metadata?.name ||
+   currentUser.user_metadata?.full_name ||
+   currentUser.email?.split('@')[0] ||
+   'User';
+
+   badge.textContent='👤 '+name;
+
+   profile.innerHTML=`
+
+   <div class="notice">
+
+   <b>${escapeHTML(name)}</b><br>
+
+   Email:
+   ${escapeHTML(currentUser.email || '')}
+
+   </div>
+
+   <div style="margin-top:12px">
+
+   <div class="check">
+   ⭐ Verified PLAYZONE User
+   </div>
+
+   <div class="check">
+   💎 Points: ${points.toLocaleString()}
+   </div>
+
+   </div>
+
+   <div class="btns">
+
+   <button onclick="logoutUser">
+   🚪 Logout
+   </button>
+
+   </div>
+   `;
+
+   document.getElementById(
+   'applicationsSection'
+   ).style.display='block';
+
+ }else{
+
+   badge.textContent='👤 Guest';
+
+   profile.innerHTML=`
+
+   <div class="notice">
+   Guest হিসেবে আছেন। Login করলে আপনার Profile, Applications এবং Job management ব্যবহার করতে পারবেন।
+   </div>
+
+   <div class="btns">
+
+   <button onclick="openLogin()">
+   🔐 Login
+   </button>
+
+   <button class="btn secondary"
+   onclick="openRegister()">
+   📝 Register
+   </button>
+
+   </div>
+   `;
+
+   document.getElementById(
+   'applicationsSection'
+   ).style.display='none';
+ }
+
+}
+
+
+async function loadSupabaseUser(){
+
+ const {data,error} =
+ await supabaseClient.auth.getUser();
+
+ if(error){
+   console.log(error);
+ }
+
+ currentUser =
+ data?.user || null;
+
+ updateUserUI();
+
+ loadJobs();
+
+ if(currentUser){
+   loadMyApplications();
+ }
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+ currentUser =
+ session?.user || null;
+
+ updateUserUI();
+
+ loadJobs();
+
+ if(currentUser){
+   loadMyApplications();
+ }
+
+});
+
+
+/* ===============================
+   JOB SYSTEM
+================================ */
+
+function showJobForm(){
+
+ if(!currentUser){
+   alert('Job Post করতে Login করুন।');
+   openLogin();
+   return;
+ }
+
+ document.getElementById(
+ 'jobForm'
+ ).style.display='block';
+
+}
+
+
+function hideJobForm(){
+
+ document.getElementById(
+ 'jobForm'
+ ).style.display='none';
+
+}
+
+
+async function addJob(){
+
+ if(!currentUser){
+   alert('Job Post করতে Login করুন।');
+   return;
+ }
+
+ const title =
+ document.getElementById('jobTitle').value.trim();
+
+ const skill =
+ document.getElementById('jobSkill').value;
+
+ const budget =
+ document.getElementById('jobBudget').value.trim();
+
+ const description =
+ document.getElementById('jobDescription').value.trim();
+
+ if(!title || !skill || !budget || !description){
+   alert('সব তথ্য পূরণ করুন।');
+   return;
+ }
+
+ const {data,error} =
+ await supabaseClient
+ .from('jobs')
+ .insert({
+
+   title:title,
+   skill:skill,
+   budget:budget,
+   description:description,
+   poster_id:currentUser.id,
+   status:'open'
+
+ })
+ .select()
+ .single();
+
+ if(error){
+
+   console.error(error);
+
+   alert(
+   'Job Publish করা যায়নি: '+
+   error.message
+   );
+
+   return;
+ }
+
+ document.getElementById('jobTitle').value='';
+ document.getElementById('jobBudget').value='';
+ document.getElementById('jobDescription').value='';
+
+ hideJobForm();
+
+ alert('🎉 Job সফলভাবে Publish হয়েছে!');
+
+ loadJobs();
+
+}
+
+
+/* ===============================
+   LOAD JOBS
+================================ */
+
+async function loadJobs(){
+
+ const list =
+ document.getElementById('jobsList');
+
+ list.innerHTML=
+ '<div class="loading">Jobs loading...</div>';
+
+ const {data,error} =
+ await supabaseClient
+ .from('jobs')
+ .select(
+ 'id,title,skill,budget,description,status,poster_id,created_at'
+ )
+ .eq('status','open')
+ .order('created_at',{
+   ascending:false
+ });
+
+ if(error){
+
+   console.error(error);
+
+   list.innerHTML=
+   '<div class="empty">Jobs load করা যায়নি।</div>';
+
+   return;
+ }
+
+ const jobs=data || [];
+
+ document.getElementById(
+ 'jobCount'
+ ).textContent=jobs.length;
+
+ if(!jobs.length){
+
+   list.innerHTML=
+   '<div class="empty">এখনো কোনো Job Post করা হয়নি।</div>';
+
+   return;
+ }
+
+ list.innerHTML='';
+
+ jobs.forEach(job=>{
+
+   const div =
+   document.createElement('div');
+
+   div.className='job';
+
+   const owner =
+   currentUser &&
+   currentUser.id===job.poster_id;
+
+   div.innerHTML=`
+
+   <h3>
+   💼 ${escapeHTML(job.title)}
+   </h3>
+
+   <div class="jobInfo">
+
+   🎯 Skill:
+   <b>${escapeHTML(job.skill || '')}</b>
+   <br>
+
+   💰 Budget:
+   <b>${escapeHTML(job.budget || '')}</b>
+   <br>
+
+   📝 ${escapeHTML(job.description || '')}
+
+   </div>
+
+   <div class="jobBtns">
+
+   ${
+     owner
+     ?
+     `<button class="smallBtn"
+       onclick="viewApplications('${job.id}','${escapeJS(job.title)}')">
+       📨 Applications দেখুন
+      </button>`
+     :
+     `<button class="smallBtn"
+       onclick="applyJob('${job.id}','${escapeJS(job.title)}')">
+       🚀 Apply Job
+      </button>`
+   }
+
+   </div>
+   `;
+
+   list.appendChild(div);
+
+ });
+
+}
+
+
+/* ===============================
+   APPLY
+================================ */
+
+function applyJob(jobId,title){
+
+ if(!currentUser){
+
+   alert(
+   'Job-এ Apply করতে Login করুন।'
+   );
+
+   openLogin();
+
+   return;
+ }
+
+ selectedJobId=jobId;
+ selectedJobTitle=title;
+
+ document.getElementById(
+ 'applyJobTitle'
+ ).textContent=
+ '💼 '+title;
+
+ document.getElementById(
+ 'applicationMessage'
+ ).value='';
+
+ openModal('applyModal');
+
+}
+
+
+async function submitApplication(){
+
+ if(!currentUser){
+
+   alert('Login করুন।');
+   return;
+
+ }
+
+ if(!selectedJobId){
+
+   alert('Job নির্বাচন করা হয়নি।');
+   return;
+
+ }
+
+ const message =
+ document.getElementById(
+ 'applicationMessage'
+ ).value.trim();
+
+ if(!message){
+
+   alert(
+   'আপনার Message লিখুন।'
+   );
+
+   return;
+ }
+
+ const {data,error} =
+ await supabaseClient
+ .from('applications')
+ .insert({
+
+   job_id:selectedJobId,
+   applicant_id:currentUser.id,
+   message:message,
+   status:'pending'
+
+ })
+ .select()
+ .single();
+
+ if(error){
+
+   console.error(error);
+
+   if(error.code==='23505'){
+
+     alert(
+     'আপনি এই Job-এ ইতিমধ্যে Apply করেছেন।'
+     );
+
+   }else{
+
+     alert(
+     'Application Submit করা যায়নি: '+
+     error.message
+     );
+
+   }
+
+   return;
+ }
+
+ closeModal('applyModal');
+
+ alert(
+ '🎉 Application সফলভাবে Submit হয়েছে।'
+ );
+
+ loadMyApplications();
+
+}
+
+
+async function loadMyApplications(){
+
+ if(!currentUser){
+   return;
+ }
+
+ const box =
+ document.getElementById('myApplications');
+
+ box.innerHTML=
+ '<div class="loading">Applications loading...</div>';
+
+ const {data,error} =
+ await supabaseClient
+ .from('applications')
+ .select(
+ 'id,job_id,message,status,created_at'
+ )
+ .eq(
+ 'applicant_id',
+ currentUser.id
+ )
+ .order(
+ 'created_at',
+ {ascending:false}
+ );
+
+ if(error){
+
+   console.error(error);
+
+   box.innerHTML=
+   '<div class="empty">Applications load করা যায়নি।</div>';
+
+   return;
+ }
+
+ const apps=data || [];
+
+ document.getElementById(
+ 'applicationCount'
+ ).textContent=apps.length;
+
+ if(!apps.length){
+
+   box.innerHTML=
+   '<div class="empty">আপনি এখনো কোনো Job-এ Apply করেননি।</div>';
+
+   return;
+ }
+
+ box.innerHTML='';
+
+ for(const app of apps){
+
+   const div =
+   document.createElement('div');
+
+   div.className='job';
+
+   let title='Job';
+
+   const jobResult =
+   await supabaseClient
+   .from('jobs')
+   .select('title,skill,budget')
+   .eq('id',app.job_id)
+   .maybeSingle();
+
+   if(jobResult.data){
+     title=jobResult.data.title;
+   }
+
+   div.innerHTML=`
+
+   <h3>💼 ${escapeHTML(title)}</h3>
+
+   <div class="jobInfo">
+
+   Status:
+
+   <span class="status ${escapeHTML(app.status)}">
+   ${escapeHTML(app.status)}
+   </span>
+
+   <br><br>
+
+   📝 ${escapeHTML(app.message || '')}
+
+   </div>
+
+   `;
+
+   box.appendChild(div);
 
  }
 
 }
 
 
-/* ================= MESSAGE ================= */
+/* ===============================
+   OWNER APPLICATIONS
+================================ */
 
-function showMessage(text){
+async function viewApplications(jobId,title){
 
- const box=document.getElementById('message');
+ if(!currentUser){
 
- box.innerText=text;
- box.style.display='block';
+   alert('Login করুন।');
+   return;
 
- setTimeout(function(){
+ }
 
-   box.style.display='none';
+ selectedJobId=jobId;
 
- },2200);
+ document.getElementById(
+ 'ownerApplications'
+ ).innerHTML=
+ '<div class="loading">Applications loading...</div>';
+
+ openModal('ownerApplicationsModal');
+
+ const {data,error} =
+ await supabaseClient
+ .from('applications')
+ .select(
+ 'id,job_id,applicant_id,message,status,created_at'
+ )
+ .eq(
+ 'job_id',
+ jobId
+ )
+ .order(
+ 'created_at',
+ {ascending:false}
+ );
+
+ if(error){
+
+   console.error(error);
+
+   document.getElementById(
+   'ownerApplications'
+   ).innerHTML=
+   '<div class="empty">Applications access করা যায়নি।</div>';
+
+   return;
+ }
+
+ const apps=data || [];
+
+ if(!apps.length){
+
+   document.getElementById(
+   'ownerApplications'
+   ).innerHTML=
+   '<div class="empty">এই Job-এ এখনো কোনো Application নেই।</div>';
+
+   return;
+ }
+
+ const box =
+ document.getElementById(
+ 'ownerApplications'
+ );
+
+ box.innerHTML='';
+
+ apps.forEach(app=>{
+
+   const div =
+   document.createElement('div');
+
+   div.className='job';
+
+   div.innerHTML=`
+
+   <h3>
+   👤 Applicant
+   </h3>
+
+   <div class="jobInfo">
+
+   Applicant ID:
+   <br>
+   <small>
+   ${escapeHTML(app.applicant_id)}
+   </small>
+
+   <br><br>
+
+   📝 Message:
+   <br>
+   ${escapeHTML(app.message || '')}
+
+   <br><br>
+
+   Status:
+   <span class="status ${escapeHTML(app.status)}">
+   ${escapeHTML(app.status)}
+   </span>
+
+   </div>
+
+   <div class="jobBtns">
+
+   ${
+    app.status==='pending'
+    ?
+    `
+    <button
+    class="smallBtn"
+    onclick="updateApplication('${app.id}','accepted')">
+    ✅ Accept
+    </button>
+
+    <button
+    class="smallBtn"
+    style="background:#692731"
+    onclick="updateApplication('${app.id}','rejected')">
+    ❌ Reject
+    </button>
+    `
+    :
+    ''
+   }
+
+   </div>
+
+   `;
+
+   box.appendChild(div);
+
+ });
 
 }
+
+
+async function updateApplication(
+applicationId,
+newStatus
+){
+
+ if(!currentUser){
+
+   alert('Login করুন।');
+   return;
+
+ }
+
+ const {error} =
+ await supabaseClient
+ .from('applications')
+ .update({
+   status:newStatus
+ })
+ .eq(
+   'id',
+   applicationId
+ );
+
+ if(error){
+
+   console.error(error);
+
+   alert(
+   'Status update করা যায়নি: '+
+   error.message
+   );
+
+   return;
+ }
+
+ alert(
+ newStatus==='accepted'
+ ? 'Application Accepted হয়েছে।'
+ : 'Application Rejected হয়েছে।'
+ );
+
+ viewApplications(
+ selectedJobId,
+ selectedJobTitle
+ );
+
+ loadMyApplications();
+
+}
+
+
+/* ===============================
+   HELPERS
+================================ */
+
+function escapeHTML(value){
+
+ if(value===null ||
+    value===undefined){
+   return '';
+ }
+
+ return String(value)
+ .replace(/&/g,'&amp;')
+ .replace(/</g,'&lt;')
+ .replace(/>/g,'&gt;')
+ .replace(/"/g,'&quot;')
+ .replace(/'/g,'&#039;');
+
+}
+
+
+function escapeJS(value){
+
+ return String(value || '')
+ .replace(/\\/g,'\\\\')
+ .replace(/'/g,"\\'")
+ .replace(/\n/g,'\\n')
+ .replace(/\r/g,'\\r');
+
+}
+
+
+/* ===============================
+   START
+================================ */
+
+loadSupabaseUser();
+loadJobs();
 
 </script>
 
 </body>
 </html>
-```
