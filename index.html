@@ -19,6 +19,7 @@ body{
 }
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+
 .header{
  position:sticky;top:0;z-index:100;background:#10283d;
  border-bottom:1px solid #23445d;padding:14px
@@ -29,6 +30,7 @@ button{cursor:pointer}
 }
 .logo{font-size:22px;font-weight:800;color:#ffd21a}
 .user-area{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
 .btn{
  border:0;border-radius:10px;padding:10px 14px;
  background:#ffd21a;color:#101010;font-weight:700
@@ -38,40 +40,57 @@ button{cursor:pointer}
 .btn.success{background:#1fbf75;color:#fff}
 .btn.warning{background:#e28b21;color:#fff}
 .btn.small{padding:8px 10px;font-size:13px}
+
 .container{max-width:1100px;margin:auto;padding:18px 14px 50px}
+
 .hero{
  background:linear-gradient(135deg,#123451,#0d2133);
  border:1px solid #234c68;border-radius:20px;padding:28px 20px
 }
 .hero h1{margin:0 0 8px;font-size:30px}
 .hero p{margin:0;color:#b9c9d8;line-height:1.6}
+
 .nav{display:flex;gap:8px;overflow:auto;margin:14px 0}
 .nav button{
  white-space:nowrap;border:1px solid #315a76;background:#10283d;
  color:#fff;border-radius:10px;padding:10px 13px
 }
 .nav button.active{background:#ffd21a;color:#111;font-weight:700}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+
+.stats{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:10px;margin-bottom:15px
+}
 .stat{
- background:#10283d;border:1px solid #23445d;border-radius:15px;padding:15px
+ background:#10283d;border:1px solid #23445d;
+ border-radius:15px;padding:15px
 }
 .stat .num{font-size:24px;font-weight:800;color:#ffd21a}
 .stat small{color:#a9bfd0}
+
 .section{display:none}
 .section.active{display:block}
+
 .panel{
  background:#193650;border-radius:15px;padding:16px;margin:12px 0;
  border:1px solid #28516d
 }
 .panel h2,.panel h3{color:#ffd21a;margin-top:0}
+
 .muted{color:#b9c9d8;font-size:13px;line-height:1.55}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
 .card{
- background:#10283d;border:1px solid #284e68;border-radius:15px;padding:15px
+ background:#10283d;border:1px solid #284e68;
+ border-radius:15px;padding:15px
 }
 .card h3{margin:0 0 8px}
 .card p{color:#b9c9d8;font-size:14px;line-height:1.55}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+.actions{
+ display:flex;gap:8px;flex-wrap:wrap;margin-top:12px
+}
+
 .statusBadge{
  display:inline-block;padding:5px 9px;border-radius:999px;
  font-size:12px;font-weight:700;background:#315a76
@@ -86,61 +105,122 @@ button{cursor:pointer}
 .statusBadge.rejected{background:#913b3b}
 .statusBadge.processing{background:#8a5b24}
 .statusBadge.paid{background:#16824d}
+.statusBadge.failed{background:#913b3b}
+
 .form-group{margin-bottom:12px}
-.form-group label{display:block;margin-bottom:6px;color:#dce8f0}
-.form-group input,.form-group textarea,.form-group select{
- width:100%;padding:11px 12px;border-radius:10px;
- border:1px solid #41647b;background:#0c2031;color:#fff;outline:none
+.form-group label{
+ display:block;margin-bottom:6px;color:#dce8f0
 }
-.form-group textarea{min-height:110px;resize:vertical}
+.form-group input,
+.form-group textarea,
+.form-group select{
+ width:100%;padding:11px 12px;border-radius:10px;
+ border:1px solid #41647b;background:#0c2031;
+ color:#fff;outline:none
+}
+.form-group textarea{
+ min-height:110px;resize:vertical
+}
+
 .empty{
  padding:25px;text-align:center;color:#9eb5c5;
  border:1px dashed #35566b;border-radius:13px
 }
+
 .notice{
- background:#0d2538;border-left:4px solid #ffd21a;padding:12px;
- border-radius:8px;color:#d8e5ed;margin:10px 0;line-height:1.5
+ background:#0d2538;border-left:4px solid #ffd21a;
+ padding:12px;border-radius:8px;color:#d8e5ed;
+ margin:10px 0;line-height:1.5
 }
+
+.payment-box{
+ background:#0d2538;
+ border:1px solid #315a76;
+ border-radius:12px;
+ padding:13px;
+ margin-top:10px
+}
+
+.payment-box.pending{
+ border-left:4px solid #e28b21
+}
+
+.payment-box.approved{
+ border-left:4px solid #ffd21a
+}
+
+.payment-box.paid{
+ border-left:4px solid #1fbf75
+}
+
+.transaction{
+ background:#12351f;
+ border:1px solid #287a45;
+ border-radius:10px;
+ padding:11px;
+ margin-top:10px;
+ word-break:break-word
+}
+
 .modal{
- position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.72);
- display:none;align-items:center;justify-content:center;padding:15px
+ position:fixed;inset:0;z-index:500;
+ background:rgba(0,0,0,.72);
+ display:none;align-items:center;
+ justify-content:center;padding:15px
 }
 .modal.show{display:flex}
+
 .modal-box{
- width:min(540px,100%);max-height:90vh;overflow:auto;
- background:#10283d;border:1px solid #315a76;border-radius:18px;
- padding:20px;position:relative
+ width:min(540px,100%);
+ max-height:90vh;overflow:auto;
+ background:#10283d;border:1px solid #315a76;
+ border-radius:18px;padding:20px;position:relative
 }
+
 .modal-close{
- position:absolute;right:12px;top:10px;border:0;background:none;
- color:#fff;font-size:25px
+ position:absolute;right:12px;top:10px;
+ border:0;background:none;color:#fff;font-size:25px
 }
+
 .game-box{
- background:#10283d;border:1px solid #315a76;border-radius:16px;
- padding:15px;margin-top:12px
+ background:#10283d;border:1px solid #315a76;
+ border-radius:16px;padding:15px;margin-top:12px
 }
+
 .game-top{
- display:flex;justify-content:space-between;gap:10px;
- align-items:center;flex-wrap:wrap
+ display:flex;justify-content:space-between;
+ gap:10px;align-items:center;flex-wrap:wrap
 }
+
 .tap-area{
- height:280px;border-radius:14px;background:#0a1b2a;
- border:1px solid #315a76;position:relative;overflow:hidden
+ height:280px;border-radius:14px;
+ background:#0a1b2a;border:1px solid #315a76;
+ position:relative;overflow:hidden
 }
+
 .tap-target{
- position:absolute;width:48px;height:48px;border-radius:50%;
- background:#ffd21a;color:#111;display:none;align-items:center;
- justify-content:center;font-weight:900
+ position:absolute;width:48px;height:48px;
+ border-radius:50%;background:#ffd21a;color:#111;
+ display:none;align-items:center;justify-content:center;
+ font-weight:900
 }
+
 canvas{
- width:100%;max-width:600px;background:#071521;border-radius:14px;
- border:1px solid #315a76;display:block;margin:auto
+ width:100%;max-width:600px;background:#071521;
+ border-radius:14px;border:1px solid #315a76;
+ display:block;margin:auto
 }
+
 .quiz-option{
  width:100%;text-align:left;background:#10283d;color:#fff;
- border:1px solid #315a76;border-radius:10px;padding:11px;margin:6px 0
+ border:1px solid #315a76;border-radius:10px;
+ padding:11px;margin:6px 0
 }
-.footer{text-align:center;color:#6f899b;font-size:12px;padding:20px 0}
+
+.footer{
+ text-align:center;color:#6f899b;
+ font-size:12px;padding:20px 0
+}
 
 @media(max-width:800px){
  .stats{grid-template-columns:repeat(2,1fr)}
@@ -154,60 +234,111 @@ canvas{
 
 <header class="header">
  <div class="header-inner">
+
   <div class="logo">PLAYZONE</div>
+
   <div class="user-area">
+
    <span id="userDisplay">👤 Guest</span>
-   <button class="btn secondary small" id="loginTopBtn"
-    onclick="openModal('login')">Login</button>
-   <button class="btn danger small" id="logoutTopBtn"
-    onclick="logout()" style="display:none">🚪 Logout</button>
+
+   <button
+    class="btn secondary small"
+    id="loginTopBtn"
+    onclick="openModal('login')">
+    Login
+   </button>
+
+   <button
+    class="btn danger small"
+    id="logoutTopBtn"
+    onclick="logout()"
+    style="display:none">
+    🚪 Logout
+   </button>
+
   </div>
+
  </div>
 </header>
 
 <main class="container">
 
 <div class="hero">
+
  <h1>খেলুন • দক্ষতা দেখান • সুযোগ তৈরি করুন</h1>
+
  <p>
   Skill games, Skill/Job Hub এবং real earning workflow —
   কাজ সম্পন্ন করে approval পাওয়ার পর Earnings এবং Payout-এর সুযোগ।
  </p>
+
 </div>
 
 <nav class="nav">
- <button class="active" onclick="showSection('home',this)">🏠 Home</button>
- <button onclick="showSection('games',this)">🎮 Games</button>
- <button onclick="showSection('jobs',this)">💼 Jobs</button>
- <button onclick="showSection('wallet',this)">💰 Wallet</button>
- <button onclick="showSection('profile',this)">👤 Profile</button>
- <button id="adminNavBtn" onclick="showSection('admin',this)"
-  style="display:none">🛠 Admin</button>
+
+ <button class="active"
+  onclick="showSection('home',this)">
+  🏠 Home
+ </button>
+
+ <button onclick="showSection('games',this)">
+  🎮 Games
+ </button>
+
+ <button onclick="showSection('jobs',this)">
+  💼 Jobs
+ </button>
+
+ <button onclick="showSection('wallet',this)">
+  💰 Wallet
+ </button>
+
+ <button onclick="showSection('profile',this)">
+  👤 Profile
+ </button>
+
+ <button
+  id="adminNavBtn"
+  onclick="showSection('admin',this)"
+  style="display:none">
+  🛠 Admin
+ </button>
+
 </nav>
 
 <div class="stats">
+
  <div class="stat">
   <small>Virtual Points</small>
   <div class="num" id="pointsDisplay">1,000</div>
  </div>
+
  <div class="stat">
   <small>Games Played</small>
   <div class="num" id="gamesPlayedDisplay">0</div>
  </div>
+
  <div class="stat">
   <small>My Jobs</small>
   <div class="num" id="myJobsCount">0</div>
  </div>
+
  <div class="stat">
   <small>Earnings</small>
   <div class="num" id="earningsDisplay">৳0</div>
  </div>
+
 </div>
 
-<!-- HOME -->
+
+<!-- =====================================================
+     HOME
+     ===================================================== -->
+
 <section id="home" class="section active">
 
  <div class="panel">
+
   <h2>🎯 PLAYZONE-এ স্বাগতম</h2>
 
   <p class="muted">
@@ -216,12 +347,16 @@ canvas{
   </p>
 
   <div class="notice">
+
    <b>Real earning workflow:</b><br>
+
    Open → Apply → Accept → Assigned → Start Work →
    Submit → Approve → Earnings → Payout
+
   </div>
 
   <div class="actions">
+
    <button class="btn"
     onclick="showSection('jobs',document.querySelectorAll('.nav button')[2])">
     💼 কাজ খুঁজুন
@@ -231,13 +366,18 @@ canvas{
     onclick="showSection('games',document.querySelectorAll('.nav button')[1])">
     🎮 Skill Games
    </button>
+
   </div>
+
  </div>
 
+
  <div class="panel">
+
   <h2>🔥 জনপ্রিয় Skill</h2>
 
   <div class="grid">
+
    <div class="card">
     <h3>🎨 Graphic Design</h3>
     <p>Poster, banner এবং social media design.</p>
@@ -257,31 +397,48 @@ canvas{
     <h3>📢 Digital Marketing</h3>
     <p>Social media promotion এবং marketing support.</p>
    </div>
+
   </div>
+
  </div>
 
 </section>
 
-<!-- GAMES -->
+
+<!-- =====================================================
+     GAMES
+     ===================================================== -->
+
 <section id="games" class="section">
 
  <div class="panel">
+
   <h2>🎮 Skill Games</h2>
+
   <p class="muted">
    Virtual Points শুধুমাত্র PLAYZONE-এর virtual points।
    এগুলো real cash earnings নয় এবং payout করা যাবে না।
   </p>
+
  </div>
+
 
  <div class="game-box">
 
   <div class="game-top">
+
    <div>
     <h3>⚡ Tap Rush</h3>
-    <div class="muted">৩০ সেকেন্ডে target tap করুন।</div>
+    <div class="muted">
+     ৩০ সেকেন্ডে target tap করুন।
+    </div>
    </div>
 
-   <button class="btn" onclick="startTapRush()">Start Game</button>
+   <button class="btn"
+    onclick="startTapRush()">
+    Start Game
+   </button>
+
   </div>
 
   <div id="tapInfo" class="notice">
@@ -289,104 +446,157 @@ canvas{
   </div>
 
   <div class="tap-area" id="tapArea">
-   <div class="tap-target" id="tapTarget"
-    onclick="tapTargetHit()">TAP</div>
+
+   <div
+    class="tap-target"
+    id="tapTarget"
+    onclick="tapTargetHit()">
+    TAP
+   </div>
+
   </div>
 
  </div>
 
+
  <div class="game-box">
 
   <div class="game-top">
+
    <div>
     <h3>🧠 Brain Box</h3>
-    <div class="muted">Knowledge quiz.</div>
+    <div class="muted">
+     Knowledge quiz.
+    </div>
    </div>
 
-   <button class="btn" onclick="startQuiz()">Start Quiz</button>
+   <button class="btn"
+    onclick="startQuiz()">
+    Start Quiz
+   </button>
+
   </div>
 
   <div id="quizBox"></div>
 
  </div>
 
+
  <div class="game-box">
 
   <div class="game-top">
+
    <div>
     <h3>🔢 Match Seven</h3>
-    <div class="muted">একই সংখ্যার pair match করুন।</div>
+    <div class="muted">
+     একই সংখ্যার pair match করুন।
+    </div>
    </div>
 
-   <button class="btn" onclick="startMatchSeven()">Start Game</button>
+   <button class="btn"
+    onclick="startMatchSeven()">
+    Start Game
+   </button>
+
   </div>
 
   <div id="matchBox"></div>
 
  </div>
 
+
  <div class="game-box">
 
   <div class="game-top">
+
    <div>
     <h3>🪽 Fly High</h3>
-    <div class="muted">Obstacle এড়িয়ে এগিয়ে যান।</div>
+    <div class="muted">
+     Obstacle এড়িয়ে এগিয়ে যান।
+    </div>
    </div>
 
-   <button class="btn" onclick="startFlyHigh()">Start Game</button>
+   <button class="btn"
+    onclick="startFlyHigh()">
+    Start Game
+   </button>
+
   </div>
 
-  <canvas id="flyCanvas" width="600" height="320"></canvas>
+  <canvas
+   id="flyCanvas"
+   width="600"
+   height="320">
+  </canvas>
 
  </div>
 
 </section>
 
-<!-- JOBS -->
+
+<!-- =====================================================
+     JOBS
+     ===================================================== -->
+
 <section id="jobs" class="section">
 
  <div class="panel">
 
   <div class="game-top">
+
    <div>
     <h2>💼 Skill & Job Hub</h2>
+
     <p class="muted">
      এখানে real কাজ পোস্ট করা এবং কাজের জন্য আবেদন করা যাবে।
     </p>
    </div>
 
    <div class="actions">
-    <button class="btn" onclick="openModal('jobPost')">
+
+    <button class="btn"
+     onclick="openModal('jobPost')">
      + নতুন কাজ পোস্ট
     </button>
 
-    <button class="btn secondary"
+    <button
+     class="btn secondary"
      onclick="loadJobsFromSupabase()">
      🔄 Refresh
     </button>
+
    </div>
 
   </div>
 
   <div id="jobsList">
-   <div class="empty">Jobs load হচ্ছে...</div>
+   <div class="empty">
+    Jobs load হচ্ছে...
+   </div>
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>📋 আমার Applications</h2>
 
   <div id="myApplications">
-   <div class="empty">Login করলে Applications দেখা যাবে।</div>
+   <div class="empty">
+    Login করলে Applications দেখা যাবে।
+   </div>
   </div>
 
  </div>
 
 </section>
 
-<!-- WALLET -->
+
+<!-- =====================================================
+     WALLET
+     ===================================================== -->
+
 <section id="wallet" class="section">
 
  <div class="panel">
@@ -418,36 +628,49 @@ canvas{
   </div>
 
   <div class="actions">
-   <button class="btn" onclick="openModal('payout')">
+
+   <button class="btn"
+    onclick="openModal('payout')">
     💸 Request Payout
    </button>
+
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>📜 Earnings History</h2>
 
   <div id="earningsHistory">
-   <div class="empty">কোনো earnings নেই।</div>
+   <div class="empty">
+    কোনো earnings নেই।
+   </div>
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>💳 Payout History</h2>
 
   <div id="payoutHistory">
-   <div class="empty">কোনো payout request নেই।</div>
+   <div class="empty">
+    কোনো payout request নেই।
+   </div>
   </div>
 
  </div>
 
 </section>
 
-<!-- PROFILE -->
+
+<!-- =====================================================
+     PROFILE
+     ===================================================== -->
+
 <section id="profile" class="section">
 
  <div class="panel">
@@ -455,20 +678,27 @@ canvas{
   <h2>👤 Profile</h2>
 
   <div id="profileBox">
-   <div class="empty">Login করুন।</div>
+   <div class="empty">
+    Login করুন।
+   </div>
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>🎯 Skill Profile</h2>
 
   <div id="skillProfileBox">
-   <div class="empty">Login করুন।</div>
+   <div class="empty">
+    Login করুন।
+   </div>
   </div>
 
-  <button class="btn" onclick="openModal('skill')">
+  <button
+   class="btn"
+   onclick="openModal('skill')">
    ✏️ Skill সেট করুন
   </button>
 
@@ -476,7 +706,11 @@ canvas{
 
 </section>
 
-<!-- ADMIN -->
+
+<!-- =====================================================
+     ADMIN
+     ===================================================== -->
+
 <section id="admin" class="section">
 
  <div class="panel">
@@ -507,43 +741,55 @@ canvas{
 
   </div>
 
-  <button class="btn" onclick="adminRefresh()">
+  <button
+   class="btn"
+   onclick="adminRefresh()">
    🔄 Admin Refresh
   </button>
 
  </div>
+
 
  <div class="panel">
 
   <h2>📋 Applications</h2>
 
   <div id="adminApplicationsBox">
-   <div class="empty">Admin data load হয়নি।</div>
+   <div class="empty">
+    Admin data load হয়নি।
+   </div>
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>💳 Payout Requests</h2>
 
   <div id="adminPayoutsBox">
-   <div class="empty">Admin data load হয়নি।</div>
+   <div class="empty">
+    Admin data load হয়নি।
+   </div>
   </div>
 
  </div>
+
 
  <div class="panel">
 
   <h2>💼 All Jobs</h2>
 
   <div id="adminJobsBox">
-   <div class="empty">Admin data load হয়নি।</div>
+   <div class="empty">
+    Admin data load হয়নি।
+   </div>
   </div>
 
  </div>
 
 </section>
+
 
 <div class="footer">
  PLAYZONE — Skill • Work • Opportunity
@@ -551,81 +797,150 @@ canvas{
 
 </main>
 
-<!-- LOGIN -->
+
+<!-- =====================================================
+     LOGIN
+     ===================================================== -->
+
 <div class="modal" id="login">
 
  <div class="modal-box">
 
-  <button class="modal-close"
-   onclick="closeModal('login')">×</button>
+  <button
+   class="modal-close"
+   onclick="closeModal('login')">
+   ×
+  </button>
 
   <h2>🔐 PLAYZONE Login</h2>
 
   <div class="form-group">
+
    <label>Email</label>
-   <input id="authEmail" type="email"
-    autocomplete="email" placeholder="আপনার Email">
+
+   <input
+    id="authEmail"
+    type="email"
+    autocomplete="email"
+    placeholder="আপনার Email">
+
   </div>
 
   <div class="form-group">
+
    <label>Password</label>
-   <input id="authPassword" type="password"
-    autocomplete="current-password" placeholder="Password">
+
+   <input
+    id="authPassword"
+    type="password"
+    autocomplete="current-password"
+    placeholder="Password">
+
   </div>
 
-  <button class="btn" onclick="loginUser()">
+  <button
+   class="btn"
+   onclick="loginUser()">
    Login
   </button>
 
-  <button class="btn secondary"
+  <button
+   class="btn secondary"
    onclick="registerUser()">
    নতুন Account তৈরি
   </button>
 
-  <div id="authMessage" class="notice" style="display:none"></div>
+  <div
+   id="authMessage"
+   class="notice"
+   style="display:none">
+  </div>
 
  </div>
 
 </div>
 
-<!-- JOB POST -->
+
+<!-- =====================================================
+     JOB POST
+     ===================================================== -->
+
 <div class="modal" id="jobPost">
 
  <div class="modal-box">
 
-  <button class="modal-close"
-   onclick="closeModal('jobPost')">×</button>
+  <button
+   class="modal-close"
+   onclick="closeModal('jobPost')">
+   ×
+  </button>
 
   <h2>💼 নতুন কাজ পোস্ট করুন</h2>
 
   <div class="form-group">
+
    <label>Job Title</label>
-   <input id="jobTitle" placeholder="যেমন: Facebook Post Design">
+
+   <input
+    id="jobTitle"
+    placeholder="যেমন: Facebook Post Design">
+
   </div>
 
   <div class="form-group">
+
    <label>Skill</label>
+
    <select id="jobSkill">
-    <option value="Graphic Design">Graphic Design</option>
-    <option value="Video Editing">Video Editing</option>
-    <option value="Data Entry">Data Entry</option>
-    <option value="Digital Marketing">Digital Marketing</option>
-    <option value="Other">Other</option>
+
+    <option value="Graphic Design">
+     Graphic Design
+    </option>
+
+    <option value="Video Editing">
+     Video Editing
+    </option>
+
+    <option value="Data Entry">
+     Data Entry
+    </option>
+
+    <option value="Digital Marketing">
+     Digital Marketing
+    </option>
+
+    <option value="Other">
+     Other
+    </option>
+
    </select>
+
   </div>
 
   <div class="form-group">
+
    <label>Budget</label>
-   <input id="jobBudget" placeholder="যেমন: ৳500">
+
+   <input
+    id="jobBudget"
+    placeholder="যেমন: ৳500">
+
   </div>
 
   <div class="form-group">
+
    <label>Job Description</label>
-   <textarea id="jobDescription"
-    placeholder="কাজের বিস্তারিত লিখুন"></textarea>
+
+   <textarea
+    id="jobDescription"
+    placeholder="কাজের বিস্তারিত লিখুন">
+   </textarea>
+
   </div>
 
-  <button class="btn" onclick="createJob()">
+  <button
+   class="btn"
+   onclick="createJob()">
    পোস্ট করুন
   </button>
 
@@ -633,42 +948,74 @@ canvas{
 
 </div>
 
-<!-- APPLY -->
+
+<!-- =====================================================
+     APPLY
+     ===================================================== -->
+
 <div class="modal" id="apply">
 
  <div class="modal-box">
 
-  <button class="modal-close"
-   onclick="closeModal('apply')">×</button>
+  <button
+   class="modal-close"
+   onclick="closeModal('apply')">
+   ×
+  </button>
 
   <h2>📝 Job Application</h2>
 
   <div id="applyJobInfo"></div>
 
-  <input id="applyJobId" type="hidden">
+  <input
+   id="applyJobId"
+   type="hidden">
 
   <div class="form-group">
+
    <label>Name</label>
-   <input id="applyName" placeholder="আপনার নাম">
+
+   <input
+    id="applyName"
+    placeholder="আপনার নাম">
+
   </div>
 
   <div class="form-group">
+
    <label>Email</label>
-   <input id="applyEmail" type="email" placeholder="Email">
+
+   <input
+    id="applyEmail"
+    type="email"
+    placeholder="Email">
+
   </div>
 
   <div class="form-group">
+
    <label>Phone</label>
-   <input id="applyPhone" placeholder="Phone">
+
+   <input
+    id="applyPhone"
+    placeholder="Phone">
+
   </div>
 
   <div class="form-group">
+
    <label>Message</label>
-   <textarea id="applyMessage"
-    placeholder="কেন আপনি এই কাজটি করতে পারবেন লিখুন"></textarea>
+
+   <textarea
+    id="applyMessage"
+    placeholder="কেন আপনি এই কাজটি করতে পারবেন লিখুন">
+   </textarea>
+
   </div>
 
-  <button class="btn" onclick="applyForJob()">
+  <button
+   class="btn"
+   onclick="applyForJob()">
    Application Submit
   </button>
 
@@ -676,48 +1023,81 @@ canvas{
 
 </div>
 
-<!-- PAYOUT -->
+
+<!-- =====================================================
+     PAYOUT
+     ===================================================== -->
+
 <div class="modal" id="payout">
 
  <div class="modal-box">
 
-  <button class="modal-close"
-   onclick="closeModal('payout')">×</button>
+  <button
+   class="modal-close"
+   onclick="closeModal('payout')">
+   ×
+  </button>
 
   <h2>💸 Payout Request</h2>
 
   <div class="notice">
+
    শুধু approved real earnings payout করা যাবে।
    Virtual Points payout করা যাবে না।
+
   </div>
 
   <div class="form-group">
+
    <label>Amount</label>
-   <input id="payoutAmount" type="number"
-    min="1" step="0.01" placeholder="Amount">
+
+   <input
+    id="payoutAmount"
+    type="number"
+    min="1"
+    step="0.01"
+    placeholder="Amount">
+
   </div>
 
   <div class="form-group">
+
    <label>Method</label>
+
    <select id="payoutMethod">
+
     <option value="bKash">bKash</option>
     <option value="Nagad">Nagad</option>
     <option value="Rocket">Rocket</option>
     <option value="Bank">Bank</option>
+
    </select>
+
   </div>
 
   <div class="form-group">
+
    <label>Account Name</label>
-   <input id="payoutAccountName" placeholder="Account Name">
+
+   <input
+    id="payoutAccountName"
+    placeholder="Account Name">
+
   </div>
 
   <div class="form-group">
+
    <label>Account Number</label>
-   <input id="payoutAccountNumber" placeholder="Account Number">
+
+   <input
+    id="payoutAccountNumber"
+    placeholder="Account Number">
+
   </div>
 
-  <button class="btn" onclick="requestPayout()">
+  <button
+   class="btn"
+   onclick="requestPayout()">
    Payout Request পাঠান
   </button>
 
@@ -725,34 +1105,59 @@ canvas{
 
 </div>
 
-<!-- SKILL -->
+
+<!-- =====================================================
+     SKILL
+     ===================================================== -->
+
 <div class="modal" id="skill">
 
  <div class="modal-box">
 
-  <button class="modal-close"
-   onclick="closeModal('skill')">×</button>
+  <button
+   class="modal-close"
+   onclick="closeModal('skill')">
+   ×
+  </button>
 
   <h2>🎯 Skill Profile</h2>
 
   <div class="form-group">
+
    <label>Primary Skill</label>
 
    <select id="skillSelect">
-    <option value="Graphic Design">Graphic Design</option>
-    <option value="Video Editing">Video Editing</option>
-    <option value="Data Entry">Data Entry</option>
-    <option value="Digital Marketing">Digital Marketing</option>
+
+    <option value="Graphic Design">
+     Graphic Design
+    </option>
+
+    <option value="Video Editing">
+     Video Editing
+    </option>
+
+    <option value="Data Entry">
+     Data Entry
+    </option>
+
+    <option value="Digital Marketing">
+     Digital Marketing
+    </option>
+
    </select>
+
   </div>
 
-  <button class="btn" onclick="saveSkill()">
+  <button
+   class="btn"
+   onclick="saveSkill()">
    Save Skill
   </button>
 
  </div>
 
 </div>
+
 
 <script>
 
@@ -773,8 +1178,11 @@ let currentUser=null;
 let currentProfile=null;
 let currentJobs=[];
 
-let pzPoints=Number(localStorage.getItem("pz_points")||1000);
-let gamesPlayed=Number(localStorage.getItem("pz_games_played")||0);
+let pzPoints=
+ Number(localStorage.getItem("pz_points")||1000);
+
+let gamesPlayed=
+ Number(localStorage.getItem("pz_games_played")||0);
 
 let tapTimer=null;
 let tapScore=0;
@@ -796,12 +1204,20 @@ let flyScore=0;
 let flyPlayer=null;
 let flyObstacles=[];
 
+
 const quizQuestions=[
+
  {
   q:"বাংলাদেশের রাজধানী কোনটি?",
-  options:["ঢাকা","চট্টগ্রাম","খুলনা","রাজশাহী"],
+  options:[
+   "ঢাকা",
+   "চট্টগ্রাম",
+   "খুলনা",
+   "রাজশাহী"
+  ],
   answer:"ঢাকা"
  },
+
  {
   q:"HTML-এর পূর্ণরূপ কী?",
   options:[
@@ -812,6 +1228,7 @@ const quizQuestions=[
   ],
   answer:"Hyper Text Markup Language"
  },
+
  {
   q:"Supabase কোন ধরনের platform?",
   options:[
@@ -822,6 +1239,7 @@ const quizQuestions=[
   ],
   answer:"Backend platform"
  },
+
  {
   q:"Data Entry-তে সাধারণত কোন কাজটি করা হয়?",
   options:[
@@ -832,19 +1250,27 @@ const quizQuestions=[
   ],
   answer:"Data input"
  }
+
 ];
 
-/* ================= HELPERS ================= */
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
 function money(value){
+
  const n=Number(value||0);
+
  return "৳"+n.toLocaleString("en-BD",{
   minimumFractionDigits:0,
   maximumFractionDigits:2
  });
 }
 
+
 function esc(value){
+
  return String(value??"")
   .replace(/&/g,"&amp;")
   .replace(/</g,"&lt;")
@@ -853,8 +1279,11 @@ function esc(value){
   .replace(/'/g,"&#039;");
 }
 
+
 function statusLabel(status){
+
  const labels={
+
   open:"Open",
   pending:"Pending",
   accepted:"Accepted",
@@ -866,61 +1295,108 @@ function statusLabel(status){
   processing:"Processing",
   paid:"Paid",
   failed:"Failed"
+
  };
 
  return labels[status]||status||"Unknown";
 }
 
+
 function backendReady(){
+
  if(!supabaseReady||!supabaseClient){
-  alert("PLAYZONE server এখনো ready হয়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।");
+
+  alert(
+   "PLAYZONE server এখনো ready হয়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।"
+  );
+
   return false;
  }
+
  return true;
 }
 
+
 function savePoints(){
- localStorage.setItem("pz_points",String(pzPoints));
+
+ localStorage.setItem(
+  "pz_points",
+  String(pzPoints)
+ );
+
  updateLocalStats();
 }
+
 
 function saveGamesPlayed(){
- localStorage.setItem("pz_games_played",String(gamesPlayed));
+
+ localStorage.setItem(
+  "pz_games_played",
+  String(gamesPlayed)
+ );
+
  updateLocalStats();
 }
 
-function updateLocalStats(){
- const p=document.getElementById("pointsDisplay");
- const g=document.getElementById("gamesPlayedDisplay");
 
- if(p)p.textContent=pzPoints.toLocaleString();
- if(g)g.textContent=gamesPlayed.toLocaleString();
+function updateLocalStats(){
+
+ const p=
+  document.getElementById("pointsDisplay");
+
+ const g=
+  document.getElementById("gamesPlayedDisplay");
+
+ if(p)
+  p.textContent=
+   pzPoints.toLocaleString();
+
+ if(g)
+  g.textContent=
+   gamesPlayed.toLocaleString();
 }
+
 
 function openModal(id){
- const el=document.getElementById(id);
- if(el)el.classList.add("show");
+
+ const el=
+  document.getElementById(id);
+
+ if(el)
+  el.classList.add("show");
 }
+
 
 function closeModal(id){
- const el=document.getElementById(id);
- if(el)el.classList.remove("show");
+
+ const el=
+  document.getElementById(id);
+
+ if(el)
+  el.classList.remove("show");
 }
 
+
 function showSection(id,button){
- document.querySelectorAll(".section").forEach(s=>{
-  s.classList.remove("active");
- });
 
- const section=document.getElementById(id);
+ document.querySelectorAll(".section")
+  .forEach(s=>{
+   s.classList.remove("active");
+  });
 
- if(section)section.classList.add("active");
+ const section=
+  document.getElementById(id);
 
- document.querySelectorAll(".nav button").forEach(b=>{
-  b.classList.remove("active");
- });
+ if(section)
+  section.classList.add("active");
 
- if(button)button.classList.add("active");
+ document.querySelectorAll(".nav button")
+  .forEach(b=>{
+   b.classList.remove("active");
+  });
+
+ if(button)
+  button.classList.add("active");
 
  if(id==="wallet"&&currentUser){
   loadEarningsDashboard();
@@ -940,27 +1416,36 @@ function showSection(id,button){
  });
 }
 
-/* ================= PROFILE ================= */
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
 async function ensureProfile(){
 
- if(!currentUser||!backendReady())return null;
+ if(!currentUser||!backendReady())
+  return null;
 
  try{
 
-  const {data,error}=await supabaseClient
+  const {data,error}=
+   await supabaseClient
    .from("profiles")
    .select("*")
    .eq("id",currentUser.id)
    .maybeSingle();
 
   if(error){
+
    console.error("Profile:",error);
+
    return null;
   }
 
   if(data){
+
    currentProfile=data;
+
    return data;
   }
 
@@ -969,7 +1454,10 @@ async function ensureProfile(){
    currentUser.email?.split("@")[0]||
    "PLAYZONE User";
 
-  const {data:newProfile,error:insertError}=
+  const {
+   data:newProfile,
+   error:insertError
+  }=
    await supabaseClient
    .from("profiles")
    .insert({
@@ -982,137 +1470,217 @@ async function ensureProfile(){
    .single();
 
   if(insertError){
-   console.error("Profile create:",insertError);
+
+   console.error(
+    "Profile create:",
+    insertError
+   );
+
    return null;
   }
 
   currentProfile=newProfile;
+
   return newProfile;
 
  }catch(error){
 
-  console.error("ensureProfile:",error);
+  console.error(
+   "ensureProfile:",
+   error
+  );
+
   return null;
  }
 }
 
+
 async function refreshUserUI(){
 
- const userDisplay=document.getElementById("userDisplay");
- const loginBtn=document.getElementById("loginTopBtn");
- const logoutBtn=document.getElementById("logoutTopBtn");
- const adminBtn=document.getElementById("adminNavBtn");
+ const userDisplay=
+  document.getElementById("userDisplay");
+
+ const loginBtn=
+  document.getElementById("loginTopBtn");
+
+ const logoutBtn=
+  document.getElementById("logoutTopBtn");
+
+ const adminBtn=
+  document.getElementById("adminNavBtn");
+
 
  if(!currentUser){
 
-  if(userDisplay)userDisplay.textContent="👤 Guest";
-  if(loginBtn)loginBtn.style.display="inline-block";
-  if(logoutBtn)logoutBtn.style.display="none";
-  if(adminBtn)adminBtn.style.display="none";
+  if(userDisplay)
+   userDisplay.textContent="👤 Guest";
+
+  if(loginBtn)
+   loginBtn.style.display="inline-block";
+
+  if(logoutBtn)
+   logoutBtn.style.display="none";
+
+  if(adminBtn)
+   adminBtn.style.display="none";
 
   currentProfile=null;
 
   await loadMyApplications();
+
   await loadEarningsDashboard();
+
   renderProfile();
 
   return;
  }
 
+
  if(!currentProfile){
+
   await ensureProfile();
  }
 
+
  if(userDisplay){
+
   userDisplay.textContent=
-   "👤 "+(currentProfile?.name||
-   currentUser.email||
-   "User");
+   "👤 "+
+   (
+    currentProfile?.name||
+    currentUser.email||
+    "User"
+   );
  }
 
- if(loginBtn)loginBtn.style.display="none";
- if(logoutBtn)logoutBtn.style.display="inline-block";
 
- const admin=await isAdmin();
+ if(loginBtn)
+  loginBtn.style.display="none";
+
+ if(logoutBtn)
+  logoutBtn.style.display="inline-block";
+
+
+ const admin=
+  await isAdmin();
+
 
  if(adminBtn){
-  adminBtn.style.display=admin?"inline-block":"none";
+
+  adminBtn.style.display=
+   admin
+   ?"inline-block"
+   :"none";
  }
 
+
  renderProfile();
+
  await loadMyApplications();
+
  await loadEarningsDashboard();
 }
 
-/* ================= AUTH ================= */
+
+/* =========================================================
+   AUTH
+   ========================================================= */
 
 async function loginUser(){
 
  if(!backendReady())return;
 
  const email=
-  document.getElementById("authEmail").value.trim();
+  document.getElementById(
+   "authEmail"
+  ).value.trim();
 
  const password=
-  document.getElementById("authPassword").value;
+  document.getElementById(
+   "authPassword"
+  ).value;
 
  if(!email||!password){
-  alert("Email এবং Password দিন।");
+
+  alert(
+   "Email এবং Password দিন।"
+  );
+
   return;
  }
 
  const {data,error}=
-  await supabaseClient.auth.signInWithPassword({
+  await supabaseClient.auth
+  .signInWithPassword({
    email,
    password
   });
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
  currentUser=data.user||null;
 
- if(currentUser){
+ if(currentUser)
   await ensureProfile();
- }
 
  closeModal("login");
 
  await refreshUserUI();
 
- alert("✅ Login সফল হয়েছে।");
+ alert(
+  "✅ Login সফল হয়েছে।"
+ );
 }
+
 
 async function registerUser(){
 
  if(!backendReady())return;
 
  const email=
-  document.getElementById("authEmail").value.trim();
+  document.getElementById(
+   "authEmail"
+  ).value.trim();
 
  const password=
-  document.getElementById("authPassword").value;
+  document.getElementById(
+   "authPassword"
+  ).value;
 
  if(!email||!password){
-  alert("Email এবং Password দিন।");
+
+  alert(
+   "Email এবং Password দিন।"
+  );
+
   return;
  }
 
  if(password.length<6){
-  alert("Password কমপক্ষে 6 characters হতে হবে।");
+
+  alert(
+   "Password কমপক্ষে 6 characters হতে হবে।"
+  );
+
   return;
  }
 
  const {data,error}=
-  await supabaseClient.auth.signUp({
+  await supabaseClient.auth
+  .signUp({
    email,
    password
   });
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
@@ -1121,12 +1689,16 @@ async function registerUser(){
   currentUser=data.user;
 
   if(data.session){
+
    await ensureProfile();
+
    await refreshUserUI();
 
    closeModal("login");
 
-   alert("✅ Account তৈরি হয়েছে এবং Login সফল।");
+   alert(
+    "✅ Account তৈরি হয়েছে এবং Login সফল।"
+   );
 
   }else{
 
@@ -1138,18 +1710,24 @@ async function registerUser(){
 
  }else{
 
-  alert("Account তৈরি করা যায়নি।");
+  alert(
+   "Account তৈরি করা যায়নি।"
+  );
  }
 }
+
 
 async function logout(){
 
  if(!backendReady())return;
 
- const {error}=await supabaseClient.auth.signOut();
+ const {error}=
+  await supabaseClient.auth.signOut();
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
@@ -1163,8 +1741,11 @@ async function logout(){
   document.querySelector(".nav button")
  );
 
- alert("✅ Logout সফল হয়েছে।");
+ alert(
+  "✅ Logout সফল হয়েছে।"
+ );
 }
+
 
 function setupAuthListener(){
 
@@ -1173,22 +1754,30 @@ function setupAuthListener(){
  supabaseClient.auth.onAuthStateChange(
   (event,session)=>{
 
-   currentUser=session?.user||null;
+   currentUser=
+    session?.user||null;
 
    setTimeout(async()=>{
 
     try{
 
      if(currentUser){
+
       await ensureProfile();
+
      }else{
+
       currentProfile=null;
      }
 
      await refreshUserUI();
 
     }catch(error){
-     console.error("Auth state:",error);
+
+     console.error(
+      "Auth state:",
+      error
+     );
     }
 
    },0);
@@ -1196,52 +1785,81 @@ function setupAuthListener(){
  );
 }
 
+
 async function loadCurrentUser(){
 
  if(!backendReady())return;
 
  const {data,error}=
-  await supabaseClient.auth.getSession();
+  await supabaseClient.auth
+  .getSession();
 
  if(error){
-  console.error("Session:",error);
+
+  console.error(
+   "Session:",
+   error
+  );
+
   return;
  }
 
- currentUser=data.session?.user||null;
+ currentUser=
+  data.session?.user||null;
 
- if(currentUser){
+ if(currentUser)
   await ensureProfile();
- }
 
  await refreshUserUI();
 }
 
-/* ================= JOBS ================= */
+
+/* =========================================================
+   JOBS
+   ========================================================= */
 
 async function createJob(){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
  const title=
-  document.getElementById("jobTitle").value.trim();
+  document.getElementById(
+   "jobTitle"
+  ).value.trim();
 
  const skill=
-  document.getElementById("jobSkill").value;
+  document.getElementById(
+   "jobSkill"
+  ).value;
 
  const budget=
-  document.getElementById("jobBudget").value.trim();
+  document.getElementById(
+   "jobBudget"
+  ).value.trim();
 
  const description=
-  document.getElementById("jobDescription").value.trim();
+  document.getElementById(
+   "jobDescription"
+  ).value.trim();
 
- if(!title||!skill||!budget||!description){
-  alert("সব Job information পূরণ করুন।");
+ if(
+  !title||
+  !skill||
+  !budget||
+  !description
+ ){
+
+  alert(
+   "সব Job information পূরণ করুন।"
+  );
+
   return;
  }
 
@@ -1260,35 +1878,60 @@ async function createJob(){
   .single();
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- document.getElementById("jobTitle").value="";
- document.getElementById("jobBudget").value="";
- document.getElementById("jobDescription").value="";
+ document.getElementById(
+  "jobTitle"
+ ).value="";
+
+ document.getElementById(
+  "jobBudget"
+ ).value="";
+
+ document.getElementById(
+  "jobDescription"
+ ).value="";
 
  closeModal("jobPost");
 
- alert("✅ Job সফলভাবে পোস্ট হয়েছে।");
+ alert(
+  "✅ Job সফলভাবে পোস্ট হয়েছে।"
+ );
 
  await loadJobsFromSupabase();
 
- if(data)showSection(
-  "jobs",
-  document.querySelectorAll(".nav button")[2]
- );
+ if(data){
+
+  showSection(
+   "jobs",
+   document.querySelectorAll(
+    ".nav button"
+   )[2]
+  );
+ }
 }
+
 
 async function loadJobsFromSupabase(){
 
- const box=document.getElementById("jobsList");
+ const box=
+  document.getElementById(
+   "jobsList"
+  );
 
  if(!box)return;
 
  if(!backendReady()){
+
   box.innerHTML=
-   '<div class="empty">Server connection ready নয়।</div>';
+   '<div class="empty">'+
+   'Server connection ready নয়.'+
+   '</div>';
+
   return;
  }
 
@@ -1310,125 +1953,202 @@ async function loadJobsFromSupabase(){
    approved_at,
    created_at
   `)
-  .order("created_at",{ascending:false});
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(error){
-  console.error("Jobs:",error);
+
+  console.error(
+   "Jobs:",
+   error
+  );
+
   box.innerHTML=
-   '<div class="empty">'+esc(error.message)+'</div>';
+   '<div class="empty">'+
+   esc(error.message)+
+   '</div>';
+
   return;
  }
 
  currentJobs=data||[];
 
  if(!currentJobs.length){
+
   box.innerHTML=
-   '<div class="empty">এখন কোনো Open Job নেই।</div>';
+   '<div class="empty">'+
+   'এখন কোনো Job নেই।'+
+   '</div>';
+
   return;
  }
 
- box.innerHTML=currentJobs.map(job=>{
 
-  let actions="";
+ box.innerHTML=
+  currentJobs.map(job=>{
 
-  if(job.status==="open"&&job.poster_id!==currentUser?.id){
+   let actions="";
 
-   actions+=`
-    <button class="btn small"
-     onclick="openApply('${job.id}')">
-     📝 Apply
-    </button>
-   `;
-  }
 
-  if(job.poster_id===currentUser?.id){
+   if(
+    job.status==="open"&&
+    job.poster_id!==currentUser?.id
+   ){
 
-   actions+=`
-    <button class="btn secondary small"
-     onclick="viewJobApplications('${job.id}')">
-     👥 Applications
-    </button>
-   `;
-  }
+    actions+=`
+     <button
+      class="btn small"
+      onclick="openApply('${job.id}')">
+      📝 Apply
+     </button>
+    `;
+   }
 
-  return `
-   <div class="card" style="margin-bottom:12px">
 
-    <h3>${esc(job.title)}</h3>
+   if(
+    job.poster_id===
+    currentUser?.id
+   ){
 
-    <div class="muted">
-     Skill: ${esc(job.skill)}
-     • Budget: ${esc(job.budget)}
+    actions+=`
+     <button
+      class="btn secondary small"
+      onclick="viewJobApplications('${job.id}')">
+      👥 Applications
+     </button>
+    `;
+   }
+
+
+   return `
+    <div
+     class="card"
+     style="margin-bottom:12px">
+
+     <h3>
+      ${esc(job.title)}
+     </h3>
+
+     <div class="muted">
+      Skill:
+      ${esc(job.skill)}
+      • Budget:
+      ${esc(job.budget)}
+     </div>
+
+     <p>
+      ${esc(job.description)}
+     </p>
+
+     <p>
+      Status:
+      <span
+       class="statusBadge ${esc(job.status||"")}">
+       ${esc(statusLabel(job.status))}
+      </span>
+     </p>
+
+     ${
+      job.assigned_to
+      ?`
+       <p class="muted">
+        Assigned User:
+        ${esc(job.assigned_to)}
+       </p>
+      `
+      :""
+     }
+
+     ${
+      job.agreed_amount
+      ?`
+       <div class="notice">
+        Agreed Payment:
+        <b>
+         ${money(job.agreed_amount)}
+        </b>
+       </div>
+      `
+      :""
+     }
+
+     ${
+      job.submission_note
+      ?`
+       <div class="notice">
+        <b>Submission:</b>
+        ${esc(job.submission_note)}
+       </div>
+      `
+      :""
+     }
+
+     <div class="actions">
+      ${actions}
+     </div>
+
     </div>
+   `;
 
-    <p>${esc(job.description)}</p>
-
-    <p>
-     Status:
-     <span class="statusBadge ${esc(job.status||"")}">
-      ${esc(statusLabel(job.status))}
-     </span>
-    </p>
-
-    ${
-     job.agreed_amount
-     ?`
-      <div class="notice">
-       Agreed Payment:
-       <b>${money(job.agreed_amount)}</b>
-      </div>
-     `
-     :""
-    }
-
-    ${
-     job.submission_note
-     ?`
-      <div class="notice">
-       <b>Submission:</b>
-       ${esc(job.submission_note)}
-      </div>
-     `
-     :""
-    }
-
-    <div class="actions">${actions}</div>
-
-   </div>
-  `;
-
- }).join("");
+  }).join("");
 
  updateMyJobsCount();
 }
 
+
 function openApply(jobId){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
- const job=currentJobs.find(j=>j.id===jobId);
+ const job=
+  currentJobs.find(
+   j=>j.id===jobId
+  );
 
  if(!job){
-  alert("Job পাওয়া যায়নি।");
+
+  alert(
+   "Job পাওয়া যায়নি।"
+  );
+
   return;
  }
 
- if(job.poster_id===currentUser.id){
-  alert("নিজের Job-এ Apply করা যাবে না।");
+ if(
+  job.poster_id===
+  currentUser.id
+ ){
+
+  alert(
+   "নিজের Job-এ Apply করা যাবে না।"
+  );
+
   return;
  }
 
  if(job.status!=="open"){
-  alert("এই Job এখন আর Open নেই।");
+
+  alert(
+   "এই Job এখন আর Open নেই।"
+  );
+
   return;
  }
 
- document.getElementById("applyJobId").value=job.id;
+ document.getElementById(
+  "applyJobId"
+ ).value=job.id;
 
- document.getElementById("applyJobInfo").innerHTML=`
+ document.getElementById(
+  "applyJobInfo"
+ ).innerHTML=`
   <div class="notice">
    <b>${esc(job.title)}</b><br>
    Skill: ${esc(job.skill)}<br>
@@ -1436,67 +2156,116 @@ function openApply(jobId){
   </div>
  `;
 
- document.getElementById("applyName").value=
+ document.getElementById(
+  "applyName"
+ ).value=
   currentProfile?.name||"";
 
- document.getElementById("applyEmail").value=
+ document.getElementById(
+  "applyEmail"
+ ).value=
   currentUser.email||"";
 
- document.getElementById("applyPhone").value="";
+ document.getElementById(
+  "applyPhone"
+ ).value="";
 
- document.getElementById("applyMessage").value="";
+ document.getElementById(
+  "applyMessage"
+ ).value="";
 
  openModal("apply");
 }
 
+
 async function applyForJob(){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
  const jobId=
-  document.getElementById("applyJobId").value;
+  document.getElementById(
+   "applyJobId"
+  ).value;
 
  const name=
-  document.getElementById("applyName").value.trim();
+  document.getElementById(
+   "applyName"
+  ).value.trim();
 
  const email=
-  document.getElementById("applyEmail").value.trim();
+  document.getElementById(
+   "applyEmail"
+  ).value.trim();
 
  const phone=
-  document.getElementById("applyPhone").value.trim();
+  document.getElementById(
+   "applyPhone"
+  ).value.trim();
 
  const message=
-  document.getElementById("applyMessage").value.trim();
+  document.getElementById(
+   "applyMessage"
+  ).value.trim();
 
- if(!jobId||!name||!email||!phone||!message){
-  alert("Application-এর সব তথ্য পূরণ করুন।");
+ if(
+  !jobId||
+  !name||
+  !email||
+  !phone||
+  !message
+ ){
+
+  alert(
+   "Application-এর সব তথ্য পূরণ করুন।"
+  );
+
   return;
  }
 
- const {data:job,error:jobError}=
+ const {
+  data:job,
+  error:jobError
+ }=
   await supabaseClient
   .from("jobs")
-  .select("id,status,poster_id")
+  .select(
+   "id,status,poster_id"
+  )
   .eq("id",jobId)
   .single();
 
  if(jobError){
+
   alert(jobError.message);
+
   return;
  }
 
  if(job.status!=="open"){
-  alert("এই Job ইতিমধ্যে Open নেই।");
+
+  alert(
+   "এই Job ইতিমধ্যে Open নেই।"
+  );
+
   return;
  }
 
- if(job.poster_id===currentUser.id){
-  alert("নিজের Job-এ Apply করা যাবে না।");
+ if(
+  job.poster_id===
+  currentUser.id
+ ){
+
+  alert(
+   "নিজের Job-এ Apply করা যাবে না।"
+  );
+
   return;
  }
 
@@ -1514,27 +2283,39 @@ async function applyForJob(){
   });
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
  closeModal("apply");
 
- alert("✅ Application সফলভাবে পাঠানো হয়েছে।");
+ alert(
+  "✅ Application সফলভাবে পাঠানো হয়েছে।"
+ );
 
  await loadMyApplications();
  await loadJobsFromSupabase();
 }
 
+
 async function loadMyApplications(){
 
- const box=document.getElementById("myApplications");
+ const box=
+  document.getElementById(
+   "myApplications"
+  );
 
  if(!box)return;
 
  if(!currentUser){
+
   box.innerHTML=
-   '<div class="empty">Login করলে Applications দেখা যাবে।</div>';
+   '<div class="empty">'+
+   'Login করলে Applications দেখা যাবে.'+
+   '</div>';
+
   return;
  }
 
@@ -1566,159 +2347,217 @@ async function loadMyApplications(){
     approved_at
    )
   `)
-  .eq("applicant_id",currentUser.id)
-  .order("created_at",{ascending:false});
+  .eq(
+   "applicant_id",
+   currentUser.id
+  )
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(error){
+
   box.innerHTML=
-   '<div class="empty">'+esc(error.message)+'</div>';
+   '<div class="empty">'+
+   esc(error.message)+
+   '</div>';
+
   return;
  }
 
  const apps=data||[];
 
  if(!apps.length){
+
   box.innerHTML=
-   '<div class="empty">আপনি এখনো কোনো Job-এ Apply করেননি।</div>';
+   '<div class="empty">'+
+   'আপনি এখনো কোনো Job-এ Apply করেননি।'+
+   '</div>';
+
   updateMyJobsCount();
+
   return;
  }
 
- box.innerHTML=apps.map(app=>{
 
-  const job=app.jobs;
+ box.innerHTML=
+  apps.map(app=>{
 
-  if(!job)return"";
+   const job=app.jobs;
 
-  let actions="";
+   if(!job)return"";
 
-  if(
-   app.status==="accepted"||
-   app.status==="assigned"
-  ){
-   if(job.status==="assigned"){
+   let actions="";
+
+
+   if(
+    app.status==="accepted"||
+    app.status==="assigned"
+   ){
+
+    if(
+     job.status==="assigned"
+    ){
+
+     actions+=`
+      <button
+       class="btn success small"
+       onclick="startAssignedJob('${job.id}')">
+       ▶️ কাজ শুরু করুন
+      </button>
+     `;
+    }
+   }
+
+
+   if(
+    job.status==="in_progress"&&
+    job.assigned_to===
+    currentUser.id
+   ){
+
     actions+=`
-     <button class="btn success small"
-      onclick="startAssignedJob('${job.id}')">
-      ▶️ কাজ শুরু করুন
+     <button
+      class="btn warning small"
+      onclick="submitAssignedJob('${job.id}')">
+      📤 কাজ Submit করুন
      </button>
     `;
    }
-  }
 
-  if(job.status==="in_progress"&&
-     job.assigned_to===currentUser.id){
 
-   actions+=`
-    <button class="btn warning small"
-     onclick="submitAssignedJob('${job.id}')">
-     📤 কাজ Submit করুন
-    </button>
+   return `
+    <div
+     class="card"
+     style="margin-bottom:10px">
+
+     <h3>
+      ${esc(job.title)}
+     </h3>
+
+     <p class="muted">
+      Skill:
+      ${esc(job.skill)}
+      • Budget:
+      ${esc(job.budget)}
+     </p>
+
+     <p>
+      Application:
+      <span
+       class="statusBadge ${esc(app.status)}">
+       ${esc(statusLabel(app.status))}
+      </span>
+     </p>
+
+     <p>
+      Job:
+      <span
+       class="statusBadge ${esc(job.status)}">
+       ${esc(statusLabel(job.status))}
+      </span>
+     </p>
+
+     ${
+      job.agreed_amount
+      ?`
+       <div class="notice">
+        Agreed Payment:
+        <b>${money(job.agreed_amount)}</b>
+       </div>
+      `
+      :""
+     }
+
+     ${
+      job.submission_note
+      ?`
+       <div class="notice">
+        Submission:
+        ${esc(job.submission_note)}
+       </div>
+      `
+      :""
+     }
+
+     <div class="actions">
+      ${actions}
+     </div>
+
+    </div>
    `;
-  }
 
-  return `
-   <div class="card" style="margin-bottom:10px">
-
-    <h3>${esc(job.title)}</h3>
-
-    <p class="muted">
-     Skill: ${esc(job.skill)}
-     • Budget: ${esc(job.budget)}
-    </p>
-
-    <p>
-     Application:
-     <span class="statusBadge ${esc(app.status)}">
-      ${esc(statusLabel(app.status))}
-     </span>
-    </p>
-
-    <p>
-     Job:
-     <span class="statusBadge ${esc(job.status)}">
-      ${esc(statusLabel(job.status))}
-     </span>
-    </p>
-
-    ${
-     job.agreed_amount
-     ?`
-      <div class="notice">
-       Agreed Payment:
-       <b>${money(job.agreed_amount)}</b>
-      </div>
-     `
-     :""
-    }
-
-    ${
-     job.submission_note
-     ?`
-      <div class="notice">
-       Submission:
-       ${esc(job.submission_note)}
-      </div>
-     `
-     :""
-    }
-
-    <div class="actions">${actions}</div>
-
-   </div>
-  `;
-
- }).join("");
+  }).join("");
 
  updateMyJobsCount(apps);
 }
 
+
 async function startAssignedJob(jobId){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- if(!confirm("এই Job-এর কাজ শুরু করবেন?"))return;
+ if(!confirm(
+  "এই Job-এর কাজ শুরু করবেন?"
+ ))return;
 
  const {error}=
   await supabaseClient.rpc(
    "start_job",
-   {p_job_id:jobId}
+   {
+    p_job_id:jobId
+   }
   );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- alert("✅ কাজ শুরু হয়েছে।");
+ alert(
+  "✅ কাজ শুরু হয়েছে।"
+ );
 
  await loadJobsFromSupabase();
  await loadMyApplications();
 }
 
+
 async function submitAssignedJob(jobId){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- const note=prompt(
-  "আপনার সম্পন্ন করা কাজের সংক্ষিপ্ত Submission Note লিখুন:",
-  ""
- );
+ const note=
+  prompt(
+   "আপনার সম্পন্ন করা কাজের সংক্ষিপ্ত Submission Note লিখুন:",
+   ""
+  );
 
  if(note===null)return;
 
  if(!note.trim()){
-  alert("Submission Note লিখুন।");
+
+  alert(
+   "Submission Note লিখুন।"
+  );
+
   return;
  }
 
@@ -1732,7 +2571,9 @@ async function submitAssignedJob(jobId){
   );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
@@ -1744,35 +2585,55 @@ async function submitAssignedJob(jobId){
  await loadMyApplications();
 
  if(await isAdmin()){
+
   await adminLoadApplications();
+  await adminLoadJobs();
  }
 }
+
 
 async function viewJobApplications(jobId){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- const {data:job,error:jobError}=
+ const {
+  data:job,
+  error:jobError
+ }=
   await supabaseClient
   .from("jobs")
-  .select("id,title,status,poster_id")
+  .select(
+   "id,title,status,poster_id"
+  )
   .eq("id",jobId)
   .single();
 
  if(jobError){
+
   alert(jobError.message);
+
   return;
  }
 
- const admin=await isAdmin();
+ const admin=
+  await isAdmin();
 
- if(job.poster_id!==currentUser.id&&!admin){
-  alert("শুধু Job Owner/Admin applications দেখতে পারবেন।");
+ if(
+  job.poster_id!==currentUser.id&&
+  !admin
+ ){
+
+  alert(
+   "শুধু Job Owner/Admin applications দেখতে পারবেন।"
+  );
+
   return;
  }
 
@@ -1790,81 +2651,125 @@ async function viewJobApplications(jobId){
    phone
   `)
   .eq("job_id",jobId)
-  .order("created_at",{ascending:false});
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
  if(!data?.length){
-  alert("এই Job-এর কোনো Application নেই।");
+
+  alert(
+   "এই Job-এর কোনো Application নেই।"
+  );
+
   return;
  }
 
- let text="Applications:\n\n";
+ let text=
+  "Applications:\n\n";
 
  data.forEach((app,i)=>{
 
   text+=
-   (i+1)+". "+(app.name||"Applicant")+
-   "\nStatus: "+statusLabel(app.status)+
-   "\nEmail: "+(app.email||"")+
-   "\nPhone: "+(app.phone||"")+
-   "\nMessage: "+(app.message||"")+
+   (i+1)+
+   ". "+
+   (app.name||"Applicant")+
+   "\nStatus: "+
+   statusLabel(app.status)+
+   "\nEmail: "+
+   (app.email||"")+
+   "\nPhone: "+
+   (app.phone||"")+
+   "\nMessage: "+
+   (app.message||"")+
    "\n\n";
  });
 
  alert(text);
 }
 
+
 function updateMyJobsCount(apps){
 
- const el=document.getElementById("myJobsCount");
+ const el=
+  document.getElementById(
+   "myJobsCount"
+  );
 
  if(!el)return;
 
  if(!currentUser){
+
   el.textContent="0";
+
   return;
  }
 
  if(apps){
-  el.textContent=apps.filter(a=>
-   ["accepted","assigned"].includes(a.status)
-  ).length.toString();
+
+  el.textContent=
+   apps.filter(a=>
+    [
+     "accepted",
+     "assigned"
+    ].includes(a.status)
+   ).length.toString();
  }
 }
 
-/* ================= APPROVAL ================= */
+
+/* =========================================================
+   APPROVAL
+   ========================================================= */
 
 async function approveSubmittedJob(jobId){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- let amount=prompt(
-  "Worker-কে কত টাকা Payment দেওয়া হবে?\n\nউদাহরণ: 500",
-  ""
- );
+ let amount=
+  prompt(
+   "Worker-কে কত টাকা Payment দেওয়া হবে?\n\nউদাহরণ: 500",
+   ""
+  );
 
  if(amount===null)return;
 
- amount=Number(
-  String(amount).replace(/,/g,"").trim()
- );
+ amount=
+  Number(
+   String(amount)
+   .replace(/,/g,"")
+   .trim()
+  );
 
- if(!Number.isFinite(amount)||amount<=0){
-  alert("সঠিক Payment Amount দিন।");
+ if(
+  !Number.isFinite(amount)||
+  amount<=0
+ ){
+
+  alert(
+   "সঠিক Payment Amount দিন।"
+  );
+
   return;
  }
 
  if(!confirm(
-  "৳"+amount.toLocaleString()+
+  "৳"+
+  amount.toLocaleString()+
   " Payment Approve করে Worker-এর Earnings তৈরি করবেন?"
  ))return;
 
@@ -1878,7 +2783,9 @@ async function approveSubmittedJob(jobId){
   );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
@@ -1893,12 +2800,16 @@ async function approveSubmittedJob(jobId){
  await loadEarningsDashboard();
 
  if(await isAdmin()){
+
   await adminLoadApplications();
   await adminLoadJobs();
  }
 }
 
-/* ================= EARNINGS ================= */
+
+/* =========================================================
+   EARNINGS
+   ========================================================= */
 
 async function loadEarningsDashboard(){
 
@@ -1911,8 +2822,12 @@ async function loadEarningsDashboard(){
    "earningsDisplay",
    "payoutAvailable"
   ].forEach(id=>{
-   const el=document.getElementById(id);
-   if(el)el.textContent="৳0";
+
+   const el=
+    document.getElementById(id);
+
+   if(el)
+    el.textContent="৳0";
   });
 
   return;
@@ -1920,15 +2835,29 @@ async function loadEarningsDashboard(){
 
  if(!backendReady())return;
 
- const {data:earnings,error}=
+ const {
+  data:earnings,
+  error
+ }=
   await supabaseClient
   .from("earnings")
   .select("*")
-  .eq("user_id",currentUser.id)
-  .order("created_at",{ascending:false});
+  .eq(
+   "user_id",
+   currentUser.id
+  )
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(error){
-  console.error("Earnings:",error);
+
+  console.error(
+   "Earnings:",
+   error
+  );
+
   return;
  }
 
@@ -1939,277 +2868,474 @@ async function loadEarningsDashboard(){
 
  rows.forEach(row=>{
 
-  const amount=Number(row.amount||0);
+  const amount=
+   Number(row.amount||0);
 
   total+=amount;
 
-  if(row.status==="available"){
+  if(
+   row.status==="available"
+  ){
+
    available+=amount;
   }
 
  });
 
- const {data:payouts,error:payoutError}=
+
+ const {
+  data:payouts,
+  error:payoutError
+ }=
   await supabaseClient
   .from("payout_requests")
   .select("*")
-  .eq("user_id",currentUser.id)
-  .order("created_at",{ascending:false});
+  .eq(
+   "user_id",
+   currentUser.id
+  )
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(payoutError){
-  console.error("Payouts:",payoutError);
+
+  console.error(
+   "Payouts:",
+   payoutError
+  );
  }
+
 
  let pending=0;
 
  (payouts||[]).forEach(p=>{
 
   if(
-   ["pending","approved","processing"]
-   .includes(p.status)
+   [
+    "pending",
+    "approved",
+    "processing"
+   ].includes(p.status)
   ){
-   pending+=Number(p.amount||0);
+
+   pending+=
+    Number(p.amount||0);
   }
 
  });
 
- document.getElementById("availableEarnings").textContent=
+
+ document.getElementById(
+  "availableEarnings"
+ ).textContent=
   money(available);
 
- document.getElementById("pendingPayout").textContent=
+ document.getElementById(
+  "pendingPayout"
+ ).textContent=
   money(pending);
 
- document.getElementById("totalEarnings").textContent=
+ document.getElementById(
+  "totalEarnings"
+ ).textContent=
   money(total);
 
- document.getElementById("earningsDisplay").textContent=
+ document.getElementById(
+  "earningsDisplay"
+ ).textContent=
   money(total);
 
- document.getElementById("payoutAvailable").textContent=
-  money(Math.max(available-pending,0));
+ document.getElementById(
+  "payoutAvailable"
+ ).textContent=
+  money(
+   Math.max(
+    available-pending,
+    0
+   )
+  );
 
- const history=document.getElementById("earningsHistory");
+
+ const history=
+  document.getElementById(
+   "earningsHistory"
+  );
 
  if(!rows.length){
 
   history.innerHTML=
-   '<div class="empty">কোনো earnings নেই।</div>';
+   '<div class="empty">'+
+   'কোনো earnings নেই.'+
+   '</div>';
 
  }else{
 
-  history.innerHTML=rows.map(row=>`
+  history.innerHTML=
+   rows.map(row=>`
 
-   <div class="card" style="margin-bottom:8px">
+    <div
+     class="card"
+     style="margin-bottom:8px">
 
-    <div style="display:flex;justify-content:space-between;gap:10px">
+     <div
+      style="
+       display:flex;
+       justify-content:space-between;
+       gap:10px">
 
-     <b>
-      ${esc(row.description||row.type||"Earning")}
-     </b>
+      <b>
+       ${esc(
+        row.description||
+        row.type||
+        "Earning"
+       )}
+      </b>
 
-     <b style="color:#ffd21a">
-      ${money(row.amount)}
-     </b>
+      <b style="color:#ffd21a">
+       ${money(row.amount)}
+      </b>
+
+     </div>
+
+     <div class="muted">
+
+      Status:
+
+      <span
+       class="statusBadge ${esc(row.status||"")}">
+       ${esc(
+        statusLabel(
+         row.status||""
+        )
+       )}
+      </span>
+
+      •
+      ${
+       row.created_at
+       ?new Date(
+        row.created_at
+       ).toLocaleString()
+       :""
+      }
+
+     </div>
 
     </div>
 
-    <div class="muted">
-     Status:
-     <span class="statusBadge ${esc(row.status||"")}">
-      ${esc(statusLabel(row.status||""))}
-     </span>
-     •
-     ${row.created_at
-      ?new Date(row.created_at).toLocaleString()
-      :""
-     }
-    </div>
-
-   </div>
-
-  `).join("");
+   `).join("");
  }
 
+
  const payoutBox=
-  document.getElementById("payoutHistory");
+  document.getElementById(
+   "payoutHistory"
+  );
 
  if(!payouts?.length){
 
   payoutBox.innerHTML=
-   '<div class="empty">কোনো payout request নেই।</div>';
+   '<div class="empty">'+
+   'কোনো payout request নেই.'+
+   '</div>';
 
  }else{
 
-  payoutBox.innerHTML=payouts.map(p=>`
+  payoutBox.innerHTML=
+   payouts.map(p=>`
 
-   <div class="card" style="margin-bottom:8px">
+    <div
+     class="card"
+     style="margin-bottom:8px">
 
-    <div style="display:flex;justify-content:space-between">
+     <div
+      style="
+       display:flex;
+       justify-content:space-between">
 
-     <b>${esc(p.method||"Payout")}</b>
+      <b>
+       ${esc(p.method||"Payout")}
+      </b>
 
-     <b style="color:#ffd21a">
-      ${money(p.amount)}
-     </b>
+      <b style="color:#ffd21a">
+       ${money(p.amount)}
+      </b>
+
+     </div>
+
+     <div class="muted">
+      Account:
+      ${esc(p.account_number||"")}
+     </div>
+
+     <div class="muted">
+
+      Status:
+
+      <span
+       class="statusBadge ${esc(p.status||"")}">
+       ${esc(
+        statusLabel(
+         p.status||""
+        )
+       )}
+      </span>
+
+     </div>
+
+     ${
+      p.transaction_id
+      ?`
+       <div class="transaction">
+
+        🧾
+        <b>Transaction ID:</b><br>
+
+        ${esc(p.transaction_id)}
+
+       </div>
+      `
+      :""
+     }
+
+     ${
+      p.paid_at
+      ?`
+       <div class="muted"
+        style="margin-top:7px">
+
+        Paid At:
+        ${new Date(
+         p.paid_at
+        ).toLocaleString()}
+
+       </div>
+      `
+      :""
+     }
+
+     ${
+      p.admin_note
+      ?`
+       <div class="notice">
+        Admin Note:
+        ${esc(p.admin_note)}
+       </div>
+      `
+      :""
+     }
 
     </div>
 
-    <div class="muted">
-     Account:
-     ${esc(p.account_number||"")}
-    </div>
-
-    <div class="muted">
-     Status:
-     <span class="statusBadge ${esc(p.status||"")}">
-      ${esc(statusLabel(p.status||""))}
-     </span>
-    </div>
-
-    ${
-     p.transaction_id
-     ?`
-      <div class="muted">
-       Transaction ID:
-       <b>${esc(p.transaction_id)}</b>
-      </div>
-     `
-     :""
-    }
-
-    ${
-     p.paid_at
-     ?`
-      <div class="muted">
-       Paid At:
-       ${new Date(p.paid_at).toLocaleString()}
-      </div>
-     `
-     :""
-    }
-
-    ${
-     p.admin_note
-     ?`
-      <div class="notice">
-       Admin Note:
-       ${esc(p.admin_note)}
-      </div>
-     `
-     :""
-    }
-
-   </div>
-
-  `).join("");
+   `).join("");
  }
 }
 
-/* ================= PAYOUT ================= */
+
+/* =========================================================
+   PAYOUT REQUEST
+   ========================================================= */
 
 async function requestPayout(){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- const amount=Number(
-  document.getElementById("payoutAmount").value
- );
+ const amount=
+  Number(
+   document.getElementById(
+    "payoutAmount"
+   ).value
+  );
 
  const method=
-  document.getElementById("payoutMethod").value;
+  document.getElementById(
+   "payoutMethod"
+  ).value;
 
  const accountName=
-  document.getElementById("payoutAccountName")
-  .value.trim();
+  document.getElementById(
+   "payoutAccountName"
+  ).value.trim();
 
  const accountNumber=
-  document.getElementById("payoutAccountNumber")
-  .value.trim();
+  document.getElementById(
+   "payoutAccountNumber"
+  ).value.trim();
 
- if(!Number.isFinite(amount)||amount<=0){
-  alert("সঠিক Amount দিন।");
+ if(
+  !Number.isFinite(amount)||
+  amount<=0
+ ){
+
+  alert(
+   "সঠিক Amount দিন।"
+  );
+
   return;
  }
 
- if(!accountName||!accountNumber){
-  alert("Account Name এবং Account Number দিন।");
+ if(
+  !accountName||
+  !accountNumber
+ ){
+
+  alert(
+   "Account Name এবং Account Number দিন।"
+  );
+
   return;
  }
 
- const {data:earnings,error}=
+
+ const {
+  data:earnings,
+  error
+ }=
   await supabaseClient
   .from("earnings")
-  .select("amount,status")
-  .eq("user_id",currentUser.id);
+  .select(
+   "amount,status"
+  )
+  .eq(
+   "user_id",
+   currentUser.id
+  );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- const available=(earnings||[])
-  .filter(e=>e.status==="available")
+
+ const available=
+  (earnings||[])
+  .filter(
+   e=>e.status==="available"
+  )
   .reduce(
-   (sum,e)=>sum+Number(e.amount||0),
+   (sum,e)=>
+    sum+Number(e.amount||0),
    0
   );
+
 
  const {data:payouts}=
   await supabaseClient
   .from("payout_requests")
-  .select("amount,status")
-  .eq("user_id",currentUser.id);
+  .select(
+   "amount,status"
+  )
+  .eq(
+   "user_id",
+   currentUser.id
+  );
 
- const reserved=(payouts||[])
-  .filter(p=>
-   ["pending","approved","processing"]
-   .includes(p.status)
+
+ const reserved=
+  (payouts||[])
+  .filter(
+   p=>
+    [
+     "pending",
+     "approved",
+     "processing"
+    ].includes(p.status)
   )
   .reduce(
-   (sum,p)=>sum+Number(p.amount||0),
+   (sum,p)=>
+    sum+Number(p.amount||0),
    0
   );
 
- const requestable=Math.max(
-  available-reserved,
-  0
- );
+
+ const requestable=
+  Math.max(
+   available-reserved,
+   0
+  );
+
 
  if(amount>requestable){
 
   alert(
    "Available earnings-এর চেয়ে বেশি payout request করা যাবে না.\n"+
-   "Requestable: "+money(requestable)
+   "Requestable: "+
+   money(requestable)
   );
 
   return;
  }
+
+
+ /*
+  * 5 parameter RPC is used intentionally.
+  * This matches the current Supabase function.
+  */
 
  const {error:rpcError}=
   await supabaseClient.rpc(
    "request_job_payout",
    {
     p_amount:amount,
+    p_currency:"BDT",
     p_method:method,
     p_account_name:accountName,
     p_account_number:accountNumber
    }
   );
 
+
  if(rpcError){
 
-  alert(rpcError.message);
-  return;
+  /*
+   * Fallback for the 4-parameter
+   * overloaded function.
+   */
+
+  const {error:fallbackError}=
+   await supabaseClient.rpc(
+    "request_job_payout",
+    {
+     p_amount:amount,
+     p_method:method,
+     p_account_name:accountName,
+     p_account_number:accountNumber
+    }
+   );
+
+  if(fallbackError){
+
+   alert(
+    fallbackError.message
+   );
+
+   return;
+  }
  }
 
- document.getElementById("payoutAmount").value="";
- document.getElementById("payoutAccountName").value="";
- document.getElementById("payoutAccountNumber").value="";
+
+ document.getElementById(
+  "payoutAmount"
+ ).value="";
+
+ document.getElementById(
+  "payoutAccountName"
+ ).value="";
+
+ document.getElementById(
+  "payoutAccountNumber"
+ ).value="";
 
  closeModal("payout");
 
@@ -2218,94 +3344,148 @@ async function requestPayout(){
  );
 
  await loadEarningsDashboard();
+
+ if(await isAdmin()){
+
+  await adminLoadPayouts();
+  await adminLoadStats();
+ }
 }
 
-/* ================= PROFILE ================= */
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
 async function renderProfile(){
 
- const box=document.getElementById("profileBox");
- const skillBox=document.getElementById("skillProfileBox");
+ const box=
+  document.getElementById(
+   "profileBox"
+  );
+
+ const skillBox=
+  document.getElementById(
+   "skillProfileBox"
+  );
 
  if(!currentUser){
 
   box.innerHTML=
-   '<div class="empty">Login করুন।</div>';
+   '<div class="empty">Login করুন.</div>';
 
   skillBox.innerHTML=
-   '<div class="empty">Login করলে skill profile দেখা যাবে।</div>';
+   '<div class="empty">'+
+   'Login করলে skill profile দেখা যাবে.'+
+   '</div>';
 
   return;
  }
 
- if(!currentProfile){
+ if(!currentProfile)
   await ensureProfile();
- }
+
 
  box.innerHTML=`
 
   <div class="card">
 
    <h3>
-    ${esc(currentProfile?.name||"PLAYZONE User")}
+    ${esc(
+     currentProfile?.name||
+     "PLAYZONE User"
+    )}
    </h3>
 
    <p class="muted">
     Email:
-    ${esc(currentUser.email||"")}
+    ${esc(
+     currentUser.email||""
+    )}
    </p>
 
    <p class="muted">
+
     Role:
+
     <span class="statusBadge">
-     ${esc(currentProfile?.role||"user")}
+     ${esc(
+      currentProfile?.role||
+      "user"
+     )}
     </span>
+
    </p>
 
    <p class="muted">
+
     Virtual Points:
+
     <b style="color:#ffd21a">
      ${pzPoints.toLocaleString()}
     </b>
+
    </p>
 
   </div>
  `;
 
- const skill=
-  localStorage.getItem("pz_skill")||"";
 
- skillBox.innerHTML=skill
+ const skill=
+  localStorage.getItem(
+   "pz_skill"
+  )||"";
+
+
+ skillBox.innerHTML=
+  skill
   ?`
    <div class="card">
+
     <b>Primary Skill:</b>
     ${esc(skill)}
+
    </div>
   `
   :
-  '<div class="empty">Skill এখনো সেট করা হয়নি।</div>';
+  '<div class="empty">'+
+  'Skill এখনো সেট করা হয়নি.'+
+  '</div>';
 }
+
 
 function saveSkill(){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  const skill=
-  document.getElementById("skillSelect").value;
+  document.getElementById(
+   "skillSelect"
+  ).value;
 
- localStorage.setItem("pz_skill",skill);
+ localStorage.setItem(
+  "pz_skill",
+  skill
+ );
 
  closeModal("skill");
 
  renderProfile();
 
- alert("✅ Skill profile updated.");
+ alert(
+  "✅ Skill profile updated."
+ );
 }
 
-/* ================= GAMES ================= */
+
+/* =========================================================
+   TAP RUSH
+   ========================================================= */
 
 function startTapRush(){
 
@@ -2315,13 +3495,18 @@ function startTapRush(){
  tapTime=30;
 
  gamesPlayed++;
+
  saveGamesPlayed();
 
  const info=
-  document.getElementById("tapInfo");
+  document.getElementById(
+   "tapInfo"
+  );
 
  const target=
-  document.getElementById("tapTarget");
+  document.getElementById(
+   "tapTarget"
+  );
 
  target.style.display="flex";
 
@@ -2330,46 +3515,62 @@ function startTapRush(){
  info.textContent=
   "Time: 30s | Score: 0";
 
- tapTimer=setInterval(()=>{
 
-  tapTime--;
+ tapTimer=
+  setInterval(()=>{
 
-  info.textContent=
-   "Time: "+tapTime+"s | Score: "+tapScore;
-
-  if(tapTime<=0){
-
-   clearInterval(tapTimer);
-
-   target.style.display="none";
-
-   pzPoints+=tapScore;
-
-   savePoints();
+   tapTime--;
 
    info.textContent=
-    "🎉 Game Over! Score: "+
-    tapScore+
-    " | Points added: "+
+    "Time: "+
+    tapTime+
+    "s | Score: "+
     tapScore;
-  }
 
- },1000);
+   if(tapTime<=0){
+
+    clearInterval(tapTimer);
+
+    target.style.display="none";
+
+    pzPoints+=tapScore;
+
+    savePoints();
+
+    info.textContent=
+     "🎉 Game Over! Score: "+
+     tapScore+
+     " | Points added: "+
+     tapScore;
+   }
+
+  },1000);
 }
+
 
 function moveTapTarget(){
 
  const area=
-  document.getElementById("tapArea");
+  document.getElementById(
+   "tapArea"
+  );
 
  const target=
-  document.getElementById("tapTarget");
+  document.getElementById(
+   "tapTarget"
+  );
 
  const maxX=
-  Math.max(0,area.clientWidth-60);
+  Math.max(
+   0,
+   area.clientWidth-60
+  );
 
  const maxY=
-  Math.max(0,area.clientHeight-60);
+  Math.max(
+   0,
+   area.clientHeight-60
+  );
 
  target.style.left=
   (Math.random()*maxX)+"px";
@@ -2377,6 +3578,7 @@ function moveTapTarget(){
  target.style.top=
   (Math.random()*maxY)+"px";
 }
+
 
 function tapTargetHit(){
 
@@ -2386,15 +3588,24 @@ function tapTargetHit(){
 
  moveTapTarget();
 
- document.getElementById("tapInfo")
-  .textContent=
-  "Time: "+tapTime+
-  "s | Score: "+tapScore;
+ document.getElementById(
+  "tapInfo"
+ ).textContent=
+  "Time: "+
+  tapTime+
+  "s | Score: "+
+  tapScore;
 }
+
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
 
 function startQuiz(){
 
  gamesPlayed++;
+
  saveGamesPlayed();
 
  quizIndex=0;
@@ -2403,14 +3614,18 @@ function startQuiz(){
  renderQuizQuestion();
 }
 
+
 function renderQuizQuestion(){
 
  const box=
-  document.getElementById("quizBox");
+  document.getElementById(
+   "quizBox"
+  );
 
  if(quizIndex>=quizQuestions.length){
 
-  pzPoints+=quizScore*10;
+  pzPoints+=
+   quizScore*10;
 
   savePoints();
 
@@ -2429,12 +3644,14 @@ function renderQuizQuestion(){
     ${quizScore*10}
 
    </div>
+
   `;
 
   return;
  }
 
- const q=quizQuestions[quizIndex];
+ const q=
+  quizQuestions[quizIndex];
 
  box.innerHTML=`
 
@@ -2445,52 +3662,74 @@ function renderQuizQuestion(){
     ${quizIndex+1}/${quizQuestions.length}
    </b>
 
-   <h3>${esc(q.q)}</h3>
+   <h3>
+    ${esc(q.q)}
+   </h3>
 
-   ${q.options.map(option=>`
+   ${
+    q.options.map(
+     option=>`
 
-    <button class="quiz-option"
-     onclick="answerQuiz(${JSON.stringify(option)})">
+      <button
+       class="quiz-option"
+       onclick="answerQuiz(${JSON.stringify(option)})">
 
-     ${esc(option)}
+       ${esc(option)}
 
-    </button>
+      </button>
 
-   `).join("")}
+     `
+    ).join("")
+   }
 
   </div>
+
  `;
 }
 
+
 function answerQuiz(answer){
 
- const q=quizQuestions[quizIndex];
+ const q=
+  quizQuestions[quizIndex];
 
- if(answer===q.answer){
+ if(answer===q.answer)
   quizScore++;
- }
 
  quizIndex++;
 
  renderQuizQuestion();
 }
 
+
+/* =========================================================
+   MATCH SEVEN
+   ========================================================= */
+
 function startMatchSeven(){
 
  gamesPlayed++;
+
  saveGamesPlayed();
 
  matchFirst=null;
  matchLocked=false;
  matchScore=0;
 
- const nums=[1,2,3,4,5,6];
+ const nums=[
+  1,2,3,4,5,6
+ ];
 
- matchPairs=[...nums,...nums]
-  .sort(()=>Math.random()-.5);
+ matchPairs=
+  [...nums,...nums]
+  .sort(
+   ()=>Math.random()-.5
+  );
 
  const box=
-  document.getElementById("matchBox");
+  document.getElementById(
+   "matchBox"
+  );
 
  box.innerHTML=`
 
@@ -2500,41 +3739,56 @@ function startMatchSeven(){
     Matched: 0 / 6
    </div>
 
-   <div id="matchGrid"
+   <div
+    id="matchGrid"
     style="
      display:grid;
      grid-template-columns:repeat(4,1fr);
      gap:8px;
-     margin-top:12px
-    ">
+     margin-top:12px">
 
-    ${matchPairs.map((n,i)=>`
+    ${
+     matchPairs.map(
+      (n,i)=>`
 
-     <button class="btn secondary"
-      style="height:60px;font-size:20px"
-      data-index="${i}"
-      onclick="matchCard(${i})">
-      ?
-     </button>
+       <button
+        class="btn secondary"
+        style="
+         height:60px;
+         font-size:20px"
+        data-index="${i}"
+        onclick="matchCard(${i})">
+        ?
+       </button>
 
-    `).join("")}
+      `
+     ).join("")
+    }
 
    </div>
 
   </div>
+
  `;
 }
+
 
 function matchCard(index){
 
  if(matchLocked)return;
 
  const buttons=
-  document.querySelectorAll("#matchGrid button");
+  document.querySelectorAll(
+   "#matchGrid button"
+  );
 
- const button=buttons[index];
+ const button=
+  buttons[index];
 
- if(!button||button.dataset.matched==="1")return;
+ if(
+  !button||
+  button.dataset.matched==="1"
+ )return;
 
  if(matchFirst===index)return;
 
@@ -2544,16 +3798,27 @@ function matchCard(index){
  if(matchFirst===null){
 
   matchFirst=index;
+
   return;
  }
 
- const first=matchFirst;
- const second=index;
+ const first=
+  matchFirst;
 
- if(matchPairs[first]===matchPairs[second]){
+ const second=
+  index;
 
-  buttons[first].dataset.matched="1";
-  buttons[second].dataset.matched="1";
+
+ if(
+  matchPairs[first]===
+  matchPairs[second]
+ ){
+
+  buttons[first]
+   .dataset.matched="1";
+
+  buttons[second]
+   .dataset.matched="1";
 
   matchScore++;
 
@@ -2562,7 +3827,10 @@ function matchCard(index){
   document.querySelector(
    "#matchBox .muted"
   ).textContent=
-   "Matched: "+matchScore+" / 6";
+   "Matched: "+
+   matchScore+
+   " / 6";
+
 
   if(matchScore===6){
 
@@ -2572,13 +3840,16 @@ function matchCard(index){
 
    savePoints();
 
-   document.getElementById("matchBox")
-    .insertAdjacentHTML(
-     "beforeend",
-     `<div class="notice">
-      🎉 Complete! ${points} points added.
-     </div>`
-    );
+   document.getElementById(
+    "matchBox"
+   ).insertAdjacentHTML(
+    "beforeend",
+    `<div class="notice">
+     🎉 Complete!
+     ${points}
+     points added.
+    </div>`
+   );
   }
 
  }else{
@@ -2597,40 +3868,52 @@ function matchCard(index){
  }
 }
 
-/* ================= FLY HIGH ================= */
+
+/* =========================================================
+   FLY HIGH
+   ========================================================= */
 
 function initFly(){
 
  flyCanvas=
-  document.getElementById("flyCanvas");
+  document.getElementById(
+   "flyCanvas"
+  );
 
  if(!flyCanvas)return;
 
  flyCtx=
-  flyCanvas.getContext("2d");
+  flyCanvas.getContext(
+   "2d"
+  );
 
  flyCanvas.addEventListener(
   "click",
   ()=>{
-   if(flyRunning){
+
+   if(flyRunning)
     flyPlayer.vy=-6;
-   }
+
   }
  );
 }
 
+
 function startFlyHigh(){
 
- if(!flyCanvas||!flyCtx){
+ if(!flyCanvas||!flyCtx)
   initFly();
- }
 
- if(!flyCanvas||!flyCtx)return;
+ if(!flyCanvas||!flyCtx)
+  return;
 
  gamesPlayed++;
+
  saveGamesPlayed();
 
- cancelAnimationFrame(flyFrame);
+ cancelAnimationFrame(
+  flyFrame
+ );
 
  flyRunning=true;
  flyScore=0;
@@ -2646,8 +3929,11 @@ function startFlyHigh(){
  flyObstacles=[];
 
  flyFrame=
-  requestAnimationFrame(flyLoop);
+  requestAnimationFrame(
+   flyLoop
+  );
 }
+
 
 function flyLoop(){
 
@@ -2661,21 +3947,28 @@ function flyLoop(){
  );
 
  flyPlayer.vy+=0.35;
- flyPlayer.y+=flyPlayer.vy;
+ flyPlayer.y+=
+  flyPlayer.vy;
+
 
  if(flyPlayer.y<0){
+
   flyPlayer.y=0;
   flyPlayer.vy=0;
  }
 
+
  if(
-  flyPlayer.y+flyPlayer.h>
+  flyPlayer.y+
+  flyPlayer.h>
   flyCanvas.height
  ){
 
   flyGameOver();
+
   return;
  }
+
 
  if(
   !flyObstacles.length||
@@ -2685,19 +3978,26 @@ function flyLoop(){
  ){
 
   const gap=100;
-  const top=30+Math.random()*120;
+
+  const top=
+   30+
+   Math.random()*120;
 
   flyObstacles.push({
+
    x:flyCanvas.width,
    w:55,
    top,
    gap
+
   });
  }
+
 
  flyObstacles.forEach(o=>{
   o.x-=3;
  });
+
 
  while(
   flyObstacles.length&&
@@ -2710,25 +4010,36 @@ function flyLoop(){
   flyScore++;
  }
 
- for(const o of flyObstacles){
+
+ for(
+  const o of flyObstacles
+ ){
 
   const hitX=
-   flyPlayer.x<o.x+o.w&&
-   flyPlayer.x+flyPlayer.w>o.x;
+   flyPlayer.x<
+    o.x+o.w&&
+   flyPlayer.x+
+    flyPlayer.w>
+    o.x;
 
   const hitY=
-   flyPlayer.y<o.top||
-   flyPlayer.y+flyPlayer.h>
-   o.top+o.gap;
+   flyPlayer.y<
+    o.top||
+   flyPlayer.y+
+    flyPlayer.h>
+    o.top+o.gap;
 
   if(hitX&&hitY){
 
    flyGameOver();
+
    return;
   }
  }
 
- flyCtx.fillStyle="#ffd21a";
+
+ flyCtx.fillStyle=
+  "#ffd21a";
 
  flyCtx.fillRect(
   flyPlayer.x,
@@ -2737,7 +4048,9 @@ function flyLoop(){
   flyPlayer.h
  );
 
- flyCtx.fillStyle="#1fbf75";
+
+ flyCtx.fillStyle=
+  "#1fbf75";
 
  flyObstacles.forEach(o=>{
 
@@ -2758,33 +4071,46 @@ function flyLoop(){
 
  });
 
+
  flyCtx.fillStyle="#fff";
- flyCtx.font="18px Arial";
+
+ flyCtx.font=
+  "18px Arial";
 
  flyCtx.fillText(
-  "Score: "+flyScore,
+  "Score: "+
+  flyScore,
   15,
   25
  );
 
+
  flyFrame=
-  requestAnimationFrame(flyLoop);
+  requestAnimationFrame(
+   flyLoop
+  );
 }
+
 
 function flyGameOver(){
 
  flyRunning=false;
 
- cancelAnimationFrame(flyFrame);
+ cancelAnimationFrame(
+  flyFrame
+ );
 
- const points=flyScore*5;
+ const points=
+  flyScore*5;
 
  pzPoints+=points;
 
  savePoints();
 
  flyCtx.fillStyle="#fff";
- flyCtx.font="28px Arial";
+
+ flyCtx.font=
+  "28px Arial";
 
  flyCtx.fillText(
   "GAME OVER",
@@ -2792,70 +4118,109 @@ function flyGameOver(){
   flyCanvas.height/2
  );
 
- flyCtx.font="18px Arial";
+ flyCtx.font=
+  "18px Arial";
 
  flyCtx.fillText(
-  "Score: "+flyScore+
-  " | Points: +"+points,
+  "Score: "+
+  flyScore+
+  " | Points: +"+
+  points,
   flyCanvas.width/2-125,
   flyCanvas.height/2+35
  );
 }
 
+
 document.addEventListener(
  "keydown",
  e=>{
-  if(e.code==="Space"&&flyRunning){
+
+  if(
+   e.code==="Space"&&
+   flyRunning
+  ){
+
    flyPlayer.vy=-6;
+
    e.preventDefault();
   }
+
  }
 );
 
-/* ================= ADMIN ================= */
+
+/* =========================================================
+   ADMIN CHECK
+   ========================================================= */
 
 async function isAdmin(){
 
- if(!currentUser||!backendReady()){
+ if(
+  !currentUser||
+  !supabaseClient||
+  !supabaseReady
+ ){
   return false;
  }
 
- if(currentProfile?.role==="admin"){
-  return true;
- }
+ /*
+  * Server-side admin check is preferred.
+  * Profile role is only a local/UI fallback.
+  */
 
  const {data,error}=
   await supabaseClient.rpc(
    "is_current_user_admin"
   );
 
- if(error){
-  console.error("Admin check:",error);
-  return false;
+ if(!error){
+
+  return !!data;
  }
 
- return !!data;
+ console.error(
+  "Admin check:",
+  error
+ );
+
+ return currentProfile?.role==="admin";
 }
+
+
+/* =========================================================
+   ADMIN REFRESH
+   ========================================================= */
 
 async function adminRefresh(){
 
  if(!currentUser){
-  alert("Admin login প্রয়োজন.");
+
+  alert(
+   "Admin login প্রয়োজন."
+  );
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
- const admin=await isAdmin();
+ const admin=
+  await isAdmin();
 
  if(!admin){
 
-  alert("আপনার Admin permission নেই.");
+  alert(
+   "আপনার Admin permission নেই."
+  );
 
   showSection(
    "home",
-   document.querySelector(".nav button")
+   document.querySelector(
+    ".nav button"
+   )
   );
 
   return;
@@ -2867,6 +4232,11 @@ async function adminRefresh(){
  await adminLoadJobs();
 }
 
+
+/* =========================================================
+   ADMIN STATS
+   ========================================================= */
+
 async function adminLoadStats(){
 
  if(!backendReady())return;
@@ -2877,7 +4247,12 @@ async function adminLoadStats(){
   );
 
  if(error){
-  console.error("Admin stats:",error);
+
+  console.error(
+   "Admin stats:",
+   error
+  );
+
   return;
  }
 
@@ -2888,29 +4263,43 @@ async function adminLoadStats(){
    ?data[0]
    :data;
 
-  document.getElementById("adminUsers")
-   .textContent=
+
+  document.getElementById(
+   "adminUsers"
+  ).textContent=
    stats?.users||
    stats?.total_users||
    0;
 
-  document.getElementById("adminJobs")
-   .textContent=
+
+  document.getElementById(
+   "adminJobs"
+  ).textContent=
    stats?.jobs||
    stats?.total_jobs||
    0;
 
-  document.getElementById("adminApplications")
-   .textContent=
+
+  document.getElementById(
+   "adminApplications"
+  ).textContent=
    stats?.applications||
    stats?.total_applications||
    0;
 
-  document.getElementById("adminPendingPayouts")
-   .textContent=
-   stats?.pending_payouts||0;
+
+  document.getElementById(
+   "adminPendingPayouts"
+  ).textContent=
+   stats?.pending_payouts||
+   0;
  }
 }
+
+
+/* =========================================================
+   ADMIN APPLICATIONS
+   ========================================================= */
 
 async function adminLoadApplications(){
 
@@ -2944,7 +4333,10 @@ async function adminLoadApplications(){
     approved_at
    )
   `)
-  .order("created_at",{ascending:false});
+  .order(
+   "created_at",
+   {ascending:false}
+  );
 
  if(error){
 
@@ -2961,120 +4353,202 @@ async function adminLoadApplications(){
  if(!apps.length){
 
   box.innerHTML=
-   '<div class="empty">কোনো Application নেই।</div>';
+   '<div class="empty">'+
+   'কোনো Application নেই.'+
+   '</div>';
 
   return;
  }
 
- box.innerHTML=apps.map(app=>{
 
-  const job=app.jobs;
+ box.innerHTML=
+  apps.map(app=>{
 
-  if(!job)return"";
+   const job=app.jobs;
 
-  let actions="";
+   if(!job)return"";
 
-  if(app.status==="pending"){
+   let actions="";
 
-   actions+=`
 
-    <button class="btn success small"
-     onclick="adminAcceptApplication('${app.id}')">
-     ✅ Accept
-    </button>
+   if(app.status==="pending"){
 
-    <button class="btn danger small"
-     onclick="adminRejectApplication('${app.id}')">
-     ❌ Reject
-    </button>
-   `;
-  }
+    actions+=`
 
-  if(job.status==="submitted"){
+     <button
+      class="btn success small"
+      onclick="adminAcceptApplication('${app.id}')">
+      ✅ Accept
+     </button>
 
-   actions+=`
+     <button
+      class="btn danger small"
+      onclick="adminRejectApplication('${app.id}')">
+      ❌ Reject
+     </button>
 
-    <button class="btn warning small"
-     onclick="approveSubmittedJob('${job.id}')">
-     💰 Approve & Pay
-    </button>
+    `;
+   }
 
-   `;
-  }
 
-  return `
+   if(job.status==="submitted"){
 
-   <div class="card" style="margin-bottom:10px">
+    actions+=`
 
-    <h3>${esc(job.title)}</h3>
+     <button
+      class="btn warning small"
+      onclick="approveSubmittedJob('${job.id}')">
+      💰 Approve & Pay
+     </button>
 
-    <div class="muted">
-     Skill: ${esc(job.skill)}
-     • Budget: ${esc(job.budget||"")}
+    `;
+   }
+
+
+   /*
+    * IMPORTANT:
+    * Rejected applications do NOT show
+    * an Approved amount.
+    */
+
+   const approvedAmount=
+    app.status!=="rejected"&&
+    job.agreed_amount
+    ?`
+     <div class="notice">
+      Approved:
+      <b>
+       ${money(job.agreed_amount)}
+      </b>
+     </div>
+    `
+    :"";
+
+
+   return `
+
+    <div
+     class="card"
+     style="margin-bottom:10px">
+
+     <h3>
+      ${esc(job.title)}
+     </h3>
+
+     <div class="muted">
+
+      Skill:
+      ${esc(job.skill)}
+
+      • Budget:
+      ${esc(job.budget||"")}
+
+     </div>
+
+
+     <p>
+
+      Application Status:
+
+      <span
+       class="statusBadge ${esc(app.status)}">
+
+       ${esc(
+        statusLabel(app.status)
+       )}
+
+      </span>
+
+     </p>
+
+
+     <p>
+
+      Job Status:
+
+      <span
+       class="statusBadge ${esc(job.status)}">
+
+       ${esc(
+        statusLabel(job.status)
+       )}
+
+      </span>
+
+     </p>
+
+
+     <p class="muted">
+
+      Applicant ID:
+
+      ${esc(app.applicant_id)}
+
+     </p>
+
+
+     <p>
+      ${esc(app.message||"")}
+     </p>
+
+
+     ${
+      job.submission_note
+      ?`
+       <div class="notice">
+
+        <b>Submission:</b>
+
+        ${esc(
+         job.submission_note
+        )}
+
+       </div>
+      `
+      :""
+     }
+
+
+     ${approvedAmount}
+
+
+     <div class="actions">
+      ${actions}
+     </div>
+
     </div>
 
-    <p>
-     Application Status:
-     <span class="statusBadge ${esc(app.status)}">
-      ${esc(statusLabel(app.status))}
-     </span>
-    </p>
+   `;
 
-    <p>
-     Job Status:
-     <span class="statusBadge ${esc(job.status)}">
-      ${esc(statusLabel(job.status))}
-     </span>
-    </p>
-
-    <p class="muted">
-     Applicant ID:
-     ${esc(app.applicant_id)}
-    </p>
-
-    <p>${esc(app.message||"")}</p>
-
-    ${
-     job.submission_note
-     ?`
-      <div class="notice">
-       <b>Submission:</b>
-       ${esc(job.submission_note)}
-      </div>
-     `
-     :""
-    }
-
-    ${
-     job.agreed_amount
-     ?`
-      <div class="muted">
-       Approved:
-       <b>${money(job.agreed_amount)}</b>
-      </div>
-     `
-     :""
-    }
-
-    <div class="actions">${actions}</div>
-
-   </div>
-
-  `;
-
- }).join("");
+  }).join("");
 }
+
+
+/* =========================================================
+   ADMIN ACCEPT APPLICATION
+   ========================================================= */
 
 async function adminAcceptApplication(
  applicationId
 ){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
+
+ if(!await isAdmin()){
+
+  alert(
+   "Admin permission required."
+  );
+
+  return;
+ }
 
  if(!confirm(
   "এই Application Accept করবেন?"
@@ -3084,32 +4558,53 @@ async function adminAcceptApplication(
   await supabaseClient.rpc(
    "accept_job_application",
    {
-    p_application_id:applicationId
+    p_application_id:
+     applicationId
    }
   );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- alert("✅ Application Accepted হয়েছে।");
+ alert(
+  "✅ Application Accepted হয়েছে।"
+ );
 
  await adminLoadApplications();
  await loadJobsFromSupabase();
  await loadMyApplications();
 }
 
+
+/* =========================================================
+   ADMIN REJECT APPLICATION
+   ========================================================= */
+
 async function adminRejectApplication(
  applicationId
 ){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
+
+ if(!await isAdmin()){
+
+  alert(
+   "Admin permission required."
+  );
+
+  return;
+ }
 
  if(!confirm(
   "এই Application Reject করবেন?"
@@ -3119,21 +4614,31 @@ async function adminRejectApplication(
   await supabaseClient.rpc(
    "reject_job_application",
    {
-    p_application_id:applicationId
+    p_application_id:
+     applicationId
    }
   );
 
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- alert("❌ Application Rejected হয়েছে।");
+ alert(
+  "❌ Application Rejected হয়েছে।"
+ );
 
  await adminLoadApplications();
  await loadJobsFromSupabase();
  await loadMyApplications();
 }
+
+
+/* =========================================================
+   ADMIN PAYOUT LIST
+   ========================================================= */
 
 async function adminLoadPayouts(){
 
@@ -3144,11 +4649,28 @@ async function adminLoadPayouts(){
    "adminPayoutsBox"
   );
 
+ if(!box)return;
+
+ if(!await isAdmin()){
+
+  box.innerHTML=
+   '<div class="empty">'+
+   'Admin access required.'+
+   '</div>';
+
+  return;
+ }
+
+
  const {data,error}=
   await supabaseClient
   .from("payout_requests")
   .select("*")
-  .order("created_at",{ascending:false});
+  .order(
+   "created_at",
+   {ascending:false}
+  );
+
 
  if(error){
 
@@ -3160,131 +4682,423 @@ async function adminLoadPayouts(){
   return;
  }
 
+
  const rows=data||[];
+
 
  if(!rows.length){
 
   box.innerHTML=
-   '<div class="empty">কোনো payout request নেই।</div>';
+   '<div class="empty">'+
+   'কোনো payout request নেই.'+
+   '</div>';
 
   return;
  }
 
- box.innerHTML=rows.map(p=>`
 
-  <div class="card" style="margin-bottom:10px">
+ box.innerHTML=
+  rows.map(p=>{
 
-   <h3>
-    ${money(p.amount)}
-    — ${esc(p.method||"")}
-   </h3>
+   const status=
+    String(
+     p.status||
+     "pending"
+    ).toLowerCase();
 
-   <p class="muted">
 
-    User ID:
-    ${esc(p.user_id)}
+   let action="";
 
-    <br>
 
-    Account Name:
-    ${esc(p.account_name||"")}
+   /*
+    * STEP 1:
+    * Pending payout can be Approved.
+    */
 
-    <br>
+   if(status==="pending"){
 
-    Account Number:
-    ${esc(p.account_number||"")}
+    action=`
 
-   </p>
+     <div
+      class="payment-box pending">
 
-   <p>
+      <b>
+       🟡 Payout Request Pending
+      </b>
 
-    Status:
+      <p class="muted">
+       প্রথমে payout request approve করুন।
+       Payment এখনো Paid হয়নি।
+      </p>
 
-    <span class="statusBadge ${esc(p.status||"")}">
-     ${esc(statusLabel(p.status||"pending"))}
-    </span>
+      <div class="actions">
 
-   </p>
+       <button
+        class="btn success small"
+        onclick="adminApprovePayoutRequest('${p.id}')">
 
-   ${
-    p.transaction_id
-    ?`
-     <p class="muted">
-      Transaction ID:
-      <b>${esc(p.transaction_id)}</b>
-     </p>
-    `
-    :""
-   }
+        ✅ Approve Payout
 
-   ${
-    p.paid_at
-    ?`
-     <p class="muted">
-      Paid At:
-      ${new Date(p.paid_at).toLocaleString()}
-     </p>
-    `
-    :""
-   }
+       </button>
 
-   ${
-    p.admin_note
-    ?`
-     <div class="notice">
-      Admin Note:
-      ${esc(p.admin_note)}
+       <button
+        class="btn danger small"
+        onclick="adminRejectPayout('${p.id}')">
+
+        ❌ Reject
+
+       </button>
+
+      </div>
+
      </div>
-    `
-    :""
+
+    `;
    }
 
-   <div class="actions">
 
-    ${
-     p.status==="pending"
-     ?`
+   /*
+    * STEP 2:
+    * Approved payout MUST show
+    * Transaction ID option.
+    */
 
-      <button class="btn success small"
-       onclick="adminApprovePayout('${p.id}')">
-       💰 Mark Paid
+   else if(status==="approved"){
+
+    action=`
+
+     <div
+      class="payment-box approved">
+
+      <b>
+       🟡 Approved — Payment Pending
+      </b>
+
+      <p class="muted">
+       Worker-এর account-এ বাস্তবে টাকা পাঠানোর
+       পরে Transaction ID দিয়ে Paid করুন।
+      </p>
+
+      <button
+       class="btn warning"
+       style="margin-top:8px"
+       onclick="adminMarkPayoutPaid('${p.id}')">
+
+       🧾 Transaction ID দিয়ে Paid করুন
+
       </button>
 
-      <button class="btn danger small"
-       onclick="adminRejectPayout('${p.id}')">
-       ❌ Reject
+     </div>
+
+    `;
+   }
+
+
+   /*
+    * STEP 3:
+    * Paid payout shows transaction.
+    */
+
+   else if(status==="paid"){
+
+    action=`
+
+     <div
+      class="payment-box paid">
+
+      <b>
+       🟢 Payment Paid
+      </b>
+
+      ${
+       p.transaction_id
+       ?`
+        <div class="transaction">
+
+         🧾
+         <b>Transaction ID:</b><br>
+
+         ${esc(
+          p.transaction_id
+         )}
+
+        </div>
+       `
+       :`
+        <div class="notice">
+         ⚠️ Transaction ID পাওয়া যায়নি।
+        </div>
+       `
+      }
+
+     </div>
+
+    `;
+   }
+
+
+   else if(status==="rejected"){
+
+    action=`
+
+     <div
+      class="payment-box">
+
+      <b>
+       ❌ Payout Rejected
+      </b>
+
+     </div>
+
+    `;
+   }
+
+
+   else if(status==="processing"){
+
+    action=`
+
+     <div
+      class="payment-box">
+
+      <b>
+       🟠 Processing
+      </b>
+
+      <button
+       class="btn warning small"
+       style="margin-top:8px"
+       onclick="adminMarkPayoutPaid('${p.id}')">
+
+       🧾 Transaction ID দিয়ে Paid করুন
+
       </button>
 
-     `
-     :""
-    }
+     </div>
 
-   </div>
+    `;
+   }
 
-  </div>
 
- `).join("");
+   return `
+
+    <div
+     class="card"
+     style="margin-bottom:12px">
+
+     <h3>
+
+      ${money(p.amount)}
+      —
+      ${esc(p.method||"")}
+
+     </h3>
+
+
+     <p class="muted">
+
+      <b>User ID:</b><br>
+      ${esc(p.user_id)}
+
+      <br><br>
+
+      <b>Account Name:</b><br>
+      ${esc(p.account_name||"")}
+
+      <br><br>
+
+      <b>Account Number:</b><br>
+      ${esc(p.account_number||"")}
+
+     </p>
+
+
+     <p>
+
+      Status:
+
+      <span
+       class="statusBadge ${esc(status)}">
+
+       ${esc(
+        statusLabel(status)
+       )}
+
+      </span>
+
+     </p>
+
+
+     ${
+      p.transaction_id
+      ?`
+       <div class="transaction">
+
+        🧾
+        <b>Transaction ID:</b><br>
+
+        ${esc(
+         p.transaction_id
+        )}
+
+       </div>
+      `
+      :""
+     }
+
+
+     ${
+      p.paid_at
+      ?`
+       <p class="muted">
+
+        Paid At:
+        ${new Date(
+         p.paid_at
+        ).toLocaleString()}
+
+       </p>
+      `
+      :""
+     }
+
+
+     ${
+      p.admin_note
+      ?`
+       <div class="notice">
+
+        Admin Note:
+        ${esc(
+         p.admin_note
+        )}
+
+       </div>
+      `
+      :""
+     }
+
+
+     ${action}
+
+    </div>
+
+   `;
+
+  }).join("");
 }
 
-async function adminApprovePayout(id){
+
+/* =========================================================
+   ADMIN APPROVE PAYOUT
+   Pending → Approved
+   ========================================================= */
+
+async function adminApprovePayoutRequest(id){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
 
+ if(!await isAdmin()){
+
+  alert(
+   "❌ Admin permission required."
+  );
+
+  return;
+ }
+
+
+ if(!confirm(
+  "এই Payout Request Approve করবেন?\n\n"+
+  "এটি এখনো Paid হবে না।\n"+
+  "Payment করার পর Transaction ID দিয়ে Paid করতে হবে।"
+ ))return;
+
+
+ const {error}=
+  await supabaseClient.rpc(
+   "admin_update_payout",
+   {
+    p_payout_id:id,
+    p_status:"approved",
+    p_admin_note:
+     "Payout approved. Payment pending.",
+    p_transaction_id:null
+   }
+  );
+
+
+ if(error){
+
+  alert(
+   "❌ Payout approve failed:\n"+
+   error.message
+  );
+
+  return;
+ }
+
+
+ alert(
+  "✅ Payout Approved হয়েছে।\n\n"+
+  "এখন বাস্তবে টাকা পাঠিয়ে Transaction ID দিয়ে Paid করুন।"
+ );
+
+
+ await adminLoadPayouts();
+ await adminLoadStats();
+ await loadEarningsDashboard();
+}
+
+
+/* =========================================================
+   ADMIN MARK PAYOUT PAID
+   Approved → Transaction ID → Paid
+   ========================================================= */
+
+async function adminMarkPayoutPaid(id){
+
+ if(!currentUser){
+
+  openModal("login");
+
+  return;
+ }
+
+ if(!backendReady())return;
+
+ if(!await isAdmin()){
+
+  alert(
+   "❌ Admin permission required."
+  );
+
+  return;
+ }
+
+
  const transactionId=
   prompt(
-   "Payment করার পর bKash/Nagad Transaction ID দিন:",
+   "Payment করার পর bKash/Nagad/Bank Transaction ID দিন:",
    ""
   );
 
+
  if(transactionId===null)return;
 
+
  const cleanTransactionId=
-  transactionId.trim();
+  String(
+   transactionId
+  ).trim();
+
 
  if(!cleanTransactionId){
 
@@ -3296,19 +5110,25 @@ async function adminApprovePayout(id){
   return;
  }
 
+
  const note=
   prompt(
    "Admin payment note:",
    "Payment completed"
   );
 
+
  if(note===null)return;
+
 
  if(!confirm(
   "আপনি কি নিশ্চিত যে এই payout-এর টাকা বাস্তবে পাঠানো হয়েছে?\n\n"+
-  "Transaction ID: "+cleanTransactionId+
-  "\n\nOK চাপলে payout status Paid হবে।"
+  "Transaction ID:\n"+
+  cleanTransactionId+
+  "\n\n"+
+  "OK চাপলে payout status Paid হবে।"
  ))return;
+
 
  const {error}=
   await supabaseClient.rpc(
@@ -3317,34 +5137,78 @@ async function adminApprovePayout(id){
     p_payout_id:id,
     p_status:"paid",
     p_admin_note:
-     note.trim()||"Payment completed",
+     String(
+      note
+     ).trim()||
+     "Payment completed",
     p_transaction_id:
      cleanTransactionId
    }
   );
 
+
  if(error){
-  alert(error.message);
+
+  alert(
+   "❌ Payment update failed:\n"+
+   error.message
+  );
+
   return;
  }
 
+
  alert(
-  "✅ Payout Paid হয়েছে.\n\n"+
-  "Transaction ID: "+cleanTransactionId
+  "✅ Payment Completed!\n\n"+
+  "Payout status: Paid\n"+
+  "Transaction ID: "+
+  cleanTransactionId
  );
 
+
  await adminLoadPayouts();
+ await adminLoadStats();
  await loadEarningsDashboard();
 }
+
+
+/*
+ * Backward-compatible function name.
+ * If another part of the old frontend calls
+ * adminApprovePayout(), it now opens the
+ * correct Transaction ID payment flow.
+ */
+
+async function adminApprovePayout(id){
+
+ await adminMarkPayoutPaid(id);
+}
+
+
+/* =========================================================
+   ADMIN REJECT PAYOUT
+   ========================================================= */
 
 async function adminRejectPayout(id){
 
  if(!currentUser){
+
   openModal("login");
+
   return;
  }
 
  if(!backendReady())return;
+
+ if(!await isAdmin()){
+
+  alert(
+   "❌ Admin permission required."
+  );
+
+  return;
+ }
+
 
  const note=
   prompt(
@@ -3352,12 +5216,24 @@ async function adminRejectPayout(id){
    ""
   );
 
+
  if(note===null)return;
 
+
  if(!note.trim()){
-  alert("Reject করার কারণ লিখুন.");
+
+  alert(
+   "Reject করার কারণ লিখুন."
+  );
+
   return;
  }
+
+
+ if(!confirm(
+  "এই Payout Request Reject করবেন?"
+ ))return;
+
 
  const {error}=
   await supabaseClient.rpc(
@@ -3365,20 +5241,35 @@ async function adminRejectPayout(id){
    {
     p_payout_id:id,
     p_status:"rejected",
-    p_admin_note:note.trim()
+    p_admin_note:
+     note.trim(),
+    p_transaction_id:null
    }
   );
 
+
  if(error){
+
   alert(error.message);
+
   return;
  }
 
- alert("❌ Payout rejected হয়েছে.");
+
+ alert(
+  "❌ Payout rejected হয়েছে."
+ );
+
 
  await adminLoadPayouts();
+ await adminLoadStats();
  await loadEarningsDashboard();
 }
+
+
+/* =========================================================
+   ADMIN JOBS
+   ========================================================= */
 
 async function adminLoadJobs(){
 
@@ -3388,6 +5279,8 @@ async function adminLoadJobs(){
   document.getElementById(
    "adminJobsBox"
   );
+
+ if(!box)return;
 
  const {data,error}=
   await supabaseClient
@@ -3406,7 +5299,11 @@ async function adminLoadJobs(){
    approved_at,
    created_at
   `)
-  .order("created_at",{ascending:false});
+  .order(
+   "created_at",
+   {ascending:false}
+  );
+
 
  if(error){
 
@@ -3418,91 +5315,140 @@ async function adminLoadJobs(){
   return;
  }
 
+
  const rows=data||[];
+
 
  if(!rows.length){
 
   box.innerHTML=
-   '<div class="empty">কোনো Job নেই।</div>';
+   '<div class="empty">'+
+   'কোনো Job নেই.'+
+   '</div>';
 
   return;
  }
 
- box.innerHTML=rows.map(job=>`
 
-  <div class="card" style="margin-bottom:10px">
+ box.innerHTML=
+  rows.map(job=>`
 
-   <h3>${esc(job.title)}</h3>
+   <div
+    class="card"
+    style="margin-bottom:10px">
 
-   <div class="muted">
-    ${esc(job.skill)}
-    •
-    ${esc(job.budget||"")}
+    <h3>
+     ${esc(job.title)}
+    </h3>
+
+    <div class="muted">
+
+     ${esc(job.skill)}
+     •
+     ${esc(job.budget||"")}
+
+    </div>
+
+
+    <p>
+
+     <span
+      class="statusBadge ${esc(job.status)}">
+
+      ${esc(
+       statusLabel(job.status)
+      )}
+
+     </span>
+
+    </p>
+
+
+    ${
+     job.assigned_to
+     ?`
+      <p class="muted">
+
+       Assigned User:
+       ${esc(job.assigned_to)}
+
+      </p>
+     `
+     :""
+    }
+
+
+    ${
+     job.submission_note
+     ?`
+      <div class="notice">
+
+       <b>Submission:</b>
+
+       ${esc(
+        job.submission_note
+       )}
+
+      </div>
+     `
+     :""
+    }
+
+
+    ${
+     job.agreed_amount
+     ?`
+      <p class="muted">
+
+       Agreed Amount:
+       <b>
+        ${money(job.agreed_amount)}
+       </b>
+
+      </p>
+     `
+     :""
+    }
+
+
+    ${
+     job.status==="submitted"
+     ?`
+      <button
+       class="btn warning small"
+       onclick="approveSubmittedJob('${job.id}')">
+
+       💰 Approve & Pay
+
+      </button>
+     `
+     :""
+    }
+
+
    </div>
 
-   <p>
-
-    <span class="statusBadge ${esc(job.status)}">
-     ${esc(statusLabel(job.status))}
-    </span>
-
-   </p>
-
-   ${
-    job.assigned_to
-    ?`
-     <p class="muted">
-      Assigned User:
-      ${esc(job.assigned_to)}
-     </p>
-    `
-    :""
-   }
-
-   ${
-    job.submission_note
-    ?`
-     <div class="notice">
-      <b>Submission:</b>
-      ${esc(job.submission_note)}
-     </div>
-    `
-    :""
-   }
-
-   ${
-    job.agreed_amount
-    ?`
-     <p class="muted">
-      Agreed Amount:
-      <b>${money(job.agreed_amount)}</b>
-     </p>
-    `
-    :""
-   }
-
-   ${
-    job.status==="submitted"
-    ?`
-     <button class="btn warning small"
-      onclick="approveSubmittedJob('${job.id}')">
-      💰 Approve & Pay
-     </button>
-    `
-    :""
-   }
-
-  </div>
-
- `).join("");
+  `).join("");
 }
 
-/* ================= STARTUP ================= */
+
+/* =========================================================
+   STARTUP
+   ========================================================= */
+
+let playzoneStarted=false;
 
 async function startPlayzone(){
 
+ if(playzoneStarted)
+  return;
+
+ playzoneStarted=true;
+
  updateLocalStats();
+
  initFly();
+
 
  if(!window.supabase){
 
@@ -3510,14 +5456,24 @@ async function startPlayzone(){
    "Supabase library could not be loaded."
   );
 
-  document.getElementById("jobsList")
-   .innerHTML=
-   '<div class="empty">'+
-   '⚠️ Supabase library load হয়নি। Page Refresh করুন।'+
-   '</div>';
+  const box=
+   document.getElementById(
+    "jobsList"
+   );
+
+  if(box){
+
+   box.innerHTML=
+    '<div class="empty">'+
+    '⚠️ Supabase library load হয়নি। Page Refresh করুন.'+
+    '</div>';
+  }
+
+  playzoneStarted=false;
 
   return;
  }
+
 
  try{
 
@@ -3529,11 +5485,13 @@ async function startPlayzone(){
 
   supabaseReady=true;
 
+
   setupAuthListener();
 
   await loadCurrentUser();
 
   await loadJobsFromSupabase();
+
 
  }catch(error){
 
@@ -3543,42 +5501,66 @@ async function startPlayzone(){
   );
 
   const box=
-   document.getElementById("jobsList");
+   document.getElementById(
+    "jobsList"
+   );
 
   if(box){
 
    box.innerHTML=
     '<div class="empty">'+
-    '⚠️ PLAYZONE server connection তৈরি করা যায়নি।<br>'+
-    esc(error.message||"Unknown error")+
+    '⚠️ PLAYZONE server connection তৈরি করা যায়নি.<br>'+
+    esc(
+     error.message||
+     "Unknown error"
+    )+
     '</div>';
   }
+
+  playzoneStarted=false;
  }
 }
 
-/* ================= MODAL EVENTS ================= */
+
+/* =========================================================
+   MODAL EVENTS
+   ========================================================= */
 
 document.addEventListener(
  "click",
  event=>{
 
   const modal=
-   event.target.closest(".modal");
+   event.target.closest(
+    ".modal"
+   );
 
-  if(modal&&event.target===modal){
-   modal.classList.remove("show");
+  if(
+   modal&&
+   event.target===modal
+  ){
+
+   modal.classList.remove(
+    "show"
+   );
   }
 
  }
 );
 
-/* ================= DOM READY ================= */
+
+/* =========================================================
+   DOM READY
+   ========================================================= */
 
 document.addEventListener(
  "DOMContentLoaded",
  ()=>{
+
   updateLocalStats();
+
   startPlayzone();
+
  }
 );
 
