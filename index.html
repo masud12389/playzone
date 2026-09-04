@@ -2928,6 +2928,2472 @@ document.addEventListener("DOMContentLoaded",()=>{
  initFly();
  startPlayzone();
 });
+<script>
+/* =========================================================
+   PLAYZONE FINAL FRONTEND
+   FIXED REAL EARNING + PAYOUT ACCOUNTING
+   ========================================================= */
+
+const SUPABASE_URL="https://cavrhkprzbbtimlixbqp.supabase.co";
+const SUPABASE_KEY="sb_publishable_1beggLIRSqVDwD3LsXYM5A_IhAYRqWL";
+
+let supabaseClient=null;
+let supabaseReady=false;
+let currentUser=null;
+let currentProfile=null;
+let currentJobs=[];
+
+let pzPoints=Number(localStorage.getItem("pz_points")||1000);
+let gamesPlayed=Number(localStorage.getItem("pz_games_played")||0);
+
+let tapScore=0,tapTime=0,tapTimer=null;
+let matchFirst=null,matchLocked=false,matchPairs=[],matchScore=0;
+
+let flyCanvas=null;
+let flyCtx=null;
+let flyFrame=null;
+let flyScore=0;
+let flyPlayer={x:70,y:150,w:24,h:24,vy:0};
+let flyObstacles=[];
+let flyRunning=false;
+
+let quizIndex=0;
+let quizScore=0;
+
+const quizQuestions=[
+ {
+  q:"বাংলাদেশের রাজধানী কোনটি?",
+  options:["ঢাকা","চট্টগ্রাম","খুলনা","রাজশাহী"],
+  answer:"ঢাকা"
+ },
+ {
+  q:"HTML-এর পূর্ণরূপ কী?",
+  options:[
+   "Hyper Text Markup Language",
+   "High Text Machine Language",
+   "Hyper Tool Multi Language",
+   "Home Text Markup Language"
+  ],
+  answer:"Hyper Text Markup Language"
+ },
+ {
+  q:"CSS সাধারণত কী কাজে ব্যবহার হয়?",
+  options:["Design/Style","Database","Payment","Email"],
+  answer:"Design/Style"
+ }
+];
+
+/* ================= BASIC ================= */
+
+function backendReady(){
+ if(!supabaseClient){
+  alert("PLAYZONE server connection এখনো প্রস্তুত হয়নি। কয়েক সেকেন্ড পরে আবার চেষ্টা করুন।");
+  return false;
+ }
+ return true;
+}
+
+function money(n){
+ n=Number(n||0);
+ return "৳"+n.toLocaleString("en-BD",{maximumFractionDigits:2});
+}
+
+function esc(value){
+ return String(value??"")
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
+}
+
+function statusLabel(status){
+ const labels={
+  open:"Open",
+  pending:"Pending",
+  accepted:"Accepted",
+  assigned:"Assigned",
+  in_progress:"Work Started",
+  submitted:"Submitted — কাজ জমা হয়েছে",
+  completed:"Completed — Payment Approved",
+  rejected:"Rejected",
+  approved:"Approved",
+  processing:"Processing",
+  paid:"Paid",
+  failed:"Failed"
+ };
+ return labels[status]||status||"Unknown";
+}
+
+function updateLocalStats(){
+ const p=document.getElementById("pointsDisplay");
+ const g=document.getElementById("gamesPlayedDisplay");
+ const w=document.getElementById("walletPoints");
+
+ if(p)p.textContent=pzPoints.toLocaleString();
+ if(g)g.textContent=gamesPlayed.toLocaleString();
+ if(w)w.textContent=pzPoints.toLocaleString();
+}
+
+function savePoints(){
+ localStorage.setItem("pz_points",String(pzPoints));
+ updateLocalStats();
+}
+
+function saveGamesPlayed(){
+ localStorage.setItem("pz_games_played",String(gamesPlayed));
+ updateLocalStats();
+}
+
+/* ================= NAVIGATION ================= */
+
+function showSection(id,btn){
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+
+ const section=document.getElementById(id);
+ if(section)section.classList.add("active");
+
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+
+ if(btn)btn.classList.add("active");
+
+ if(id==="jobs"){
+  loadJobsFromSupabase();
+  if(currentUser)loadMyApplications();
+ }
+
+ if(id==="wallet")loadEarningsDashboard();
+ if(id==="profile")renderProfile();
+ if(id==="admin")adminRefresh();
+}
+
+function openModal(name){
+ const map={
+  login:"loginModal",
+  jobPost:"jobPostModal",
+  apply:"applyModal",
+  payout:"payoutModal",
+  skill:"skillModal"
+ };
+
+ const id=map[name];
+ if(!id)return;
+
+ if(name==="payout"){
+  loadEarningsDashboard().then(()=>{
+   const amount=document.getElementById("payoutAvailable");
+   const input=document.getElementById("payoutAmount");
+
+   if(amount){
+    amount.textContent=amount.dataset.available
+     ?money(amount.dataset.available)
+     :"৳0";
+   }
+
+   if(input){
+    input.max=amount?.dataset.available||0;
+   }
+
+   document.getElementById(id).classList.add("show");
+  });
+  return;
+ }
+
+ document.getElementById(id).classList.add("show");
+}
+
+function closeModal(name){
+ const map={
+  login:"loginModal",
+  jobPost:"jobPostModal",
+  apply:"applyModal",
+  payout:"payoutModal",
+  skill:"skillModal"
+ };
+
+ const id=map[name];
+ if(id)document.getElementById(id).classList.remove("show");
+}
+
+/* ================= AUTH ================= */
+
+async function loginUser(){
+ if(!backendReady())return;
+
+ const email=document.getElementById("authEmail").value.trim();
+ const password=document.getElementById("authPassword").value;
+
+ if(!email||!password){
+  alert("Email এবং Password দিন।");
+  return;
+ }
+
+ const {data,error}=await supabaseClient.auth.signInWithPassword({
+  email,password
+ });
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ currentUser=data.user||null;
+
+ if(currentUser)await ensureProfile();
+
+ closeModal("login");
+ await refreshUserUI();
+
+ alert("✅ Login সফল হয়েছে।");
+}
+
+async function registerUser(){
+ if(!backendReady())return;
+
+ const email=document.getElementById("authEmail").value.trim();
+ const password=document.getElementById("authPassword").value;
+
+ if(!email||!password){
+  alert("Email এবং Password দিন।");
+  return;
+ }
+
+ if(password.length<6){
+  alert("Password কমপক্ষে ৬ অক্ষরের হতে হবে।");
+  return;
+ }
+
+ const {data,error}=await supabaseClient.auth.signUp({
+  email,password
+ });
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ if(data.user){
+  currentUser=data.user;
+
+  await ensureProfile();
+  await refreshUserUI();
+
+  if(data.session){
+   alert("✅ Account তৈরি ও Login সম্পন্ন হয়েছে।");
+  }else{
+   alert("✅ Account তৈরি হয়েছে। Email confirmation প্রয়োজন হলে email check করুন।");
+  }
+
+  closeModal("login");
+ }
+}
+
+async function logout(){
+ if(!backendReady())return;
+
+ try{
+  await supabaseClient.auth.signOut();
+ }catch(e){
+  console.error(e);
+ }
+
+ currentUser=null;
+ currentProfile=null;
+
+ document.getElementById("adminNavBtn").style.display="none";
+
+ await refreshUserUI();
+
+ showSection("home",document.querySelector(".nav button"));
+
+ alert("Logout হয়েছে।");
+}
+
+async function ensureProfile(){
+ if(!currentUser||!backendReady())return;
+
+ const {data,error}=await supabaseClient
+  .from("profiles")
+  .select("id,name,points,created_at,role")
+  .eq("id",currentUser.id)
+  .maybeSingle();
+
+ if(error){
+  console.error("Profile load:",error);
+  return;
+ }
+
+ if(data){
+  currentProfile=data;
+  return;
+ }
+
+ const name=currentUser.email
+  ?currentUser.email.split("@")[0]
+  :"PLAYZONE User";
+
+ const {data:newProfile,error:createError}=await supabaseClient
+  .from("profiles")
+  .insert({
+   id:currentUser.id,
+   name,
+   points:1000,
+   role:"user"
+  })
+  .select()
+  .single();
+
+ if(createError){
+  console.error("Profile create:",createError);
+  return;
+ }
+
+ currentProfile=newProfile;
+}
+
+async function refreshUserUI(){
+ updateLocalStats();
+
+ if(!currentUser){
+
+  document.getElementById("userDisplay").textContent="👤 Guest";
+  document.getElementById("loginTopBtn").style.display="";
+  document.getElementById("logoutTopBtn").style.display="none";
+  document.getElementById("adminNavBtn").style.display="none";
+
+  document.getElementById("profileBox").innerHTML=
+   '<div class="empty">Login করুন।</div>';
+
+  document.getElementById("skillProfileBox").innerHTML=
+   '<div class="empty">Login করলে skill profile দেখা যাবে।</div>';
+
+  document.getElementById("myApplications").innerHTML=
+   '<div class="empty">Login করলে আপনার applications ও assigned jobs এখানে দেখা যাবে।</div>';
+
+  document.getElementById("availableEarnings").textContent="৳0";
+  document.getElementById("pendingPayout").textContent="৳0";
+  document.getElementById("totalEarnings").textContent="৳0";
+  document.getElementById("earningsDisplay").textContent="৳0";
+  document.getElementById("payoutAvailable").textContent="৳0";
+
+  return;
+ }
+
+ document.getElementById("userDisplay").textContent=
+  "👤 "+(currentProfile?.name||currentUser.email||"User");
+
+ document.getElementById("loginTopBtn").style.display="none";
+ document.getElementById("logoutTopBtn").style.display="";
+
+ if(currentProfile?.role==="admin"){
+  document.getElementById("adminNavBtn").style.display="";
+ }else{
+  document.getElementById("adminNavBtn").style.display="none";
+ }
+
+ renderProfile();
+ await loadMyApplications();
+ await loadEarningsDashboard();
+}
+
+async function loadCurrentUser(){
+ if(!backendReady())return;
+
+ try{
+  const {data}=await supabaseClient.auth.getSession();
+
+  currentUser=data?.session?.user||null;
+
+  if(currentUser)await ensureProfile();
+
+  await refreshUserUI();
+ }catch(error){
+  console.error("Session:",error);
+ }
+}
+
+/* ================= JOBS ================= */
+
+async function createJob(){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const title=document.getElementById("jobTitle").value.trim();
+ const skill=document.getElementById("jobSkill").value;
+ const description=document.getElementById("jobDescription").value.trim();
+ const budget=document.getElementById("jobBudget").value.trim();
+
+ if(!title||!description||!budget){
+  alert("Title, Description এবং Budget পূরণ করুন।");
+  return;
+ }
+
+ const {error}=await supabaseClient
+  .from("jobs")
+  .insert({
+   poster_id:currentUser.id,
+   title,
+   skill,
+   description,
+   budget,
+   status:"open"
+  });
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ document.getElementById("jobTitle").value="";
+ document.getElementById("jobDescription").value="";
+ document.getElementById("jobBudget").value="";
+
+ closeModal("jobPost");
+
+ await loadJobsFromSupabase();
+
+ alert("✅ Job সফলভাবে পোস্ট হয়েছে।");
+}
+
+async function loadJobsFromSupabase(){
+ const box=document.getElementById("jobsList");
+
+ if(!backendReady()){
+  if(box)box.innerHTML=
+   '<div class="empty">Server connection প্রস্তুত হচ্ছে...</div>';
+  return;
+ }
+
+ const {data,error}=await supabaseClient
+  .from("jobs")
+  .select(`
+   id,
+   poster_id,
+   title,
+   skill,
+   description,
+   budget,
+   status,
+   assigned_to,
+   started_at,
+   completed_at,
+   created_at,
+   submission_note,
+   submitted_at,
+   agreed_amount,
+   approved_at
+  `)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  console.error(error);
+
+  if(box){
+   box.innerHTML=
+    '<div class="empty">Jobs load করা যায়নি:<br>'+esc(error.message)+'</div>';
+  }
+
+  return;
+ }
+
+ currentJobs=data||[];
+ renderJobs(currentJobs);
+
+ const adminJobs=document.getElementById("adminJobs");
+ if(adminJobs)adminJobs.textContent=currentJobs.length;
+}
+
+function renderJobs(jobs){
+ const box=document.getElementById("jobsList");
+
+ if(!jobs.length){
+  box.innerHTML='<div class="empty">এখনো কোনো Job পোস্ট করা হয়নি।</div>';
+  return;
+ }
+
+ box.innerHTML=jobs.map(job=>{
+  const isOwner=currentUser&&job.poster_id===currentUser.id;
+  let action="";
+
+  if(isOwner){
+
+   if(job.status==="submitted"){
+    action+=`
+     <button class="btn success small"
+      onclick="approveSubmittedJob('${job.id}')">
+      ✅ Approve & Pay
+     </button>`;
+   }
+
+   action+=`
+    <button class="btn secondary small"
+     onclick="viewJobApplications('${job.id}')">
+     📋 Applications
+    </button>`;
+
+  }else if(job.status==="open"){
+
+   action=`
+    <button class="btn small"
+     onclick="openApply('${job.id}')">
+     📩 Apply
+    </button>`;
+
+  }else{
+
+   action=`
+    <span class="statusBadge ${esc(job.status)}">
+     ${esc(statusLabel(job.status))}
+    </span>`;
+  }
+
+  const submission=job.submission_note
+   ?`<div class="notice"><b>Submission:</b> ${esc(job.submission_note)}</div>`
+   :"";
+
+  const payment=job.agreed_amount
+   ?`<div class="muted">
+      Approved Payment:
+      <b style="color:#ffd21a">${money(job.agreed_amount)}</b>
+     </div>`
+   :"";
+
+  return `
+   <div class="card" style="margin-bottom:10px">
+
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+
+     <div>
+      <h3>${esc(job.title)}</h3>
+      <div class="muted">
+       🎯 ${esc(job.skill)}
+       ${job.budget?" • 💰 "+esc(job.budget):""}
+      </div>
+     </div>
+
+     <span class="statusBadge ${esc(job.status)}">
+      ${esc(statusLabel(job.status))}
+     </span>
+
+    </div>
+
+    <p>${esc(job.description)}</p>
+    ${submission}
+    ${payment}
+
+    <div class="actions">${action}</div>
+   </div>
+  `;
+ }).join("");
+}
+
+/* ================= APPLY ================= */
+
+function openApply(jobId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ const job=currentJobs.find(j=>j.id===jobId);
+
+ if(!job){
+  alert("Job পাওয়া যায়নি।");
+  return;
+ }
+
+ if(job.poster_id===currentUser.id){
+  alert("নিজের Job-এ আবেদন করা যাবে না।");
+  return;
+ }
+
+ if(job.status!=="open"){
+  alert("এই Job বর্তমানে Apply করার জন্য open নয়।");
+  return;
+ }
+
+ document.getElementById("applyJobId").value=jobId;
+ document.getElementById("applyMessage").value="";
+
+ document.getElementById("applyJobInfo").innerHTML=`
+  <b>${esc(job.title)}</b><br>
+  Skill: ${esc(job.skill)}<br>
+  Budget: ${esc(job.budget||"Not specified")}
+ `;
+
+ openModal("apply");
+}
+
+async function applyForJob(){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const jobId=document.getElementById("applyJobId").value;
+ const message=document.getElementById("applyMessage").value.trim();
+
+ if(!jobId){
+  alert("Job পাওয়া যায়নি।");
+  return;
+ }
+
+ const {data:job,error:jobError}=await supabaseClient
+  .from("jobs")
+  .select("id,poster_id,status")
+  .eq("id",jobId)
+  .single();
+
+ if(jobError){
+  alert(jobError.message);
+  return;
+ }
+
+ if(job.poster_id===currentUser.id){
+  alert("নিজের Job-এ আবেদন করা যাবে না।");
+  return;
+ }
+
+ if(job.status!=="open"){
+  alert("এই Job আর open নেই।");
+  return;
+ }
+
+ const {error}=await supabaseClient
+  .from("applications")
+  .insert({
+   job_id:jobId,
+   applicant_id:currentUser.id,
+   message,
+   status:"pending",
+   name:currentProfile?.name||
+    currentUser.email?.split("@")[0]||
+    "",
+   email:currentUser.email||"",
+   phone:""
+  });
+
+ if(error){
+
+  if(
+   error.code==="23505"||
+   /duplicate|unique/i.test(error.message||"")
+  ){
+   alert("⚠️ আপনি এই Job-এ ইতোমধ্যে আবেদন করেছেন।");
+  }else{
+   alert(error.message);
+  }
+
+  return;
+ }
+
+ closeModal("apply");
+
+ alert("✅ Application সফলভাবে পাঠানো হয়েছে।");
+
+ await loadMyApplications();
+ await loadJobsFromSupabase();
+}
+
+/* ================= MY APPLICATIONS ================= */
+
+async function loadMyApplications(){
+ const box=document.getElementById("myApplications");
+
+ if(!currentUser){
+  box.innerHTML='<div class="empty">Login করুন।</div>';
+  return;
+ }
+
+ if(!backendReady()){
+  box.innerHTML='<div class="empty">Server connection প্রস্তুত হচ্ছে...</div>';
+  return;
+ }
+
+ const {data,error}=await supabaseClient
+  .from("applications")
+  .select(`
+   id,
+   job_id,
+   applicant_id,
+   message,
+   status,
+   created_at,
+   jobs(
+    id,
+    title,
+    skill,
+    budget,
+    status,
+    assigned_to,
+    submission_note,
+    submitted_at,
+    agreed_amount,
+    approved_at
+   )
+  `)
+  .eq("applicant_id",currentUser.id)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  box.innerHTML='<div class="empty">'+esc(error.message)+'</div>';
+  return;
+ }
+
+ const applications=data||[];
+
+ const assignedJobs=applications.filter(a=>
+  a.jobs&&a.jobs.assigned_to===currentUser.id
+ );
+
+ document.getElementById("myJobsCount").textContent=assignedJobs.length;
+
+ if(!applications.length){
+  box.innerHTML='<div class="empty">এখনো কোনো Application নেই।</div>';
+  return;
+ }
+
+ box.innerHTML=applications.map(app=>{
+  const job=app.jobs;
+  if(!job)return "";
+
+  let action="";
+
+  if(job.assigned_to===currentUser.id){
+
+   if(job.status==="accepted"||job.status==="assigned"){
+    action=`
+     <button class="btn small"
+      onclick="startAssignedJob('${job.id}')">
+      ▶️ Start Work
+     </button>`;
+   }
+
+   if(job.status==="in_progress"){
+    action=`
+     <button class="btn warning small"
+      onclick="submitAssignedJob('${job.id}')">
+      📤 Submit Work
+     </button>`;
+   }
+
+   if(job.status==="submitted"){
+    action=`
+     <span class="statusBadge submitted">
+      ⏳ Approval Pending
+     </span>`;
+   }
+
+   if(job.status==="completed"){
+    action=`
+     <span class="statusBadge completed">
+      ✅ Payment Approved
+     </span>`;
+   }
+  }
+
+  const submission=job.submission_note
+   ?`<div class="notice"><b>Submission Note:</b> ${esc(job.submission_note)}</div>`
+   :"";
+
+  const payment=job.agreed_amount
+   ?`<div class="muted">
+      Approved Amount:
+      <b style="color:#ffd21a">${money(job.agreed_amount)}</b>
+     </div>`
+   :"";
+
+  return `
+   <div class="card" style="margin-bottom:10px">
+
+    <h3>${esc(job.title)}</h3>
+
+    <div class="muted">
+     ${esc(job.skill)} • ${esc(job.budget||"")}
+    </div>
+
+    <p>
+     Application:
+     <span class="statusBadge ${esc(app.status)}">
+      ${esc(statusLabel(app.status))}
+     </span>
+    </p>
+
+    <p class="muted">
+     Job Status:
+     <span class="statusBadge ${esc(job.status)}">
+      ${esc(statusLabel(job.status))}
+     </span>
+    </p>
+
+    ${submission}
+    ${payment}
+
+    <div class="actions">${action}</div>
+   </div>
+  `;
+ }).join("");
+}
+
+/* ================= JOB WORKFLOW ================= */
+
+async function startAssignedJob(jobId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ if(!confirm("আপনি কি এই কাজটি এখন Start করতে চান?"))return;
+
+ const {error}=await supabaseClient.rpc(
+  "start_job",
+  {p_job_id:jobId}
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert("✅ কাজ শুরু হয়েছে। কাজ শেষ হলে Submit Work করুন।");
+
+ await loadMyApplications();
+ await loadJobsFromSupabase();
+}
+
+async function submitAssignedJob(jobId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const note=prompt(
+  "কাজ জমা দেওয়ার নোট লিখুন। চাইলে কাজের Link-ও দিতে পারেন:",
+  ""
+ );
+
+ if(note===null)return;
+
+ if(!confirm("আপনি কি নিশ্চিত যে কাজটি এখন Submit করতে চান?"))return;
+
+ const {error}=await supabaseClient.rpc(
+  "complete_job",
+  {
+   p_job_id:jobId,
+   p_submission_note:note.trim()||null
+  }
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert(
+  "✅ কাজ সফলভাবে Submitted হয়েছে। এখন Job Owner/Admin Approval-এর অপেক্ষা করুন।"
+ );
+
+ await loadMyApplications();
+ await loadJobsFromSupabase();
+ await loadEarningsDashboard();
+}
+
+async function approveSubmittedJob(jobId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ let amount=prompt(
+  "Worker-কে কত টাকা Payment দেওয়া হবে?\n\nউদাহরণ: 500",
+  ""
+ );
+
+ if(amount===null)return;
+
+ amount=Number(String(amount).replace(/,/g,"").trim());
+
+ if(!Number.isFinite(amount)||amount<=0){
+  alert("সঠিক Payment Amount দিন।");
+  return;
+ }
+
+ if(!confirm(
+  "৳"+amount.toLocaleString()+
+  " Payment Approve করে Worker-এর Earnings তৈরি করবেন?"
+ ))return;
+
+ const {error}=await supabaseClient.rpc(
+  "approve_job",
+  {
+   p_job_id:jobId,
+   p_agreed_amount:amount
+  }
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert(
+  "✅ Job Approved! ৳"+
+  amount.toLocaleString()+
+  " Worker-এর Earnings-এ যোগ হয়েছে।"
+ );
+
+ await loadJobsFromSupabase();
+ await loadMyApplications();
+ await loadEarningsDashboard();
+
+ if(await isAdmin())await adminLoadApplications();
+}
+
+async function viewJobApplications(jobId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const {data:job,error:jobError}=await supabaseClient
+  .from("jobs")
+  .select("id,title,status,poster_id")
+  .eq("id",jobId)
+  .single();
+
+ if(jobError){
+  alert(jobError.message);
+  return;
+ }
+
+ const admin=await isAdmin();
+
+ if(job.poster_id!==currentUser.id&&!admin){
+  alert("শুধু Job Owner/Admin applications দেখতে পারবেন।");
+  return;
+ }
+
+ const {data,error}=await supabaseClient
+  .from("applications")
+  .select(`
+   id,
+   applicant_id,
+   message,
+   status,
+   created_at,
+   name,
+   email,
+   phone
+  `)
+  .eq("job_id",jobId)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ if(!data?.length){
+  alert("এই Job-এর কোনো Application নেই।");
+  return;
+ }
+
+ let text="Applications:\n\n";
+
+ data.forEach((app,i)=>{
+  text+=
+   (i+1)+". "+(app.name||"Applicant")+
+   "\nStatus: "+app.status+
+   "\nEmail: "+(app.email||"")+
+   "\nMessage: "+(app.message||"")+
+   "\n\n";
+ });
+
+ alert(text);
+}
+
+/* ================= EARNINGS + PAYOUT ACCOUNTING ================= */
+
+async function getWalletAccounting(){
+ if(!currentUser||!backendReady()){
+  return {
+   total:0,
+   available:0,
+   reserved:0,
+   availableToRequest:0,
+   payouts:[]
+  };
+ }
+
+ const {data:earnings,error:earningError}=await supabaseClient
+  .from("earnings")
+  .select("amount,status")
+  .eq("user_id",currentUser.id);
+
+ if(earningError){
+  throw earningError;
+ }
+
+ const rows=earnings||[];
+
+ let available=0;
+ let total=0;
+
+ rows.forEach(row=>{
+  const amount=Number(row.amount||0);
+
+  if(row.status==="available"){
+   available+=amount;
+  }
+
+  /*
+   Total Earnings means total earnings currently recorded,
+   including available and already-paid earning ledger rows.
+  */
+  total+=amount;
+ });
+
+ const {data:payouts,error:payoutError}=await supabaseClient
+  .from("payout_requests")
+  .select("*")
+  .eq("user_id",currentUser.id)
+  .order("created_at",{ascending:false});
+
+ if(payoutError){
+  throw payoutError;
+ }
+
+ const payoutRows=payouts||[];
+
+ let reserved=0;
+
+ payoutRows.forEach(p=>{
+  if(["pending","approved","processing"].includes(p.status)){
+   reserved+=Number(p.amount||0);
+  }
+ });
+
+ /*
+   IMPORTANT:
+   Available Earnings = earnings ledger amount still available.
+   Available to Request = available earnings minus
+   amounts already reserved by unpaid payouts.
+  */
+ const availableToRequest=Math.max(
+  Number(available)-Number(reserved),
+  0
+ );
+
+ return {
+  total,
+  available,
+  reserved,
+  availableToRequest,
+  payouts:payoutRows,
+  earnings:rows
+ };
+}
+
+async function loadEarningsDashboard(){
+ const availableEl=document.getElementById("availableEarnings");
+ const pendingEl=document.getElementById("pendingPayout");
+ const totalEl=document.getElementById("totalEarnings");
+ const earningsDisplay=document.getElementById("earningsDisplay");
+ const payoutAvailable=document.getElementById("payoutAvailable");
+
+ if(!currentUser){
+
+  if(availableEl)availableEl.textContent="৳0";
+  if(pendingEl)pendingEl.textContent="৳0";
+  if(totalEl)totalEl.textContent="৳0";
+  if(earningsDisplay)earningsDisplay.textContent="৳0";
+  if(payoutAvailable){
+   payoutAvailable.textContent="৳0";
+   payoutAvailable.dataset.available="0";
+  }
+
+  return;
+ }
+
+ if(!backendReady())return;
+
+ try{
+
+  const wallet=await getWalletAccounting();
+
+  /*
+    The visible "Available Earnings" is now the amount
+    actually available for a NEW payout request.
+    Existing approved/processing/pending payouts are excluded.
+  */
+  availableEl.textContent=money(wallet.availableToRequest);
+
+  pendingEl.textContent=money(wallet.reserved);
+
+  totalEl.textContent=money(wallet.total);
+  earningsDisplay.textContent=money(wallet.total);
+
+  payoutAvailable.textContent=money(wallet.availableToRequest);
+  payoutAvailable.dataset.available=String(wallet.availableToRequest);
+
+  const history=document.getElementById("earningsHistory");
+
+  if(!wallet.earnings.length){
+
+   history.innerHTML=
+    '<div class="empty">কোনো earnings নেই।</div>';
+
+  }else{
+
+   history.innerHTML=wallet.earnings.map(row=>`
+    <div class="card" style="margin-bottom:8px">
+
+     <div style="display:flex;justify-content:space-between;gap:10px">
+      <b>${esc(row.description||row.type||"Earning")}</b>
+      <b style="color:#ffd21a">${money(row.amount)}</b>
+     </div>
+
+     <div class="muted">
+      Status:
+      <span class="statusBadge ${esc(row.status||"")}">
+       ${esc(statusLabel(row.status||""))}
+      </span>
+      • ${row.created_at?new Date(row.created_at).toLocaleString():""}
+     </div>
+
+    </div>
+   `).join("");
+  }
+
+  const payoutBox=document.getElementById("payoutHistory");
+
+  if(!wallet.payouts.length){
+
+   payoutBox.innerHTML=
+    '<div class="empty">কোনো payout request নেই।</div>';
+
+  }else{
+
+   payoutBox.innerHTML=wallet.payouts.map(p=>`
+
+    <div class="card" style="margin-bottom:8px">
+
+     <div style="display:flex;justify-content:space-between;gap:10px">
+      <b>${esc(p.method||"Payout")}</b>
+      <b style="color:#ffd21a">${money(p.amount)}</b>
+     </div>
+
+     <div class="muted">
+      Account: ${esc(p.account_number||"")}
+     </div>
+
+     <div class="muted">
+      Status:
+      <span class="statusBadge ${esc(p.status||"")}">
+       ${esc(statusLabel(p.status||""))}
+      </span>
+     </div>
+
+     ${p.transaction_id
+      ?`<div class="muted">
+         Transaction ID:
+         <b>${esc(p.transaction_id)}</b>
+        </div>`
+      :""}
+
+     ${p.paid_at
+      ?`<div class="muted">
+         Paid At:
+         ${new Date(p.paid_at).toLocaleString()}
+        </div>`
+      :""}
+
+     ${p.admin_note
+      ?`<div class="notice">
+         Admin Note: ${esc(p.admin_note)}
+        </div>`
+      :""}
+
+    </div>
+
+   `).join("");
+  }
+
+ }catch(error){
+
+  console.error("Wallet:",error);
+
+  if(availableEl)availableEl.textContent="৳0";
+  if(pendingEl)pendingEl.textContent="৳0";
+
+  alert(
+   "Wallet হিসাব load করা যায়নি:\n"+
+   (error.message||"Unknown error")
+  );
+ }
+}
+
+/* ================= PAYOUT REQUEST ================= */
+
+async function requestPayout(){
+
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const amount=Number(
+  document.getElementById("payoutAmount").value
+ );
+
+ const method=
+  document.getElementById("payoutMethod").value;
+
+ const accountName=
+  document.getElementById("payoutAccountName").value.trim();
+
+ const accountNumber=
+  document.getElementById("payoutAccountNumber").value.trim();
+
+ if(!Number.isFinite(amount)||amount<=0){
+  alert("সঠিক Amount দিন।");
+  return;
+ }
+
+ if(!accountName||!accountNumber){
+  alert("Account Name এবং Account Number দিন।");
+  return;
+ }
+
+ try{
+
+  /*
+    Recalculate from server immediately before creating
+    payout request. This prevents stale Wallet values.
+  */
+  const wallet=await getWalletAccounting();
+
+  if(wallet.availableToRequest<=0){
+
+   alert(
+    "❌ এখন নতুন payout request করার মতো available balance নেই.\n\n"+
+    "Available to Request: "+money(wallet.availableToRequest)+"\n"+
+    "Pending/Approved Payout: "+money(wallet.reserved)
+   );
+
+   await loadEarningsDashboard();
+   return;
+  }
+
+  if(amount>wallet.availableToRequest){
+
+   alert(
+    "❌ Available balance-এর চেয়ে বেশি payout request করা যাবে না.\n\n"+
+    "Available to Request: "+
+    money(wallet.availableToRequest)
+   );
+
+   return;
+  }
+
+  /*
+    IMPORTANT:
+    request_job_payout currently accepts:
+    p_amount, p_method, p_account_name, p_account_number
+
+    p_currency must NOT be sent because the current
+    database function signature does not contain it.
+  */
+  const {data,error}=await supabaseClient.rpc(
+   "request_job_payout",
+   {
+    p_amount:amount,
+    p_method:method,
+    p_account_name:accountName,
+    p_account_number:accountNumber
+   }
+  );
+
+  if(error){
+
+   alert(
+    "❌ Payout request করা যায়নি.\n\n"+
+    error.message
+   );
+
+   await loadEarningsDashboard();
+   return;
+  }
+
+  document.getElementById("payoutAmount").value="";
+  document.getElementById("payoutAccountName").value="";
+  document.getElementById("payoutAccountNumber").value="";
+
+  closeModal("payout");
+
+  alert(
+   "✅ Payout request সফলভাবে পাঠানো হয়েছে।\n\n"+
+   "Amount: "+money(amount)+
+   "\nStatus: Pending"
+  );
+
+  await loadEarningsDashboard();
+
+ }catch(error){
+
+  console.error("Payout request:",error);
+
+  alert(
+   "❌ Payout request করা যায়নি.\n\n"+
+   (error.message||"Unknown error")
+  );
+ }
+}
+
+/* ================= PROFILE ================= */
+
+async function renderProfile(){
+ const box=document.getElementById("profileBox");
+ const skillBox=document.getElementById("skillProfileBox");
+
+ if(!currentUser){
+  box.innerHTML='<div class="empty">Login করুন।</div>';
+  skillBox.innerHTML='<div class="empty">Login করলে skill profile দেখা যাবে।</div>';
+  return;
+ }
+
+ await ensureProfile();
+
+ box.innerHTML=`
+  <div class="card">
+   <h3>${esc(currentProfile?.name||"PLAYZONE User")}</h3>
+
+   <p class="muted">
+    Email: ${esc(currentUser.email||"")}
+   </p>
+
+   <p class="muted">
+    Role:
+    <span class="statusBadge">
+     ${esc(currentProfile?.role||"user")}
+    </span>
+   </p>
+
+   <p class="muted">
+    Virtual Points:
+    <b style="color:#ffd21a">
+     ${pzPoints.toLocaleString()}
+    </b>
+   </p>
+  </div>
+ `;
+
+ const skill=localStorage.getItem("pz_skill")||"";
+
+ skillBox.innerHTML=skill
+  ?`<div class="card"><b>Primary Skill:</b> ${esc(skill)}</div>`
+  :'<div class="empty">Skill এখনো সেট করা হয়নি।</div>';
+}
+
+function saveSkill(){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ const skill=document.getElementById("skillSelect").value;
+
+ localStorage.setItem("pz_skill",skill);
+
+ closeModal("skill");
+ renderProfile();
+
+ alert("✅ Skill profile updated.");
+}
+
+/* ================= TAP RUSH ================= */
+
+function startTapRush(){
+ clearInterval(tapTimer);
+
+ tapScore=0;
+ tapTime=30;
+
+ gamesPlayed++;
+ saveGamesPlayed();
+
+ const info=document.getElementById("tapInfo");
+ const target=document.getElementById("tapTarget");
+
+ target.style.display="flex";
+
+ moveTapTarget();
+
+ info.textContent="Time: 30s | Score: 0";
+
+ tapTimer=setInterval(()=>{
+
+  tapTime--;
+
+  info.textContent=
+   "Time: "+tapTime+"s | Score: "+tapScore;
+
+  if(tapTime<=0){
+
+   clearInterval(tapTimer);
+   target.style.display="none";
+
+   pzPoints+=tapScore;
+   savePoints();
+
+   info.textContent=
+    "🎉 Game Over! Score: "+
+    tapScore+
+    " | Points added: "+
+    tapScore;
+  }
+
+ },1000);
+}
+
+function moveTapTarget(){
+ const area=document.getElementById("tapArea");
+ const target=document.getElementById("tapTarget");
+
+ const maxX=Math.max(0,area.clientWidth-60);
+ const maxY=Math.max(0,area.clientHeight-60);
+
+ target.style.left=(Math.random()*maxX)+"px";
+ target.style.top=(Math.random()*maxY)+"px";
+}
+
+function tapTargetHit(){
+ if(tapTime<=0)return;
+
+ tapScore++;
+ moveTapTarget();
+
+ document.getElementById("tapInfo").textContent=
+  "Time: "+tapTime+"s | Score: "+tapScore;
+}
+
+/* ================= QUIZ ================= */
+
+function startQuiz(){
+ gamesPlayed++;
+ saveGamesPlayed();
+
+ quizIndex=0;
+ quizScore=0;
+
+ renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+ const box=document.getElementById("quizBox");
+
+ if(quizIndex>=quizQuestions.length){
+
+  pzPoints+=quizScore*10;
+  savePoints();
+
+  box.innerHTML=`
+   <div class="notice">
+    🎉 Quiz শেষ!
+    Score: ${quizScore}/${quizQuestions.length}
+    <br>
+    Points added: ${quizScore*10}
+   </div>
+  `;
+
+  return;
+ }
+
+ const q=quizQuestions[quizIndex];
+
+ box.innerHTML=`
+  <div class="card">
+
+   <b>Question ${quizIndex+1}/${quizQuestions.length}</b>
+
+   <h3>${esc(q.q)}</h3>
+
+   ${q.options.map(option=>`
+    <button class="quiz-option"
+     onclick="answerQuiz(${JSON.stringify(option)})">
+     ${esc(option)}
+    </button>
+   `).join("")}
+
+  </div>
+ `;
+}
+
+function answerQuiz(answer){
+ const q=quizQuestions[quizIndex];
+
+ if(answer===q.answer)quizScore++;
+
+ quizIndex++;
+ renderQuizQuestion();
+}
+
+/* ================= MATCH SEVEN ================= */
+
+function startMatchSeven(){
+ gamesPlayed++;
+ saveGamesPlayed();
+
+ matchFirst=null;
+ matchLocked=false;
+ matchScore=0;
+
+ const nums=[1,2,3,4,5,6];
+
+ matchPairs=[...nums,...nums]
+  .sort(()=>Math.random()-.5);
+
+ const box=document.getElementById("matchBox");
+
+ box.innerHTML=`
+  <div class="card">
+
+   <div class="muted">Matched: 0 / 6</div>
+
+   <div id="matchGrid"
+    style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
+
+    ${matchPairs.map((n,i)=>`
+     <button class="btn secondary"
+      style="height:60px;font-size:20px"
+      data-index="${i}"
+      onclick="matchCard(${i})">
+      ?
+     </button>
+    `).join("")}
+
+   </div>
+
+  </div>
+ `;
+}
+
+function matchCard(index){
+ if(matchLocked)return;
+
+ const buttons=document.querySelectorAll("#matchGrid button");
+ const button=buttons[index];
+
+ if(!button||button.dataset.matched==="1")return;
+ if(matchFirst===index)return;
+
+ button.textContent=matchPairs[index];
+
+ if(matchFirst===null){
+  matchFirst=index;
+  return;
+ }
+
+ const first=matchFirst;
+ const second=index;
+
+ if(matchPairs[first]===matchPairs[second]){
+
+  buttons[first].dataset.matched="1";
+  buttons[second].dataset.matched="1";
+
+  matchScore++;
+  matchFirst=null;
+
+  document.querySelector("#matchBox .muted").textContent=
+   "Matched: "+matchScore+" / 6";
+
+  if(matchScore===6){
+
+   const points=60;
+
+   pzPoints+=points;
+   savePoints();
+
+   document.getElementById("matchBox").insertAdjacentHTML(
+    "beforeend",
+    `<div class="notice">🎉 Complete! ${points} points added.</div>`
+   );
+  }
+
+ }else{
+
+  matchLocked=true;
+
+  setTimeout(()=>{
+
+   buttons[first].textContent="?";
+   buttons[second].textContent="?";
+
+   matchFirst=null;
+   matchLocked=false;
+
+  },600);
+ }
+}
+
+/* ================= FLY HIGH ================= */
+
+function initFly(){
+ flyCanvas=document.getElementById("flyCanvas");
+
+ if(flyCanvas){
+  flyCtx=flyCanvas.getContext("2d");
+
+  flyCanvas.addEventListener("click",()=>{
+   if(flyRunning)flyPlayer.vy=-6;
+  });
+ }
+}
+
+function startFlyHigh(){
+ if(!flyCanvas||!flyCtx)initFly();
+
+ if(!flyCanvas||!flyCtx)return;
+
+ gamesPlayed++;
+ saveGamesPlayed();
+
+ cancelAnimationFrame(flyFrame);
+
+ flyRunning=true;
+ flyScore=0;
+
+ flyPlayer={
+  x:70,y:150,w:24,h:24,vy:0
+ };
+
+ flyObstacles=[];
+
+ flyCtx.clearRect(
+  0,0,
+  flyCanvas.width,
+  flyCanvas.height
+ );
+
+ flyFrame=requestAnimationFrame(flyLoop);
+}
+
+function flyLoop(){
+ if(!flyRunning)return;
+
+ flyCtx.clearRect(
+  0,0,
+  flyCanvas.width,
+  flyCanvas.height
+ );
+
+ flyPlayer.vy+=0.35;
+ flyPlayer.y+=flyPlayer.vy;
+
+ if(flyPlayer.y<0){
+  flyPlayer.y=0;
+  flyPlayer.vy=0;
+ }
+
+ if(flyPlayer.y+flyPlayer.h>flyCanvas.height){
+  flyGameOver();
+  return;
+ }
+
+ if(
+  !flyObstacles.length||
+  flyObstacles[flyObstacles.length-1].x<380
+ ){
+
+  const gap=100;
+  const top=30+Math.random()*120;
+
+  flyObstacles.push({
+   x:flyCanvas.width,
+   w:55,
+   top,
+   gap
+  });
+ }
+
+ flyObstacles.forEach(o=>o.x-=3);
+
+ while(
+  flyObstacles.length&&
+  flyObstacles[0].x+flyObstacles[0].w<0
+ ){
+  flyObstacles.shift();
+  flyScore++;
+ }
+
+ for(const o of flyObstacles){
+
+  const hitX=
+   flyPlayer.x<o.x+o.w&&
+   flyPlayer.x+flyPlayer.w>o.x;
+
+  const hitY=
+   flyPlayer.y<o.top||
+   flyPlayer.y+flyPlayer.h>o.top+o.gap;
+
+  if(hitX&&hitY){
+   flyGameOver();
+   return;
+  }
+ }
+
+ flyCtx.fillStyle="#ffd21a";
+
+ flyCtx.fillRect(
+  flyPlayer.x,
+  flyPlayer.y,
+  flyPlayer.w,
+  flyPlayer.h
+ );
+
+ flyCtx.fillStyle="#1fbf75";
+
+ flyObstacles.forEach(o=>{
+
+  flyCtx.fillRect(
+   o.x,0,o.w,o.top
+  );
+
+  flyCtx.fillRect(
+   o.x,
+   o.top+o.gap,
+   o.w,
+   flyCanvas.height-(o.top+o.gap)
+  );
+ });
+
+ flyCtx.fillStyle="#fff";
+ flyCtx.font="18px Arial";
+
+ flyCtx.fillText(
+  "Score: "+flyScore,
+  15,25
+ );
+
+ flyFrame=requestAnimationFrame(flyLoop);
+}
+
+function flyGameOver(){
+ flyRunning=false;
+ cancelAnimationFrame(flyFrame);
+
+ const points=flyScore*5;
+
+ pzPoints+=points;
+ savePoints();
+
+ flyCtx.fillStyle="#fff";
+ flyCtx.font="28px Arial";
+
+ flyCtx.fillText(
+  "GAME OVER",
+  flyCanvas.width/2-85,
+  flyCanvas.height/2
+ );
+
+ flyCtx.font="18px Arial";
+
+ flyCtx.fillText(
+  "Score: "+flyScore+
+  " | Points: +"+points,
+  flyCanvas.width/2-125,
+  flyCanvas.height/2+35
+ );
+}
+
+document.addEventListener("keydown",e=>{
+ if(e.code==="Space"&&flyRunning){
+  flyPlayer.vy=-6;
+  e.preventDefault();
+ }
+});
+
+/* ================= ADMIN ================= */
+
+async function isAdmin(){
+ if(!currentUser||!backendReady())return false;
+
+ if(currentProfile?.role==="admin")return true;
+
+ const {data,error}=await supabaseClient.rpc(
+  "is_current_user_admin"
+ );
+
+ if(error){
+  console.error("Admin check:",error);
+  return false;
+ }
+
+ return !!data;
+}
+
+async function adminRefresh(){
+ if(!currentUser){
+  alert("Admin login প্রয়োজন.");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const admin=await isAdmin();
+
+ if(!admin){
+  alert("আপনার Admin permission নেই.");
+
+  showSection(
+   "home",
+   document.querySelector(".nav button")
+  );
+
+  return;
+ }
+
+ await adminLoadStats();
+ await adminLoadApplications();
+ await adminLoadPayouts();
+ await adminLoadJobs();
+}
+
+async function adminLoadStats(){
+ if(!backendReady())return;
+
+ const {data,error}=await supabaseClient
+  .from("payout_requests")
+  .select("id,status");
+
+ /*
+   We calculate unpaid payout count directly so that
+   Approved/Processing requests are not incorrectly shown as 0.
+  */
+
+ if(error){
+  console.error("Admin payout stats:",error);
+ }else{
+
+  const unpaid=(data||[]).filter(p=>
+   ["pending","approved","processing"].includes(p.status)
+  ).length;
+
+  document.getElementById("adminPendingPayouts").textContent=unpaid;
+ }
+
+ const {data:users}=await supabaseClient
+  .from("profiles")
+  .select("id",{count:"exact",head:true});
+
+ const {data:jobs}=await supabaseClient
+  .from("jobs")
+  .select("id",{count:"exact",head:true});
+
+ const {data:applications}=await supabaseClient
+  .from("applications")
+  .select("id",{count:"exact",head:true});
+
+ /*
+   The above head queries may return null data.
+   Use count values if available through response objects.
+  */
+
+ const usersResult=await supabaseClient
+  .from("profiles")
+  .select("id",{count:"exact",head:true});
+
+ const jobsResult=await supabaseClient
+  .from("jobs")
+  .select("id",{count:"exact",head:true});
+
+ const applicationsResult=await supabaseClient
+  .from("applications")
+  .select("id",{count:"exact",head:true});
+
+ document.getElementById("adminUsers").textContent=
+  usersResult.count??0;
+
+ document.getElementById("adminJobs").textContent=
+  jobsResult.count??0;
+
+ document.getElementById("adminApplications").textContent=
+  applicationsResult.count??0;
+}
+
+async function adminLoadApplications(){
+ if(!backendReady())return;
+
+ const box=document.getElementById("adminApplicationsBox");
+
+ const {data,error}=await supabaseClient
+  .from("applications")
+  .select(`
+   id,
+   job_id,
+   applicant_id,
+   message,
+   status,
+   created_at,
+   jobs(
+    id,
+    title,
+    skill,
+    budget,
+    status,
+    assigned_to,
+    submission_note,
+    submitted_at,
+    agreed_amount,
+    approved_at
+   )
+  `)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  box.innerHTML='<div class="empty">'+esc(error.message)+'</div>';
+  return;
+ }
+
+ const apps=data||[];
+
+ if(!apps.length){
+  box.innerHTML='<div class="empty">কোনো Application নেই।</div>';
+  return;
+ }
+
+ box.innerHTML=apps.map(app=>{
+
+  const job=app.jobs;
+  if(!job)return "";
+
+  let actions="";
+
+  if(app.status==="pending"){
+
+   actions+=`
+    <button class="btn success small"
+     onclick="adminAcceptApplication('${app.id}')">
+     ✅ Accept
+    </button>
+
+    <button class="btn danger small"
+     onclick="adminRejectApplication('${app.id}')">
+     ❌ Reject
+    </button>
+   `;
+  }
+
+  if(job.status==="submitted"){
+
+   actions+=`
+    <button class="btn warning small"
+     onclick="approveSubmittedJob('${job.id}')">
+     💰 Approve & Pay
+    </button>
+   `;
+  }
+
+  return `
+   <div class="card" style="margin-bottom:10px">
+
+    <h3>${esc(job.title)}</h3>
+
+    <div class="muted">
+     Skill: ${esc(job.skill)}
+     • Budget: ${esc(job.budget||"")}
+    </div>
+
+    <p>
+     Application Status:
+     <span class="statusBadge ${esc(app.status)}">
+      ${esc(statusLabel(app.status))}
+     </span>
+    </p>
+
+    <p>
+     Job Status:
+     <span class="statusBadge ${esc(job.status)}">
+      ${esc(statusLabel(job.status))}
+     </span>
+    </p>
+
+    <p class="muted">
+     Applicant ID: ${esc(app.applicant_id)}
+    </p>
+
+    <p>${esc(app.message||"")}</p>
+
+    ${job.submission_note
+     ?`<div class="notice">
+        <b>Submission:</b>
+        ${esc(job.submission_note)}
+       </div>`
+     :""}
+
+    ${job.agreed_amount
+     ?`<div class="muted">
+        Approved:
+        <b>${money(job.agreed_amount)}</b>
+       </div>`
+     :""}
+
+    <div class="actions">${actions}</div>
+
+   </div>
+  `;
+ }).join("");
+}
+
+async function adminAcceptApplication(applicationId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ if(!confirm("এই Application Accept করবেন?"))return;
+
+ const {error}=await supabaseClient.rpc(
+  "accept_job_application",
+  {p_application_id:applicationId}
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert("✅ Application Accepted হয়েছে.");
+
+ await adminLoadApplications();
+ await loadJobsFromSupabase();
+ await loadMyApplications();
+}
+
+async function adminRejectApplication(applicationId){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ if(!confirm("এই Application Reject করবেন?"))return;
+
+ const {error}=await supabaseClient.rpc(
+  "reject_job_application",
+  {p_application_id:applicationId}
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert("❌ Application Rejected হয়েছে.");
+
+ await adminLoadApplications();
+ await loadJobsFromSupabase();
+ await loadMyApplications();
+}
+
+async function adminLoadPayouts(){
+ if(!backendReady())return;
+
+ const box=document.getElementById("adminPayoutsBox");
+
+ const {data,error}=await supabaseClient
+  .from("payout_requests")
+  .select("*")
+  .order("created_at",{ascending:false});
+
+ if(error){
+  box.innerHTML='<div class="empty">'+esc(error.message)+'</div>';
+  return;
+ }
+
+ const rows=data||[];
+
+ if(!rows.length){
+  box.innerHTML='<div class="empty">কোনো payout request নেই।</div>';
+  return;
+ }
+
+ box.innerHTML=rows.map(p=>`
+
+  <div class="card" style="margin-bottom:10px">
+
+   <h3>
+    ${money(p.amount)} — ${esc(p.method||"")}
+   </h3>
+
+   <p class="muted">
+    User ID: ${esc(p.user_id)}
+    <br>
+    Account Name: ${esc(p.account_name||"")}
+    <br>
+    Account Number: ${esc(p.account_number||"")}
+   </p>
+
+   <p>
+    Status:
+    <span class="statusBadge ${esc(p.status||"")}">
+     ${esc(statusLabel(p.status||"pending"))}
+    </span>
+   </p>
+
+   ${p.transaction_id
+    ?`<p class="muted">
+       Transaction ID:
+       <b>${esc(p.transaction_id)}</b>
+      </p>`
+    :""}
+
+   ${p.paid_at
+    ?`<p class="muted">
+       Paid At:
+       ${new Date(p.paid_at).toLocaleString()}
+      </p>`
+    :""}
+
+   ${p.admin_note
+    ?`<div class="notice">
+       Admin Note:
+       ${esc(p.admin_note)}
+      </div>`
+    :""}
+
+   <div class="actions">
+
+    ${
+     ["pending","approved","processing"].includes(p.status)
+     ?`
+      <button class="btn success small"
+       onclick="adminApprovePayout('${p.id}')">
+       💰 Mark Paid
+      </button>
+
+      <button class="btn danger small"
+       onclick="adminRejectPayout('${p.id}')">
+       ❌ Reject
+      </button>
+     `
+     :""
+    }
+
+   </div>
+
+  </div>
+
+ `).join("");
+}
+
+/* Real payment:
+   Admin must send money first.
+   Then transaction ID is required before Paid. */
+
+async function adminApprovePayout(id){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const transactionId=prompt(
+  "Payment করার পর bKash/Nagad Transaction ID দিন:",
+  ""
+ );
+
+ if(transactionId===null)return;
+
+ const cleanTransactionId=transactionId.trim();
+
+ if(!cleanTransactionId){
+  alert(
+   "❌ Transaction ID ছাড়া payout Paid করা যাবে না.\n\n"+
+   "আগে বাস্তবে payment সম্পন্ন করুন, তারপর Transaction ID দিন।"
+  );
+  return;
+ }
+
+ const note=prompt(
+  "Admin payment note:",
+  "Payment completed"
+ );
+
+ if(note===null)return;
+
+ if(!confirm(
+  "আপনি কি নিশ্চিত যে এই payout-এর টাকা বাস্তবে পাঠানো হয়েছে?\n\n"+
+  "Transaction ID: "+cleanTransactionId+
+  "\n\nOK চাপলে payout status Paid হবে।"
+ ))return;
+
+ const {error}=await supabaseClient.rpc(
+  "admin_update_payout",
+  {
+   p_payout_id:id,
+   p_status:"paid",
+   p_admin_note:note.trim()||"Payment completed",
+   p_transaction_id:cleanTransactionId
+  }
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert(
+  "✅ Payout Paid হয়েছে.\n\n"+
+  "Transaction ID: "+cleanTransactionId
+ );
+
+ await adminLoadPayouts();
+ await adminLoadStats();
+ await loadEarningsDashboard();
+}
+
+async function adminRejectPayout(id){
+ if(!currentUser){
+  openModal("login");
+  return;
+ }
+
+ if(!backendReady())return;
+
+ const note=prompt(
+  "Reject করার কারণ লিখুন:",
+  ""
+ );
+
+ if(note===null)return;
+
+ if(!note.trim()){
+  alert("Reject করার কারণ লিখুন.");
+  return;
+ }
+
+ const {error}=await supabaseClient.rpc(
+  "admin_update_payout",
+  {
+   p_payout_id:id,
+   p_status:"rejected",
+   p_admin_note:note.trim()
+  }
+ );
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert("❌ Payout rejected হয়েছে.");
+
+ await adminLoadPayouts();
+ await adminLoadStats();
+ await loadEarningsDashboard();
+}
+
+async function adminLoadJobs(){
+ if(!backendReady())return;
+
+ const box=document.getElementById("adminJobsBox");
+
+ const {data,error}=await supabaseClient
+  .from("jobs")
+  .select(`
+   id,
+   title,
+   skill,
+   budget,
+   status,
+   poster_id,
+   assigned_to,
+   submission_note,
+   submitted_at,
+   agreed_amount,
+   approved_at,
+   created_at
+  `)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  box.innerHTML='<div class="empty">'+esc(error.message)+'</div>';
+  return;
+ }
+
+ const rows=data||[];
+
+ if(!rows.length){
+  box.innerHTML='<div class="empty">কোনো Job নেই।</div>';
+  return;
+ }
+
+ box.innerHTML=rows.map(job=>`
+
+  <div class="card" style="margin-bottom:10px">
+
+   <h3>${esc(job.title)}</h3>
+
+   <div class="muted">
+    ${esc(job.skill)}
+    •
+    ${esc(job.budget||"")}
+   </div>
+
+   <p>
+    <span class="statusBadge ${esc(job.status)}">
+     ${esc(statusLabel(job.status))}
+    </span>
+   </p>
+
+   ${job.assigned_to
+    ?`<p class="muted">
+       Assigned User: ${esc(job.assigned_to)}
+      </p>`
+    :""}
+
+   ${job.submission_note
+    ?`<div class="notice">
+       <b>Submission:</b>
+       ${esc(job.submission_note)}
+      </div>`
+    :""}
+
+   ${job.agreed_amount
+    ?`<p class="muted">
+       Agreed Amount:
+       <b>${money(job.agreed_amount)}</b>
+      </p>`
+    :""}
+
+   ${
+    job.status==="submitted"
+    ?`
+     <button class="btn warning small"
+      onclick="approveSubmittedJob('${job.id}')">
+      💰 Approve & Pay
+     </button>
+    `
+    :""
+   }
+
+  </div>
+
+ `).join("");
+}
+
+/* ================= AUTH STATE ================= */
+
+function setupAuthListener(){
+
+ if(!backendReady())return;
+
+ supabaseClient.auth.onAuthStateChange((event,session)=>{
+
+  currentUser=session?.user||null;
+
+  setTimeout(async()=>{
+   try{
+
+    if(currentUser){
+     await ensureProfile();
+    }else{
+     currentProfile=null;
+    }
+
+    await refreshUserUI();
+
+   }catch(error){
+    console.error("Auth state:",error);
+   }
+  },0);
+
+ });
+}
+
+/* ================= START APP ================= */
+
+async function startPlayzone(){
+
+ updateLocalStats();
+ initFly();
+
+ if(!window.supabase){
+  console.error("Supabase library could not be loaded.");
+
+  document.getElementById("jobsList").innerHTML=
+   '<div class="empty">⚠️ Server library load হয়নি। Page Refresh করুন।</div>';
+
+  return;
+ }
+
+ try{
+
+  supabaseClient=window.supabase.createClient(
+   SUPABASE_URL,
+   SUPABASE_KEY
+  );
+
+  supabaseReady=true;
+
+  setupAuthListener();
+
+  await loadCurrentUser();
+
+  await loadJobsFromSupabase();
+
+ }catch(error){
+
+  console.error("PLAYZONE startup error:",error);
+
+  document.getElementById("jobsList").innerHTML=
+   '<div class="empty">⚠️ PLAYZONE server connection তৈরি করা যায়নি।<br>'+
+   esc(error.message||"Unknown error")+
+   '</div>';
+ }
+}
+
+/* ================= MODAL OUTSIDE CLICK ================= */
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+ modal.addEventListener("click",event=>{
+  if(event.target===modal){
+   modal.classList.remove("show");
+  }
+ });
+
+});
+
+/* ================= DOM READY ================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+ updateLocalStats();
+ initFly();
+ startPlayzone();
+});
 </script>
 
 </body>
